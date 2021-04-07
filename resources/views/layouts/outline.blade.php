@@ -4,7 +4,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Work Stocks</title> <!-- title dinamico -->
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>@yield('title', 'Work Stocks')</title>
 
     <!-- All Plugins Css -->
     <link href="{{asset('css/plugins.css')}}" rel="stylesheet">
@@ -12,6 +15,8 @@
     <link href="{{asset('css/styles.css')}}" rel="stylesheet">
     <!-- Custom Color -->
     <link href="{{asset('css/skin/default.css')}}" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="{{asset('css/custom.css')}}" rel="stylesheet">
 </head>
 
 <body class="green-skin">
@@ -28,7 +33,6 @@
     @include('navbar.nav')
 
     <!-- yields here the main content page -->
-    @include('home')
     @yield('content')
 
     <!-- include here the footer -->
