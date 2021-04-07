@@ -1,3 +1,27 @@
 .mf-link-hover:hover {
     color: #00a94f!important;
 }
+
+@media screen and (max-width: 992px) {
+    .display-desk {
+        display: none!important;
+    }
+}
+
+@media screen and (min-width: 993px) {
+    .display-desk {
+        display: inline-block!important;
+    }
+}
+
+@media screen and (min-width: 993px) {
+    .display-mob {
+        display: none!important;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .display-mob {
+        display: inline-block!important;
+    }
+}

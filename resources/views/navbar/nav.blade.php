@@ -12,7 +12,7 @@
                 <ul class="nav-menu">
 
                     <li class="active">
-                        <a href="#">Home<span class="submenu-indicator"></span></a>
+                        <a href="{{ route('home') }}">Home<span class="submenu-indicator"></span></a>
                     </li>
 
                     <li>
@@ -31,7 +31,7 @@
                         <a href="#">Blog<span class="submenu-indicator"></span></a>
                     </li>
 
-                    <li><a href="#">Pages<span class="submenu-indicator"></span></a>
+                    <!--<li><a href="#">Pages<span class="submenu-indicator"></span></a>
                         <ul class="nav-dropdown nav-submenu" style="right: auto; display: none;">
                             <li><a href="blog.html">Blogs Page</a></li>
                             <li><a href="blog-detail.html">Blog Detail</a></li>
@@ -41,22 +41,51 @@
                             <li><a href="all-jobs.html">Jobs Widgets</a></li>
                             <li><a href="login.html">LogIn</a></li>
                         </ul>
-                    </li>
+                    </li>-->
 
-                    <li><a href="contact.html">Contacts</a></li>
+                    <!-- <li><a href="contact.html">Contatti</a></li> -->
 
                 </ul>
 
                 <ul class="nav-menu nav-menu-social align-to-right">
 
-                    <li>
-                        <a href="#" data-toggle="modal" data-target="#login">
-                            <i class="ti-user mr-1"></i><span class="dn-lg">Login/Register</span>
+                    <li class="add-listing theme-bg mb-3 display-mob">
+                        <a href="#">
+                            <i class="ti-plus"></i> Nuova Offerta
                         </a>
                     </li>
-                    <li class="add-listing theme-bg">
+
+                    @guest
+                        @if (Route::has('login') && Route::has('register'))
+                            <li>
+                                <a href="{{ route('login') }}">
+                                    <i class="ti-user mr-1"></i><span class="dn-lg">Login/Registrati</span>
+                                </a>
+                            </li>
+                        @endif
+                    @else
+                        <li>
+                            <a href="#">
+                                <i class="ti-user mr-1"></i>{{ Auth::user()->name }}<span class="submenu-indicator"></span>
+                            </a>
+                            <ul class="nav-dropdown nav-submenu" style="right: auto; display: none;">
+                                <li><a href="blog.html">Profilo</a></li>
+                                <li>
+                                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    @endguest
+
+                    <li class="add-listing theme-bg display-desk">
                         <a href="#">
-                            <i class="ti-plus"></i> Post Job
+                            <i class="ti-plus"></i> Nuova Offerta
                         </a>
                     </li>
                 </ul>
