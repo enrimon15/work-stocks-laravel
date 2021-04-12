@@ -20,9 +20,9 @@
 					</div>
 
 					<!-- Nav tabs -->
-					<ul class="nav dashboard-verticle-nav">
+					<ul class="nav dashboard-verticle-nav"> <!--nav-pills-->
 						<li class="nav-item">
-							<a class="nav-link active" data-toggle="tab" href="#profile" id="testr"><i class="ti-user"></i>Profilo</a>
+							<a class="nav-link active" data-toggle="tab" href="#profile"><i class="ti-user"></i>Profilo</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" data-toggle="tab" href="#change-password"><i class="lni-lock"></i>Cambia Password</a>
@@ -63,7 +63,7 @@
 				<div class="tab-content">
 
 					<!-- My Profile -->
-					<div class="tab-pane {{empty(Session::get('tab')) ? 'active' : (Session::get('tab') == 'profile' ? 'active container' : '')}}" id="profile">
+					<div class="tab-pane {{empty(Session::get('tab')) ? 'active container' : (Session::get('tab') == 'profile' ? 'active container' : '')}}" id="profile">
 
 						<!-- Basic Info -->
 						<div class="tr-single-box">
@@ -77,14 +77,14 @@
 									<div class="col-lg-12 col-md-12 col-sm-12">
 										<div class="form-group">
 											<label>Nome</label>
-											<input class="form-control" type="text" value="Adam Muklarial">
+											<input class="form-control" type="text" value="{{Auth::user()->name}}">
 										</div>
 									</div>
 
 									<div class="col-lg-12 col-md-12 col-sm-12">
 										<div class="form-group">
 											<label>Cognome</label>
-											<input class="form-control" type="text" value="Adam Muklarial">
+											<input class="form-control" type="text" value="{{Auth::user()->surname}}">
 										</div>
 									</div>
 
@@ -202,7 +202,7 @@
 						<!-- Add Educations -->
 						<div class="tr-single-box">
 							<div class="tr-single-header">
-								<h4><i class="lni-graduation"></i> Add Education</h4>
+								<h4><i class="lni-graduation"></i> Qualifiche</h4>
 							</div>
 
 							<div class="tr-single-body">

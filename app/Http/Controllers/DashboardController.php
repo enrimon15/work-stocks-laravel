@@ -17,6 +17,7 @@ class DashboardController extends Controller
 
     public function index()
     {
+        $user = Auth::user();
         if (Auth::user()->hasRole('company')) {
             return view('company.company-dashboard')->with('tab', 'profile');
         } else {
