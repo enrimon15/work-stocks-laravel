@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +19,11 @@ use App\Http\Controllers\HomeController;
 /*Route::get('/', function () {
     return view('layouts.outline');
 });*/
+Auth::routes();
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});
 
 Route::get('/', [HomeController::class, 'index']);
 
@@ -24,11 +31,13 @@ Route::get('/home', function () {
     return redirect('/');
 })->name('home');
 
-Auth::routes();
+// DASHBOARD
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
-});
+Route::post('/change-password', [DashboardController::class, 'changePassword'])->name('changePass');
+
+Route::get('/profile/{id}', [ProfileController::class, 'index'])->name('profile');
+
 
 /*Route::get('/test', function () {
     dd(\App\Models\User::all());

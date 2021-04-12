@@ -69,7 +69,7 @@
                                 <i class="ti-user mr-1"></i>{{ Auth::user()->name }}<span class="submenu-indicator"></span>
                             </a>
                             <ul class="nav-dropdown nav-submenu" style="right: auto; display: none;">
-                                <li><a href="blog.html">Profilo</a></li>
+                                <li><a href="{{route('dashboard')}}">Profilo</a></li>
                                 <li>
                                     <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
