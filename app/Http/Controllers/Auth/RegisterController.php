@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use TCG\Voyager\Models\Role;
 
 class RegisterController extends Controller
 {
@@ -41,6 +43,19 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    private function messages()
+    {
+        return [
+            'email.unique' => 'La email è già presente nel sistema',
+            'email.*' => 'La email non è valida',
+            'name.*' => 'Il nome non è valido',
+            'surname.*' => 'Il cognome non è valido',
+            'password.confirmed' => 'Le due password non coincidono',
+            'password.*' => 'La password non è valida, controlla che sia almeno 8 caratteri',
+            'user_type.*' => 'La tipologia utente non è valida'
+        ];
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -54,7 +69,11 @@ class RegisterController extends Controller
             'surname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+            'user_type' => [
+                'required',
+                Rule::in(['base_user', 'company']),
+            ],
+        ], $this->messages());
     }
 
     /**
@@ -65,11 +84,16 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $role = Role::where('name', '=', $data['user_type'])->firstOrFail();
+
+        $user = User::create([
             'name' => $data['name'],
             'surname' => $data['surname'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+        $user->roles()->save($role);
+
+        return $user;
     }
 }

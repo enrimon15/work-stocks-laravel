@@ -25,10 +25,6 @@
 
                         <div class="login-form">
 
-                            @if($errors->any())
-                                <p class="color--error mb-2"><strong>Controlla che tutti i campi siano corretti!</strong></p>
-                            @endif
-
                             <form method="POST" action="{{ route('register') }}">
                                 @csrf
                                 <div class="form-group mb-5">
@@ -37,6 +33,10 @@
                                         <option value="base_user">Utente</option>
                                         <option value="company">Azienda</option>
                                     </select>
+                                    <!-- Error -->
+                                    @if ($errors->has('user_type'))
+                                        <p class="color--error mb-2"><strong>{{ $errors->first('user_type') }}</strong></p>
+                                    @endif
                                 </div>
 
                                 <div class="form-group">
@@ -45,6 +45,10 @@
                                         <input type="text" class="form-control" placeholder="Nome" name="name" value="{{ old('name') }}" required autocomplete="name">
                                         <i class="ti-user"></i>
                                     </div>
+                                    <!-- Error -->
+                                    @if ($errors->has('name'))
+                                        <p class="color--error mb-2"><strong>{{ $errors->first('name') }}</strong></p>
+                                    @endif
                                 </div>
 
                                 <div class="form-group">
@@ -53,6 +57,10 @@
                                         <input type="text" class="form-control" placeholder="Cognome" name="surname" value="{{ old('surname') }}" required autocomplete="surname">
                                         <i class="ti-user"></i>
                                     </div>
+                                    <!-- Error -->
+                                    @if ($errors->has('surname'))
+                                        <p class="color--error mb-2"><strong>{{ $errors->first('surname') }}</strong></p>
+                                    @endif
                                 </div>
 
                                 <div class="form-group">
@@ -61,6 +69,10 @@
                                         <input type="email" class="form-control" placeholder="email" name="email" value="{{ old('email') }}" required autocomplete="email">
                                         <i class="ti-user"></i>
                                     </div>
+                                    <!-- Error -->
+                                    @if ($errors->has('email'))
+                                        <p class="color--error mb-2"><strong>{{ $errors->first('email') }}</strong></p>
+                                    @endif
                                 </div>
 
                                 <div class="form-group">
@@ -69,6 +81,10 @@
                                         <input type="password" class="form-control" placeholder="*******" name="password" required autocomplete="new-password">
                                         <i class="ti-unlock"></i>
                                     </div>
+                                    <!-- Error -->
+                                    @if ($errors->has('password'))
+                                        <p class="color--error mb-2"><strong>{{ $errors->first('password') }}</strong></p>
+                                    @endif
                                 </div>
 
                                 <div class="form-group">

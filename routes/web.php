@@ -20,6 +20,16 @@ use App\Http\Controllers\HomeController;
 
 Route::get('/', [HomeController::class, 'index']);
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/home', function () {
+    return redirect('/');
+})->name('home');
 
 Auth::routes();
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});
+
+/*Route::get('/test', function () {
+    dd(\App\Models\User::all());
+});*/
