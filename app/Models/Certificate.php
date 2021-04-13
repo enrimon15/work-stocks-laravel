@@ -5,23 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserProfile extends Model
+class Certificate extends Model
 {
     use HasFactory;
 
-    protected $table = 'user_profiles';
+    protected $table = 'certificates';
     protected $id = 'id';
 
     protected $fillable = [
-        'telephone',
-        'overview',
-        'job_title',
-        'min_salary',
-        'city',
-        'country',
-        'cv_path',
-        'birth',
-        'sex'
+        'date',
+        'end_date',
+        'link',
+        'credential'
     ];
 
     public function user() {

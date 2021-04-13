@@ -1,6 +1,9 @@
 @extends('layouts.outline')
 
 @section('content')
+<!-- Preloader - style you can find in spinners.css -->
+<div class="Loader"></div>
+
 <!-- ============================ Hero Banner  Start================================== -->
 <div class="hero-header jumbo-banner text-center" style="background: url(https://via.placeholder.com/1920x800);" data-overlay="6">
 	<div class="container">

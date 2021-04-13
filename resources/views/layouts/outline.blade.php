@@ -20,10 +20,6 @@
 </head>
 
 <body class="green-skin">
-<!-- ============================================================== -->
-<!-- Preloader - style you can find in spinners.css -->
-<!-- ============================================================== -->
-<div class="Loader"></div>
 
 <!-- ============================================================== -->
 <!-- Main wrapper - style you can find in pages.scss -->

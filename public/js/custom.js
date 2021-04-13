@@ -423,7 +423,18 @@
 
 	// Editor 
 	$('#summernote').summernote({
-		height: 150
+		height: 150,
+		toolbar: [
+			[ 'style', [ 'style' ] ],
+			[ 'font', [ 'bold', 'italic', 'underline'] ],
+			[ 'fontname', [ 'fontname' ] ],
+			[ 'fontsize', [ 'fontsize' ] ],
+			[ 'color', [ 'color' ] ],
+			[ 'para', [ 'ol', 'ul' ] ],
+			[ 'table', [ 'table' ] ],
+			[ 'insert', [ 'link'] ],
+			[ 'view', [ 'undo', 'redo', 'fullscreen', 'codeview'] ]
+		]
 	});
 	
 	// Editor 
