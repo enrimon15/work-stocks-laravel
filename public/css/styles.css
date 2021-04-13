@@ -2582,7 +2582,7 @@ position: absolute;
 display: inline-block;
 vertical-align: middle;
 margin: 5px;
-cursor: pointer;
+cursor: pointerer;
 }
 .checkbox-custom-label, .radio-custom-label {
 position: relative;

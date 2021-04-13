@@ -13,10 +13,10 @@
 
 					<div class="dashboard-thumb">
 						<div class="dashboard-th-pic">
-							<img src="https://via.placeholder.com/400x400" class="img-fluid mx-auto img-circle" alt="" />
+							<img src="{{asset('images/avatar/' . Auth::user()->avatar)}}" class="img-fluid mx-auto img-circle" alt="" />
 						</div>
 						<h4 class="mb-1">{{Auth::user()->name." ".Auth::user()->surname}}</h4>
-						<span class="text-success">{{Auth::user()->profile()->job_title ?? null}}</span>
+						<span class="text-success">{{Auth::user()->profile->job_title ?? null}}</span>
 					</div>
 
 					<!-- Nav tabs -->

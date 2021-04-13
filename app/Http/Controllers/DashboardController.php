@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class DashboardController extends Controller
 {
@@ -27,30 +28,37 @@ class DashboardController extends Controller
     }
 
     public function updateProfile(Request $data) {
+        $user = Auth::user(); // current user
+
         $data->validate([
             'name' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
             'jobTitle'=> ['string', 'max:255'],
             'minSalary'=> ['numeric', 'min:0'],
             'description'=> ['string'],
-            'avatar'=> ['required','max:10000','mimes:jpg,png'], //10 mb
+            'avatar'=> ['max:10000','mimes:jpg,png,jpeg'], //10 mb
             'birth'=> ['date'],
             'sex' => [
                 'required',
                 Rule::in(['M', 'F']),
             ],
             'telephone'=> ['string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id, 'id')],
             'country'=> ['string', 'max:255'],
             'city'=> ['string', 'max:255'],
             'website'=> ['string', 'max:255']
         ]);
 
-        $user = Auth::user(); // current user
         $user->name = $data->input('name');
         $user->surname = $data->input('surname');
         $user->email = $data->input('email');
-        //$user->avatar = $data->input('avatar');
+
+        if($data->avatar != null) {
+            $newImageName = time() . "-" . $data->input('name') . $data->input('surname') . "-" . $user->id . $data->avatar->extension();
+            $data->avatar->move(public_path('images'), $newImageName);
+            $user->avatar = $newImageName;
+        }
+
         $user->save();
 
         $profile = new UserProfile();;

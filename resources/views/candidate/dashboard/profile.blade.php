@@ -14,7 +14,12 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('updateProfileExecute') }}">
+        <!-- Error -->
+        @if ($errors->any())
+            <p class="color--error mb-2"><strong>Controlla che tutti i campi siano corretti</strong></p>
+        @endif
+
+        <form method="POST" action="{{ route('updateProfileExecute') }}" enctype="multipart/form-data">
         @csrf
             <!-- Basic Info -->
             <div class="tr-single-box">
@@ -62,7 +67,7 @@
 
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <div class="form-group">
-                                <label>Avatar</label>
+                                <label>Avatar (png, jpg, jpeg)</label>
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="clogo" name="avatar">
                                     <label class="custom-file-label" for="clogo">Scegli immagine</label>
