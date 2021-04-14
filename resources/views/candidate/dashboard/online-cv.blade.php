@@ -15,10 +15,10 @@
             <table class="table table-striped mb-5">
                 <thead class="thead-dark">
                 <tr>
-                    <th scope="col">Qualification</th>
-                    <th scope="col">Dates</th>
-                    <th scope="col">School / Colleges</th>
-                    <th scope="col">Action</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Data</th>
+                    <th scope="col">Istituto</th>
+                    <th scope="col">Azioni</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -66,30 +66,57 @@
 
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
-                                    <label>Title</label>
-                                    <input class="form-control" type="text" value="Adam Muklarial">
+                                    <label>Nome</label>
+                                    <input class="form-control" name="name" placeholder="Nome" type="text" required>
+                                </div>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="state" id="flexRadioDefault1" checked>
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    Conclusa
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="state" id="flexRadioDefault2">
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                    In corso
+                                </label>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <label>Data di inizio</label>
+                                    <input type="date" class="form-control" name="startDate" required>
                                 </div>
                             </div>
 
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="form-group">
-                                    <label>From</label>
-                                    <input placeholder="06.11.2007" type="text" class="form-control datepicker">
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6 col-md-6 col-sm-6">
-                                <div class="form-group">
-                                    <label>To</label>
-                                    <input placeholder="07.17.2010" type="text" class="form-control datepicker">
+                                    <label>Data di fine</label>
+                                    <input type="date" class="form-control" name="endDate">
                                 </div>
                             </div>
 
 
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
-                                    <label>University</label>
-                                    <input placeholder="University Name" type="text" class="form-control">
+                                    <label>Istituto</label>
+                                    <input placeholder="Nome istituto" name="institute" type="text" class="form-control" required>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label>Descrizione</label>
+                                    <textarea placeholder="Descrizione" name="description" class="form-control" required></textarea>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label>Valutazione</label>
+                                    <input placeholder="Valutazione" name="valuation" type="text" class="form-control" required>
                                 </div>
                             </div>
 
@@ -98,7 +125,7 @@
                 </tr>
                 </tbody>
             </table>
-            <a href="#" class="btn add-pr-item-btn">Add Item</a>
+            <a href="#" class="btn add-pr-item-btn">Aggiungi</a>
         </div>
 
     </div>
