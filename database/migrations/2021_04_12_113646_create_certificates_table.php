@@ -21,6 +21,7 @@ class CreateCertificatesTable extends Migration
             $table->year('end_date')->nullable(); //può non avere scadenza
             $table->string('link')->nullable();
             $table->string('credential');
+            $table->string('society');
             $table->timestamps();
         });
     }

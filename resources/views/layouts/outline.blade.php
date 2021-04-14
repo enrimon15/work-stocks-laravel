@@ -17,6 +17,14 @@
     <link href="{{asset('css/skin/default.css')}}" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="{{asset('css/custom.css')}}" rel="stylesheet">
+    <!-- JQuery -->
+    <script src="{{asset('js/jquery.min.js')}}"></script>
+    <!-- Datatables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap3.min.js"></script>
+
+
 </head>
 
 <body class="green-skin">
@@ -41,7 +49,6 @@
 <!-- ============================================================== -->
 <!-- All Jquery -->
 <!-- ============================================================== -->
-<script src="{{asset('js/jquery.min.js')}}"></script>
 <script src="{{asset('js/popper.min.js')}}"></script>
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
 <script src="{{asset('js/select2.min.js')}}"></script>

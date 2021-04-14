@@ -12,8 +12,8 @@ class User extends \TCG\Voyager\Models\User
 {
     use HasFactory, Notifiable;
 
-    protected $table = 'users';
-    protected $id = 'id';
+    /*protected $table = 'users';
+    protected $id = 'id';*/
 
     /**
      * The attributes that are mass assignable.

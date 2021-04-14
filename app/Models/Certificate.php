@@ -16,7 +16,8 @@ class Certificate extends Model
         'date',
         'end_date',
         'link',
-        'credential'
+        'credential',
+        'society'
     ];
 
     public function user() {

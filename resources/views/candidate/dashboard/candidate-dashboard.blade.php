@@ -65,57 +65,6 @@
 					<!-- yields here the main content page -->
 					@yield('content-dashboard')
 
-					<!-- CV & Cover letter -->
-					<div class="tab-pane" id="cv">
-						<!-- CV & Cover letter -->
-						<div class="tr-single-box">
-							<div class="tr-single-header">
-								<h4><i class="ti-desktop"></i> CV & Cover letter</h4>
-							</div>
-
-							<div class="tr-single-body">
-								<div class="row">
-
-									<div class="col-lg-12 col-md-12 col-sm-12">
-										<div class="form-group">
-											<label>Full Name</label>
-											<input class="form-control" type="text" value="Adam Muklarial">
-										</div>
-									</div>
-
-									<div class="col-lg-12 col-md-12 col-sm-12">
-										<div class="form-group">
-											<label>Job Title</label>
-											<input class="form-control" type="text" value="Web Designer & Developer">
-										</div>
-									</div>
-
-									<div class="col-lg-12 col-md-12 col-sm-12">
-										<div class="form-group">
-											<label>Overview</label>
-											<div id="cv-cover"><p>Hello Description</p></div>
-										</div>
-									</div>
-
-									<div class="col-lg-12 col-md-12 col-sm-12">
-										<form>
-											<div class="custom-file">
-												<input type="file" class="custom-file-input" id="customFile">
-												<label class="custom-file-label" for="customFile">Choose file</label>
-											</div>
-										</form>
-									</div>
-
-								</div>
-							</div>
-
-						</div>
-						<!-- /CV -->
-
-						<a href="#" class="btn btn-info btn-md full-width">Save & Update<i class="ml-2 ti-arrow-right"></i></a>
-
-					</div>
-
 				</div>
 			</div>
 
