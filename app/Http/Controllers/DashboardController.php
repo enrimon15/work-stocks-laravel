@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Qualification;
 use App\Models\UserProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -33,20 +34,20 @@ class DashboardController extends Controller
         $data->validate([
             'name' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
-            'jobTitle'=> ['string', 'max:255'],
-            'minSalary'=> ['numeric', 'min:0'],
-            'description'=> ['string'],
-            'avatar'=> ['max:10000','mimes:jpg,png,jpeg'], //10 mb
-            'birth'=> ['date'],
+            'jobTitle'=> ['nullable','string', 'max:255'],
+            'minSalary'=> ['nullable','numeric', 'min:0'],
+            'description'=> ['nullable','string'],
+            'avatar'=> ['nullable','max:10000','mimes:jpg,png,jpeg'], //10 mb
+            'birth'=> ['nullable','date'],
             'sex' => [
-                'required',
+                'nullable',
                 Rule::in(['M', 'F']),
             ],
-            'telephone'=> ['string', 'max:255'],
+            'telephone'=> ['nullable','string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id, 'id')],
-            'country'=> ['string', 'max:255'],
-            'city'=> ['string', 'max:255'],
-            'website'=> ['string', 'max:255']
+            'country'=> ['nullable','string', 'max:255'],
+            'city'=> ['nullable','string', 'max:255'],
+            'website'=> ['nullable','string', 'max:255']
         ]);
 
         $user->name = $data->input('name');
@@ -61,7 +62,7 @@ class DashboardController extends Controller
 
         $user->save();
 
-        $profile = new UserProfile();;
+        $profile = new UserProfile();
         if ($user->profile()->exists()) {
             $profile = $user->profile;
         } else {
@@ -127,5 +128,50 @@ class DashboardController extends Controller
 
     public function showOnlineCV() {
         return view('candidate.dashboard.online-cv');
+    }
+
+    public function populateOnlineCV(Request $data, $operationType) {
+        $user = Auth::user(); // current user
+
+        switch ($operationType) {
+            case 'qualification':
+                $data->validate([
+                    'name' => ['required', 'string', 'max:255'],
+                    'inProgress' => ['nullable','string', 'max:255'],
+                    'startDate'=> ['required', 'date'],
+                    'endDate'=> ['nullable','date','after_or_equal:start_date'],
+                    'institute'=> ['string', 'required', 'max:255'],
+                    'description'=> ['nullable','string'], //10 mb
+                    'valuation'=> ['nullable','string','max:255']
+                ]);
+
+                $qualification = new Qualification();
+                $qualification->user()->associate($user);
+                $qualification->name = $data->input('name');
+                $qualification->start_date = date('Y',strtotime($data->input('startDate')));
+                if ($data->input('endDate') != null) $qualification->end_date = date('Y',strtotime($data->input('endDate')));
+                $qualification->in_progress = ($data->input('inProgress') == 'on') ? true : false;
+                $qualification->institute = $data->input('institute');
+                if ($data->input('description') != null) $qualification->description = $data->input('description');
+                if ($data->input('valuation') != null) $qualification->valuation = $data->input('valuation');
+
+                $qualification->save();
+                return back()->with('success', 'Qualifica inserita correttamente');
+                break;
+            case 'experience':
+                echo "i equals 1";
+                break;
+            case 'certificate':
+                echo "i equals 2";
+                break;
+            case 'skill':
+                echo "i equals 2";
+                break;
+            case 'cv':
+                echo "i equals 2";
+                break;
+            default:
+                //default case;
+        }
     }
 }

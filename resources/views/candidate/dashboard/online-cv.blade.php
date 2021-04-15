@@ -19,6 +19,20 @@
 <!-- My Resume and Online CV -->
 <div class="tab-pane active container" id="resume">
 
+    @if(Session::get('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{Session::get('success')}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+
+    <!-- Error -->
+    @if ($errors->any())
+            <p class="color--error mb-2"><strong>{{ $errors }}</strong></p>
+    @endif
+
     <!-- Add Educations -->
     <div class="tr-single-box">
         <div class="tr-single-header">
@@ -84,60 +98,64 @@
                 <tbody class="ui-sortable"><tr class="pricing-list-item pattern ui-sortable-handle">
                     <td>
                         <div class="box-close"><a style="cursor: pointer" id="add-qualification-butt" class="delete"><i id="add-qualification-icon" class="ti-plus"></i></a></div>
-                        <div id="add-qualification" class="row" style="display: none">
 
-                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                <div class="form-group">
-                                    <label>Nome</label>
-                                    <input class="form-control" name="name" placeholder="Nome" type="text" required>
+                        <form method="POST" action="{{ route('onlineCvExecute', ['operationType' => 'qualification']) }}">
+                            @csrf
+                            <div id="add-qualification" class="row" style="display: none">
+
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Nome</label>
+                                        <input class="form-control" name="name" placeholder="Nome" type="text" required>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                <div class="form-group mt-1 float-right">
-                                    <input type="checkbox" name="inProgress" id="check-qualification">&nbsp;&nbsp;In corso
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="form-group mt-1 float-right">
+                                        <input type="checkbox" name="inProgress" id="check-qualification">&nbsp;&nbsp;In corso
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-lg-6 col-md-6 col-sm-6">
-                                <div class="form-group">
-                                    <label>Data di inizio</label>
-                                    <input type="date" class="form-control" name="startDate" required>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Data di inizio</label>
+                                        <input type="date" class="form-control" name="startDate" required>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-lg-6 col-md-6 col-sm-6">
-                                <div class="form-group">
-                                    <label>Data di fine</label>
-                                    <input id="end-qualification" type="date" class="form-control" name="endDate">
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Data di fine</label>
+                                        <input id="end-qualification" type="date" class="form-control" name="endDate">
+                                    </div>
                                 </div>
-                            </div>
 
 
-                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                <div class="form-group">
-                                    <label>Istituto</label>
-                                    <input placeholder="Nome istituto" name="institute" type="text" class="form-control" required>
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Istituto</label>
+                                        <input placeholder="Nome istituto" name="institute" type="text" class="form-control" required>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                <div class="form-group">
-                                    <label>Descrizione</label>
-                                    <textarea placeholder="Descrizione" name="description" class="form-control" required></textarea>
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Descrizione</label>
+                                        <textarea placeholder="Descrizione" name="description" class="form-control"></textarea>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                <div class="form-group">
-                                    <label>Valutazione</label>
-                                    <input placeholder="Valutazione" name="valuation" type="text" class="form-control" required>
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Valutazione</label>
+                                        <input placeholder="Valutazione" name="valuation" type="text" class="form-control">
+                                    </div>
                                 </div>
+
+                                <button type="submit" class="btn add-pr-item-btn mt-2 ml-1">Aggiungi</button>
                             </div>
+                        </form>
 
-                            <a href="#" class="btn add-pr-item-btn mt-2 ml-1">Aggiungi</a>
-
-                        </div>
                     </td>
                 </tr>
                 </tbody>
@@ -498,6 +516,13 @@
 <script>
     jQuery(function($) {
         $(document).ready( function () {
+
+            /*$("#datepicker").datepicker({
+                format: "yyyy",
+                viewMode: "years",
+                minViewMode: "years"
+            });*/
+
             let options = {
                 "scrollX": true,
                 "scrollY": '280px',
