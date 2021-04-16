@@ -46,6 +46,8 @@ Route::get('/dashboard/job-alert', [DashboardController::class, 'showJobAlert'])
 
 Route::get('/dashboard/online-cv', [DashboardController::class, 'showOnlineCV'])->name('onlineCV');
 Route::post('/dashboard/online-cv/{operationType}', [DashboardController::class, 'populateOnlineCV'])->name('onlineCvExecute');
+Route::get('/dashboard/online-cv/delete-qualification/{id}', [DashboardController::class, 'deleteQualification'])->name('onlineCvDeleteQualification');
+Route::get('/dashboard/online-cv/edit/{operationType}/{id}', [DashboardController::class, 'editCV'])->name('onlineCvEdit');
 
 // PROFILE
 Route::get('/profile/{id}', [ProfileController::class, 'index'])->name('profile');

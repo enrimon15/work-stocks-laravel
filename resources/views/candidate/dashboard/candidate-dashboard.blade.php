@@ -28,7 +28,7 @@
 							<a class="nav-link {{Route::currentRouteName() == 'changePassword' ? 'active' : ''}}" href="{{route('changePassword')}}"><i class="lni-lock"></i>Cambia Password</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link {{Route::currentRouteName() == 'onlineCV' ? 'active' : ''}}" href="{{route('onlineCV')}}"><i class="ti-file"></i>Online CV</a>
+							<a class="nav-link {{(Route::currentRouteName() == 'onlineCV' || Route::currentRouteName() == 'onlineCvEdit') ? 'active' : ''}}" href="{{route('onlineCV')}}"><i class="ti-file"></i>Online CV</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link {{Route::currentRouteName() == 'favorite' ? 'active' : ''}}" href="{{route('favorite')}}"><i class="lni-heart-filled"></i>Offerte Salvate</a>

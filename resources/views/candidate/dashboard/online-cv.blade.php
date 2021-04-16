@@ -52,45 +52,31 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">Masters In Fine Arts</th>
-                    <td>2002 - 2004</td>
-                    <td>Virazia University</td>
-                    <td>100</td>
-                    <td>Desc</td>
-                    <td>
-                        <div class="dash-action">
-                            <a href="#" class="dg-edit" data-toggle="tooltip" data-placement="top" title="Edit"><i class="ti-pencil"></i></a>
-                            <a href="#" class="dg-delete" data-toggle="tooltip" data-placement="top" title="Delete"><i class="ti-trash"></i></a>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">Tommers College</th>
-                    <td>2012 - 2015</td>
-                    <td>Bachlors in Fine Arts</td>
-                    <td>100</td>
-                    <td>Desc</td>
-                    <td>
-                        <div class="dash-action">
-                            <a href="#" class="dg-edit" data-toggle="tooltip" data-placement="top" title="Edit"><i class="ti-pencil"></i></a>
-                            <a href="#" class="dg-delete" data-toggle="tooltip" data-placement="top" title="Delete"><i class="ti-trash"></i></a>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">Diploma In Fine Arts</th>
-                    <td>2014 - 2015</td>
-                    <td>Imperieal of Art Direction</td>
-                    <td>100</td>
-                    <td>Desc</td>
-                    <td>
-                        <div class="dash-action">
-                            <a href="#" class="dg-edit" data-toggle="tooltip" data-placement="top" title="Edit"><i class="ti-pencil"></i></a>
-                            <a href="#" class="dg-delete" data-toggle="tooltip" data-placement="top" title="Delete"><i class="ti-trash"></i></a>
-                        </div>
-                    </td>
-                </tr>
+                @foreach($qualifications as $qualification)
+                    <tr>
+                        <th scope="row">{{$qualification->name}}</th>
+                        <td>{{$qualification->start_date}} - {{$qualification->end_date ?? 'in corso'}}</td>
+                        <td>{{$qualification->institute}}</td>
+                        <td>{{$qualification->valuation ?? null}}</td>
+                        <td>
+                            @if($qualification->description != null)
+                                <span data-toggle="modal" data-target="#qualification-description-modal">
+                                <a href="#" class="dg-edit" data-toggle="tooltip" data-placement="top" title="Leggi Descrizione">
+                                    <i class="ti-eye"></i>
+                                </a>
+                                </span>
+                            @else
+                                {{null}}
+                            @endif
+                        </td>
+                        <td>
+                            <div class="dash-action">
+                                <a href="{{route('onlineCvEdit', ['operationType' => 'qualification','id' => $qualification->id])}}" class="dg-edit" data-toggle="tooltip" data-placement="top" title="Modifica"><i class="ti-pencil"></i></a>
+                                <a href="{{route('onlineCvDeleteQualification', ['id' => $qualification->id])}}" class="dg-delete" data-toggle="tooltip" data-placement="top" title="Elimina"><i class="ti-trash"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
                 </tbody>
             </table>
 
@@ -164,6 +150,26 @@
 
     </div>
     <!-- /Education Info -->
+
+    <!-- Modal Qualification Description -->
+    <div class="modal fade" id="qualification-description-modal" tabindex="-1" role="dialog" aria-labelledby="qualification-description-modal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Descrizione Qualifica</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{$qualification->description ?? null}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Chiudi</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Add Experience -->
     <div class="tr-single-box">
@@ -512,6 +518,7 @@
 </div>
 
 <script src="{{asset('js/dashboard.js')}}"></script>
+<script src="{{asset('js/dashboard-in-progress.js')}}"></script>
 
 <script>
     jQuery(function($) {
@@ -534,7 +541,11 @@
                 "bLengthChange": false,
                 "bFilter": true,
                 "bAutoWidth": false,
-                "paging": false
+                "paging": false,
+                "language": {
+                    "emptyTable": 'Non sono presenti qualifiche, clicca su "+" per aggiungerne una',
+                    "sSearch": "Cerca:"
+                }
             };
 
             $('#qualification_table').DataTable(options);

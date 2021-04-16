@@ -18,16 +18,6 @@ window.addEventListener('load', function () {
             $qualificationIcon.classList.add('ti-close');
         }
     });
-
-    let $checkboxQualification  = document.getElementById('check-qualification');
-    $checkboxQualification.addEventListener('change', function() {
-        let $endQualification = document.getElementById('end-qualification');
-        if (this.checked) {
-            $endQualification.disabled = true;
-        } else {
-            $endQualification.disabled = false;
-        }
-    });
     ////////////////
 
     // add experience
@@ -42,16 +32,6 @@ window.addEventListener('load', function () {
         } else {
             $experienceIcon.classList.remove('ti-plus');
             $experienceIcon.classList.add('ti-close');
-        }
-    });
-
-    let $checkboxExperience  = document.getElementById('check-experience');
-    $checkboxExperience.addEventListener('change', function() {
-        let $endExperience = document.getElementById('end-experience');
-        if (this.checked) {
-            $endExperience.disabled = true;
-        } else {
-            $endExperience.disabled = false;
         }
     });
     ////////////////
@@ -72,7 +52,7 @@ window.addEventListener('load', function () {
     });
     ////////////////
 
-    // add skill
+    // add certificate
     let $certificateButt = document.getElementById('add-certificate-butt');
     $certificateButt.addEventListener('click', function (e) {
         let $certificate = document.getElementById('add-certificate');

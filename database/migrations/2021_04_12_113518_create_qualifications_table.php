@@ -17,8 +17,8 @@ class CreateQualificationsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->year('start_date');
-            $table->year('end_date')->nullable(); //può essere in corso
+            $table->date('start_date');
+            $table->date('end_date')->nullable(); //può essere in corso
             $table->boolean('in_progress');
             $table->string('institute')->nullable();
             $table->string('name');

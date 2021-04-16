@@ -127,7 +127,9 @@ class DashboardController extends Controller
     }
 
     public function showOnlineCV() {
-        return view('candidate.dashboard.online-cv');
+        $user = Auth::user();
+        $qualifications = $user->qualifications;
+        return view('candidate.dashboard.online-cv')->with(['qualifications' => $qualifications]);
     }
 
     public function populateOnlineCV(Request $data, $operationType) {
@@ -148,8 +150,9 @@ class DashboardController extends Controller
                 $qualification = new Qualification();
                 $qualification->user()->associate($user);
                 $qualification->name = $data->input('name');
-                $qualification->start_date = date('Y',strtotime($data->input('startDate')));
-                if ($data->input('endDate') != null) $qualification->end_date = date('Y',strtotime($data->input('endDate')));
+                $qualification->start_date = $data->input('startDate');
+                //if ($data->input('endDate') != null) $qualification->end_date = date('Y',strtotime($data->input('endDate')));
+                if ($data->input('endDate') != null) $qualification->end_date = $data->input('endDate');
                 $qualification->in_progress = ($data->input('inProgress') == 'on') ? true : false;
                 $qualification->institute = $data->input('institute');
                 if ($data->input('description') != null) $qualification->description = $data->input('description');
@@ -172,6 +175,45 @@ class DashboardController extends Controller
                 break;
             default:
                 //default case;
+        }
+    }
+
+    public function editCV($operationType, $id) {
+        $user = Auth::user(); // current user
+
+        switch ($operationType) {
+            case 'qualification':
+                $qualification = Qualification::find($id);
+                if ($qualification->user == Auth::user()) {
+                    return view('candidate.dashboard.edit-cv')->with('qualification', $qualification);
+                } else {
+                    // redirect error page
+                }
+                break;
+            case 'experience':
+                echo "i equals 1";
+                break;
+            case 'certificate':
+                echo "i equals 2";
+                break;
+            case 'skill':
+                echo "i equals 2";
+                break;
+            case 'cv':
+                echo "i equals 2";
+                break;
+            default:
+                //default case;
+        }
+    }
+
+    public function deleteQualification($id) {
+        $qualification = Qualification::find($id);
+        if ($qualification->user == Auth::user()) {
+            $qualification->delete();
+            return back()->with('success', 'Qualifica eliminata correttamente');
+        } else {
+            // redirect error page
         }
     }
 }
