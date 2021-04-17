@@ -1,3 +1,6 @@
+<?php
+use TCG\Voyager\Models\Menu;
+?>
 <!-- Start Navigation -->
 <div class="header header-light">
     <div class="container-fluid">
@@ -11,25 +14,8 @@
             <div class="nav-menus-wrapper" style="transition-property: none;">
                 <ul class="nav-menu">
 
-                    <li class="active">
-                        <a href="{{ route('home') }}">Home<span class="submenu-indicator"></span></a>
-                    </li>
-
-                    <li>
-                        <a href="#">Offerte<span class="submenu-indicator"></span></a>
-                    </li>
-
-                    <li>
-                        <a href="#">Candidati<span class="submenu-indicator"></span></a>
-                    </li>
-
-                    <li>
-                        <a href="#">Aziende<span class="submenu-indicator"></span></a>
-                    </li>
-
-                    <li>
-                        <a href="#">Blog<span class="submenu-indicator"></span></a>
-                    </li>
+                    <!-- Menu recuperato da voyager e poi renderizzato tramite menu.blade.php -->
+                    <?=Menu::display('MainMenu', '/navbar/menu')?>
 
                     <!--<li><a href="#">Pages<span class="submenu-indicator"></span></a>
                         <ul class="nav-dropdown nav-submenu" style="right: auto; display: none;">
