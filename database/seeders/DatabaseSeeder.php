@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use TCG\Voyager\Models\Role;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,20 +16,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-        Role::create([
-            'name' => 'base_user',
-            'display_name' => 'Utente Base'
+        // Creazione admin
+        User::create([
+            'name' => 'admin',
+            'surname' => 'admin',
+            'email' => 'admin@admin.it',
+            'password' => Hash::make('admin')
         ]);
 
+        // Creazione ruolo azienda
         Role::create([
             'name' => 'company',
             'display_name' => 'Azienda'
         ]);
-
-        /*Role::create([
-            'name' => 'admin',
-            'display_name' => 'Amministratore'
-        ]);*/
     }
 }

@@ -71,7 +71,7 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'user_type' => [
                 'required',
-                Rule::in(['base_user', 'company']),
+                Rule::in(['user', 'company']),
             ],
         ], $this->messages());
     }

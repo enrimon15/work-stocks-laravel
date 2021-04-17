@@ -30,7 +30,7 @@
                                 <div class="form-group mb-5">
                                     <label>Che tipologia di utente sei?</label>
                                     <select class="form-control" name="user_type">
-                                        <option value="base_user">Utente</option>
+                                        <option value="user">Utente</option>
                                         <option value="company">Azienda</option>
                                     </select>
                                     <!-- Error -->

@@ -22,9 +22,11 @@ class DashboardController extends Controller
 
         //dd($user->profile()->telephone ?? 'ciao');
         if ($user->hasRole('company')) {
-            return view('company.company-dashboard')->with('tab', 'profile');
-        } else if ($user->hasRole('base_user')) {
+            return view('company.company-dashboard');
+        } else if ($user->hasRole('user')) {
             return view('candidate.dashboard.profile')->with('user', $user);
+        } else if ($user->hasRole('admin')) {
+            return redirect()->route('voyager.dashboard');
         }
     }
 
@@ -55,8 +57,8 @@ class DashboardController extends Controller
         $user->email = $data->input('email');
 
         if($data->avatar != null) {
-            $newImageName = time() . "-" . $data->input('name') . $data->input('surname') . "-" . $user->id . "." . $data->avatar->extension();
-            $data->avatar->move(public_path('images/avatar'), $newImageName);
+            $newImageName = 'users/' . time() . "-" . $data->input('name') . $data->input('surname') . "-" . $user->id . $data->avatar->extension();
+            $data->avatar->move(public_path('storage/users'), $newImageName);
             $user->avatar = $newImageName;
         }
 
