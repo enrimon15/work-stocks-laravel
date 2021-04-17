@@ -55,8 +55,8 @@ class DashboardController extends Controller
         $user->email = $data->input('email');
 
         if($data->avatar != null) {
-            $newImageName = time() . "-" . $data->input('name') . $data->input('surname') . "-" . $user->id . $data->avatar->extension();
-            $data->avatar->move(public_path('images'), $newImageName);
+            $newImageName = time() . "-" . $data->input('name') . $data->input('surname') . "-" . $user->id . "." . $data->avatar->extension();
+            $data->avatar->move(public_path('images/avatar'), $newImageName);
             $user->avatar = $newImageName;
         }
 

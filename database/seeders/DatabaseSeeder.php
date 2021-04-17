@@ -25,9 +25,9 @@ class DatabaseSeeder extends Seeder
             'display_name' => 'Azienda'
         ]);
 
-        Role::create([
+        /*Role::create([
             'name' => 'admin',
             'display_name' => 'Amministratore'
-        ]);
+        ]);*/
     }
 }
