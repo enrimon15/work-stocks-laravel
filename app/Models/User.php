@@ -59,6 +59,11 @@ class User extends \TCG\Voyager\Models\User
         return false;
     }
 
+    public function isAdmin() {
+        $adminRole = Role::where('name','admin')->first();
+        return $adminRole->id == $this->role_id;
+    }
+
     public function profile() {
         return $this->hasOne( UserProfile::class);
     }

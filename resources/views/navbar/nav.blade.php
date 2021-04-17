@@ -69,7 +69,11 @@
                                 <i class="ti-user mr-1"></i>{{ Auth::user()->name }}<span class="submenu-indicator"></span>
                             </a>
                             <ul class="nav-dropdown nav-submenu" style="right: auto; display: none;">
-                                <li><a href="{{route('dashboard')}}">Profilo</a></li>
+                                @if(Auth::user()->isAdmin())
+                                    <li><a href="{{route('voyager.dashboard')}}">Dashboard</a></li>
+                                @else
+                                    <li><a href="{{route('dashboard')}}">Profilo</a></li>
+                                @endif
                                 <li>
                                     <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}

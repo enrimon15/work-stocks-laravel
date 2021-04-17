@@ -17,16 +17,16 @@ class CreateUserProfilesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('job_title');
+            $table->string('job_title')->nullable();
             $table->string('overview')->nullable();
             $table->string('telephone')->nullable();
             $table->string('website')->nullable();
             $table->integer('min_salary')->nullable();
-            $table->string('city');
-            $table->string('country');
+            $table->string('city')->nullable();
+            $table->string('country')->nullable();
             $table->string('cv_path')->nullable();
-            $table->date('birth');
-            $table->enum('sex', ['M', 'F']);
+            $table->date('birth')->nullable();
+            $table->enum('sex', ['M', 'F'])->nullable();
             $table->timestamps();
         });
     }
