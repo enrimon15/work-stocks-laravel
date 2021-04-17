@@ -16,9 +16,6 @@ use App\Http\Controllers\ProfileController;
 |
 */
 
-/*Route::get('/', function () {
-    return view('layouts.outline');
-});*/
 Auth::routes();
 
 Route::group(['prefix' => 'admin'], function () {
@@ -30,29 +27,3 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/home', function () {
     return redirect('/');
 })->name('home');
-
-// DASHBOARD
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::post('/dashboard/update-profile', [DashboardController::class, 'updateProfile'])->name('updateProfileExecute');
-
-Route::get('/dashboard/change-password', [DashboardController::class, 'showChangePassword'])->name('changePassword');
-Route::post('/dashboard/change-password', [DashboardController::class, 'changePassword'])->name('changePasswordExecute');
-
-Route::get('/dashboard/favorite', [DashboardController::class, 'showFavorite'])->name('favorite');
-
-Route::get('/dashboard/applied-jobs', [DashboardController::class, 'showAppliedJobs'])->name('appliedJobs');
-
-Route::get('/dashboard/job-alert', [DashboardController::class, 'showJobAlert'])->name('jobAlert');
-
-Route::get('/dashboard/online-cv', [DashboardController::class, 'showOnlineCV'])->name('onlineCV');
-Route::post('/dashboard/online-cv/{operationType}', [DashboardController::class, 'populateOnlineCV'])->name('onlineCvExecute');
-Route::get('/dashboard/online-cv/delete-qualification/{id}', [DashboardController::class, 'deleteQualification'])->name('onlineCvDeleteQualification');
-Route::get('/dashboard/online-cv/edit/{operationType}/{id}', [DashboardController::class, 'editCV'])->name('onlineCvEdit');
-
-// PROFILE
-Route::get('/profile/{id}', [ProfileController::class, 'index'])->name('profile');
-
-
-/*Route::get('/test', function () {
-    dd(\App\Models\User::all());
-});*/
