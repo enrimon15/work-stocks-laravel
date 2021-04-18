@@ -1,9 +1,8 @@
 <?php
 
+use App\Http\Controllers\JobController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +26,10 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/home', function () {
     return redirect('/');
 })->name('home');
+
+//rotte per job catalog
+Route::get('/job', [JobController::Class, 'jobCatalog']);
+
 
 //rotte di prova per la class active sui <li> del menu
 Route::get('/offerte', [HomeController::class, 'index']);

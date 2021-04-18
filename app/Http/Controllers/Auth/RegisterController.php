@@ -43,7 +43,7 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
-    private function messages()
+    /*private function messages()
     {
         return [
             'email.unique' => 'La email è già presente nel sistema',
@@ -54,7 +54,7 @@ class RegisterController extends Controller
             'password.*' => 'La password non è valida, controlla che sia almeno 8 caratteri',
             'user_type.*' => 'La tipologia utente non è valida'
         ];
-    }
+    }*/
 
     /**
      * Get a validator for an incoming registration request.
@@ -73,7 +73,7 @@ class RegisterController extends Controller
                 'required',
                 Rule::in(['user', 'company']),
             ],
-        ], $this->messages());
+        ]/*, $this->messages()*/);
     }
 
     /**

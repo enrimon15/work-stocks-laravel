@@ -5,6 +5,6 @@
     @else
         <li>
     @endif
-        <a href="{{$item->link()}}">{{$item->title}}<span class="submenu-indicator"></span></a>
+        <a href="{{$item->link()}}">{{__('mainmenu.'.$item->title)}}<span class="submenu-indicator"></span></a>
     </li>
 @endforeach
