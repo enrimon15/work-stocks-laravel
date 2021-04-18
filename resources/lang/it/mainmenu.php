@@ -2,8 +2,8 @@
 
 return [
     'home'   => 'Home',
-    'offerte' => 'Offerte',
-    'candidati' => 'Candidati',
-    'aziende' => 'Aziende',
+    'offers' => 'Offerte',
+    'apply' => 'Candidati',
+    'companies' => 'Aziende',
     'blog' => 'Blog',
 ];
