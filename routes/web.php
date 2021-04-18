@@ -27,8 +27,7 @@ Route::get('/home', function () {
     return redirect('/');
 })->name('home');
 
-//rotte per job catalog
-Route::get('/job', [JobController::Class, 'jobCatalog']);
+
 
 
 //rotte di prova per la class active sui <li> del menu
