@@ -45,7 +45,7 @@ use TCG\Voyager\Models\Menu;
                         @if (Route::has('login') && Route::has('register'))
                             <li>
                                 <a href="{{ route('login') }}">
-                                    <i class="ti-user mr-1"></i><span class="dn-lg">Login/Registrati</span>
+                                    <i class="ti-user mr-1"></i><span class="dn-lg">{{__('loginAndRegister.accountActions')}}</span>
                                 </a>
                             </li>
                         @endif

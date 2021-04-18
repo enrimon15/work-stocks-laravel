@@ -6,7 +6,7 @@
         <div class="container">
             <div class="col-lg-12 col-md-12">
                 <div class="pt-caption text-center">
-                    <h1>Registrati</h1>
+                    <h1>{{__('loginAndRegister.registerTitle')}}</h1>
                 </div>
             </div>
         </div>
@@ -28,10 +28,10 @@
                             <form method="POST" action="{{ route('register') }}">
                                 @csrf
                                 <div class="form-group mb-5">
-                                    <label>Che tipologia di utente sei?</label>
+                                    <label>{{__('loginAndRegister.userTypeQuestion')}}</label>
                                     <select class="form-control" name="user_type">
-                                        <option value="user">Utente</option>
-                                        <option value="company">Azienda</option>
+                                        <option value="user">{{__('loginAndRegister.userTypeUser')}}</option>
+                                        <option value="company">{{__('loginAndRegister.userTypeCompany')}}</option>
                                     </select>
                                     <!-- Error -->
                                     @if ($errors->has('user_type'))
@@ -40,9 +40,9 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Nome</label>
+                                    <label>{{__('loginAndRegister.nameLabel')}}</label>
                                     <div class="input-with-gray">
-                                        <input type="text" class="form-control" placeholder="Nome" name="name" value="{{ old('name') }}" required autocomplete="name">
+                                        <input type="text" class="form-control" placeholder="{{__('loginAndRegister.nameLabel')}}" name="name" value="{{ old('name') }}" required autocomplete="name">
                                         <i class="ti-user"></i>
                                     </div>
                                     <!-- Error -->
@@ -52,9 +52,9 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Cognome</label>
+                                    <label>{{__('loginAndRegister.surnameLabel')}}</label>
                                     <div class="input-with-gray">
-                                        <input type="text" class="form-control" placeholder="Cognome" name="surname" value="{{ old('surname') }}" required autocomplete="surname">
+                                        <input type="text" class="form-control" placeholder="{{__('loginAndRegister.surnameLabel')}}" name="surname" value="{{ old('surname') }}" required autocomplete="surname">
                                         <i class="ti-user"></i>
                                     </div>
                                     <!-- Error -->
@@ -64,9 +64,9 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Email</label>
+                                    <label>{{__('loginAndRegister.emailLabel')}}</label>
                                     <div class="input-with-gray">
-                                        <input type="email" class="form-control" placeholder="email" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                        <input type="email" class="form-control" placeholder="{{__('loginAndRegister.emailLabel')}}" name="email" value="{{ old('email') }}" required autocomplete="email">
                                         <i class="ti-user"></i>
                                     </div>
                                     <!-- Error -->
@@ -76,7 +76,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Password</label>
+                                    <label>{{__('loginAndRegister.passwordLabel')}}</label>
                                     <div class="input-with-gray">
                                         <input type="password" class="form-control" placeholder="*******" name="password" required autocomplete="new-password">
                                         <i class="ti-unlock"></i>
@@ -88,7 +88,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Conferma Password</label>
+                                    <label>{{__('loginAndRegister.passwordConfirmationLabel')}}</label>
                                     <div class="input-with-gray">
                                         <input type="password" class="form-control" placeholder="*******" name="password_confirmation" required autocomplete="new-password">
                                         <i class="ti-unlock"></i>
@@ -96,16 +96,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary btn-md full-width pop-login">Registrati</button>
-                                </div>
-
-                                <div class="modal-footer">
-                                    <div class="mf-link"><a class="color--dark mf-link-hover" href="{{ route('login') }}"><i class="ti-user"></i>Accedi</a></div>
-                                    <div class="mf-forget">
-                                        @if (Route::has('password.request'))
-                                            <a href="{{ route('password.request') }}">Hai dimenticato la password?</a>
-                                        @endif
-                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-md full-width pop-login">{{__('loginAndRegister.registrationButtonLabel')}}</button>
                                 </div>
 
                             </form>
