@@ -81,36 +81,19 @@
                     </div>
 
                     <div class="sidebar-container d-sm-none d-md-block d-none">
-
-                        <!-- Category -->
+                        <!-- Experince -->
                         <div class="sidebar-widget">
                             <div class="form-group">
-                                <h5 class="mb-2">Job Category</h5>
+                                <h5 class="mb-2">{{__('jobs/filters.skillsTitle')}}</h5>
                                 <div class="side-imbo">
                                     <ul class="no-ul-list">
-                                        <li>
-                                            <input id="checkbox-ei1" class="checkbox-custom" name="checkbox-ei1" type="checkbox">
-                                            <label for="checkbox-ei1" class="checkbox-custom-label">IT Computers</label>
-                                        </li>
 
+                                        @foreach($tags as $tag)
                                         <li>
-                                            <input id="checkbox-ei2" class="checkbox-custom" name="checkbox-ei2" type="checkbox">
-                                            <label for="checkbox-ei2" class="checkbox-custom-label">Financial Service</label>
+                                            <input id="checkbox-ep1" class="checkbox-custom" name="checkbox-skill{{$loop->iteration}}" type="checkbox">
+                                            <label for="checkbox-ep1" class="checkbox-custom-label">{{$tag->slug}}</label>
                                         </li>
-
-                                        <li>
-                                            <input id="checkbox-ei3" class="checkbox-custom" name="checkbox-ei3" type="checkbox">
-                                            <label for="checkbox-ei3" class="checkbox-custom-label">Art, Design, Media</label>
-                                        </li>
-
-                                        <li>
-                                            <input id="checkbox-ei4" class="checkbox-custom" name="checkbox-ei4" type="checkbox">
-                                            <label for="checkbox-ei4" class="checkbox-custom-label">Coach & Education</label>
-                                        </li>
-                                        <li>
-                                            <input id="checkbox-ei5" class="checkbox-custom" name="checkbox-ei5" type="checkbox">
-                                            <label for="checkbox-ei5" class="checkbox-custom-label">Banking</label>
-                                        </li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>
@@ -119,61 +102,27 @@
                         <!-- Experince -->
                         <div class="sidebar-widget">
                             <div class="form-group">
-                                <h5 class="mb-2">Skills</h5>
-                                <div class="side-imbo">
-                                    <ul class="no-ul-list">
-                                        <li>
-                                            <input id="checkbox-ep1" class="checkbox-custom" name="checkbox-ep1" type="checkbox">
-                                            <label for="checkbox-ep1" class="checkbox-custom-label">Administrative</label>
-                                        </li>
-
-                                        <li>
-                                            <input id="checkbox-ep2" class="checkbox-custom" name="checkbox-ep2" type="checkbox">
-                                            <label for="checkbox-ep2" class="checkbox-custom-label">iPhone & Android</label>
-                                        </li>
-
-                                        <li>
-                                            <input id="checkbox-ep3" class="checkbox-custom" name="checkbox-ep3" type="checkbox">
-                                            <label for="checkbox-ep3" class="checkbox-custom-label">Java & AJAX</label>
-                                        </li>
-
-                                        <li>
-                                            <input id="checkbox-ep4" class="checkbox-custom" name="checkbox-ep4" type="checkbox">
-                                            <label for="checkbox-ep4" class="checkbox-custom-label">Account Manager</label>
-                                        </li>
-                                        <li>
-                                            <input id="checkbox-ep5" class="checkbox-custom" name="checkbox-ep5" type="checkbox">
-                                            <label for="checkbox-ep5" class="checkbox-custom-label">WordPress</label>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Experince -->
-                        <div class="sidebar-widget">
-                            <div class="form-group">
-                                <h5 class="mb-2">Experince</h5>
+                                <h5 class="mb-2">{{__('jobs/filters.experienceTitle')}}</h5>
                                 <div class="side-imbo">
                                     <ul class="no-ul-list">
                                         <li>
                                             <input id="checkbox-e1" class="checkbox-custom" name="checkbox-e1" type="checkbox">
-                                            <label for="checkbox-e1" class="checkbox-custom-label">1 Year</label>
+                                            <label for="checkbox-e1" class="checkbox-custom-label">1 {{__('jobs/filters.year')}}</label>
                                         </li>
 
                                         <li>
                                             <input id="checkbox-e2" class="checkbox-custom" name="checkbox-e2" type="checkbox">
-                                            <label for="checkbox-e2" class="checkbox-custom-label">2 Year</label>
+                                            <label for="checkbox-e2" class="checkbox-custom-label">2 {{__('jobs/filters.years')}}</label>
                                         </li>
 
                                         <li>
                                             <input id="checkbox-e3" class="checkbox-custom" name="checkbox-e3" type="checkbox">
-                                            <label for="checkbox-e3" class="checkbox-custom-label">3 Year</label>
+                                            <label for="checkbox-e3" class="checkbox-custom-label">3 {{__('jobs/filters.years')}}</label>
                                         </li>
 
                                         <li>
                                             <input id="checkbox-e4" class="checkbox-custom" name="checkbox-e4" type="checkbox">
-                                            <label for="checkbox-e4" class="checkbox-custom-label">4+ Year</label>
+                                            <label for="checkbox-e4" class="checkbox-custom-label">4+ {{__('jobs/filters.years')}}</label>
                                         </li>
                                     </ul>
                                 </div>
@@ -183,27 +132,27 @@
                         <!-- Job Type -->
                         <div class="sidebar-widget">
                             <div class="form-group">
-                                <h5 class="mb-2">Job Type</h5>
+                                <h5 class="mb-2">{{__('jobs/filters.jobTypeTitle')}}</h5>
                                 <div class="side-imbo">
                                     <ul class="no-ul-list">
                                         <li>
                                             <input id="checkbox-j1" class="checkbox-custom" name="checkbox-j1" type="checkbox">
-                                            <label for="checkbox-j1" class="checkbox-custom-label">Full Time</label>
+                                            <label for="checkbox-j1" class="checkbox-custom-label">{{__('jobs/filters.fullTime')}}</label>
                                         </li>
 
                                         <li>
                                             <input id="checkbox-j2" class="checkbox-custom" name="checkbox-j2" type="checkbox">
-                                            <label for="checkbox-j2" class="checkbox-custom-label">Part Time</label>
+                                            <label for="checkbox-j2" class="checkbox-custom-label">{{__('jobs/filters.partTime')}}</label>
                                         </li>
 
                                         <li>
                                             <input id="checkbox-j3" class="checkbox-custom" name="checkbox-j3" type="checkbox">
-                                            <label for="checkbox-j3" class="checkbox-custom-label">Construction Base</label>
+                                            <label for="checkbox-j3" class="checkbox-custom-label">{{__('jobs/filters.constructionBase')}}</label>
                                         </li>
 
                                         <li>
                                             <input id="checkbox-j4" class="checkbox-custom" name="checkbox-j4" type="checkbox">
-                                            <label for="checkbox-j4" class="checkbox-custom-label">Internship</label>
+                                            <label for="checkbox-j4" class="checkbox-custom-label">{{__('jobs/filters.Internship')}}</label>
                                         </li>
                                     </ul>
                                 </div>
@@ -213,7 +162,7 @@
                         <!-- Job Type -->
                         <div class="sidebar-widget">
                             <div class="form-group">
-                                <h5 class="mb-2">Job Level</h5>
+                                <h5 class="mb-2">{{__('jobs/filters.jobLevelTitle')}}</h5>
                                 <div class="side-imbo">
                                     <ul class="no-ul-list">
                                         <li>
@@ -238,27 +187,26 @@
                         <!-- Compensation -->
                         <div class="sidebar-widget">
                             <div class="form-group">
-                                <h5 class="mb-2">Expected Sallery</h5>
+                                <h5 class="mb-2">{{__('jobs/filters.expectedSalleryTitle')}}</h5>
                                 <div class="side-imbo">
                                     <ul class="no-ul-list">
                                         <li>
                                             <input id="checkbox-c1" class="checkbox-custom" name="checkbox-c1" type="checkbox">
-                                            <label for="checkbox-c1" class="checkbox-custom-label">$500 - $1000</label>
+                                            <label for="checkbox-c1" class="checkbox-custom-label">500€ - 1000€</label>
                                         </li>
 
                                         <li>
                                             <input id="checkbox-c2" class="checkbox-custom" name="checkbox-c2" type="checkbox">
-                                            <label for="checkbox-c2" class="checkbox-custom-label">$1000 - $2000</label>
+                                            <label for="checkbox-c2" class="checkbox-custom-label">1000€ - 2000€</label>
                                         </li>
 
                                         <li>
                                             <input id="checkbox-c03" class="checkbox-custom" name="checkbox-c03" type="checkbox">
-                                            <label for="checkbox-c03" class="checkbox-custom-label">$2000 - $5000</label>
+                                            <label for="checkbox-c03" class="checkbox-custom-label">2000€ - 5000€</label>
                                         </li>
 
                                         <li>
                                             <input id="checkbox-c4" class="checkbox-custom" name="checkbox-c4" type="checkbox">
-                                            <label for="checkbox-c4" class="checkbox-custom-label">$5000 - $10000</label>
                                         </li>
                                     </ul>
                                 </div>
