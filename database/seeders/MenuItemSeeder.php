@@ -20,7 +20,7 @@ class MenuItemSeeder extends Seeder
 
         $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu->id,
-            'title'   => __("Home"),
+            'title'   => __("home"),
             'url'     => '/',
             'route'   => null,
         ]);
@@ -36,7 +36,7 @@ class MenuItemSeeder extends Seeder
 
         $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu->id,
-            'title'   => __("Offerte"),
+            'title'   => __("offers"),
             'url'     => 'offerte',
             'route'   => null,
         ]);
@@ -52,7 +52,7 @@ class MenuItemSeeder extends Seeder
 
         $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu->id,
-            'title'   => __("Candidati"),
+            'title'   => __("apply"),
             'url'     => 'candidati',
             'route'   => null,
         ]);
@@ -68,7 +68,7 @@ class MenuItemSeeder extends Seeder
 
         $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu->id,
-            'title'   => __("Aziende"),
+            'title'   => __("companies"),
             'url'     => 'aziende',
             'route'   => null,
         ]);
@@ -84,7 +84,7 @@ class MenuItemSeeder extends Seeder
 
         $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu->id,
-            'title'   => __("Blog"),
+            'title'   => __("blog"),
             'url'     => 'blog',
             'route'   => null,
         ]);
