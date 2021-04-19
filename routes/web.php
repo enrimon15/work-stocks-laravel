@@ -31,6 +31,5 @@ Route::get('/home', function () {
 
 
 //rotte di prova per la class active sui <li> del menu
-Route::get('/offerte', [HomeController::class, 'index']);
 Route::get('/offerte/pippo', [HomeController::class, 'index']);
 Route::get('/candidati', [HomeController::class, 'index']);
