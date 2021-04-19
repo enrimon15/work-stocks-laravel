@@ -37,7 +37,7 @@ class MenuItemSeeder extends Seeder
         $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu->id,
             'title'   => __("offers"),
-            'url'     => 'offerte',
+            'url'     => 'jobs',
             'route'   => null,
         ]);
         if (!$menuItem->exists) {
