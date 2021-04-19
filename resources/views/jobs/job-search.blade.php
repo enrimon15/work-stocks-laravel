@@ -222,7 +222,7 @@
                         <!-- layout Wrapper -->
                         <div class="col-md-12 mb-3">
                             <div class="layout-switcher-wrap">
-                                <div class="layout-switcher-left">702 Result Found</div>
+                                <div class="layout-switcher-left">{{$jobs->total().' '.__('jobs/jobs.results')}}</div>
                                 <div class="layout-switcher">
                                     <ul>
                                         <li><a href="search-with-sidebar.html"><i class="ti-layout-grid3"></i></a></li>
@@ -237,167 +237,31 @@
 
                         <div class="col-md-12">
 
+                            @foreach($jobs as $job)
                             <!-- Single Large Job List -->
                             <div class="job-new-list">
                                 <div class="vc-thumb">
                                     <img class="img-fluid rounded-circle" src="https://via.placeholder.com/90x90" alt="c2.jpg">
                                 </div>
                                 <div class="vc-content">
-                                    <h5 class="title"><a href="job-detail.html">Web Developer</a><span class="j-full-time">Full Time</span></h5>
+                                    <h5 class="title"><a href="job-detail.html">{{$job->title}}</a><span class="j-full-time">Full Time</span></h5>
                                     <p>Google Inc</p>
                                     <ul class="vc-info-list">
-                                        <li class="list-inline-item"><h5>Sallery</h5> <i class="ti-credit-card"></i>$3.5k-$5k P.A</li>
-                                        <li class="list-inline-item"><h5>Skills</h5>
+                                        <li class="list-inline-item"><h5>{{__('jobs/filters.expectedSalleryTitle')}}</h5> <i class="ti-credit-card"></i>$3.5k-$5k P.A</li>
+                                        <li class="list-inline-item"><h5>{{__('jobs/filters.skillsTitle')}}</h5>
                                             <div class="skills">
-                                                <span>Css3</span><span>photoshop</span><span>java</span><span>+3 more</span>
+                                                <span>{{$tag->tags}}</span><span>photoshop</span><span>java</span><span>+3 more</span>
                                             </div>
                                         </li>
                                     </ul>
                                 </div>
-                                <a class="btn btn-black bn-det" href="job-detail.html">Apply Now<i class="ti-arrow-right ml-1"></i></a>
+                                <a class="btn btn-black bn-det" href="job-detail.html">{{__('jobs/jobs.apply')}}<i class="ti-arrow-right ml-1"></i></a>
                             </div>
-
-                            <!-- Single Large Job List -->
-                            <div class="job-new-list">
-                                <div class="vc-thumb">
-                                    <img class="img-fluid rounded-circle" src="https://via.placeholder.com/90x90" alt="c2.jpg">
-                                </div>
-                                <div class="vc-content">
-                                    <h5 class="title"><a href="job-detail.html">App Developer</a><span class="j-part-time">Part Time</span></h5>
-                                    <p>Apple Soft.</p>
-                                    <ul class="vc-info-list">
-                                        <li class="list-inline-item"><h5>Sallery</h5> <i class="ti-credit-card"></i>$4.5k-$5k P.A</li>
-                                        <li class="list-inline-item"><h5>Skills</h5>
-                                            <div class="skills">
-                                                <span>Html</span><span>Css3</span><span>java</span><span>+3 more</span>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <a class="btn btn-black bn-det" href="job-detail.html">Apply Now<i class="ti-arrow-right ml-1"></i></a>
-                            </div>
-
-                            <!-- Single Large Job List -->
-                            <div class="job-new-list">
-                                <div class="vc-thumb">
-                                    <img class="img-fluid rounded-circle" src="https://via.placeholder.com/90x90" alt="c2.jpg">
-                                </div>
-                                <div class="vc-content">
-                                    <h5 class="title"><a href="job-detail.html">software Engineering</a><span class="j-temporary-time">Temporary</span></h5>
-                                    <p>Iliance Tech</p>
-                                    <ul class="vc-info-list">
-                                        <li class="list-inline-item"><h5>Sallery</h5> <i class="ti-credit-card"></i>$3.5k-$6k P.A</li>
-                                        <li class="list-inline-item"><h5>Skills</h5>
-                                            <div class="skills">
-                                                <span>Html</span><span>Css3</span><span>photoshop</span><span>+5 more</span>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <a class="btn btn-black bn-det" href="job-detail.html">Apply Now<i class="ti-arrow-right ml-1"></i></a>
-                            </div>
-
-                            <!-- Single Large Job List -->
-                            <div class="job-new-list">
-                                <div class="vc-thumb">
-                                    <img class="img-fluid rounded-circle" src="https://via.placeholder.com/90x90" alt="c2.jpg">
-                                </div>
-                                <div class="vc-content">
-                                    <h5 class="title"><a href="job-detail.html">Content Writer</a><span class="j-full-time">Full Time</span></h5>
-                                    <p>Zilliancer Soft</p>
-                                    <ul class="vc-info-list">
-                                        <li class="list-inline-item"><h5>Sallery</h5> <i class="ti-credit-card"></i>$3.5k-$5k P.A</li>
-                                        <li class="list-inline-item"><h5>Skills</h5>
-                                            <div class="skills">
-                                                <span>Html5</span><span>Css3</span><span>java</span><span>+3 more</span>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <a class="btn btn-black bn-det" href="job-detail.html">Apply Now<i class="ti-arrow-right ml-1"></i></a>
-                            </div>
-
-                            <!-- Single Large Job List -->
-                            <div class="job-new-list">
-                                <div class="vc-thumb">
-                                    <img class="img-fluid rounded-circle" src="https://via.placeholder.com/90x90" alt="c2.jpg">
-                                </div>
-                                <div class="vc-content">
-                                    <h5 class="title"><a href="job-detail.html">Product Manager</a><span class="j-part-time">Part Time</span></h5>
-                                    <p>Google Inc</p>
-                                    <ul class="vc-info-list">
-                                        <li class="list-inline-item"><h5>Sallery</h5> <i class="ti-credit-card"></i>$4.5k-$6k P.A</li>
-                                        <li class="list-inline-item"><h5>Skills</h5>
-                                            <div class="skills">
-                                                <span>Html5</span><span>photoshop</span><span>java</span><span>+1 more</span>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <a class="btn btn-black bn-det" href="job-detail.html">Apply Now<i class="ti-arrow-right ml-1"></i></a>
-                            </div>
-
-                            <!-- Single Large Job List -->
-                            <div class="job-new-list">
-                                <div class="vc-thumb">
-                                    <img class="img-fluid rounded-circle" src="https://via.placeholder.com/90x90" alt="c2.jpg">
-                                </div>
-                                <div class="vc-content">
-                                    <h5 class="title"><a href="job-detail.html">Expert Bidder</a><span class="j-full-time">Full Time</span></h5>
-                                    <p>Shiverianer Inc</p>
-                                    <ul class="vc-info-list">
-                                        <li class="list-inline-item"><h5>Sallery</h5> <i class="ti-credit-card"></i>$3.5k-$5k P.A</li>
-                                        <li class="list-inline-item"><h5>Skills</h5>
-                                            <div class="skills">
-                                                <span>Html</span><span>Css3</span><span>java</span><span>+3 more</span>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <a class="btn btn-black bn-det" href="job-detail.html">Apply Now<i class="ti-arrow-right ml-1"></i></a>
-                            </div>
-
-                            <!-- Single Large Job List -->
-                            <div class="job-new-list">
-                                <div class="vc-thumb">
-                                    <img class="img-fluid rounded-circle" src="https://via.placeholder.com/90x90" alt="c2.jpg">
-                                </div>
-                                <div class="vc-content">
-                                    <h5 class="title"><a href="job-detail.html">Iphone Developer</a><span class="j-part-time">Part Time</span></h5>
-                                    <p>Megrolia Soft</p>
-                                    <ul class="vc-info-list">
-                                        <li class="list-inline-item"><h5>Sallery</h5> <i class="ti-credit-card"></i>$7.5k-$15k P.A</li>
-                                        <li class="list-inline-item"><h5>Skills</h5>
-                                            <div class="skills">
-                                                <span>Html</span><span>Css3</span><span>java</span><span>+3 more</span>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <a class="btn btn-black bn-det" href="job-detail.html">Apply Now<i class="ti-arrow-right ml-1"></i></a>
-                            </div>
-
-                            <!-- Single Large Job List -->
-                            <div class="job-new-list">
-                                <div class="vc-thumb">
-                                    <img class="img-fluid rounded-circle" src="https://via.placeholder.com/90x90" alt="c2.jpg">
-                                </div>
-                                <div class="vc-content">
-                                    <h5 class="title"><a href="job-detail.html">Web Developer</a><span class="j-full-time">Full Time</span></h5>
-                                    <p>Google Inc</p>
-                                    <ul class="vc-info-list">
-                                        <li class="list-inline-item"><h5>Sallery</h5> <i class="ti-credit-card"></i>$3.5k-$5k P.A</li>
-                                        <li class="list-inline-item"><h5>Skills</h5>
-                                            <div class="skills">
-                                                <span>Html</span><span>Css3</span><span>PHP</span><span>+3 more</span>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <a class="btn btn-black bn-det" href="job-detail.html">Apply Now<i class="ti-arrow-right ml-1"></i></a>
-                            </div>
-
+                            @endforeach
+                            {{$jobs->links('vendor/pagination/bootstrap-4')}}
                         </div>
+
+
 
                     </div>
                 </div>

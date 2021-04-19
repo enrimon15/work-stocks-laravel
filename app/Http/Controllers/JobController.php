@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\JobOffer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Tags\Tag;
@@ -29,6 +30,8 @@ class JobController extends Controller
             $tags[] = Tag::findOrCreate(substr($tg->name,7,(strlen($tg->name)-2)));
         }
 
-        return view('jobs/job-search')->with('tags', $tags);
+        return view('jobs/job-search')
+            ->with('tags', $tags)
+            ->with('jobs', JobOffer::paginate(10));
     }
 }
