@@ -7,3 +7,9 @@
  * Eseguire php artisan db:seed --class=MenuItemSeeder
  * Eseguire php artisan voyager:install
  * Eseguire php artisan voyager:admin admin@admin.it
+
+
+
+Documentazione delle librerie introdotte:
+
+* Tags: https://github.com/rtconner/laravel-tagging
