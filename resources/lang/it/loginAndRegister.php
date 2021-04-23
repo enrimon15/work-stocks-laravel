@@ -15,6 +15,6 @@ return [
     'loginButtonLabel' => 'Accedi',
     'passwordForgotLinkLabel' => 'Hai dimenticato la password?',
     'remember' => 'Ricordami',
-    'accountActions' => 'Login/Registrazione',
+    'accountActions' => 'Login',
 
 ];

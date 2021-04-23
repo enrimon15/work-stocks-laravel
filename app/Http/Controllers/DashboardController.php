@@ -14,7 +14,7 @@ class DashboardController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     public function index() {
@@ -25,8 +25,6 @@ class DashboardController extends Controller
             return view('company.company-dashboard');
         } else if ($user->hasRole('user')) {
             return view('candidate.dashboard.profile')->with('user', $user);
-        } else if ($user->hasRole('admin')) {
-            return redirect()->route('voyager.dashboard');
         }
     }
 
@@ -149,19 +147,18 @@ class DashboardController extends Controller
                     'valuation'=> ['nullable','string','max:255']
                 ]);
 
-                $qualification = new Qualification();
+                $qualification = $data->input('id') != null ? $user->qualifications->firstWhere('id', $data->input('id')) : $qualification = new Qualification();
                 $qualification->user()->associate($user);
                 $qualification->name = $data->input('name');
                 $qualification->start_date = $data->input('startDate');
-                //if ($data->input('endDate') != null) $qualification->end_date = date('Y',strtotime($data->input('endDate')));
-                if ($data->input('endDate') != null) $qualification->end_date = $data->input('endDate');
+                $qualification->end_date = $data->input('endDate');
                 $qualification->in_progress = ($data->input('inProgress') == 'on') ? true : false;
                 $qualification->institute = $data->input('institute');
-                if ($data->input('description') != null) $qualification->description = $data->input('description');
-                if ($data->input('valuation') != null) $qualification->valuation = $data->input('valuation');
+                $qualification->description = $data->input('description');
+                $qualification->valuation = $data->input('valuation');
 
                 $qualification->save();
-                return back()->with('success', 'Qualifica inserita correttamente');
+                return redirect()->route('onlineCV')->with('success', $data->input('id') == null ? 'Qualifica inserita correttamente' : 'Qualifica aggiornata correttamente');
                 break;
             case 'experience':
                 echo "i equals 1";
@@ -186,7 +183,7 @@ class DashboardController extends Controller
         switch ($operationType) {
             case 'qualification':
                 $qualification = Qualification::find($id);
-                if ($qualification->user == Auth::user()) {
+                if ($qualification->user == $user) {
                     return view('candidate.dashboard.edit-cv')->with('qualification', $qualification);
                 } else {
                     // redirect error page
@@ -208,6 +205,7 @@ class DashboardController extends Controller
                 //default case;
         }
     }
+
 
     public function deleteQualification($id) {
         $qualification = Qualification::find($id);

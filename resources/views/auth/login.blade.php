@@ -25,13 +25,9 @@
 
                         <div class="login-form">
 
-                            @error('email')
+                            @if ($errors->any())
                                 <p class="color--error mb-2"><strong>{{__('auth.failed')}}</strong></p>
-                            @enderror
-
-                            @error('password')
-                                <p class="color--error mb-2"><strong>{{__('auth.failed')}}</strong></p>
-                            @enderror
+                            @endif
 
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf

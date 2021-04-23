@@ -3,7 +3,7 @@
 return [
     'registerTitle' => 'Registration',
     'loginTitle' => 'Login with your credentials',
-    'userTypeQuestion' => 'Which type of user you are?',
+    'userTypeQuestion' => 'Which type of user are you?',
     'userTypeUser' => 'User',
     'userTypeCompany' => 'Company',
     'nameLabel' => 'Name',
@@ -15,7 +15,7 @@ return [
     'loginButtonLabel' => 'Login',
     'passwordForgotLinkLabel' => 'Forgot your password?',
     'remember' => 'Remember me',
-    'accountActions' => 'Sign in-up',
+    'accountActions' => 'Sign in',
 
 
 ];

@@ -28,10 +28,6 @@
         </div>
     @endif
 
-    <!-- Error -->
-    @if ($errors->any())
-            <p class="color--error mb-2"><strong>{{ $errors }}</strong></p>
-    @endif
 
     <!-- Add Educations -->
     <div class="tr-single-box">
@@ -55,7 +51,7 @@
                 @foreach($qualifications as $qualification)
                     <tr>
                         <th scope="row">{{$qualification->name}}</th>
-                        <td>{{$qualification->start_date}} - {{$qualification->end_date ?? 'in corso'}}</td>
+                        <td>{{date('Y',strtotime($qualification->start_date))}} - {{$qualification->end_date != null ? date('Y',strtotime($qualification->end_date)) : 'in corso'}}</td>
                         <td>{{$qualification->institute}}</td>
                         <td>{{$qualification->valuation ?? null}}</td>
                         <td>
@@ -94,12 +90,20 @@
                                         <label>Nome</label>
                                         <input class="form-control" name="name" placeholder="Nome" type="text" required>
                                     </div>
+                                    <!-- Error -->
+                                    @if ($errors->has('name'))
+                                        <p class="color--error mb-2"><strong>{{ $errors->first('name') }}</strong></p>
+                                    @endif
                                 </div>
 
                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                     <div class="form-group mt-1 float-right">
                                         <input type="checkbox" name="inProgress" id="check-qualification">&nbsp;&nbsp;In corso
                                     </div>
+                                    <!-- Error -->
+                                    @if ($errors->has('inProgress'))
+                                        <p class="color--error mb-2"><strong>{{ $errors->first('inProgress') }}</strong></p>
+                                    @endif
                                 </div>
 
                                 <div class="col-lg-6 col-md-6 col-sm-6">
@@ -107,6 +111,10 @@
                                         <label>Data di inizio</label>
                                         <input type="date" class="form-control" name="startDate" required>
                                     </div>
+                                    <!-- Error -->
+                                    @if ($errors->has('startDate'))
+                                        <p class="color--error mb-2"><strong>{{ $errors->first('startDate') }}</strong></p>
+                                    @endif
                                 </div>
 
                                 <div class="col-lg-6 col-md-6 col-sm-6">
@@ -114,6 +122,10 @@
                                         <label>Data di fine</label>
                                         <input id="end-qualification" type="date" class="form-control" name="endDate">
                                     </div>
+                                    <!-- Error -->
+                                    @if ($errors->has('endDate'))
+                                        <p class="color--error mb-2"><strong>{{ $errors->first('endDate') }}</strong></p>
+                                    @endif
                                 </div>
 
 
@@ -122,6 +134,10 @@
                                         <label>Istituto</label>
                                         <input placeholder="Nome istituto" name="institute" type="text" class="form-control" required>
                                     </div>
+                                    <!-- Error -->
+                                    @if ($errors->has('institute'))
+                                        <p class="color--error mb-2"><strong>{{ $errors->first('institute') }}</strong></p>
+                                    @endif
                                 </div>
 
                                 <div class="col-lg-12 col-md-12 col-sm-12">
@@ -129,6 +145,10 @@
                                         <label>Descrizione</label>
                                         <textarea placeholder="Descrizione" name="description" class="form-control"></textarea>
                                     </div>
+                                    <!-- Error -->
+                                    @if ($errors->has('description'))
+                                        <p class="color--error mb-2"><strong>{{ $errors->first('description') }}</strong></p>
+                                    @endif
                                 </div>
 
                                 <div class="col-lg-12 col-md-12 col-sm-12">
@@ -136,6 +156,10 @@
                                         <label>Valutazione</label>
                                         <input placeholder="Valutazione" name="valuation" type="text" class="form-control">
                                     </div>
+                                    <!-- Error -->
+                                    @if ($errors->has('valuation'))
+                                        <p class="color--error mb-2"><strong>{{ $errors->first('valuation') }}</strong></p>
+                                    @endif
                                 </div>
 
                                 <button type="submit" class="btn add-pr-item-btn mt-2 ml-1">Aggiungi</button>

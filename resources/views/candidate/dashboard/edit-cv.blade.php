@@ -3,10 +3,13 @@
 @section('content-dashboard')
 
 <div class="container">
+
     <h3 class="mb-5">Modifica Qualifica</h3>
     <form method="POST" action="{{ route('onlineCvExecute', ['operationType' => 'qualification']) }}">
         @csrf
         <div class="row">
+
+            <input hidden name="id" value="{{$qualification->id}}">
 
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <div class="form-group">
@@ -20,7 +23,7 @@
                     @if($qualification->in_progress == true)
                         <input type="checkbox" name="inProgress" id="check-qualification" checked>&nbsp;&nbsp;In corso
                     @else
-                        <input type="checkbox" name="inProgress" id="check-qualification" checked>&nbsp;&nbsp;In corso
+                        <input type="checkbox" name="inProgress" id="check-qualification">&nbsp;&nbsp;In corso
                     @endif
                 </div>
             </div>
@@ -50,7 +53,7 @@
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <div class="form-group">
                     <label>Descrizione</label>
-                    <textarea placeholder="Descrizione" name="description" class="form-control" value="{{$qualification->description ?? null}}"></textarea>
+                    <textarea placeholder="Descrizione" name="description" class="form-control">{{$qualification->description ?? null}}</textarea>
                 </div>
             </div>
 
