@@ -8,8 +8,8 @@ return [
     'expectedSalleryTitle' => 'Expected Sallery',
     'year'=> 'Year',
     'years' => 'Years',
-    'fullTime' => 'Full time',
-    'partTime' => 'Part Time',
-    'constructionBase' => 'Construction Base',
-    'Internship' => 'Internship',
+    'full_time' => 'Full time',
+    'part_time' => 'Part Time',
+    'costruction_base' => 'Construction Base',
+    'internship' => 'Internship',
 ];

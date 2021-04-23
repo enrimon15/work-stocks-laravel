@@ -153,14 +153,14 @@
                                                 <input id="checkbox-j1" class="checkbox-custom" name="checkbox-j1"
                                                        type="checkbox">
                                                 <label for="checkbox-j1"
-                                                       class="checkbox-custom-label">{{__('jobs/filters.fullTime')}}</label>
+                                                       class="checkbox-custom-label">{{__('jobs/filters.full_time')}}</label>
                                             </li>
 
                                             <li>
                                                 <input id="checkbox-j2" class="checkbox-custom" name="checkbox-j2"
                                                        type="checkbox">
                                                 <label for="checkbox-j2"
-                                                       class="checkbox-custom-label">{{__('jobs/filters.partTime')}}</label>
+                                                       class="checkbox-custom-label">{{__('jobs/filters.part_time')}}</label>
                                             </li>
 
                                             <li>
@@ -174,7 +174,7 @@
                                                 <input id="checkbox-j4" class="checkbox-custom" name="checkbox-j4"
                                                        type="checkbox">
                                                 <label for="checkbox-j4"
-                                                       class="checkbox-custom-label">{{__('jobs/filters.Internship')}}</label>
+                                                       class="checkbox-custom-label">{{__('jobs/filters.internship')}}</label>
                                             </li>
                                         </ul>
                                     </div>
@@ -281,12 +281,12 @@
                                         </div>
                                         <div class="vc-content">
                                             <h5 class="title"><a href="job-detail.html">{{$job->title}}</a><span
-                                                    class="j-full-time">Full Time</span></h5>
-                                            <p>Google Inc</p>
+                                                    class="j-full-time">{{__('jobs/filters.'.$job->offers_type)}}</span></h5>
+                                            <p>METTERE IL NOME DELL'AZIENDA</p>
                                             <ul class="vc-info-list">
                                                 <li class="list-inline-item">
                                                     <h5>{{__('jobs/filters.expectedSalleryTitle')}}</h5> <i
-                                                        class="ti-credit-card"></i>$3.5k-$5k P.A
+                                                        class="ti-credit-card"></i>{{$job->min_salary.'€ - '.$job->max_salary.'€'}}
                                                 </li>
                                                 <li class="list-inline-item"><h5>{{__('jobs/filters.skillsTitle')}}</h5>
                                                     <div class="skills">
