@@ -255,7 +255,7 @@
                             <div class="col-md-12 mb-3">
                                 <div class="layout-switcher-wrap">
                                     <div
-                                        class="layout-switcher-left">{{$jobs->total().' '.__('jobs/jobs.results')}}</div>
+                                        class="layout-switcher-left">{{$jobs->total().' '.__(trans_choice('jobs/jobs.results',$jobs->total()))}}</div>
                                     <div class="layout-switcher">
                                         <ul>
                                             <li><a href="search-with-sidebar.html"><i class="ti-layout-grid3"></i></a>
@@ -293,7 +293,12 @@
                                                         @if(!empty($job->tagNames()))
                                                             @foreach($job->tagNames() as $tag)
                                                                 @if($loop->iteration > 3)
-                                                                    <span>+ altre {{count($job->tagNames())-3}} skill</span>
+                                                                    <span>+ {{' '.
+                                                                            (count($job->tagNames())-3)
+                                                                            .' '.
+                                                                            trans_choice('jobs/jobs.others',(count($job->tagNames())-3))
+                                                                            }}
+                                                                    </span>
                                                                     @break
                                                                 @endif
                                                                 <span>{{$tag}}</span>

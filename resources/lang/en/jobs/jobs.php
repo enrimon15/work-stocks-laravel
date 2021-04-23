@@ -1,6 +1,7 @@
 <?php
 
 return [
-    'results' => 'Results Found',
+    'results' => 'Result Found |Results Found',
     'apply' => 'Apply Now',
+    'others' => 'other|others',
 ];
