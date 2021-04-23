@@ -4,14 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Tags\HasTags;
 
-class JobOffer extends Model
+class Company extends Model
 {
     use HasFactory;
-    use HasTags;
 
-    public function company() {
-        return $this->belongsTo(Company::class);
+    public function jobOffers() {
+        return $this->hasMany(JobOffer::class);
     }
 }

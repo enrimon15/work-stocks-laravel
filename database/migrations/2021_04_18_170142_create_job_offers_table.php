@@ -16,6 +16,13 @@ class CreateJobOffersTable extends Migration
         Schema::create('job_offers', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('description');
+            $table->integer('experience');
+            $table->dateTime('due_date');
+            $table->enum('offers_type',['full_time','part_time','costrunction_base','internship']);
+            $table->enum('sex', ['male','female','not_specified']);
+            $table->integer('min_salary')->nullable();
+            $table->integer('max_salary')->nullable();
             $table->timestamps();
         });
     }
