@@ -25,6 +25,24 @@ use function Illuminate\Support\Facades\Date;
  * @method static \Illuminate\Database\Eloquent\Builder|Company whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Company whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Company whereUpdatedAt($value)
+ * @property int $commercial_contact_id
+ * @property string $piva
+ * @property string $company_form
+ * @property string $name
+ * @property string $overview
+ * @property int $employees_number
+ * @property string $foundation_year
+ * @property string $website
+ * @property string $slogan
+ * @method static \Illuminate\Database\Eloquent\Builder|Company whereCommercialContactId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Company whereCompanyForm($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Company whereEmployeesNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Company whereFoundationYear($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Company whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Company whereOverview($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Company wherePiva($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Company whereSlogan($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Company whereWebsite($value)
  */
 class Company extends Model
 {
