@@ -28,6 +28,16 @@
         </div>
     @endif
 
+    <!-- Error -->
+     @if ($errors->any())
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+           Operazione non riuscita, controlla che tutti i campi siano corretti!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+
 
     <!-- Add Educations -->
     <div class="tr-single-box">
@@ -68,7 +78,7 @@
                         <td>
                             <div class="dash-action">
                                 <a href="{{route('onlineCvEdit', ['operationType' => 'qualification','id' => $qualification->id])}}" class="dg-edit" data-toggle="tooltip" data-placement="top" title="Modifica"><i class="ti-pencil"></i></a>
-                                <a href="{{route('onlineCvDeleteQualification', ['id' => $qualification->id])}}" class="dg-delete" data-toggle="tooltip" data-placement="top" title="Elimina"><i class="ti-trash"></i></a>
+                                <a href="{{route('onlineCvDelete', ['id' => $qualification->id, 'operationType' => 'qualification'])}}" class="dg-delete" data-toggle="tooltip" data-placement="top" title="Elimina"><i class="ti-trash"></i></a>
                             </div>
                         </td>
                     </tr>
@@ -90,20 +100,12 @@
                                         <label>Nome</label>
                                         <input class="form-control" name="name" placeholder="Nome" type="text" required>
                                     </div>
-                                    <!-- Error -->
-                                    @if ($errors->has('name'))
-                                        <p class="color--error mb-2"><strong>{{ $errors->first('name') }}</strong></p>
-                                    @endif
                                 </div>
 
                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                     <div class="form-group mt-1 float-right">
                                         <input type="checkbox" name="inProgress" id="check-qualification">&nbsp;&nbsp;In corso
                                     </div>
-                                    <!-- Error -->
-                                    @if ($errors->has('inProgress'))
-                                        <p class="color--error mb-2"><strong>{{ $errors->first('inProgress') }}</strong></p>
-                                    @endif
                                 </div>
 
                                 <div class="col-lg-6 col-md-6 col-sm-6">
@@ -111,10 +113,6 @@
                                         <label>Data di inizio</label>
                                         <input type="date" class="form-control" name="startDate" required>
                                     </div>
-                                    <!-- Error -->
-                                    @if ($errors->has('startDate'))
-                                        <p class="color--error mb-2"><strong>{{ $errors->first('startDate') }}</strong></p>
-                                    @endif
                                 </div>
 
                                 <div class="col-lg-6 col-md-6 col-sm-6">
@@ -122,10 +120,6 @@
                                         <label>Data di fine</label>
                                         <input id="end-qualification" type="date" class="form-control" name="endDate">
                                     </div>
-                                    <!-- Error -->
-                                    @if ($errors->has('endDate'))
-                                        <p class="color--error mb-2"><strong>{{ $errors->first('endDate') }}</strong></p>
-                                    @endif
                                 </div>
 
 
@@ -134,10 +128,6 @@
                                         <label>Istituto</label>
                                         <input placeholder="Nome istituto" name="institute" type="text" class="form-control" required>
                                     </div>
-                                    <!-- Error -->
-                                    @if ($errors->has('institute'))
-                                        <p class="color--error mb-2"><strong>{{ $errors->first('institute') }}</strong></p>
-                                    @endif
                                 </div>
 
                                 <div class="col-lg-12 col-md-12 col-sm-12">
@@ -145,10 +135,6 @@
                                         <label>Descrizione</label>
                                         <textarea placeholder="Descrizione" name="description" class="form-control"></textarea>
                                     </div>
-                                    <!-- Error -->
-                                    @if ($errors->has('description'))
-                                        <p class="color--error mb-2"><strong>{{ $errors->first('description') }}</strong></p>
-                                    @endif
                                 </div>
 
                                 <div class="col-lg-12 col-md-12 col-sm-12">
@@ -156,10 +142,6 @@
                                         <label>Valutazione</label>
                                         <input placeholder="Valutazione" name="valuation" type="text" class="form-control">
                                     </div>
-                                    <!-- Error -->
-                                    @if ($errors->has('valuation'))
-                                        <p class="color--error mb-2"><strong>{{ $errors->first('valuation') }}</strong></p>
-                                    @endif
                                 </div>
 
                                 <button type="submit" class="btn add-pr-item-btn mt-2 ml-1">Aggiungi</button>
@@ -212,39 +194,29 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">Software Developer presso Gio Tech</th>
-                    <td>2002 - 2004</td>
-                    <td>Desc</td>
-                    <td>
-                        <div class="dash-action">
-                            <a href="#" class="dg-edit" data-toggle="tooltip" data-placement="top" title="Edit"><i class="ti-pencil"></i></a>
-                            <a href="#" class="dg-delete" data-toggle="tooltip" data-placement="top" title="Delete"><i class="ti-trash"></i></a>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">PHP Developer presso Hint Solution</th>
-                    <td>2012 - 2015</td>
-                    <td>Desc</td>
-                    <td>
-                        <div class="dash-action">
-                            <a href="#" class="dg-edit" data-toggle="tooltip" data-placement="top" title="Edit"><i class="ti-pencil"></i></a>
-                            <a href="#" class="dg-delete" data-toggle="tooltip" data-placement="top" title="Delete"><i class="ti-trash"></i></a>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">Web Designer presso Indo Soft</th>
-                    <td>2014 - 2015</td>
-                    <td>Desc</td>
-                    <td>
-                        <div class="dash-action">
-                            <a href="#" class="dg-edit" data-toggle="tooltip" data-placement="top" title="Edit"><i class="ti-pencil"></i></a>
-                            <a href="#" class="dg-delete" data-toggle="tooltip" data-placement="top" title="Delete"><i class="ti-trash"></i></a>
-                        </div>
-                    </td>
-                </tr>
+                @foreach($experiences as $experience)
+                    <tr>
+                        <th scope="row">{{$experience->job_position}} @ {{$experience->company}}</th>
+                        <td>{{date('Y',strtotime($experience->start_date))}} - {{$experience->end_date != null ? date('Y',strtotime($experience->end_date)) : 'in corso'}}</td>
+                        <td>
+                            @if($experience->description != null)
+                                <span data-toggle="modal" data-target="#experience-description-modal">
+                                <a href="#" class="dg-edit" data-toggle="tooltip" data-placement="top" title="Leggi Descrizione">
+                                    <i class="ti-eye"></i>
+                                </a>
+                                </span>
+                            @else
+                                {{null}}
+                            @endif
+                        </td>
+                        <td>
+                            <div class="dash-action">
+                                <a href="{{route('onlineCvEdit', ['operationType' => 'experience','id' => $experience->id])}}" class="dg-edit" data-toggle="tooltip" data-placement="top" title="Modifica"><i class="ti-pencil"></i></a>
+                                <a href="{{route('onlineCvDelete', ['id' => $experience->id, 'operationType' => 'experience'])}}" class="dg-delete" data-toggle="tooltip" data-placement="top" title="Elimina"><i class="ti-trash"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
                 </tbody>
             </table>
 
@@ -252,52 +224,55 @@
                 <tbody class="ui-sortable"><tr class="pricing-list-item pattern ui-sortable-handle">
                     <td>
                         <div class="box-close"><a style="cursor: pointer" id="add-experience-butt" class="delete"><i id="add-experience-icon" class="ti-plus"></i></a></div>
-                        <div class="row" id="add-experience" style="display: none">
+                        <form method="POST" action="{{ route('onlineCvExecute', ['operationType' => 'experience']) }}">
+                            @csrf
+                            <div class="row" id="add-experience" style="display: none">
 
-                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                <div class="form-group">
-                                    <label>Posizione Lavorativa</label>
-                                    <input class="form-control" type="text" placeholder="Posizione lavorativa" name="jobPosition" required>
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Posizione Lavorativa</label>
+                                        <input class="form-control" type="text" placeholder="Posizione lavorativa" name="jobPosition" required>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                <div class="form-group">
-                                    <label>Azienda</label>
-                                    <input placeholder="Nome azienda" type="text" class="form-control" name="companyName" required>
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Azienda</label>
+                                        <input placeholder="Nome azienda" type="text" class="form-control" name="companyName" required>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                <div class="form-group mt-1 float-right">
-                                    <input type="checkbox" name="inProgress" id="check-experience">&nbsp;&nbsp;In corso
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="form-group mt-1 float-right">
+                                        <input type="checkbox" name="inProgress" id="check-experience">&nbsp;&nbsp;In corso
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-lg-6 col-md-6 col-sm-6">
-                                <div class="form-group">
-                                    <label>Data di inizio</label>
-                                    <input type="date" class="form-control" name="startDate" required>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Data di inizio</label>
+                                        <input type="date" class="form-control" name="startDate" required>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-lg-6 col-md-6 col-sm-6">
-                                <div class="form-group">
-                                    <label>Data di fine</label>
-                                    <input id="end-experience" type="date" class="form-control" name="endDate">
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Data di fine</label>
+                                        <input id="end-experience" type="date" class="form-control" name="endDate">
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                <div class="form-group">
-                                    <label>Descrizione</label>
-                                    <textarea placeholder="Descrizione" name="description" class="form-control" required></textarea>
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Descrizione</label>
+                                        <textarea placeholder="Descrizione" name="description" class="form-control" required></textarea>
+                                    </div>
                                 </div>
+
+                                <button type="submit" class="btn add-pr-item-btn mt-2 ml-1">Aggiungi</button>
+
                             </div>
-
-                            <a href="#" class="btn add-pr-item-btn mt-2 ml-1">Aggiungi</a>
-
-                        </div>
+                        </form>
                     </td>
                 </tr>
                 </tbody>
@@ -306,6 +281,26 @@
 
     </div>
     <!-- /Experience Info -->
+
+        <!-- Modal Qualification Description -->
+        <div class="modal fade" id="experience-description-modal" tabindex="-1" role="dialog" aria-labelledby="xperience-description-modal" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Descrizione Esperienza</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        {{$experience->description ?? null}}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Chiudi</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     <!-- Add Certificates -->
     <div class="tr-single-box">
@@ -325,42 +320,20 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">Angular Developer</th>
-                    <td>2002 - 2004</td>
-                    <td>dfghs</td>
-                    <td>Udemy</td>
-                    <td>
-                        <div class="dash-action">
-                            <a href="#" class="dg-edit" data-toggle="tooltip" data-placement="top" title="Edit"><i class="ti-pencil"></i></a>
-                            <a href="#" class="dg-delete" data-toggle="tooltip" data-placement="top" title="Delete"><i class="ti-trash"></i></a>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">PHP Developer</th>
-                    <td>2012 - 2015</td>
-                    <td>djfkklf</td>
-                    <td>Udemy</td>
-                    <td>
-                        <div class="dash-action">
-                            <a href="#" class="dg-edit" data-toggle="tooltip" data-placement="top" title="Edit"><i class="ti-pencil"></i></a>
-                            <a href="#" class="dg-delete" data-toggle="tooltip" data-placement="top" title="Delete"><i class="ti-trash"></i></a>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">Web Designer</th>
-                    <td>2014 - 2015</td>
-                    <td>fjgjg</td>
-                    <td>Udemy</td>
-                    <td>
-                        <div class="dash-action">
-                            <a href="#" class="dg-edit" data-toggle="tooltip" data-placement="top" title="Edit"><i class="ti-pencil"></i></a>
-                            <a href="#" class="dg-delete" data-toggle="tooltip" data-placement="top" title="Delete"><i class="ti-trash"></i></a>
-                        </div>
-                    </td>
-                </tr>
+                @foreach($certificates as $certificate)
+                    <tr>
+                        <th scope="row">{{$certificate->name}}</th>
+                        <td>{{date('Y',strtotime($certificate->date))}} - {{$certificate->end_date != null ? date('Y',strtotime($certificate->end_date)) : null}}</td>
+                        <td><a href="{{$certificate->link}}">{{$certificate->credential}}</a></td>
+                        <td>{{$certificate->society}}</td>
+                        <td>
+                            <div class="dash-action">
+                                <a href="{{route('onlineCvEdit', ['operationType' => 'certificate','id' => $certificate->id])}}" class="dg-edit" data-toggle="tooltip" data-placement="top" title="Modifica"><i class="ti-pencil"></i></a>
+                                <a href="{{route('onlineCvDelete', ['id' => $certificate->id, 'operationType' => 'certificate'])}}" class="dg-delete" data-toggle="tooltip" data-placement="top" title="Elimina"><i class="ti-trash"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
                 </tbody>
             </table>
 
@@ -368,53 +341,56 @@
                 <tbody class="ui-sortable"><tr class="pricing-list-item pattern ui-sortable-handle">
                     <td>
                         <div class="box-close"><a style="cursor: pointer" id="add-certificate-butt" class="delete"><i id="add-certificate-icon" class="ti-plus"></i></a></div>
-                        <div class="row" id="add-certificate" style="display: none">
+                        <form method="POST" action="{{ route('onlineCvExecute', ['operationType' => 'certificate']) }}">
+                            @csrf
+                            <div class="row" id="add-certificate" style="display: none">
 
-                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                <div class="form-group">
-                                    <label>Nome</label>
-                                    <input class="form-control" type="text" placeholder="Nome certificato" name="certificateName" required>
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Nome</label>
+                                        <input class="form-control" type="text" placeholder="Nome certificato" name="certificateName" required>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                <div class="form-group">
-                                    <label>Ente Rilasciante</label>
-                                    <input placeholder="Nome ente rilasciante" type="text" class="form-control" name="certificateSociety" required>
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Ente Rilasciante</label>
+                                        <input placeholder="Nome ente rilasciante" type="text" class="form-control" name="certificateSociety" required>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-lg-6 col-md-6 col-sm-6">
-                                <div class="form-group">
-                                    <label>Data di ottenimento</label>
-                                    <input type="date" class="form-control" name="date" required>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Data di ottenimento</label>
+                                        <input type="date" class="form-control" name="date" required>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-lg-6 col-md-6 col-sm-6">
-                                <div class="form-group">
-                                    <label>Data di scadenza</label>
-                                    <input type="date" class="form-control" name="endDate">
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Data di scadenza</label>
+                                        <input type="date" class="form-control" name="endDate">
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-lg-6 col-md-6 col-sm-6">
-                                <div class="form-group">
-                                    <label>Credenziale</label>
-                                    <input type="text" placeholder="ID credenziale" class="form-control" name="credential" required>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Credenziale</label>
+                                        <input type="text" placeholder="ID credenziale" class="form-control" name="credential" required>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-lg-6 col-md-6 col-sm-6">
-                                <div class="form-group">
-                                    <label>Link</label>
-                                    <input type="text" placeholder="URL" class="form-control" name="link">
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Link</label>
+                                        <input type="text" placeholder="URL" class="form-control" name="link">
+                                    </div>
                                 </div>
+
+                                <button type="submit" class="btn add-pr-item-btn mt-2 ml-1">Aggiungi</button>
+
                             </div>
-
-                            <a href="#" class="btn add-pr-item-btn mt-2 ml-1">Aggiungi</a>
-
-                        </div>
+                        </form>
                     </td>
                 </tr>
                 </tbody>
@@ -440,36 +416,18 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">Graphic Design</th>
-                    <td>Principiante</td>
-                    <td>
-                        <div class="dash-action">
-                            <a href="#" class="dg-edit" data-toggle="tooltip" data-placement="top" title="Edit"><i class="ti-pencil"></i></a>
-                            <a href="#" class="dg-delete" data-toggle="tooltip" data-placement="top" title="Delete"><i class="ti-trash"></i></a>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">PHP Developer</th>
-                    <td>Intermedio</td>
-                    <td>
-                        <div class="dash-action">
-                            <a href="#" class="dg-edit" data-toggle="tooltip" data-placement="top" title="Edit"><i class="ti-pencil"></i></a>
-                            <a href="#" class="dg-delete" data-toggle="tooltip" data-placement="top" title="Delete"><i class="ti-trash"></i></a>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">Web Designer</th>
-                    <td>Avanzato</td>
-                    <td>
-                        <div class="dash-action">
-                            <a href="#" class="dg-edit" data-toggle="tooltip" data-placement="top" title="Edit"><i class="ti-pencil"></i></a>
-                            <a href="#" class="dg-delete" data-toggle="tooltip" data-placement="top" title="Delete"><i class="ti-trash"></i></a>
-                        </div>
-                    </td>
-                </tr>
+                    @foreach($skills as $skill)
+                        <tr>
+                            <th scope="row">{{$skill->name}}</th>
+                            <td>{{$skill->assestment}}</td>
+                            <td>
+                                <div class="dash-action">
+                                    <a href="{{route('onlineCvEdit', ['operationType' => 'skill','id' => $skill->id])}}" class="dg-edit" data-toggle="tooltip" data-placement="top" title="Modifica"><i class="ti-pencil"></i></a>
+                                    <a href="{{route('onlineCvDelete', ['id' => $skill->id, 'operationType' => 'skill'])}}" class="dg-delete" data-toggle="tooltip" data-placement="top" title="Elimina"><i class="ti-trash"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
 
@@ -477,29 +435,32 @@
                 <tbody class="ui-sortable"><tr class="pricing-list-item pattern ui-sortable-handle">
                     <td>
                         <div class="box-close"><a style="cursor: pointer" id="add-skill-butt" class="delete"><i id="add-skill-icon" class="ti-plus"></i></a></div>
-                        <div class="row" id="add-skill" style="display:none;">
+                        <form method="POST" action="{{ route('onlineCvExecute', ['operationType' => 'skill']) }}">
+                            @csrf
+                            <div class="row" id="add-skill" style="display:none;">
 
-                            <div class="ccol-lg-12 col-md-12 col-sm-12">
-                                <div class="form-group">
-                                    <label>Competenza</label>
-                                    <input class="form-control" placeholder="Nome competenza" type="text" name="skillName" required>
+                                <div class="ccol-lg-12 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Competenza</label>
+                                        <input class="form-control" placeholder="Nome competenza" type="text" name="skillName" required>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                <div class="form-group">
-                                    <label>Livello</label>
-                                    <select class="form-control" name="skillLevel">
-                                        <option value="beginner">Principiante</option>
-                                        <option value="intermediate">Intermedio</option>
-                                        <option value="advanced">Avanzato</option>
-                                    </select>
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Livello</label>
+                                        <select class="form-control" name="skillLevel">
+                                            <option value="beginner">Principiante</option>
+                                            <option value="intermediate">Intermedio</option>
+                                            <option value="advanced">Avanzato</option>
+                                        </select>
+                                    </div>
                                 </div>
+
+                                <button type="submit" class="btn add-pr-item-btn mt-2 ml-1">Aggiungi</button>
+
                             </div>
-
-                            <a href="#" class="btn add-pr-item-btn mt-2 ml-1">Aggiungi</a>
-
-                        </div>
+                        </form>
                     </td>
                 </tr>
                 </tbody>
@@ -567,7 +528,7 @@
                 "bAutoWidth": false,
                 "paging": false,
                 "language": {
-                    "emptyTable": 'Non sono presenti qualifiche, clicca su "+" per aggiungerne una',
+                    "emptyTable": 'Non sono presenti dati, clicca su "+" per aggiungerne',
                     "sSearch": "Cerca:"
                 }
             };
@@ -575,6 +536,7 @@
             $('#qualification_table').DataTable(options);
             $('#skill_table').DataTable(options);
             $('#experience_table').DataTable(options);
+            $('#certificate_table').DataTable(options);
         } );
     });
 </script>

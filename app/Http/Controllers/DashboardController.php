@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Certificate;
 use App\Models\Qualification;
+use App\Models\Skill;
 use App\Models\UserProfile;
+use App\Models\WorkingExperience;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
@@ -128,8 +131,12 @@ class DashboardController extends Controller
 
     public function showOnlineCV() {
         $user = Auth::user();
-        $qualifications = $user->qualifications;
-        return view('candidate.dashboard.online-cv')->with(['qualifications' => $qualifications]);
+        return view('candidate.dashboard.online-cv')->with([
+            'qualifications' => $user->qualifications,
+            'experiences' => $user->workingExperiences,
+            'certificates' => $user->certificates,
+            'skills' => $user->skills,
+        ]);
     }
 
     public function populateOnlineCV(Request $data, $operationType) {
@@ -141,13 +148,13 @@ class DashboardController extends Controller
                     'name' => ['required', 'string', 'max:255'],
                     'inProgress' => ['nullable','string', 'max:255'],
                     'startDate'=> ['required', 'date'],
-                    'endDate'=> ['nullable','date','after_or_equal:start_date'],
+                    'endDate'=> ['nullable','date','after_or_equal:startDate'],
                     'institute'=> ['string', 'required', 'max:255'],
                     'description'=> ['nullable','string'], //10 mb
                     'valuation'=> ['nullable','string','max:255']
                 ]);
 
-                $qualification = $data->input('id') != null ? $user->qualifications->firstWhere('id', $data->input('id')) : $qualification = new Qualification();
+                $qualification = $data->input('id') != null ? $user->qualifications->firstWhere('id', $data->input('id')) : new Qualification();
                 $qualification->user()->associate($user);
                 $qualification->name = $data->input('name');
                 $qualification->start_date = $data->input('startDate');
@@ -161,13 +168,62 @@ class DashboardController extends Controller
                 return redirect()->route('onlineCV')->with('success', $data->input('id') == null ? 'Qualifica inserita correttamente' : 'Qualifica aggiornata correttamente');
                 break;
             case 'experience':
-                echo "i equals 1";
+                $data->validate([
+                    'jobPosition' => ['required', 'string', 'max:255'],
+                    'inProgress' => ['nullable','string', 'max:255'],
+                    'startDate'=> ['required', 'date'],
+                    'endDate'=> ['nullable','date','after_or_equal:startDate'],
+                    'companyName'=> ['string', 'required', 'max:255'],
+                    'description'=> ['nullable','string']
+                ]);
+
+                $experience = $data->input('id') != null ? $user->workingExperiences->firstWhere('id', $data->input('id')) : new WorkingExperience();
+                $experience->user()->associate($user);
+                $experience->job_position = $data->input('jobPosition');
+                $experience->start_date = $data->input('startDate');
+                $experience->end_date = $data->input('endDate');
+                $experience->in_progress = ($data->input('inProgress') == 'on') ? true : false;
+                $experience->company = $data->input('companyName');
+                $experience->description = $data->input('description');
+
+                $experience->save();
+                return redirect()->route('onlineCV')->with('success', $data->input('id') == null ? 'Esperienza inserita correttamente' : 'Esperienza aggiornata correttamente');
                 break;
             case 'certificate':
-                echo "i equals 2";
+                $data->validate([
+                    'certificateName' => ['required', 'string', 'max:255'],
+                    'date'=> ['required', 'date'],
+                    'endDate'=> ['nullable','date','after_or_equal:date'],
+                    'certificateSociety'=> ['string', 'required', 'max:255'],
+                    'credential'=> ['required','string'],
+                    'link'=> ['nullable','string','max:255']
+                ]);
+
+                $certificate = $data->input('id') != null ? $user->certificates->firstWhere('id', $data->input('id')) : new Certificate();
+                $certificate->user()->associate($user);
+                $certificate->name = $data->input('name');
+                $certificate->date = $data->input('date');
+                $certificate->end_date = $data->input('endDate');
+                $certificate->society = $data->input('certificateSociety');
+                $certificate->credential = $data->input('credential');
+                $certificate->link = $data->input('link');
+
+                $certificate->save();
+                return redirect()->route('onlineCV')->with('success', $data->input('id') == null ? 'Certificato inserito correttamente' : 'Certificato aggiornato correttamente');
                 break;
             case 'skill':
-                echo "i equals 2";
+                $data->validate([
+                    'skillName' => ['required', 'string', 'max:255'],
+                    'skillLevel'=> ['required','string','max:255',Rule::in(['beginner', 'intermediate','advanced'])]
+                ]);
+
+                $skill = $data->input('id') != null ? $user->skills->firstWhere('id', $data->input('id')) : new Skill();
+                $skill->user()->associate($user);
+                $skill->name = $data->input('skillName');
+                $skill->assestment = $data->input('skillLevel');
+
+                $skill->save();
+                return redirect()->route('onlineCV')->with('success', $data->input('id') == null ? 'Competenza inserita correttamente' : 'Competenza aggiornata correttamente');
                 break;
             case 'cv':
                 echo "i equals 2";
@@ -184,13 +240,63 @@ class DashboardController extends Controller
             case 'qualification':
                 $qualification = Qualification::find($id);
                 if ($qualification->user == $user) {
-                    return view('candidate.dashboard.edit-cv')->with('qualification', $qualification);
+                    return view('candidate.dashboard.edit-cv')->with(['qualification' => $qualification, 'operationType' => $operationType]);
                 } else {
                     // redirect error page
                 }
                 break;
             case 'experience':
-                echo "i equals 1";
+                $experience = WorkingExperience::find($id);
+                if ($experience->user == $user) {
+                    return view('candidate.dashboard.edit-cv')->with(['experience' => $experience, 'operationType' => $operationType]);
+                } else {
+                    // redirect error page
+                }
+                break;
+            case 'certificate':
+                $certificate = Certificate::find($id);
+                if ($certificate->user == $user) {
+                    return view('candidate.dashboard.edit-cv')->with(['certificate' => $certificate, 'operationType' => $operationType]);
+                } else {
+                    // redirect error page
+                }
+                break;
+            case 'skill':
+                $skill = Skill::find($id);
+                if ($skill->user == $user) {
+                    return view('candidate.dashboard.edit-cv')->with(['skill' => $skill, 'operationType' => $operationType]);
+                } else {
+                    // redirect error page
+                }
+                break;
+            case 'cv':
+                echo "i equals 2";
+                break;
+            default:
+                //default case;
+        }
+    }
+
+
+    public function deleteRecordCv($id, $operationType) {
+        switch ($operationType) {
+            case 'qualification':
+                $qualification = Qualification::find($id);
+                if ($qualification->user == Auth::user()) {
+                    $qualification->delete();
+                    return back()->with('success', 'Qualifica eliminata correttamente');
+                } else {
+                    // redirect error page
+                }
+                break;
+            case 'experience':
+                $experience = WorkingExperience::find($id);
+                if ($experience->user == Auth::user()) {
+                    $experience->delete();
+                    return back()->with('success', 'Esperienza eliminata correttamente');
+                } else {
+                    // redirect error page
+                }
                 break;
             case 'certificate':
                 echo "i equals 2";
@@ -203,17 +309,6 @@ class DashboardController extends Controller
                 break;
             default:
                 //default case;
-        }
-    }
-
-
-    public function deleteQualification($id) {
-        $qualification = Qualification::find($id);
-        if ($qualification->user == Auth::user()) {
-            $qualification->delete();
-            return back()->with('success', 'Qualifica eliminata correttamente');
-        } else {
-            // redirect error page
         }
     }
 }
