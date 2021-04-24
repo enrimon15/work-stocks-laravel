@@ -305,7 +305,7 @@
     <!-- Add Certificates -->
     <div class="tr-single-box">
         <div class="tr-single-header">
-            <h4><i class="ti-cup"></i> Certificati</h4>
+            <h4><i class="ti-cup"></i> Certificazioni</h4>
         </div>
 
         <div class="tr-single-body">
@@ -323,8 +323,8 @@
                 @foreach($certificates as $certificate)
                     <tr>
                         <th scope="row">{{$certificate->name}}</th>
-                        <td>{{date('Y',strtotime($certificate->date))}} - {{$certificate->end_date != null ? date('Y',strtotime($certificate->end_date)) : null}}</td>
-                        <td><a href="{{$certificate->link}}">{{$certificate->credential}}</a></td>
+                        <td>{{date('Y',strtotime($certificate->date))}} {{$certificate->end_date != null ? ('-' . date('Y',strtotime($certificate->end_date))) : null}}</td>
+                        <td><a href="{{$certificate->link}}" target="_blank">{{$certificate->credential}}</a></td>
                         <td>{{$certificate->society}}</td>
                         <td>
                             <div class="dash-action">
@@ -359,6 +359,12 @@
                                     </div>
                                 </div>
 
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="form-group mt-1 float-right">
+                                        <input type="checkbox" name="noEnd" id="no-end-certification">&nbsp;&nbsp;Non ha scadenza
+                                    </div>
+                                </div>
+
                                 <div class="col-lg-6 col-md-6 col-sm-6">
                                     <div class="form-group">
                                         <label>Data di ottenimento</label>
@@ -369,7 +375,7 @@
                                 <div class="col-lg-6 col-md-6 col-sm-6">
                                     <div class="form-group">
                                         <label>Data di scadenza</label>
-                                        <input type="date" class="form-control" name="endDate">
+                                        <input id="end-certification" type="date" class="form-control" name="endDate">
                                     </div>
                                 </div>
 

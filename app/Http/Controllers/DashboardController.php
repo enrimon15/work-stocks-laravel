@@ -201,7 +201,7 @@ class DashboardController extends Controller
 
                 $certificate = $data->input('id') != null ? $user->certificates->firstWhere('id', $data->input('id')) : new Certificate();
                 $certificate->user()->associate($user);
-                $certificate->name = $data->input('name');
+                $certificate->name = $data->input('certificateName');
                 $certificate->date = $data->input('date');
                 $certificate->end_date = $data->input('endDate');
                 $certificate->society = $data->input('certificateSociety');
@@ -299,13 +299,23 @@ class DashboardController extends Controller
                 }
                 break;
             case 'certificate':
-                echo "i equals 2";
-                break;
+                $certificate = Certificate::find($id);
+                if ($certificate->user == Auth::user()) {
+                    $certificate->delete();
+                    return back()->with('success', 'Certificazione eliminata correttamente');
+                } else {
+                    // redirect error page
+                }
             case 'skill':
-                echo "i equals 2";
+                $skill = Skill::find($id);
+                if ($skill->user == Auth::user()) {
+                    $skill->delete();
+                    return back()->with('success', 'Skill eliminata correttamente');
+                } else {
+                    // redirect error page
+                }
                 break;
             case 'cv':
-                echo "i equals 2";
                 break;
             default:
                 //default case;

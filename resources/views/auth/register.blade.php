@@ -99,6 +99,15 @@
                                     <button type="submit" class="btn btn-primary btn-md full-width pop-login">{{__('loginAndRegister.registrationButtonLabel')}}</button>
                                 </div>
 
+                                <div class="modal-footer">
+                                    <div class="mf-link"><a class="color--dark mf-link-hover" href="{{ route('login') }}"><i class="ti-user"></i>{{__('loginAndRegister.loginButtonLabel')}}</a></div>
+                                    <div class="mf-forget">
+                                        @if (Route::has('password.request'))
+                                            <a href="{{ route('password.request') }}">{{__('loginAndRegister.passwordForgotLinkLabel')}}</a>
+                                        @endif
+                                    </div>
+                                </div>
+
                             </form>
                         </div>
                     </div>

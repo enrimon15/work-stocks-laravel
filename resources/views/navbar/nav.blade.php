@@ -37,7 +37,7 @@ use TCG\Voyager\Models\Menu;
 
                     <li class="add-listing theme-bg mb-3 display-mob">
                         <a href="#">
-                            <i class="ti-plus"></i> Nuova Offerta
+                            <i class="ti-plus"></i> {{__('nav.newOffer')}}
                         </a>
                     </li>
 
@@ -56,13 +56,13 @@ use TCG\Voyager\Models\Menu;
                             </a>
                             <ul class="nav-dropdown nav-submenu" style="right: auto; display: none;">
                                 @if(Auth::user()->isAdmin())
-                                    <li><a href="{{route('voyager.dashboard')}}">Dashboard</a></li>
+                                    <li><a href="{{route('voyager.dashboard')}}">{{__('nav.dashboard')}}</a></li>
                                 @else
-                                    <li><a href="{{route('dashboard')}}">Profilo</a></li>
+                                    <li><a href="{{route('dashboard')}}">{{__('nav.profile')}}</a></li>
                                 @endif
                                 <li>
                                     <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('nav.logout') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

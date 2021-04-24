@@ -22,30 +22,30 @@
 					<!-- Nav tabs -->
 					<ul class="nav dashboard-verticle-nav"> <!--nav-pills-->
 						<li class="nav-item">
-							<a class="nav-link {{Route::currentRouteName() == 'dashboard' ? 'active' : ''}}" href="{{route('dashboard')}}"><i class="ti-user"></i>Profilo</a>
+							<a class="nav-link {{Route::currentRouteName() == 'dashboard' ? 'active' : ''}}" href="{{route('dashboard')}}"><i class="ti-user"></i>{{__('dashboard/user/menu.profile')}}</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link {{Route::currentRouteName() == 'changePassword' ? 'active' : ''}}" href="{{route('changePassword')}}"><i class="lni-lock"></i>Cambia Password</a>
+							<a class="nav-link {{Route::currentRouteName() == 'changePassword' ? 'active' : ''}}" href="{{route('changePassword')}}"><i class="lni-lock"></i>{{__('dashboard/user/menu.changePass')}}</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link {{(Route::currentRouteName() == 'onlineCV' || Route::currentRouteName() == 'onlineCvEdit') ? 'active' : ''}}" href="{{route('onlineCV')}}"><i class="ti-file"></i>Online CV</a>
+							<a class="nav-link {{(Route::currentRouteName() == 'onlineCV' || Route::currentRouteName() == 'onlineCvEdit') ? 'active' : ''}}" href="{{route('onlineCV')}}"><i class="ti-file"></i>{{__('dashboard/user/menu.onlineCV')}}</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link {{Route::currentRouteName() == 'favorite' ? 'active' : ''}}" href="{{route('favorite')}}"><i class="lni-heart-filled"></i>Offerte Salvate</a>
+							<a class="nav-link {{Route::currentRouteName() == 'favorite' ? 'active' : ''}}" href="{{route('favorite')}}"><i class="lni-heart-filled"></i>{{__('dashboard/user/menu.favorites')}}</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link {{Route::currentRouteName() == 'appliedJobs' ? 'active' : ''}}" href="{{route('appliedJobs')}}"><i class="lni-briefcase"></i>Candidature</a>
+							<a class="nav-link {{Route::currentRouteName() == 'appliedJobs' ? 'active' : ''}}" href="{{route('appliedJobs')}}"><i class="lni-briefcase"></i>{{__('dashboard/user/menu.appliedJobs')}}</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link {{Route::currentRouteName() == 'jobAlert' ? 'active' : ''}}" href="{{route('jobAlert')}}"><i class="lni-alarm"></i>Job Alert</a>
+							<a class="nav-link {{Route::currentRouteName() == 'jobAlert' ? 'active' : ''}}" href="{{route('jobAlert')}}"><i class="lni-alarm"></i>{{__('dashboard/user/menu.jobAlert')}}</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="{{route('profile', ['id' => Auth::user()->id])}}"><i class="lni-user"></i>Visualizza Profilo</a>
+							<a class="nav-link" href="{{route('profile', ['id' => Auth::user()->id])}}"><i class="lni-user"></i>{{__('dashboard/user/menu.showProfile')}}</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
 								<i class="lni-exit"></i>
-								{{ __('Log Out') }}
+								{{__('dashboard/user/menu.logout')}}
 							</a>
 
 							<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
