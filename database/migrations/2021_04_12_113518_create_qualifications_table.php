@@ -22,7 +22,7 @@ class CreateQualificationsTable extends Migration
             $table->boolean('in_progress');
             $table->string('institute')->nullable();
             $table->string('name');
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->string('valuation')->nullable();
             $table->timestamps();
         });

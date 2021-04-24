@@ -18,7 +18,7 @@ class CreateUserProfilesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('job_title')->nullable();
-            $table->string('overview')->nullable();
+            $table->text('overview')->nullable();
             $table->string('telephone')->nullable();
             $table->string('website')->nullable();
             $table->integer('min_salary')->nullable();

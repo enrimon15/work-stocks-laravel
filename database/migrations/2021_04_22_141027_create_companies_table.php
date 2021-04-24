@@ -14,7 +14,17 @@ class CreateCompaniesTable extends Migration
     public function up()
     {
         Schema::create('companies', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('commercial_contact_id');
+            $table->foreign('commercial_contact_id')->references('id')->on('commercial_contacts')->onDelete('cascade');
+            $table->string('piva');
+            $table->string('company_form');
+            $table->string('name');
+            $table->text('overview');
+            $table->integer('employees_number');
+            $table->year('foundation_year');
+            $table->string('website');
+            $table->string('slogan');
             $table->timestamps();
         });
     }

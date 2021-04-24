@@ -22,6 +22,7 @@ class CreateCertificatesTable extends Migration
             $table->string('link')->nullable();
             $table->string('credential');
             $table->string('society');
+            $table->string('name');
             $table->timestamps();
         });
     }

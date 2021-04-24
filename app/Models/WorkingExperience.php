@@ -18,7 +18,7 @@ class WorkingExperience extends Model
 {
     use HasFactory;
 
-    protected $table = 'working_expreriences';
+    protected $table = 'working_experiences';
     protected $id = 'id';
 
     protected $fillable = [

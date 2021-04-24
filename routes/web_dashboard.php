@@ -20,6 +20,6 @@ Route::prefix('/dashboard')->middleware('auth')->middleware('roleIn:user,company
 
     Route::get('/online-cv', [DashboardController::class, 'showOnlineCV'])->name('onlineCV');
     Route::post('/online-cv/{operationType}', [DashboardController::class, 'populateOnlineCV'])->name('onlineCvExecute');
-    Route::get('/online-cv/delete-qualification/{id}', [DashboardController::class, 'deleteQualification'])->name('onlineCvDeleteQualification');
+    Route::get('/online-cv/delete/{id}/{operationType}', [DashboardController::class, 'deleteRecordCv'])->name('onlineCvDelete');
     Route::get('/online-cv/edit/{operationType}/{id}', [DashboardController::class, 'editCV'])->name('onlineCvEdit');
 });
