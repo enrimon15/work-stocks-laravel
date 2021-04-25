@@ -17,7 +17,9 @@ class CreateCompaniesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('commercial_contact_id');
             $table->foreign('commercial_contact_id')->references('id')->on('commercial_contacts')->onDelete('cascade');
-            $table->string('piva');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('vat_number');
             $table->string('company_form');
             $table->string('name');
             $table->text('overview');
