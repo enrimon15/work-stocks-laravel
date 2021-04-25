@@ -14,17 +14,12 @@
             </div>
         @endif
 
-        <!-- Error -->
-        @if ($errors->any())
-            <p class="color--error mb-2"><strong>Controlla che tutti i campi siano corretti</strong></p>
-        @endif
-
         <form method="POST" action="{{ route('updateProfileExecute') }}" enctype="multipart/form-data">
         @csrf
             <!-- Basic Info -->
             <div class="tr-single-box">
                 <div class="tr-single-header">
-                    <h4><i class="ti-desktop"></i> Dettagli Profilo</h4>
+                    <h4><i class="ti-desktop"></i> {{__('dashboard/user/profile.title')}}</h4>
                 </div>
                 <div class="tr-single-body">
 
@@ -32,69 +27,103 @@
 
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <div class="form-group">
-                                <label>Nome</label>
+                                <label>{{__('dashboard/user/profile.name')}}</label>
                                 <input class="form-control" name="name" required type="text" value="{{$user->name}}">
                             </div>
+                            <!-- Error -->
+                            @if ($errors->has('name'))
+                                <p class="color--error mb-2"><strong>{{$errors->first('name')}}</strong></p>
+                            @endif
                         </div>
 
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <div class="form-group">
-                                <label>Cognome</label>
+                                <label>{{__('dashboard/user/profile.surname')}}</label>
                                 <input class="form-control" name="surname" required type="text" value="{{$user->surname}}">
                             </div>
+                            <!-- Error -->
+                            @if ($errors->has('surname'))
+                                <p class="color--error mb-2"><strong>{{$errors->first('surname')}}</strong></p>
+                            @endif
                         </div>
 
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <div class="form-group">
-                                <label>Titolo di lavoro</label>
-                                <input class="form-control" name="jobTitle" type="text" placeholder="Titolo di lavoro"  value="{{$user->profile->job_title ?? null}}">
+                                <label>{{__('dashboard/user/profile.jobPosition')}}</label>
+                                <input class="form-control" name="jobTitle" type="text" placeholder="{{__('dashboard/user/profile.phJobTitle')}}"  value="{{$user->profile->job_title ?? null}}">
                             </div>
+                            <!-- Error -->
+                            @if ($errors->has('jobTitle'))
+                                <p class="color--error mb-2"><strong>{{$errors->first('jobTitle')}}</strong></p>
+                            @endif
                         </div>
 
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <div class="form-group">
-                                <label>Salario minimo</label>
+                                <label>{{__('dashboard/user/profile.minSalary')}}</label>
                                 <input class="form-control" name="minSalary" type="number" placeholder="0"  value="{{$user->profile->min_salary ?? null}}">
                             </div>
+                            <!-- Error -->
+                            @if ($errors->has('minSalary'))
+                                <p class="color--error mb-2"><strong>{{$errors->first('minSalary')}}</strong></p>
+                            @endif
                         </div>
 
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <div class="form-group">
-                                <label>Descrizione</label>
+                                <label>{{__('dashboard/user/profile.overview')}}</label>
                                 <textarea id="summernote" name="description">{{$user->profile->overview ?? null}}</textarea>
                             </div>
+                            <!-- Error -->
+                            @if ($errors->has('description'))
+                                <p class="color--error mb-2"><strong>{{$errors->first('description')}}</strong></p>
+                            @endif
                         </div>
 
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <div class="form-group">
-                                <label>Avatar (png, jpg, jpeg)</label>
+                                <label>{{__('dashboard/user/profile.avatar')}}</label>
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="clogo" name="avatar">
-                                    <label class="custom-file-label" for="clogo">Scegli immagine</label>
+                                    <input type="file" class="custom-file-input" id="clogo" name="avatar" accept=".png,.jpg,.jpeg">
+                                    <label class="custom-file-label" for="clogo">{{__('dashboard/user/profile.chooseImg')}}</label>
                                 </div>
                             </div>
+                            <!-- Error -->
+                            @if ($errors->has('avatar'))
+                                <p class="color--error mb-2"><strong>{{$errors->first('avatar')}}</strong></p>
+                            @endif
                         </div>
 
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
-                                <label>Data di nascita</label>
+                                <label>{{__('dashboard/user/profile.birth')}}</label>
                                 <input class="form-control" type="date" name="birth" value="{{$user->profile->birth ?? null}}">
                             </div>
+                            <!-- Error -->
+                            @if ($errors->has('birth'))
+                                <p class="color--error mb-2"><strong>{{$errors->first('birth')}}</strong></p>
+                            @endif
                         </div>
 
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
-                                <label>Sesso</label>
+                                <label>{{__('dashboard/user/profile.gender')}}</label>
                                 <select class="form-control" name="sex">
                                     @if($user->profile()->exists() && !empty($user->profile->sex))
+                                        <option disabled>{{__('dashboard/user/profile.choose')}}</option>
                                         <option {{$user->profile->sex == 'M' ? 'selected' : null}} value="M">M</option>
                                         <option {{$user->profile->sex == 'F' ? 'selected' : null}} value="F">F</option>
                                     @else
+                                        <option selected disabled>{{__('dashboard/user/profile.choose')}}</option>
                                         <option value="M">M</option>
                                         <option value="F">F</option>
                                     @endif
                                 </select>
                             </div>
+                            <!-- Error -->
+                            @if ($errors->has('sex'))
+                                <p class="color--error mb-2"><strong>{{$errors->first('sex')}}</strong></p>
+                            @endif
                         </div>
 
                     </div>
@@ -106,7 +135,7 @@
             <!-- Contact Info -->
             <div class="tr-single-box">
                 <div class="tr-single-header">
-                    <h4><i class="ti-headphone"></i> Contatti</h4>
+                    <h4><i class="ti-headphone"></i> {{__('dashboard/user/profile.contactsTitle')}}</h4>
                 </div>
 
                 <div class="tr-single-body">
@@ -114,37 +143,57 @@
 
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
-                                <label class="social-nfo">Telefono</label>
-                                <input class="form-control" type="text" name="telephone" placeholder="Numero di telefono" value="{{$user->profile->telephone ?? null}}">
+                                <label class="social-nfo">{{__('dashboard/user/profile.telephone')}}</label>
+                                <input class="form-control" type="text" name="telephone" placeholder="{{__('dashboard/user/profile.phTelephone')}}" value="{{$user->profile->telephone ?? null}}">
                             </div>
+                            <!-- Error -->
+                            @if ($errors->has('telephone'))
+                                <p class="color--error mb-2"><strong>{{$errors->first('telephone')}}</strong></p>
+                            @endif
                         </div>
 
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
-                                <label class="social-nfo">Email</label>
+                                <label class="social-nfo">{{__('dashboard/user/profile.email')}}</label>
                                 <input class="form-control" type="email" name="email" required value="{{$user->email}}">
                             </div>
+                            <!-- Error -->
+                            @if ($errors->has('email'))
+                                <p class="color--error mb-2"><strong>{{$errors->first('email')}}</strong></p>
+                            @endif
                         </div>
 
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
-                                <label class="social-nfo">Nazionalità</label>
-                                <input class="form-control" type="text" name="country" placeholder="Nazione" value="{{$user->profile->country ?? null}}">
+                                <label class="social-nfo">{{__('dashboard/user/profile.country')}}</label>
+                                <input class="form-control" type="text" name="{{__('dashboard/user/profile.phCountry')}}" placeholder="Nazione" value="{{$user->profile->country ?? null}}">
                             </div>
+                            <!-- Error -->
+                            @if ($errors->has('country'))
+                                <p class="color--error mb-2"><strong>{{$errors->first('country')}}</strong></p>
+                            @endif
                         </div>
 
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
-                                <label class="social-nfo">Città</label>
-                                <input class="form-control" type="text" name="city" placeholder="Città" value="{{$user->profile->min_salary ?? null}}">
+                                <label class="social-nfo">{{__('dashboard/user/profile.city')}}</label>
+                                <input class="form-control" type="text" name="city" placeholder="{{__('dashboard/user/profile.phCity')}}" value="{{$user->profile->min_salary ?? null}}">
                             </div>
+                            <!-- Error -->
+                            @if ($errors->has('city'))
+                                <p class="color--error mb-2"><strong>{{$errors->first('city')}}</strong></p>
+                            @endif
                         </div>
 
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <div class="form-group">
-                                <label class="social-nfo">Sito web</label>
-                                <input class="form-control" name="website" type="text" placeholder="www.website.com" value="{{$user->profile->website ?? null}}">
+                                <label class="social-nfo">{{__('dashboard/user/profile.website')}}</label>
+                                <input class="form-control" name="website" type="text" placeholder="{{__('dashboard/user/profile.phWebsite')}}" value="{{$user->profile->website ?? null}}">
                             </div>
+                            <!-- Error -->
+                            @if ($errors->has('website'))
+                                <p class="color--error mb-2"><strong>{{$errors->first('website')}}</strong></p>
+                            @endif
                         </div>
 
                     </div>
@@ -153,7 +202,7 @@
             </div>
             <!-- /Contact Info -->
 
-            <button type="submit" class="btn btn-info btn-md full-width">Salva<i class="ml-2 ti-arrow-right"></i></button>
+            <button type="submit" class="btn btn-info btn-md full-width">{{__('dashboard/user/profile.buttonSave')}}<i class="ml-2 ti-arrow-right"></i></button>
         </form>
 
     </div>

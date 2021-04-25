@@ -47,6 +47,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|JobOffer withAnyTag($tagNames)
  * @method static \Illuminate\Database\Eloquent\Builder|JobOffer withoutTags($tagNames)
  * @mixin \Eloquent
+ * @property int $commercial_contact_id
+ * @property int $places_of_work_id
+ * @method static \Illuminate\Database\Eloquent\Builder|JobOffer whereCommercialContactId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobOffer wherePlacesOfWorkId($value)
  */
 class JobOffer extends Model
 {

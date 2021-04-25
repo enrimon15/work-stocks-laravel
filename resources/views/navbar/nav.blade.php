@@ -75,7 +75,7 @@ use TCG\Voyager\Models\Menu;
 
                     <li class="add-listing theme-bg display-desk">
                         <a href="#">
-                            <i class="ti-plus"></i> Nuova Offerta
+                            <i class="ti-plus"></i> {{__('nav.newOffer')}}
                         </a>
                     </li>
                 </ul>

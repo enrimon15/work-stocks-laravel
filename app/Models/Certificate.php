@@ -31,6 +31,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Certificate whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Certificate whereUserId($value)
  * @mixin \Eloquent
+ * @property string $name
+ * @method static \Illuminate\Database\Eloquent\Builder|Certificate whereName($value)
  */
 class Certificate extends Model
 {

@@ -54,7 +54,7 @@
                                 <div class="form-group">
                                     <label>{{__('loginAndRegister.surnameLabel')}}</label>
                                     <div class="input-with-gray">
-                                        <input type="text" class="form-control" placeholder="{{__('loginAndRegister.surnameLabel')}}" name="surname" value="{{ old('surname') }}" required autocomplete="surname">
+                                        <input type="text" class="form-control" placeholder="{{__('loginAndRegister.surnameLabel')}}" name="surname" value="{{ old('surname') }}" required>
                                         <i class="ti-user"></i>
                                     </div>
                                     <!-- Error -->
