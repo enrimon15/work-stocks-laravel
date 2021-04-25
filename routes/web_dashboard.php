@@ -22,4 +22,5 @@ Route::prefix('/dashboard')->middleware('auth')->middleware('roleIn:user,company
     Route::post('/online-cv/{operationType}', [DashboardController::class, 'populateOnlineCV'])->name('onlineCvExecute');
     Route::get('/online-cv/delete/{id}/{operationType}', [DashboardController::class, 'deleteRecordCv'])->name('onlineCvDelete');
     Route::get('/online-cv/edit/{operationType}/{id}', [DashboardController::class, 'editCV'])->name('onlineCvEdit');
+    Route::get('/online-cv/download-cv', [DashboardController::class, 'downloadCv'])->name('downloadCv');
 });

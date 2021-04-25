@@ -16,14 +16,14 @@
 
     <div class="tr-single-box">
         <div class="tr-single-header">
-            <h4><i class="lni-lock"></i> Cambia Password</h4>
+            <h4><i class="lni-lock"></i> {{__('dashboard/user/changePassword.title')}}</h4>
         </div>
 
         <form method="POST" action="{{ route('changePasswordExecute') }}">
             @csrf
             <div class="tr-single-body">
                 <div class="form-group">
-                    <label>Password Attuale</label>
+                    <label>{{__('dashboard/user/changePassword.currentPassword')}}</label>
                     <input class="form-control" type="text" name="old_password" value="{{old('old_password')}}" required>
                     <!-- Error -->
                     @if ($errors->has('old_pass'))
@@ -31,20 +31,24 @@
                     @endif
                 </div>
                 <div class="form-group">
-                    <label>Nuova Password</label>
+                    <label>{{__('dashboard/user/changePassword.newPassword')}}</label>
                     <input class="form-control" type="text" name="new_password" value="{{old('new_password')}}" required>
                     <!-- Error -->
-                    @if ($errors->has('new_password') || $errors->has('confirm_password'))
-                        <p class="color--error mb-2"><strong>La password non rispetta il formato, controlla che la lunghezza sia almeno di 8 caratteri</strong></p>
+                    @if ($errors->has('new_password'))
+                        <p class="color--error mb-2"><strong>{{ $errors->first('new_password') }}</strong></p>
                     @endif
                 </div>
                 <div class="form-group">
-                    <label>Conferma Password</label>
+                    <label>{{__('dashboard/user/changePassword.confirmPassword')}}</label>
                     <input class="form-control" type="text" name="confirm_password" value="{{old('confirm_password')}}" required>
+                    <!-- Error -->
+                    @if ($errors->has('confirm_password'))
+                        <p class="color--error mb-2"><strong>{{ $errors->first('confirm_password') }}</strong></p>
+                    @endif
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-info btn-md full-width">Salva<i class="ml-2 ti-arrow-right"></i></button>
+            <button type="submit" class="btn btn-info btn-md full-width">{{__('dashboard/user/changePassword.buttonSave')}}<i class="ml-2 ti-arrow-right"></i></button>
         </form>
 
     </div>

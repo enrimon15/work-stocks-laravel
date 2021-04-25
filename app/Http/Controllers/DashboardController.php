@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
 class DashboardController extends Controller
@@ -23,7 +24,6 @@ class DashboardController extends Controller
     public function index() {
         $user = Auth::user();
 
-        //dd($user->profile()->telephone ?? 'ciao');
         if ($user->hasRole('company')) {
             return view('company.company-dashboard');
         } else if ($user->hasRole('user')) {
@@ -58,7 +58,7 @@ class DashboardController extends Controller
         $user->email = $data->input('email');
 
         if($data->avatar != null) {
-            $newImageName = 'users/' . time() . "-" . $data->input('name') . $data->input('surname') . "-" . $user->id . $data->avatar->extension();
+            $newImageName = 'users/' . time() . "-" . $data->input('name') . $data->input('surname') . "-" . $user->id . '.' . $data->avatar->extension();
             $data->avatar->move(public_path('storage/users'), $newImageName);
             $user->avatar = $newImageName;
         }
@@ -82,7 +82,7 @@ class DashboardController extends Controller
         $profile->website = $data->input('website');
         $profile->save();
 
-        return back()->with('success', 'Profilo utente aggiornato correttamente');
+        return back()->with('success', __('dashboard/user/profile.success'));
     }
 
     public function showChangePassword() {
@@ -99,10 +99,10 @@ class DashboardController extends Controller
 
         $user = Auth::user(); // current user
         if (!Hash::check($data->input('old_password'), $user->password)) {
-            $error = ['old_pass' => 'La password attuale non corrisponde'];
+            $error = ['old_pass' => __('dashboard/user/changePassword.errorCurrentPassword')];
         }
         if ($data->input('confirm_password') != $data->input('new_password')) {
-            $error = ['new_pass' => 'Le due password non coincidono'];
+            $error = ['confirm_password' => __('dashboard/user/changePassword.errorConfirmPassword')];
         }
 
         if ($error != null) {
@@ -114,7 +114,7 @@ class DashboardController extends Controller
         $user->password = Hash::make($data->input('new_password'));
         $user->save();
 
-        return Redirect::back()->with('success','Password cambiata con successo');
+        return Redirect::back()->with('success', __('dashboard/user/changePassword.success'));
     }
 
     public function showFavorite() {
@@ -165,7 +165,7 @@ class DashboardController extends Controller
                 $qualification->valuation = $data->input('valuation');
 
                 $qualification->save();
-                return redirect()->route('onlineCV')->with('success', $data->input('id') == null ? 'Qualifica inserita correttamente' : 'Qualifica aggiornata correttamente');
+                return redirect()->route('onlineCV')->with('success', $data->input('id') == null ? __('dashboard/user/onlineCV.successQualification') : __('dashboard/user/onlineCV.updateQualification'));
                 break;
             case 'experience':
                 $data->validate([
@@ -187,7 +187,7 @@ class DashboardController extends Controller
                 $experience->description = $data->input('description');
 
                 $experience->save();
-                return redirect()->route('onlineCV')->with('success', $data->input('id') == null ? 'Esperienza inserita correttamente' : 'Esperienza aggiornata correttamente');
+                return redirect()->route('onlineCV')->with('success', $data->input('id') == null ? __('dashboard/user/onlineCV.successExperience') : __('dashboard/user/onlineCV.updateExperience'));
                 break;
             case 'certificate':
                 $data->validate([
@@ -209,7 +209,7 @@ class DashboardController extends Controller
                 $certificate->link = $data->input('link');
 
                 $certificate->save();
-                return redirect()->route('onlineCV')->with('success', $data->input('id') == null ? 'Certificato inserito correttamente' : 'Certificato aggiornato correttamente');
+                return redirect()->route('onlineCV')->with('success', $data->input('id') == null ? __('dashboard/user/onlineCV.successCertificate') : __('dashboard/user/onlineCV.updateCertificate'));
                 break;
             case 'skill':
                 $data->validate([
@@ -223,14 +223,30 @@ class DashboardController extends Controller
                 $skill->assestment = $data->input('skillLevel');
 
                 $skill->save();
-                return redirect()->route('onlineCV')->with('success', $data->input('id') == null ? 'Competenza inserita correttamente' : 'Competenza aggiornata correttamente');
+                return redirect()->route('onlineCV')->with('success', $data->input('id') == null ? __('dashboard/user/onlineCV.successSkill') : __('dashboard/user/onlineCV.updateSkill'));
                 break;
             case 'cv':
-                echo "i equals 2";
+                $data->validate([
+                    'cv' => ['required','max:10000','mimes:pdf'], //10mb
+                ]);
+
+                if($data->cv != null) {
+                    $newCv = 'cv/' . time() . "-" . $user->name . $user->surname . "-" . $user->id . '.' . $data->cv->extension();
+                    $data->cv->move(public_path('storage/cv'), $newCv);
+                    $userProfile = $user->profile;
+                    $userProfile->cv_path = $newCv;
+                    $userProfile->save();
+                }
+                return redirect()->route('onlineCV')->with('success', __('dashboard/user/onlineCV.successCv'));
                 break;
             default:
                 //default case;
         }
+    }
+
+    public function downloadCv() {
+        $user = Auth::user(); // current user
+        return Storage::disk('public')->download($user->profile->cv_path);
     }
 
     public function editCV($operationType, $id) {
@@ -284,7 +300,7 @@ class DashboardController extends Controller
                 $qualification = Qualification::find($id);
                 if ($qualification->user == Auth::user()) {
                     $qualification->delete();
-                    return back()->with('success', 'Qualifica eliminata correttamente');
+                    return back()->with('success', __('dashboard/user/onlineCV.deleteQualification'));
                 } else {
                     // redirect error page
                 }
@@ -293,7 +309,7 @@ class DashboardController extends Controller
                 $experience = WorkingExperience::find($id);
                 if ($experience->user == Auth::user()) {
                     $experience->delete();
-                    return back()->with('success', 'Esperienza eliminata correttamente');
+                    return back()->with('success', __('dashboard/user/onlineCV.deleteExperience'));
                 } else {
                     // redirect error page
                 }
@@ -302,7 +318,7 @@ class DashboardController extends Controller
                 $certificate = Certificate::find($id);
                 if ($certificate->user == Auth::user()) {
                     $certificate->delete();
-                    return back()->with('success', 'Certificazione eliminata correttamente');
+                    return back()->with('success', __('dashboard/user/onlineCV.deleteCertificate'));
                 } else {
                     // redirect error page
                 }
@@ -310,7 +326,7 @@ class DashboardController extends Controller
                 $skill = Skill::find($id);
                 if ($skill->user == Auth::user()) {
                     $skill->delete();
-                    return back()->with('success', 'Skill eliminata correttamente');
+                    return back()->with('success', __('dashboard/user/onlineCV.deleteSkill'));
                 } else {
                     // redirect error page
                 }

@@ -18,7 +18,7 @@ class CreateCertificatesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->date('date');
-            $table->year('end_date')->nullable(); //può non avere scadenza
+            $table->date('end_date')->nullable(); //può non avere scadenza
             $table->string('link')->nullable();
             $table->string('credential');
             $table->string('society');
