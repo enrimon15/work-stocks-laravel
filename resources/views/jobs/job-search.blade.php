@@ -277,12 +277,12 @@
                                     <div class="job-new-list">
                                         <div class="vc-thumb">
                                             <img class="img-fluid rounded-circle"
-                                                 src="https://via.placeholder.com/90x90" alt="c2.jpg">
+                                                 src="{{asset('storage/'.$job->company->user->avatar)}}">
                                         </div>
                                         <div class="vc-content">
-                                            <h5 class="title"><a href="job-detail.html">{{$job->title}}</a><span
+                                            <h5 class="title"><a href="{!! route('jobs/getById',['id'=>$job->id]) !!}">{{$job->title}}</a><span
                                                     class="j-full-time">{{__('jobs/filters.'.$job->offers_type)}}</span></h5>
-                                            <p>METTERE IL NOME DELL'AZIENDA</p>
+                                            <p>{{$job->company->name}}</p>
 
                                             <ul class="vc-info-list">
                                                 <li class="list-inline-item">

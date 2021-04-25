@@ -28,4 +28,8 @@ use Illuminate\Database\Eloquent\Model;
 class CommercialContact extends Model
 {
     use HasFactory;
+
+    public function company() {
+        return $this->hasOne(Company::class);
+    }
 }

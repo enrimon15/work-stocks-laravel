@@ -60,4 +60,8 @@ class JobOffer extends Model
     public function company() {
         return $this->belongsTo(Company::class,'companies_id');
     }
+
+    public function placesOfWork() {
+        return $this->belongsTo(PlacesOfWork::class);
+    }
 }

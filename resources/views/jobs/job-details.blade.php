@@ -18,12 +18,12 @@
             <div class="tr-list-wrap">
                 <div class="tr-list-detail">
                     <div class="tr-list-thumb">
-                        <img src="https://via.placeholder.com/90x90" class="img-responsive" alt="" />
+                        <img src="{{asset('storage/'.$job->company->user->avatar)}}" class="img-responsive" alt="" />
                     </div>
                     <div class="tr-list-info">
                         <h4 class="mb-1">{{$job->title}}</h4>
                         <h6 class="font-14"><a href="company-detail.html" class="text-warning">{{$job->company->name}}</a></h6>
-                        <p class="mb-1"><i class="ti-location-pin mr-2"></i>Blick Market, USA</p>
+                        <p class="mb-1"><i class="ti-location-pin mr-2"></i>{{$job->placesOfWork->address.', '.$job->placesOfWork->city.', '.$job->placesOfWork->country}}</p>
                     </div>
                 </div>
                 <div class="listing-detail_right">
@@ -51,8 +51,7 @@
                         <h4><i class="ti-info"></i>{{__('jobs/jobs.jobDescription')}}</h4>
                     </div>
                     <div class="tr-single-body">
-                        <p>We are seeking an experienced Wordpress developer with minimum 2+ years of experiencea WordPress Developer responsible for both back-end and front-end development, including creating WordPress themes and plugins. This position requires a combination of programming skills (namely PHP, HTML5, CSS3, and JavaScript) and aesthetics (understanding element arrangements on the screen, the color and font choices, and so on). The candidate should have a strong understanding of industry trends and content management systems.</p>
-                        <p> Experience with the responsive and adaptive design is strongly preferred. Also, an understanding of the entire web development process, including design, development, and deployment is preferred.</p>
+                        {!! $job->description !!}
                     </div>
                 </div>
 
@@ -63,22 +62,15 @@
                     </div>
                     <div class="tr-single-body">
                         <ul class="jb-detail-list">
-                            <li>Hand On experience with Wordpress</li>
-                            <li>Good understanding of front-end technologies, including HTML5, CSS3, JavaScript, jQuery</li>
-                            <li>Experience building user interfaces for websites and/or web applications</li>
-                            <li>Experience designing and developing responsive design websites</li>
-                            <li>Comfortable working with debugging tools like Firebug, Chrome inspector, etc.</li>
-                            <li>Ability to understand CSS changes and their ramifications to ensure consistent style across platforms and browsers</li>
-                            <li>Ability to convert comprehensive layout and wireframes into working HTML pages</li>
-                            <li>Knowledge of how to interact with RESTful APIs and formats (JSON, XML)</li>
-                            <li>Proficient understanding of code versioning tool GIT</li>
-                            <li>Strong understanding of PHP back-end development</li>
+                            @foreach($job->tagNames() as $tag)
+                                <li>{{$tag}}</li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
 
 
-                <!-- Job Education -->
+                <!-- Job Education
                 <div class="tr-single-box">
                     <div class="tr-single-header">
                         <h4><i class="ti-cup"></i>{{__('jobs/jobs.education')}}</h4>
@@ -90,7 +82,7 @@
                             <li>Any Graduattion Degree(13th Pass) (Preferred)</li>
                         </ul>
                     </div>
-                </div>
+                </div>-->
 
                 <a href="javascript:void(0)" data-toggle="modal" data-target="#apply" class="btn btn-info full-width mb-2">{{__('jobs/jobs.applyThisJob')}}</a>
 
@@ -192,7 +184,7 @@
                                             <i class="lni-map-marker"></i>
                                         </div>
                                         <div class="icon-box-text">
-                                            524 New Ave, CA 548, USA
+                                            {{$job->company->mainPlaceOfWork()->address.', '.$job->company->mainPlaceOfWork()->city.', '.$job->company->mainPlaceOfWork()->country}}
                                         </div>
                                     </a>
                                 </div>
@@ -205,7 +197,7 @@
                                             <i class="lni-phone-handset"></i>
                                         </div>
                                         <div class="icon-box-text">
-                                            +1 415-989-1002
+                                            {{$job->company->commercialContact->telephone}}
                                         </div>
                                     </a>
                                 </div>
@@ -218,7 +210,7 @@
                                             <i class="lni-envelope"></i>
                                         </div>
                                         <div class="icon-box-text">
-                                            helpsupport.com@finding.com
+                                            {{$job->company->commercialContact->email}}
                                         </div>
                                     </a>
                                 </div>
@@ -231,7 +223,7 @@
                                             <i class="lni-world"></i>
                                         </div>
                                         <div class="icon-box-text">
-                                            www.myfinding.com
+                                            {{$job->company->website}}
                                         </div>
                                     </a>
                                 </div>
