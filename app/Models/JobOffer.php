@@ -54,6 +54,6 @@ class JobOffer extends Model
     use Taggable;
 
     public function company() {
-        return $this->belongsTo(Company::class);
+        return $this->belongsTo(Company::class,'companies_id');
     }
 }
