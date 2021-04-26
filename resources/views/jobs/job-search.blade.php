@@ -22,21 +22,21 @@
                         <div class="col-lg-3 col-md-3 col-sm-12 p-0">
                             <div class="form-group">
                                 <i class="ti-search"></i>
-                                <input type="text" class="form-control b-r" placeholder="Job Title or Keywords">
+                                <input id="topFilterJobTitle" type="text" class="form-control b-r" placeholder="{{__('jobs/filters.jobTitleOrKeywords')}}">
                             </div>
                         </div>
 
                         <div class="col-lg-3 col-md-3 col-sm-12 p-0">
                             <div class="form-group">
                                 <i class="ti-location-pin"></i>
-                                <input type="text" class="form-control b-r" placeholder="Location">
+                                <input id="topFilterLocation" type="text" class="form-control b-r" placeholder="{{__('jobs/filters.location')}}">
                             </div>
                         </div>
 
                         <div class="col-lg-2 col-md-2 col-sm-12 p-0">
                             <div class="form-group">
                                 <i class="ti-briefcase"></i>
-                                <input type="text" class="form-control b-r" placeholder="Job Type">
+                                <input type="text" class="form-control b-r" placeholder="NOME AZIENDA">
                             </div>
                         </div>
 
@@ -55,7 +55,7 @@
                         </div>
 
                         <div class="col-lg-2 col-md-2 col-sm-12 p-0">
-                            <button type="button" class="btn btn-primary full-width">Find Jobs</button>
+                            <button type="button" onclick="filtersByAjaxCall()" class="btn btn-primary full-width">{{__('jobs/filters.findJobs')}}</button>
                         </div>
                     </div>
                 </form>
@@ -110,31 +110,31 @@
                                 <div class="form-group">
                                     <h5 class="mb-2">{{__('jobs/filters.experienceTitle')}}</h5>
                                     <div class="side-imbo">
-                                        <ul class="no-ul-list">
+                                        <ul class="no-ul-list" id="checkBoxFilterExperience">
                                             <li>
                                                 <input id="checkbox-e1" class="checkbox-custom" name="checkbox-e1"
-                                                       type="checkbox">
+                                                       type="checkbox" value="1" data-linked="group1" onchange="filtersByAjaxCall()">
                                                 <label for="checkbox-e1"
                                                        class="checkbox-custom-label">1 {{__('jobs/filters.year')}}</label>
                                             </li>
 
                                             <li>
                                                 <input id="checkbox-e2" class="checkbox-custom" name="checkbox-e2"
-                                                       type="checkbox">
+                                                       type="checkbox" value="2" data-linked="group1" onchange="filtersByAjaxCall()">
                                                 <label for="checkbox-e2"
                                                        class="checkbox-custom-label">2 {{__('jobs/filters.years')}}</label>
                                             </li>
 
                                             <li>
                                                 <input id="checkbox-e3" class="checkbox-custom" name="checkbox-e3"
-                                                       type="checkbox">
+                                                       type="checkbox" value="3" data-linked="group1" onchange="filtersByAjaxCall()">
                                                 <label for="checkbox-e3"
                                                        class="checkbox-custom-label">3 {{__('jobs/filters.years')}}</label>
                                             </li>
 
                                             <li>
                                                 <input id="checkbox-e4" class="checkbox-custom" name="checkbox-e4"
-                                                       type="checkbox">
+                                                       type="checkbox" value="4" data-linked="group1" onchange="filtersByAjaxCall()">
                                                 <label for="checkbox-e4"
                                                        class="checkbox-custom-label">4+ {{__('jobs/filters.years')}}</label>
                                             </li>
@@ -167,7 +167,7 @@
                                                 <input id="checkbox-j3" class="checkbox-custom" name="checkbox-j3"
                                                        type="checkbox">
                                                 <label for="checkbox-j3"
-                                                       class="checkbox-custom-label">{{__('jobs/filters.constructionBase')}}</label>
+                                                       class="checkbox-custom-label">{{__('jobs/filters.costruction_base')}}</label>
                                             </li>
 
                                             <li>
@@ -440,8 +440,57 @@
 @endsection
 
 @push('scripts')
+
     <script>
+
+        function analyzeFilters() {
+            var topFilterJobTitle = $('#topFilterJobTitle').val();
+            var topFilterLocation = $('#topFilterLocation').val();
+
+            var queryParameters = "";
+
+            if(topFilterJobTitle) {
+                queryParameters += ("filter[title]="+topFilterJobTitle)+"&";
+            }
+
+            if(topFilterLocation) {
+                queryParameters += ("filter[location]="+topFilterLocation)+"&";
+            }
+
+
+            $('#checkBoxFilterExperience').find('input[type=checkbox]').each(function () {
+                console.log("trovati i checkbox");
+                if ($(this).prop('checked')) {
+                    queryParameters += ("filter[experience]="+$(this).val());
+                    console.log("query:"+queryParameters);
+                }
+            });
+
+
+            return queryParameters;
+        }
+        function filtersByAjaxCall(){
+            console.log('chiamata');
+            $(document).ready(function() {
+
+                $.ajax({
+                    url: "/jobs?"+analyzeFilters(),
+                    success: function (data) {
+                        $('#table_data').html(data);
+                    }
+                });
+
+            });
+        }
+
         $(document).ready(function(){
+
+            // $(function() {
+            //     $('.checkbox-custom').mousedown(function() {
+            //         var linked = $(this).data('linked');
+            //         $(':checkbox[data-linked="' + linked + '"]').prop('checked', false);
+            //     });
+            // });
 
             $(document).on('click', '.pagination a', function(event){
                 event.preventDefault();
@@ -449,10 +498,14 @@
                 fetch_data(page);
             });
 
+
+
+
+
             function fetch_data(page)
             {
                 $.ajax({
-                    url:"/jobs?page="+page,
+                    url:"/jobs?page="+page+"&"+analyzeFilters(),
                     success:function(data)
                     {
                         $('#table_data').html(data);

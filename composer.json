@@ -17,6 +17,7 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.2",
         "rtconner/laravel-tagging": "^4.0",
+        "spatie/laravel-query-builder": "^3.3",
         "tcg/voyager": "^1.4"
     },
     "require-dev": {

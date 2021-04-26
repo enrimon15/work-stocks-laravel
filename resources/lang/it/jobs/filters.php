@@ -12,4 +12,7 @@ return [
     'part_time' => 'Part Time',
     'costruction_base' => 'Apprendistato',
     'internship' => 'Tirocinio',
+    'findJobs' => 'Cerca Lavori',
+    'jobTitleOrKeywords' => 'Titolo Offerta o parole chiave',
+    'location' => 'Indirizzo',
 ];

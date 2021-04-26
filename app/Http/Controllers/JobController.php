@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Filters\FilterJobOfferLocation;
 use App\Models\JobOffer;
+use Carbon\Carbon;
 use Conner\Tagging\Model\Tag;
 use Conner\Tagging\Model\TagGroup;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class JobController extends Controller
 {
@@ -18,9 +22,14 @@ class JobController extends Controller
 
     public function jobCatalog(Request $request)
     {
+        $jobs = QueryBuilder::for(JobOffer::class)
+            ->where('due_date', '>=', Carbon::today())
+            ->allowedFilters(['title',
+                              'experience',
+                              AllowedFilter::custom('location',new FilterJobOfferLocation)])
+            ->paginate(10);
 
         if ($request->ajax()) {
-            $jobs = JobOffer::paginate(10);
             return view('jobs.job-search-data')
                 ->with('jobs',$jobs)
                 ->render();
@@ -36,10 +45,9 @@ class JobController extends Controller
                     ->get();
             }
 
-
             return view('jobs/job-search')
                 ->with('tags', $tags)
-                ->with('jobs', JobOffer::paginate(10));
+                ->with('jobs', $jobs/*JobOffer::paginate(10)*/);
         }
     }
 

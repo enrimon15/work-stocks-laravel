@@ -12,4 +12,7 @@ return [
     'part_time' => 'Part Time',
     'costruction_base' => 'Construction Base',
     'internship' => 'Internship',
+    'findJobs' => 'Find Jobs',
+    'jobTitleOrKeywords' => 'Job Title or Keywords',
+    'location' => 'Location',
 ];
