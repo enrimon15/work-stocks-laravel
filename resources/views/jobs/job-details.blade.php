@@ -179,7 +179,9 @@
                         <ul class="extra-service">
                             <li>
                                 <div class="icon-box-icon-block">
-                                    <a href="#">
+                                    <a href="https://www.google.com/maps/search/?api=1&query={{str_replace(' ','%20',$job->company->mainPlaceOfWork()->address).'%20'.
+                                                                                                str_replace(' ','%20',$job->company->mainPlaceOfWork()->city).'%20'.
+                                                                                                str_replace(' ','%20',$job->company->mainPlaceOfWork()->country)}}">
                                         <div class="icon-box-round">
                                             <i class="lni-map-marker"></i>
                                         </div>
@@ -192,7 +194,7 @@
 
                             <li>
                                 <div class="icon-box-icon-block">
-                                    <a href="#">
+                                    <a href="tel:{{$job->company->commercialContact->telephone}}">
                                         <div class="icon-box-round">
                                             <i class="lni-phone-handset"></i>
                                         </div>
@@ -205,7 +207,7 @@
 
                             <li>
                                 <div class="icon-box-icon-block">
-                                    <a href="#">
+                                    <a href="mailto:{{$job->company->commercialContact->email}}">
                                         <div class="icon-box-round">
                                             <i class="lni-envelope"></i>
                                         </div>
@@ -218,7 +220,7 @@
 
                             <li>
                                 <div class="icon-box-icon-block">
-                                    <a href="#">
+                                    <a href="{{'//'.$job->company->website}}">
                                         <div class="icon-box-round">
                                             <i class="lni-world"></i>
                                         </div>
