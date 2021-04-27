@@ -19,14 +19,14 @@ class CreateCompaniesTable extends Migration
             $table->foreign('commercial_contact_id')->references('id')->on('commercial_contacts')->onDelete('cascade');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('vat_number');
+            $table->unsignedBigInteger('vat_number')->unique();
             $table->string('company_form');
             $table->string('name');
-            $table->text('overview');
+            $table->text('overview')->nullable();
             $table->integer('employees_number');
             $table->year('foundation_year');
             $table->string('website');
-            $table->string('slogan');
+            $table->string('slogan')->nullable();
             $table->timestamps();
         });
     }

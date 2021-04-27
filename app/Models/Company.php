@@ -48,7 +48,30 @@ class Company extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'vat_number',
+        'company_form',
+        'overview',
+        'employees_number',
+        'slogan',
+        'website',
+        'foundation_year'
+    ];
+
     public function jobOffers() {
         return $this->hasMany(JobOffer::class);
+    }
+
+    public function user() {
+        return $this->belongsTo( User::class);
+    }
+
+    public function commercialContact() {
+        return $this->belongsTo( CommercialContact::class);
+    }
+
+    public function workingPlaces() {
+        return $this->hasMany( PlacesOfWork::class);
     }
 }

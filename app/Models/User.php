@@ -129,4 +129,8 @@ class User extends \TCG\Voyager\Models\User
     public function workingExperiences() {
         return $this->hasMany( WorkingExperience::class);
     }
+
+    public function company() {
+        return $this->hasOne( Company::class);
+    }
 }

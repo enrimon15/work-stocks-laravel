@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\CommercialContact;
+use App\Models\Company;
+use App\Models\PlacesOfWork;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Validation\Rule;
@@ -64,16 +67,45 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'surname' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'user_type' => [
-                'required',
-                Rule::in(['user', 'company']),
-            ],
-        ]/*, $this->messages()*/);
+        if ($data['user_type'] == 'user') { //user
+            return Validator::make($data, [
+                'name' => ['required', 'string', 'max:255'],
+                'surname' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'password' => ['required', 'string', 'min:8', 'confirmed'],
+                'user_type' => [
+                    'required',
+                    Rule::in(['user', 'company']),
+                ],
+            ]);
+        } else { //company
+            return Validator::make($data, [
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'surname' => ['required', 'string', 'max:255'],
+                'password' => ['required', 'string', 'min:8', 'confirmed'],
+                'user_type' => [
+                    'required',
+                    Rule::in(['user', 'company']),
+                ],
+                'companyName' => ['required', 'string', 'max:255'],
+                'vatNumber' => ['required', 'numeric', 'digits:11'],
+                'companyForm' => ['required', 'string', 'max:255'],
+                'foundationYear' => ['required', 'numeric', 'min:0'],
+                'employeesNumber' => ['required', 'numeric', 'min:0'],
+                'website' => ['required', 'string', 'max:255'],
+                'contactEmail' => ['required', 'string', 'email', 'max:255'],
+                'contactName' => ['required', 'string', 'max:255'],
+                'contactPhone' => ['required', 'string', 'max:255'],
+                'address' => ['required', 'string', 'max:255'],
+                'city' => ['required', 'string', 'max:255'],
+                'country' => ['required', 'string', 'max:255'],
+                'workingPlaceType' => [
+                    'required',
+                    Rule::in(['legal', 'commercial', 'operative']),
+                ]
+            ]);
+        }
     }
 
     /**
@@ -93,6 +125,34 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
         $user->roles()->save($role);
+
+        if ($data['user_type'] == 'company') {
+            $company = new Company();
+            $company->name = $data['companyName'];
+            $company->website = $data['website'];
+            $company->employees_number = $data['employeesNumber'];
+            $company->foundation_year = $data['foundationYear'];
+            $company->company_form = $data['companyForm'];
+            $company->vat_number = $data['vatNumber'];
+
+            $commercialContact = new CommercialContact();
+            $commercialContact->name = $data['contactEmail'];
+            $commercialContact->email = $data['contactName'];
+            $commercialContact->telephone = $data['contactPhone'];
+            $commercialContact->save();
+            $company->commercialContact()->associate($commercialContact);
+
+            $user->company()->save($company);
+
+            $workingPlace = new PlacesOfWork();
+            $workingPlace->address = $data['address'];
+            $workingPlace->city = $data['city'];
+            $workingPlace->country = $data['country'];
+            $workingPlace->type = $data['workingPlaceType'];
+            $workingPlace->primary = true;
+            $workingPlace->company()->associate($company);
+            $workingPlace->save();
+        }
 
         return $user;
     }

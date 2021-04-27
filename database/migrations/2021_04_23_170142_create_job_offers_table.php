@@ -15,11 +15,11 @@ class CreateJobOffersTable extends Migration
     {
         Schema::create('job_offers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('commercial_contact_id');
+            //$table->unsignedBigInteger('commercial_contact_id');
             $table->unsignedBigInteger('companies_id');
             $table->unsignedBigInteger('places_of_work_id');
             //$table->unsignedBigInteger('sector');
-            $table->foreign('commercial_contact_id')->references('id')->on('commercial_contacts')->onDelete('cascade');
+            //$table->foreign('commercial_contact_id')->references('id')->on('commercial_contacts')->onDelete('cascade');
             $table->foreign('companies_id')->references('id')->on('companies')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('places_of_work_id')->references('id')->on('places_of_works')->onDelete('cascade');
             //$table->foreign('sector')->references('id')->on('categories')->onDelete('cascade');
