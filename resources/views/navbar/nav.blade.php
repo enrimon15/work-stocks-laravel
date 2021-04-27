@@ -52,7 +52,7 @@ use TCG\Voyager\Models\Menu;
                     @else
                         <li>
                             <a href="#">
-                                <i class="ti-user mr-1"></i>{{ Auth::user()->name }}<span class="submenu-indicator"></span>
+                                <i class="ti-user mr-1"></i>{{ Auth::user()->hasRole('company') ? Auth::user()->company->name : Auth::user()->name }}<span class="submenu-indicator"></span>
                             </a>
                             <ul class="nav-dropdown nav-submenu" style="right: auto; display: none;">
                                 @if(Auth::user()->isAdmin())

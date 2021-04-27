@@ -29,7 +29,13 @@ class CommercialContact extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'email',
+        'telephone'
+    ];
+
     public function company() {
-        return $this->hasOne(Company::class);
+        return $this->hasOne( Company::class);
     }
 }

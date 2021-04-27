@@ -34,4 +34,16 @@ use Illuminate\Database\Eloquent\Model;
 class PlacesOfWork extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'city',
+        'country',
+        'address',
+        'primary',
+        'type'
+    ];
+
+    public function company() {
+        return $this->belongsTo( Company::class);
+    }
 }

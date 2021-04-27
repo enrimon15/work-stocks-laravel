@@ -7,6 +7,7 @@ return [
     'userTypeUser' => 'User',
     'userTypeCompany' => 'Company',
     'nameLabel' => 'Name',
+    'nameLabelCompany' => 'Company Name',
     'surnameLabel' => 'Surname',
     'emailLabel' => 'Email',
     'passwordLabel' => 'Password',

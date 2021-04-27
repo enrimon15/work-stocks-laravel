@@ -196,7 +196,7 @@ class DashboardController extends Controller
                     'endDate'=> ['nullable','date','after_or_equal:date'],
                     'certificateSociety'=> ['string', 'required', 'max:255'],
                     'credential'=> ['required','string'],
-                    'link'=> ['nullable','string','max:255']
+                    'link'=> ['nullable','string','max:255','url']
                 ]);
 
                 $certificate = $data->input('id') != null ? $user->certificates->firstWhere('id', $data->input('id')) : new Certificate();

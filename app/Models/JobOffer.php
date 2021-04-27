@@ -58,6 +58,18 @@ class JobOffer extends Model
     use HasFactory;
     use Taggable;
 
+    protected $fillable = [
+        'title',
+        'description',
+        'experience',
+        'due_date',
+        'offers_type',
+        'offers_type',
+        'sex',
+        'min_salary',
+        'max_salary'
+    ];
+
     public function company() {
         return $this->belongsTo(Company::class,'companies_id');
     }
@@ -68,5 +80,9 @@ class JobOffer extends Model
 
     public function skillTags() {
         return $this->hasMany(Tagged::class, 'taggable_id');
+    }
+
+    public function workingPlace() {
+        return $this->belongsTo( PlacesOfWork::class);
     }
 }

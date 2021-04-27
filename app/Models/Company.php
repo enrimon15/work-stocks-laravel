@@ -48,23 +48,34 @@ class Company extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'vat_number',
+        'company_form',
+        'overview',
+        'employees_number',
+        'slogan',
+        'website',
+        'foundation_year'
+    ];
+
     public function jobOffers() {
         return $this->hasMany(JobOffer::class);
-    }
-
-    public function placesOfWork() {
-        return $this->hasMany(PlacesOfWork::class);
     }
 
     public function commercialContact() {
         return $this->belongsTo(CommercialContact::class);
     }
 
-    public function user() {
-        return $this->belongsTo(\TCG\Voyager\Models\User::class);
+    public function mainPlaceOfWork() {
+        return $this->workingPlaces()->where('primary', '=', true)->first();
     }
 
-    public function mainPlaceOfWork() {
-        return $this->placesOfWork()->where('primary', '=', true)->first();
+    public function user() {
+        return $this->belongsTo( User::class);
+    }
+
+    public function workingPlaces() {
+        return $this->hasMany( PlacesOfWork::class);
     }
 }
