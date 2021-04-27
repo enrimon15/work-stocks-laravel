@@ -112,29 +112,29 @@
                                     <div class="side-imbo">
                                         <ul class="no-ul-list" id="checkBoxFilterExperience">
                                             <li>
-                                                <input id="checkbox-e1" class="checkbox-custom" name="checkbox-e1"
-                                                       type="checkbox" value="1" data-linked="group1" onchange="filtersByAjaxCall()">
+                                                <input id="checkbox-e1" class="checkbox-custom" name="group1[]"
+                                                       type="checkbox" value="1" data-linked="group1">
                                                 <label for="checkbox-e1"
                                                        class="checkbox-custom-label">1 {{__('jobs/filters.year')}}</label>
                                             </li>
 
                                             <li>
-                                                <input id="checkbox-e2" class="checkbox-custom" name="checkbox-e2"
-                                                       type="checkbox" value="2" data-linked="group1" onchange="filtersByAjaxCall()">
+                                                <input id="checkbox-e2" class="checkbox-custom" name="group1[]"
+                                                       type="checkbox" value="2" data-linked="group1">
                                                 <label for="checkbox-e2"
                                                        class="checkbox-custom-label">2 {{__('jobs/filters.years')}}</label>
                                             </li>
 
                                             <li>
-                                                <input id="checkbox-e3" class="checkbox-custom" name="checkbox-e3"
-                                                       type="checkbox" value="3" data-linked="group1" onchange="filtersByAjaxCall()">
+                                                <input id="checkbox-e3" class="checkbox-custom" name="group1[]"
+                                                       type="checkbox" value="3" data-linked="group1" >
                                                 <label for="checkbox-e3"
                                                        class="checkbox-custom-label">3 {{__('jobs/filters.years')}}</label>
                                             </li>
 
                                             <li>
-                                                <input id="checkbox-e4" class="checkbox-custom" name="checkbox-e4"
-                                                       type="checkbox" value="4" data-linked="group1" onchange="filtersByAjaxCall()">
+                                                <input id="checkbox-e4" class="checkbox-custom" name="group1[]"
+                                                       type="checkbox" value="4" data-linked="group1">
                                                 <label for="checkbox-e4"
                                                        class="checkbox-custom-label">4+ {{__('jobs/filters.years')}}</label>
                                             </li>
@@ -440,80 +440,6 @@
 @endsection
 
 @push('scripts')
-
-    <script>
-
-        function analyzeFilters() {
-            var topFilterJobTitle = $('#topFilterJobTitle').val();
-            var topFilterLocation = $('#topFilterLocation').val();
-
-            var queryParameters = "";
-
-            if(topFilterJobTitle) {
-                queryParameters += ("filter[title]="+topFilterJobTitle)+"&";
-            }
-
-            if(topFilterLocation) {
-                queryParameters += ("filter[location]="+topFilterLocation)+"&";
-            }
-
-
-            $('#checkBoxFilterExperience').find('input[type=checkbox]').each(function () {
-                console.log("trovati i checkbox");
-                if ($(this).prop('checked')) {
-                    queryParameters += ("filter[experience]="+$(this).val());
-                    console.log("query:"+queryParameters);
-                }
-            });
-
-
-            return queryParameters;
-        }
-        function filtersByAjaxCall(){
-            console.log('chiamata');
-            $(document).ready(function() {
-
-                $.ajax({
-                    url: "/jobs?"+analyzeFilters(),
-                    success: function (data) {
-                        $('#table_data').html(data);
-                    }
-                });
-
-            });
-        }
-
-        $(document).ready(function(){
-
-            // $(function() {
-            //     $('.checkbox-custom').mousedown(function() {
-            //         var linked = $(this).data('linked');
-            //         $(':checkbox[data-linked="' + linked + '"]').prop('checked', false);
-            //     });
-            // });
-
-            $(document).on('click', '.pagination a', function(event){
-                event.preventDefault();
-                var page = $(this).attr('href').split('page=')[1];
-                fetch_data(page);
-            });
-
-
-
-
-
-            function fetch_data(page)
-            {
-                $.ajax({
-                    url:"/jobs?page="+page+"&"+analyzeFilters(),
-                    success:function(data)
-                    {
-                        $('#table_data').html(data);
-                    }
-                });
-            }
-
-        });
-    </script>
+    <script src="{{asset('js/custom/jobs/JobsFiltersCriteria.js')}}"></script>
 @endpush
 
