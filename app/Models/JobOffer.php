@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Conner\Tagging\Model\Tagged;
 use Conner\Tagging\Taggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -58,6 +59,14 @@ class JobOffer extends Model
     use Taggable;
 
     public function company() {
-        return $this->belongsTo(Company::class);
+        return $this->belongsTo(Company::class,'companies_id');
+    }
+
+    public function placesOfWork() {
+        return $this->belongsTo(PlacesOfWork::class);
+    }
+
+    public function skillTags() {
+        return $this->hasMany(Tagged::class, 'taggable_id');
     }
 }

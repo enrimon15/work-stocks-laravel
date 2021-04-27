@@ -1,8 +1,8 @@
 
 (function($){
 	"use strict";
-	
-	//Loader	
+
+	//Loader
 	$(window).on('load', function () {
 		$('.Loader').delay(350).fadeOut('slow');
 		$('body').delay(350).css({ 'overflow': 'visible' });
@@ -153,7 +153,7 @@
 	(jQuery, window, document), $(document).ready(function() {
 		$("#navigation").navigation()
 	});
-	
+
 	// Count
 	$(window).on('load', function() {
 		$('.count-facts h4').counterUp({
@@ -161,8 +161,8 @@
 			time: 800
 		});
 	});
-	
-	$(window).scroll(function() {    
+
+	$(window).scroll(function() {
 		var scroll = $(window).scrollTop();
 
 		if (scroll >= 50) {
@@ -171,7 +171,7 @@
 			$(".header").removeClass("header-fixed");
 		}
 	});
-	
+
 	// Jobs
 	$("#job-slide").owlCarousel({
 		loop:true,
@@ -196,7 +196,7 @@
 			}
 		}
 	})
-	
+
 	// Jobs
 	$("#testimonial-3-slide").owlCarousel({
 		loop:true,
@@ -221,7 +221,7 @@
 			}
 		}
 	})
-	
+
 	// Jobs
 	$("#agency-slide").owlCarousel({
 		loop:true,
@@ -246,7 +246,7 @@
 			}
 		}
 	})
-	
+
 	// RL List
 	$("#rl-list").owlCarousel({
 		loop:true,
@@ -271,8 +271,8 @@
 			}
 		}
 	})
-	
-	
+
+
 	// Testimonials 2
 	$("#testimonials-two").owlCarousel({
 		nav:true,
@@ -300,7 +300,7 @@
 			}
 		}
 	})
-	
+
 	// Employers
 	$("#brands").owlCarousel({
 		loop:true,
@@ -325,103 +325,100 @@
 			}
 		}
 	})
-	
+
 	// All Select Category
-	$('#category').select2({
-		placeholder: "Choose Category...",
-		allowClear: true
-	});
-	
+
+
 	// All Select Category
 	$('#category-side').select2({
 		placeholder: "Choose Category...",
 		allowClear: true
 	});
-	
+
 	// All Select Category
 	$('#category-2').select2({
 		placeholder: "Choose Category...",
 		allowClear: true
 	});
-	
+
 	// Filter Sidebar Category
 	$('#category-3').select2({
 		placeholder: "Choose Category...",
 		allowClear: true
 	});
-	
+
 	// All Search
 	$('#search-allow').select2({
 		placeholder: "Search Allow",
 		allowClear: true
 	});
-	
+
 	// Job type
 	$('#jb-type').select2({
 		placeholder: "Job type",
 		allowClear: true
 	});
-	
+
 	// Career  Lavel
 	$('#career-lavel').select2({
 		placeholder: "Career Level",
 		allowClear: true
 	});
-	
+
 	// Offerd Salary
 	$('#offerd-sallery').select2({
 		placeholder: "Offerd Salary",
 		allowClear: true
 	});
-	
+
 	// SignUp As
 	$('#signup-as').select2({
 		placeholder: "Sign Up As",
 		allowClear: true
 	});
-	
+
 	// Experience
 	$('#experience').select2({
 		placeholder: "Please Select",
 		allowClear: true
 	});
-	
+
 	// Gender
 	$('#gender').select2({
 		placeholder: "Please Select",
 		allowClear: true
-	});	
-	
+	});
+
 	// Industry
 	$('#industry').select2({
 		placeholder: "Please Select",
 		allowClear: true
-	});	
-	
+	});
+
 	// Qualification
 	$('#qualification').select2({
 		placeholder: "Please Select",
 		allowClear: true
-	});	
-	
-	
+	});
+
+
 	// Business Type
 	$('#business-type').select2({
 		placeholder: "Search Allow",
 		allowClear: true
 	});
-	
-	// Search Page Tag & Skill 
+
+	// Search Page Tag & Skill
 	$(".tag-skill").select2({
 	  tags: true
 	});
-	
-	// Specialisms 
+
+	// Specialisms
 	$("#specialisms").select2({
 		placeholder: "Specialisms"
 	});
 
-	// Editor 
+	// Editor
 	$('#summernote').summernote({
 		height: 150,
 		toolbar: [
@@ -436,28 +433,28 @@
 			[ 'view', [ 'undo', 'redo', 'fullscreen', 'codeview'] ]
 		]
 	});
-	
-	// Editor 
+
+	// Editor
 	$('#resume-info').summernote({
 		height: 120
 	});
-	
+
 	// Job Description
 	$('#jb-description').summernote({
 		height: 150
 	});
-	
-	// CV 
+
+	// CV
 	$('#cv-cover').summernote({
 		height: 150
 	});
-	
+
 	// File upload
 	$(".custom-file-input").on("change", function() {
 	  var fileName = $(this).val().split("\\").pop();
 	  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
 	});
-	
+
 	/****----- Counter ---------*/
 	$('.count').on('each', function () {
 		$(this).prop('Counter',0).animate({
@@ -470,6 +467,6 @@
 			}
 		});
 	});
-	
-	
+
+
 })(jQuery);

@@ -51,4 +51,20 @@ class Company extends Model
     public function jobOffers() {
         return $this->hasMany(JobOffer::class);
     }
+
+    public function placesOfWork() {
+        return $this->hasMany(PlacesOfWork::class);
+    }
+
+    public function commercialContact() {
+        return $this->belongsTo(CommercialContact::class);
+    }
+
+    public function user() {
+        return $this->belongsTo(\TCG\Voyager\Models\User::class);
+    }
+
+    public function mainPlaceOfWork() {
+        return $this->placesOfWork()->where('primary', '=', true)->first();
+    }
 }

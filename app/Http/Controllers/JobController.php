@@ -2,49 +2,74 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Filters\FilterJobOfferExperienceYears;
+use App\Models\Filters\FilterJobOfferLocation;
+use App\Models\Filters\FilterJobOfferSalary;
+use App\Models\Filters\FilterJobOfferSkills;
 use App\Models\JobOffer;
+use Carbon\Carbon;
 use Conner\Tagging\Model\Tag;
 use Conner\Tagging\Model\TagGroup;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class JobController extends Controller
 {
-    public function __construct() {
+    public function __construct()
+    {
 
     }
 
-    public function jobCatalog() {
-        //Retrieve Most popular tags
-//        $mostUsedTags = DB::table('tags')
-//            ->join('taggables', 'tags.id', '=', 'taggables.tag_id')
-//            ->select('tags.id','tags.name',DB::raw('count(*) as occ'))
-//            ->where('tags.type' , '=', 'skill')
-//            ->groupBy('tags.id', 'tags.name')
-//            ->orderBy('occ', 'desc')
-//            ->limit(5)
-//            ->get();
-//
-//        $tags = array();
-//
-//        foreach ($mostUsedTags as $tg) {
-//            //$tags[] = Tag::findOrCreate(substr($tg->name,7,(strlen($tg->name)-2)));
-//            $tags = 1;
-//        }
+    public function jobCatalog(Request $request)
+    {
+        $jobs = QueryBuilder::for(JobOffer::class)
+            ->where('due_date', '>=', Carbon::today())
+            ->allowedFilters(['title',
+                            'experience',
+                            'company.name',
+                            AllowedFilter::custom('location',new FilterJobOfferLocation),
+                            AllowedFilter::custom('experience',new FilterJobOfferExperienceYears),
+                            AllowedFilter::custom('salary', new FilterJobOfferSalary),
+                            AllowedFilter::custom('skill',new FilterJobOfferSkills)])
+            ->paginate(10);
 
+        if ($request->ajax()) {
+            return view('jobs.job-search-data')
+                ->with('jobs',$jobs)
+                ->render();
+        } else {
 
-        $tagGroup = TagGroup::where('slug','=','skill')->first();
+            $tagGroup = TagGroup::where('slug', '=', 'skill')->first();
 
-        $tags = null;
-        if($tagGroup) {
-            $tags = Tag::where('tag_group_id', '=', $tagGroup->getAttribute('id'))
-                ->orderBy('count','desc')
-                ->limit(5)
-                ->get();
+            $tags = null;
+            if ($tagGroup) {
+                $tags = Tag::where('tag_group_id', '=', $tagGroup->getAttribute('id'))
+                    ->orderBy('count', 'desc')
+                    ->limit(5)
+                    ->get();
+            }
+
+            return view('jobs/job-search')
+                ->with('tags', $tags)
+                ->with('jobs', $jobs/*JobOffer::paginate(10)*/);
+        }
+    }
+
+    public function getById($id)
+    {
+
+        try {
+            $job = JobOffer::findOrFail($id);
+            return view('jobs.job-details')
+                ->with('job', $job);
+        } catch (ModelNotFoundException $ex) {
+            return redirect()->route('jobs/getAll');
         }
 
 
-
-        return view('jobs/job-search')
-            ->with('tags', $tags)
-            ->with('jobs', JobOffer::paginate(10));
     }
 }

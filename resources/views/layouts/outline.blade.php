@@ -65,6 +65,8 @@
 <script src="{{asset('js/jQuery.style.switcher.js')}}"></script>
 <script src="{{asset('js/counterup.min.js')}}"></script>
 <script src="{{asset('js/custom.js')}}"></script>
+
+@stack('scripts')
 <!-- ============================================================== -->
 <!-- This page plugins -->
 <!-- ============================================================== -->
