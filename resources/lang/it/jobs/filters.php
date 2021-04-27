@@ -15,4 +15,8 @@ return [
     'findJobs' => 'Cerca Lavori',
     'jobTitleOrKeywords' => 'Titolo Offerta o parole chiave',
     'location' => 'Indirizzo',
+    'resetFilterButton' => 'Reset Filtri',
+    'noExperience' => 'Nessuna Esperienza',
+    'orMore' => 'o più',
+    'companyName' => 'Nome Azienda',
 ];

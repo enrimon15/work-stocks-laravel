@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function analyzeFilters() {
         var topFilterJobTitle = $('#topFilterJobTitle').val();
         var topFilterLocation = $('#topFilterLocation').val();
+        var topFilterCompanyName = $('#topFilterCompanyName').val();
 
         var queryParameters = "";
 
@@ -14,17 +15,69 @@ document.addEventListener("DOMContentLoaded", function () {
             queryParameters += ("filter[location]=" + topFilterLocation) + "&";
         }
 
+        if(topFilterCompanyName) {
+            queryParameters += ("filter[company.name]=" + topFilterCompanyName) + "&";
+        }
+
 
         $('#checkBoxFilterExperience').find('input[type=checkbox]').each(function () {
             console.log("trovati i checkbox");
             if ($(this).prop('checked')) {
-                queryParameters += ("filter[experience]=" + $(this).val());
+                queryParameters += ("filter[experience]=" + $(this).val()+"&");
+                console.log("query:" + queryParameters);
+            }
+        });
+
+        $('#checkBoxFilterSalary').find('input[type=checkbox]').each(function () {
+            console.log("trovati i checkbox");
+            if ($(this).prop('checked')) {
+                queryParameters += ("filter[salary]=" + $(this).val()+"&");
+                console.log("query:" + queryParameters);
+            }
+        });
+
+        $('#checkBoxFilterSkill').find('input[type=checkbox]').each(function () {
+            console.log("trovati i checkbox");
+            if ($(this).prop('checked')) {
+                queryParameters += ("filter[skill]=" + $(this).val()+"&");
                 console.log("query:" + queryParameters);
             }
         });
 
 
         return queryParameters;
+    }
+
+    function clearAllFilters() {
+        console.log('cleared');
+        $('#topFilterJobTitle').val("");
+
+        $('#topFilterLocation').val("");
+
+
+
+        $('#checkBoxFilterExperience').find('input[type=checkbox]').each(function () {
+            console.log("trovati i checkbox");
+            if ($(this).prop('checked')) {
+               $(this).prop('checked', false);
+            }
+        });
+
+        $('#checkBoxFilterSalary').find('input[type=checkbox]').each(function () {
+            console.log("trovati i checkbox");
+            if ($(this).prop('checked')) {
+                $(this).prop('checked', false);
+            }
+        });
+
+        $('#checkBoxFilterSkill').find('input[type=checkbox]').each(function () {
+            console.log("trovati i checkbox");
+            if ($(this).prop('checked')) {
+                $(this).prop('checked', false);
+            }
+        });
+
+        filtersByAjaxCall();
     }
 
     function filtersByAjaxCall() {
@@ -35,6 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 url: "/jobs?" + analyzeFilters(),
                 success: function (data) {
                     $('#table_data').html(data);
+                    $('#totalResultsInfo').html(window.totalResults+" "+window.totalResultI18nString);
                 }
             });
 
@@ -45,18 +99,6 @@ document.addEventListener("DOMContentLoaded", function () {
         $('input[name="' + this.name + '"]').not(this).prop('checked', false);
         filtersByAjaxCall();
     });
-
-});
-
-
-$(document).ready(function () {
-
-    // $(function() {
-    //     $('.checkbox-custom').mousedown(function() {
-    //         var linked = $(this).data('linked');
-    //         $(':checkbox[data-linked="' + linked + '"]').prop('checked', false);
-    //     });
-    // });
 
     $(document).on('click', '.pagination a', function (event) {
         event.preventDefault();
@@ -73,5 +115,18 @@ $(document).ready(function () {
             }
         });
     }
+
+    $('#category').select2({
+        placeholder:  window.skillsFilterTranslation,
+        allowClear: true
+    });
+
+    $('#searchButton').on("click",function () {
+        filtersByAjaxCall();
+    });
+
+    $('#resetFilterButton').on("click", function() {
+        clearAllFilters();
+    });
 
 });

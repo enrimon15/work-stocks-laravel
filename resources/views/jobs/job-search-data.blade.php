@@ -41,3 +41,8 @@
     </div>
 @endforeach
 {!! $jobs->links('vendor/pagination/bootstrap-4')!!}
+
+<script>
+    window.totalResults = {{$jobs->total()}};
+    window.totalResultI18nString = '{{__(trans_choice('jobs/jobs.results',$jobs->total()))}}';
+</script>

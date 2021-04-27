@@ -15,4 +15,8 @@ return [
     'findJobs' => 'Find Jobs',
     'jobTitleOrKeywords' => 'Job Title or Keywords',
     'location' => 'Location',
+    'resetFilterButton' => 'Filters Reset',
+    'noExperience' => 'No Experience',
+    'orMore' => 'or more',
+    'companyName' => 'Company Name',
 ];
