@@ -43,7 +43,7 @@
                                 <div class="form-group">
                                     <label>{{__('loginAndRegister.nameLabel')}}</label>
                                     <div class="input-with-gray">
-                                        <input type="text" class="form-control" placeholder="{{__('loginAndRegister.nameLabel')}}" name="name" value="{{ old('name') }}" required autocomplete="name">
+                                        <input type="text" class="form-control" placeholder="{{__('loginAndRegister.nameLabel')}}" name="name" value="{{ old('name') }}" required autocomplete="given-name">
                                         <i class="ti-user"></i>
                                     </div>
                                     <!-- Error -->
@@ -55,7 +55,7 @@
                                 <div class="form-group">
                                     <label>{{__('loginAndRegister.surnameLabel')}}</label>
                                     <div class="input-with-gray">
-                                        <input id="surname-field" type="text" class="form-control" placeholder="{{__('loginAndRegister.surnameLabel')}}" name="surname" value="{{ old('surname') }}" required>
+                                        <input id="surname-field" type="text" class="form-control" placeholder="{{__('loginAndRegister.surnameLabel')}}" name="surname" value="{{ old('surname') }}" required autocomplete="family-name">
                                         <i class="ti-user"></i>
                                     </div>
                                     <!-- Error -->
@@ -103,13 +103,13 @@
                                 <div id="company-fields" style="display: none;">
                                     <!-- Company Information -->
                                     <div class="tr-single-header mt-5 mb-3 pt-5 pb-0 pl-0 pr-0">
-                                        <h4><i class="ti-home"></i> Informazioni Azienda</h4>
+                                        <h4><i class="ti-home"></i> {{__('loginAndRegister.companyTitle')}}</h4>
                                     </div>
 
                                     <div class="form-group">
-                                        <label>Nome Azienda</label>
+                                        <label>{{__('loginAndRegister.companyName')}}</label>
                                         <div class="input-with-gray">
-                                            <input id="companyName" type="text" class="form-control companyfield" placeholder="Nome azienda" name="companyName" value="{{ old('companyName') }}" required>
+                                            <input type="text" class="form-control companyfield" placeholder="{{__('loginAndRegister.companyNameM')}}" name="companyName" value="{{ old('companyName') }}" required>
                                             <i class="ti-home"></i>
                                         </div>
                                         <!-- Error -->
@@ -120,9 +120,9 @@
 
                                     <div class="row">
                                         <div class="form-group col-lg-6 col-md-6 col-sm-12">
-                                            <label>Partita IVA</label>
+                                            <label>{{__('loginAndRegister.vatNumber')}}</label>
                                             <div class="input-with-gray">
-                                                <input id="vatNumber" type="number" class="form-control companyfield" placeholder="Partita IVA" name="vatNumber" value="{{ old('vatNumber') }}" required>
+                                                <input type="number" class="form-control companyfield" placeholder="{{__('loginAndRegister.vatNumber')}}" name="vatNumber" value="{{ old('vatNumber') }}" required>
                                                 <i class="ti-receipt"></i>
                                             </div>
                                             <!-- Error -->
@@ -132,9 +132,9 @@
                                         </div>
 
                                         <div class="form-group col-lg-6 col-md-6 col-sm-12">
-                                            <label>Forma Societaria</label>
+                                            <label>{{__('loginAndRegister.companyForm')}}</label>
                                             <div class="input-with-gray">
-                                                <input id="companyForm" type="text" class="form-control companyfield" placeholder="Forma societaria" name="companyForm" value="{{ old('companyForm') }}" required>
+                                                <input type="text" class="form-control companyfield" placeholder="{{__('loginAndRegister.companyFormM')}}" name="companyForm" value="{{ old('companyForm') }}" required>
                                                 <i class="ti-tag"></i>
                                             </div>
                                             <!-- Error -->
@@ -146,9 +146,9 @@
 
                                     <div class="row">
                                         <div class="form-group col-lg-6 col-md-6 col-sm-12">
-                                            <label>Anno Di Fondazione</label>
+                                            <label>{{__('loginAndRegister.foundationYear')}}</label>
                                             <div class="input-with-gray">
-                                                <input id="foundationYear" type="number" class="form-control companyfield" placeholder="Anno di fondazione" name="foundationYear" value="{{ old('foundationYear') }}" required>
+                                                <input type="number" class="form-control companyfield" placeholder="{{__('loginAndRegister.foundationYearM')}}" name="foundationYear" value="{{ old('foundationYear') }}" required>
                                                 <i class="ti-time"></i>
                                             </div>
                                             <!-- Error -->
@@ -158,9 +158,9 @@
                                         </div>
 
                                         <div class="form-group col-lg-6 col-md-6 col-sm-12">
-                                            <label>Numero Dipendenti</label>
+                                            <label>{{__('loginAndRegister.employeesNumber')}}</label>
                                             <div class="input-with-gray">
-                                                <input id="employeesNumber" type="number" class="form-control companyfield" placeholder="Numero di dipendenti" name="employeesNumber" value="{{ old('employeesNumber') }}" required>
+                                                <input type="number" class="form-control companyfield" placeholder="{{__('loginAndRegister.employeesNumberM')}}" name="employeesNumber" value="{{ old('employeesNumber') }}" required>
                                                 <i class="ti-user"></i>
                                             </div>
                                             <!-- Error -->
@@ -171,9 +171,9 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label>Sito Web</label>
+                                        <label>{{__('loginAndRegister.website')}}</label>
                                         <div class="input-with-gray">
-                                            <input id="website" type="text" class="form-control companyfield" placeholder="Sito web" name="website" value="{{ old('website') }}" required>
+                                            <input id="website" type="text" class="form-control companyfield" placeholder="{{__('loginAndRegister.websiteM')}}" name="website" value="{{ old('website') }}" required>
                                             <i class="ti-world"></i>
                                         </div>
                                         <!-- Error -->
@@ -184,13 +184,13 @@
 
                                     <!-- Commercial Contact -->
                                     <div class="tr-single-header mt-5 mb-3 pt-5 pb-0 pl-0 pr-0">
-                                        <h4><i class="ti-id-badge"></i> Contatto Commerciale</h4>
+                                        <h4><i class="ti-id-badge"></i> {{__('loginAndRegister.contactTile')}}</h4>
                                     </div>
 
                                     <div class="form-group">
-                                        <label>Email Contatto</label>
+                                        <label>{{__('loginAndRegister.emailContact')}}</label>
                                         <div class="input-with-gray">
-                                            <input id="contactEmail" type="email" class="form-control companyfield" placeholder="Email contatto" name="contactEmail" value="{{ old('contactEmail') }}" required>
+                                            <input type="email" class="form-control companyfield" placeholder="{{__('loginAndRegister.emailContactM')}}" name="contactEmail" value="{{ old('contactEmail') }}" required>
                                             <i class="ti-email"></i>
                                         </div>
                                         <!-- Error -->
@@ -201,9 +201,9 @@
 
                                     <div class="row">
                                         <div class="form-group col-lg-6 col-md-6 col-sm-12">
-                                            <label>Nome Contatto</label>
+                                            <label>{{__('loginAndRegister.nameContact')}}o</label>
                                             <div class="input-with-gray">
-                                                <input id="contactName" type="text" class="form-control companyfield" placeholder="Nome contatto" name="contactName" value="{{ old('contactName') }}" required>
+                                                <input type="text" class="form-control companyfield" placeholder="{{__('loginAndRegister.nameContactM')}}" name="contactName" value="{{ old('contactName') }}" required autocomplete="name">
                                                 <i class="ti-user"></i>
                                             </div>
                                             <!-- Error -->
@@ -213,9 +213,9 @@
                                         </div>
 
                                         <div class="form-group col-lg-6 col-md-6 col-sm-12">
-                                            <label>Telefono Contatto</label>
+                                            <label>{{__('loginAndRegister.phoneContact')}}</label>
                                             <div class="input-with-gray">
-                                                <input type="text" class="form-control companyfield" placeholder="Telefono contatto" name="contactPhone" value="{{ old('contactPhone') }}" required>
+                                                <input type="text" class="form-control companyfield" placeholder="{{__('loginAndRegister.phoneContactM')}}" name="contactPhone" value="{{ old('contactPhone') }}" required>
                                                 <i class="ti-headphone-alt"></i>
                                             </div>
                                             <!-- Error -->
@@ -227,13 +227,13 @@
 
                                     <!-- Main Working Place -->
                                     <div class="tr-single-header mt-5 mb-3 pt-5 pb-0 pl-0 pr-0">
-                                        <h4><i class="ti-location-pin"></i> Sede Principale</h4>
+                                        <h4><i class="ti-location-pin"></i> {{__('loginAndRegister.workingPlaceTitle')}}</h4>
                                     </div>
 
                                     <div class="form-group">
-                                        <label>Indirizzo</label>
+                                        <label>{{__('loginAndRegister.address')}}</label>
                                         <div class="input-with-gray">
-                                            <input type="text" class="form-control companyfield" placeholder="Via e civico" name="address" value="{{ old('address') }}" required>
+                                            <input type="text" class="form-control companyfield" placeholder="{{__('loginAndRegister.addressM')}}" name="address" value="{{ old('address') }}" required>
                                             <i class="ti-pin"></i>
                                         </div>
                                         <!-- Error -->
@@ -244,9 +244,9 @@
 
                                     <div class="row">
                                         <div class="form-group col-lg-6 col-md-6 col-sm-12">
-                                            <label>Città</label>
+                                            <label>{{__('loginAndRegister.city')}}</label>
                                             <div class="input-with-gray">
-                                                <input type="text" class="form-control companyfield" placeholder="Città" name="city" value="{{ old('city') }}" required>
+                                                <input type="text" class="form-control companyfield" placeholder="{{__('loginAndRegister.city')}}" name="city" value="{{ old('city') }}" required>
                                                 <i class="ti-home"></i>
                                             </div>
                                             <!-- Error -->
@@ -256,9 +256,9 @@
                                         </div>
 
                                         <div class="form-group col-lg-6 col-md-6 col-sm-12">
-                                            <label>Nazione</label>
+                                            <label>{{__('loginAndRegister.country')}}</label>
                                             <div class="input-with-gray">
-                                                <input type="text" class="form-control companyfield" placeholder="Nazione" name="country" value="{{ old('country') }}" required>
+                                                <input type="text" class="form-control companyfield" placeholder="{{__('loginAndRegister.country')}}" name="country" value="{{ old('country') }}" required>
                                                 <i class="ti-map-alt"></i>
                                             </div>
                                             <!-- Error -->
@@ -269,11 +269,11 @@
                                     </div>
 
                                     <div class="form-group mb-5 input-with-gray">
-                                        <label>Tipologia Sede</label>
+                                        <label>{{__('loginAndRegister.typeWorkingPlace')}}</label>
                                         <select class="form-control companyfield" name="workingPlaceType" required>
-                                            <option value="legal">Legale</option>
-                                            <option value="commercial">Commerciale</option>
-                                            <option value="operative">Operativa</option>
+                                            <option value="legal">{{__('loginAndRegister.legal')}}</option>
+                                            <option value="commercial">{{__('loginAndRegister.commercial')}}</option>
+                                            <option value="operative">{{__('loginAndRegister.operative')}}</option>
                                         </select>
                                         <!-- Error -->
                                         @if ($errors->has('workingPlaceType'))

@@ -1,0 +1,32 @@
+<?php
+
+return [
+    'profileTitle' => 'Informazioni Accesso',
+    'emailProfile' => 'Email Di Accesso',
+    'name' => 'Nome',
+    'surname' => 'Cognome',
+    'companyTitle' => 'Informazioni Azienda',
+    'companyName' => 'Nome Azienda',
+    'vatNumber' => 'Partita Iva',
+    'companyForm' => 'Forma Societaria',
+    'overview' => 'Descrizione',
+    'foundationYear' => 'Anno Di Fondazione',
+    'employeesNumber' => 'Numero Di Dipendenti',
+    'chooseImg' => 'Scegli Immagine',
+    'avatar' => 'Logo Azienda',
+    'website' => 'Sito Web',
+    'slogan' => 'Slogan',
+    'contactTile' => 'Contatto Commerciale',
+    'emailContact' => 'Email Contatto',
+    'nameContact' => 'Nome Contatto',
+    'phoneContact' => 'Telefono Contatto',
+    'workingPlaceTitle' => 'Sede Principale',
+    'address' => 'Indirizzo',
+    'city' => 'Città',
+    'country' => 'Nazione',
+    'typeWorkingPlace' => 'Tipologia Sede',
+    'legal' => 'Legale',
+    'commercial' => 'Commerciale',
+    'operative' => 'Operativa',
+    'buttonSave' => 'Salva'
+];

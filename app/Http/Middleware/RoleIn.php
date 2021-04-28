@@ -14,11 +14,13 @@ class RoleIn
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle(Request $request, Closure $next, $roles)
+    public function handle(Request $request, Closure $next, ...$roles)
     {
         if (auth()->check()) {
-            if (auth()->user()->hasRole($roles)) {
-                return $next($request);
+            foreach ($roles as $role) {
+                if (auth()->user()->hasRole($role)) {
+                    return $next($request);
+                }
             }
             return redirect('/');
         }

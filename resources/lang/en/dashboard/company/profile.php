@@ -1,0 +1,32 @@
+<?php
+
+return [
+    'profileTitle' => 'Access Info',
+    'emailProfile' => 'Access Email',
+    'name' => 'Name',
+    'surname' => 'Surname',
+    'companyTitle' => 'Company Info',
+    'companyName' => 'Company Name',
+    'vatNumber' => 'Vat Number',
+    'companyForm' => 'Business Type',
+    'overview' => 'Overview',
+    'foundationYear' => 'Foundation Year',
+    'employeesNumber' => 'Employees Number',
+    'chooseImg' => 'Choose Image',
+    'avatar' => 'Company Logo',
+    'website' => 'Website',
+    'slogan' => 'Slogan',
+    'contactTile' => 'Commercial Contact',
+    'emailContact' => 'Contact Email',
+    'nameContact' => 'Contact Name',
+    'phoneContact' => 'Contact Phone',
+    'workingPlaceTitle' => 'Main Working Place',
+    'address' => 'Address',
+    'city' => 'City',
+    'country' => 'Country',
+    'typeWorkingPlace' => 'Working Place Type',
+    'legal' => 'Legal',
+    'commercial' => 'Commercial',
+    'operative' => 'Operative',
+    'buttonSave' => 'Save'
+];

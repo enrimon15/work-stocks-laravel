@@ -25,7 +25,7 @@ class DashboardController extends Controller
         $user = Auth::user();
 
         if ($user->hasRole('company')) {
-            return view('company.company-dashboard');
+            return view('company.dashboard.profile')->with('user', $user);
         } else if ($user->hasRole('user')) {
             return view('candidate.dashboard.profile')->with('user', $user);
         }
