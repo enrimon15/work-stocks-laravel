@@ -485,12 +485,12 @@
 
                     <div class="col-lg-12 col-md-12 col-sm-12">
                         <div class="row float-right">
-                            @if(Auth::user()->profile->cv_path != null)
+                            @if(Auth::user()->profile != null && uth::user()->profile->cv_path != null)
                                 <p class="mr-3">{{'CV' . '-' . Auth::user()->name . '-' . Auth::user()->surname . '.pdf'}}</p>
                             @endif
                             <div class="form-group mr-2">
                                 <a href="{{route('downloadCv')}}">
-                                    <button {{Auth::user()->profile->cv_path == null ? 'disabled' : null}} type="button" class="btn btn-primary p-15" data-toggle="tooltip" data-placement="top" title="{{__('dashboard/user/onlineCV.downloadCv')}}"><i class="ti-download"></i></button>
+                                    <button {{Auth::user()->profile != null && Auth::user()->profile->cv_path == null ? 'disabled' : null}} type="button" class="btn btn-primary p-15" data-toggle="tooltip" data-placement="top" title="{{__('dashboard/user/onlineCV.downloadCv')}}"><i class="ti-download"></i></button>
                                 </a>
                             </div>
                         </div>

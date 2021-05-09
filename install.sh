@@ -1,4 +1,5 @@
 #!/bin/zsh
+composer install
 php artisan migrate:fresh
 php artisan db:seed --class=DatabaseSeeder
 php artisan db:seed --class=MenuSeeder
