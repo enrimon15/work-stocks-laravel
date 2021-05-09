@@ -1,4 +1,4 @@
-@extends('candidate.dashboard.candidate-dashboard')
+@extends('subscriber.dashboard.candidate-dashboard')
 
 @section('content-dashboard')
 

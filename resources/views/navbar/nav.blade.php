@@ -14,9 +14,19 @@ use TCG\Voyager\Models\Menu;
             <div class="nav-menus-wrapper" style="transition-property: none;">
                 <ul class="nav-menu">
 
-                    <!-- Menu recuperato da voyager e poi renderizzato tramite menu.blade.php -->
-                    <?=Menu::display('MainMenu', '/navbar/menu')?>
 
+                    @if(!Auth::guest())
+                        @if(Auth::user()->hasRole('company'))
+                            <?=Menu::display('company', '/navbar/menu')?>
+                        @elseif(Auth::user()->hasRole('user'))
+                            <?=Menu::display('user', '/navbar/menu')?>
+                        @elseif(Auth::user()->isAdmin())
+                            <?=Menu::display('guest', '/navbar/menu')?>
+                        @endif
+                    @else
+                        <!-- Menu recuperato da voyager e poi renderizzato tramite menu.blade.php -->
+                        <?=Menu::display('guest', '/navbar/menu')?>
+                    @endif
                     <!--<li><a href="#">Pages<span class="submenu-indicator"></span></a>
                         <ul class="nav-dropdown nav-submenu" style="right: auto; display: none;">
                             <li><a href="blog.html">Blogs Page</a></li>

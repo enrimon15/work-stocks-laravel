@@ -30,6 +30,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|PlacesOfWork whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PlacesOfWork whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \App\Models\Company $company
  */
 class PlacesOfWork extends Model
 {

@@ -27,7 +27,7 @@ class DashboardController extends Controller
         if ($user->hasRole('company')) {
             return view('company.dashboard.profile')->with('user', $user);
         } else if ($user->hasRole('user')) {
-            return view('candidate.dashboard.profile')->with('user', $user);
+            return view('subscriber.dashboard.profile')->with('user', $user);
         }
     }
 
@@ -86,7 +86,7 @@ class DashboardController extends Controller
     }
 
     public function showChangePassword() {
-        return view('candidate.dashboard.change-password');
+        return view('subscriber.dashboard.change-password');
     }
 
     public function changePassword(Request $data) {
@@ -118,20 +118,20 @@ class DashboardController extends Controller
     }
 
     public function showFavorite() {
-        return view('candidate.dashboard.favorite');
+        return view('subscriber.dashboard.favorite');
     }
 
     public function showAppliedJobs() {
-        return view('candidate.dashboard.applied-jobs');
+        return view('subscriber.dashboard.applied-jobs');
     }
 
     public function showJobAlert() {
-        return view('candidate.dashboard.job-alert');
+        return view('subscriber.dashboard.job-alert');
     }
 
     public function showOnlineCV() {
         $user = Auth::user();
-        return view('candidate.dashboard.online-cv')->with([
+        return view('subscriber.dashboard.online-cv')->with([
             'qualifications' => $user->qualifications,
             'experiences' => $user->workingExperiences,
             'certificates' => $user->certificates,
@@ -256,7 +256,7 @@ class DashboardController extends Controller
             case 'qualification':
                 $qualification = Qualification::find($id);
                 if ($qualification->user == $user) {
-                    return view('candidate.dashboard.edit-cv')->with(['qualification' => $qualification, 'operationType' => $operationType]);
+                    return view('subscriber.dashboard.edit-cv')->with(['qualification' => $qualification, 'operationType' => $operationType]);
                 } else {
                     // redirect error page
                 }
@@ -264,7 +264,7 @@ class DashboardController extends Controller
             case 'experience':
                 $experience = WorkingExperience::find($id);
                 if ($experience->user == $user) {
-                    return view('candidate.dashboard.edit-cv')->with(['experience' => $experience, 'operationType' => $operationType]);
+                    return view('subscriber.dashboard.edit-cv')->with(['experience' => $experience, 'operationType' => $operationType]);
                 } else {
                     // redirect error page
                 }
@@ -272,7 +272,7 @@ class DashboardController extends Controller
             case 'certificate':
                 $certificate = Certificate::find($id);
                 if ($certificate->user == $user) {
-                    return view('candidate.dashboard.edit-cv')->with(['certificate' => $certificate, 'operationType' => $operationType]);
+                    return view('subscriber.dashboard.edit-cv')->with(['certificate' => $certificate, 'operationType' => $operationType]);
                 } else {
                     // redirect error page
                 }
@@ -280,7 +280,7 @@ class DashboardController extends Controller
             case 'skill':
                 $skill = Skill::find($id);
                 if ($skill->user == $user) {
-                    return view('candidate.dashboard.edit-cv')->with(['skill' => $skill, 'operationType' => $operationType]);
+                    return view('subscriber.dashboard.edit-cv')->with(['skill' => $skill, 'operationType' => $operationType]);
                 } else {
                     // redirect error page
                 }

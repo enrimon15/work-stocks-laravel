@@ -43,6 +43,14 @@ use function Illuminate\Support\Facades\Date;
  * @method static \Illuminate\Database\Eloquent\Builder|Company wherePiva($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Company whereSlogan($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Company whereWebsite($value)
+ * @property int $user_id
+ * @property int $vat_number
+ * @property-read \App\Models\CommercialContact $commercialContact
+ * @property-read \App\Models\User $user
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\PlacesOfWork[] $workingPlaces
+ * @property-read int|null $working_places_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Company whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Company whereVatNumber($value)
  */
 class Company extends Model
 {

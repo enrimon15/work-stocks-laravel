@@ -53,6 +53,7 @@ use TCG\Voyager\Models\Role;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereSurname($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \App\Models\Company|null $company
  */
 class User extends \TCG\Voyager\Models\User
 {

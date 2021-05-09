@@ -52,6 +52,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $places_of_work_id
  * @method static \Illuminate\Database\Eloquent\Builder|JobOffer whereCommercialContactId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|JobOffer wherePlacesOfWorkId($value)
+ * @property-read \App\Models\PlacesOfWork $placesOfWork
+ * @property-read \Illuminate\Database\Eloquent\Collection|Tagged[] $skillTags
+ * @property-read int|null $skill_tags_count
+ * @property-read \App\Models\PlacesOfWork $workingPlace
  */
 class JobOffer extends Model
 {

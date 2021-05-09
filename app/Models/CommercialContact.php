@@ -24,6 +24,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|CommercialContact whereTelephone($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CommercialContact whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \App\Models\Company|null $company
  */
 class CommercialContact extends Model
 {

@@ -15,7 +15,15 @@ class MenuSeeder extends Seeder
     public function run()
     {
         Menu::create([
-            'name' => 'MainMenu',
+            'name' => 'guest',
+        ]);
+
+        Menu::create([
+            'name' => 'user',
+        ]);
+
+        Menu::create([
+            'name' => 'company',
         ]);
     }
 }
