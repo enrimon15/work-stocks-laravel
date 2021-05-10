@@ -210,7 +210,7 @@
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <div class="form-group">
                     <label>{{__('dashboard/user/onlineCV.skillLevel')}}</label>
-                    <select class="form-control" name="skillLevel" required>
+                    <select class="form-control" name="skillLevel" required id="level-skill-select">
                         @if($skill->assestment == 'beginner')
                             <option selected value="beginner">{{__('dashboard/user/onlineCV.beginner')}}</option>
                             <option value="intermediate">{{__('dashboard/user/onlineCV.intermediate')}}</option>
@@ -235,5 +235,13 @@
 @endif
 
 <script src="{{asset('js/dashboard-in-progress.js')}}"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#level-skill-select').select2({
+            minimumResultsForSearch: -1
+        });
+    });
+</script>
 
 @endsection

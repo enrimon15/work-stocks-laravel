@@ -237,7 +237,7 @@
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <div class="form-group">
                                 <label>{{__('dashboard/company/profile.typeWorkingPlace')}}</label>
-                                <select required class="form-control" name="typeWorkingPlace">
+                                <select required class="form-control" name="typeWorkingPlace" id="working-place-type">
                                     <option {{$user->company->mainPlaceOfWork()->type == 'legal' ? 'selected' : null}} value="legal">{{__('dashboard/company/profile.legal')}}</option>
                                     <option {{$user->company->mainPlaceOfWork()->type == 'commercial' ? 'selected' : null}} value="commercial">{{__('dashboard/company/profile.commercial')}}</option>
                                     <option {{$user->company->mainPlaceOfWork()->type == 'operative' ? 'selected' : null}} value="operative">{{__('dashboard/company/profile.operative')}}</option>
@@ -259,5 +259,13 @@
         </form>
 
     </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#working-place-type').select2({
+                minimumResultsForSearch: -1
+            });
+        });
+    </script>
 
 @endsection
