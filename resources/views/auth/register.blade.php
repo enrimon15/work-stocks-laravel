@@ -40,6 +40,11 @@
                                     @endif
                                 </div>
 
+                                <!-- Commercial Contact -->
+                                <div id="commercial-contact" class="tr-single-header mt-5 mb-3 pt-3 pb-0 pl-0 pr-0">
+                                    <h4><i class="ti-id-badge"></i> {{__('loginAndRegister.contactTile')}}</h4>
+                                </div>
+
                                 <div class="form-group">
                                     <label>{{__('loginAndRegister.nameLabel')}}</label>
                                     <div class="input-with-gray">
@@ -73,6 +78,18 @@
                                     <!-- Error -->
                                     @if ($errors->has('email'))
                                         <p class="color--error mb-2"><strong>{{ $errors->first('email') }}</strong></p>
+                                    @endif
+                                </div>
+
+                                <div class="form-group" id="phone-contact">
+                                    <label>{{__('loginAndRegister.phoneContact')}}</label>
+                                    <div class="input-with-gray">
+                                        <input type="text" class="form-control companyfield" placeholder="{{__('loginAndRegister.phoneContactM')}}" name="contactPhone" value="{{ old('contactPhone') }}">
+                                        <i class="ti-headphone-alt"></i>
+                                    </div>
+                                    <!-- Error -->
+                                    @if ($errors->has('contactPhone'))
+                                        <p class="color--error mb-2"><strong>{{ $errors->first('contactPhone') }}</strong></p>
                                     @endif
                                 </div>
 
@@ -122,12 +139,12 @@
                                         <div class="form-group col-lg-6 col-md-6 col-sm-12">
                                             <label>{{__('loginAndRegister.vatNumber')}}</label>
                                             <div class="input-with-gray">
-                                                <input type="number" class="form-control companyfield" placeholder="{{__('loginAndRegister.vatNumber')}}" name="vatNumber" value="{{ old('vatNumber') }}" required>
+                                                <input type="number" class="form-control companyfield" placeholder="{{__('loginAndRegister.vatNumber')}}" name="vattinNumber" value="{{ old('vattinNumber') }}" required>
                                                 <i class="ti-receipt"></i>
                                             </div>
                                             <!-- Error -->
-                                            @if ($errors->has('vatNumber'))
-                                                <p class="color--error mb-2"><strong>{{ $errors->first('vatNumber') }}</strong></p>
+                                            @if ($errors->has('vattinNumber'))
+                                                <p class="color--error mb-2"><strong>{{ $errors->first('vattinNumber') }}</strong></p>
                                             @endif
                                         </div>
 
@@ -148,7 +165,7 @@
                                         <div class="form-group col-lg-6 col-md-6 col-sm-12">
                                             <label>{{__('loginAndRegister.foundationYear')}}</label>
                                             <div class="input-with-gray">
-                                                <input type="number" class="form-control companyfield" placeholder="{{__('loginAndRegister.foundationYearM')}}" name="foundationYear" value="{{ old('foundationYear') }}" required>
+                                                <input type="number" class="form-control companyfield" placeholder="{{__('loginAndRegister.foundationYearM')}}" name="foundationYear" value="{{ old('foundationYear') }}" required min="0">
                                                 <i class="ti-time"></i>
                                             </div>
                                             <!-- Error -->
@@ -160,7 +177,7 @@
                                         <div class="form-group col-lg-6 col-md-6 col-sm-12">
                                             <label>{{__('loginAndRegister.employeesNumber')}}</label>
                                             <div class="input-with-gray">
-                                                <input type="number" class="form-control companyfield" placeholder="{{__('loginAndRegister.employeesNumberM')}}" name="employeesNumber" value="{{ old('employeesNumber') }}" required>
+                                                <input type="number" class="form-control companyfield" placeholder="{{__('loginAndRegister.employeesNumberM')}}" name="employeesNumber" value="{{ old('employeesNumber') }}" required min="0">
                                                 <i class="ti-user"></i>
                                             </div>
                                             <!-- Error -->
@@ -180,49 +197,6 @@
                                         @if ($errors->has('website'))
                                             <p class="color--error mb-2"><strong>{{ $errors->first('website') }}</strong></p>
                                         @endif
-                                    </div>
-
-                                    <!-- Commercial Contact -->
-                                    <div class="tr-single-header mt-5 mb-3 pt-5 pb-0 pl-0 pr-0">
-                                        <h4><i class="ti-id-badge"></i> {{__('loginAndRegister.contactTile')}}</h4>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>{{__('loginAndRegister.emailContact')}}</label>
-                                        <div class="input-with-gray">
-                                            <input type="email" class="form-control companyfield" placeholder="{{__('loginAndRegister.emailContactM')}}" name="contactEmail" value="{{ old('contactEmail') }}" required>
-                                            <i class="ti-email"></i>
-                                        </div>
-                                        <!-- Error -->
-                                        @if ($errors->has('contactEmail'))
-                                            <p class="color--error mb-2"><strong>{{ $errors->first('contactEmail') }}</strong></p>
-                                        @endif
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="form-group col-lg-6 col-md-6 col-sm-12">
-                                            <label>{{__('loginAndRegister.nameContact')}}o</label>
-                                            <div class="input-with-gray">
-                                                <input type="text" class="form-control companyfield" placeholder="{{__('loginAndRegister.nameContactM')}}" name="contactName" value="{{ old('contactName') }}" required autocomplete="name">
-                                                <i class="ti-user"></i>
-                                            </div>
-                                            <!-- Error -->
-                                            @if ($errors->has('contactName'))
-                                                <p class="color--error mb-2"><strong>{{ $errors->first('contactName') }}</strong></p>
-                                            @endif
-                                        </div>
-
-                                        <div class="form-group col-lg-6 col-md-6 col-sm-12">
-                                            <label>{{__('loginAndRegister.phoneContact')}}</label>
-                                            <div class="input-with-gray">
-                                                <input type="text" class="form-control companyfield" placeholder="{{__('loginAndRegister.phoneContactM')}}" name="contactPhone" value="{{ old('contactPhone') }}" required>
-                                                <i class="ti-headphone-alt"></i>
-                                            </div>
-                                            <!-- Error -->
-                                            @if ($errors->has('contactPhone'))
-                                                <p class="color--error mb-2"><strong>{{ $errors->first('contactPhone') }}</strong></p>
-                                            @endif
-                                        </div>
                                     </div>
 
                                     <!-- Main Working Place -->
@@ -268,9 +242,9 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group mb-5 input-with-gray">
+                                    <div class="form-group mb-5">
                                         <label>{{__('loginAndRegister.typeWorkingPlace')}}</label>
-                                        <select class="form-control companyfield" name="workingPlaceType" required>
+                                        <select class="form-control companyfield" id="working-place-type" name="workingPlaceType" required>
                                             <option value="legal">{{__('loginAndRegister.legal')}}</option>
                                             <option value="commercial">{{__('loginAndRegister.commercial')}}</option>
                                             <option value="operative">{{__('loginAndRegister.operative')}}</option>
@@ -294,9 +268,7 @@
                                         @endif
                                     </div>
                                 </div>
-
-                            </form>
-                        </div>
+                        </form>
                     </div>
                 </div>
 
@@ -314,11 +286,15 @@
         function changeRole() {
             let role = document.getElementById("select-role").value;
             if (role === 'company') {
+                document.getElementById('phone-contact').style.display = 'block';
+                document.getElementById('commercial-contact').style.display = 'block';
                 document.getElementById('company-fields').style.display = 'block';
                 document.querySelectorAll('input.companyfield').forEach(function(item) {
                     item.required = true;
                 });
             } else if (role === 'user') {
+                document.getElementById('phone-contact').style.display = 'none';
+                document.getElementById('commercial-contact').style.display = 'none';
                 document.getElementById('company-fields').style.display = 'none';
                 document.querySelectorAll('input.companyfield').forEach(function(item) {
                     item.required = false;
@@ -326,5 +302,21 @@
             }
         }
 
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            document.querySelectorAll(".input-with-gray").forEach(function (item) {
+                item.setAttribute("style", "z-index: 0!important;");
+            });
+
+            $('#select-role').select2({
+                minimumResultsForSearch: -1
+            });
+
+            $('#working-place-type').select2({
+                minimumResultsForSearch: -1
+            });
+        });
     </script>
 @endsection

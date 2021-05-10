@@ -79,4 +79,12 @@
     </section>
     <div class="clearfix"></div>
     <!-- ============================ Who We Are End ================================== -->
+
+    <script>
+        $(document).ready(function() {
+            document.querySelectorAll(".input-with-gray").forEach(function (item) {
+                item.setAttribute("style", "z-index: 0!important;");
+            });
+        });
+    </script>
 @endsection

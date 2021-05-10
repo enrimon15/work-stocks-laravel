@@ -19,7 +19,7 @@
         <!-- User Info -->
             <div class="tr-single-box">
                 <div class="tr-single-header">
-                    <h4><i class="ti-user"></i> {{__('dashboard/company/profile.profileTitle')}}</h4>
+                    <h4><i class="ti-id-badge"></i> {{__('dashboard/company/profile.profileTitle')}}</h4>
                 </div>
                 <div class="tr-single-body">
 
@@ -55,6 +55,17 @@
                             <!-- Error -->
                             @if ($errors->has('surname'))
                                 <p class="color--error mb-2"><strong>{{$errors->first('surname')}}</strong></p>
+                            @endif
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="form-group">
+                                <label>{{__('dashboard/company/profile.phoneContact')}}</label>
+                                <input class="form-control" name="phoneContact" required type="text" value="{{$user->telephone ?? null}}" placeholder="{{__('dashboard/company/profile.phoneContact')}}">
+                            </div>
+                            <!-- Error -->
+                            @if ($errors->has('phoneContact'))
+                                <p class="color--error mb-2"><strong>{{$errors->first('phoneContact')}}</strong></p>
                             @endif
                         </div>
 
@@ -134,7 +145,7 @@
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <div class="form-group">
                                 <label>{{__('dashboard/company/profile.website')}}</label>
-                                <input class="form-control" required type="text" name="website" value="{{$user->company->website}}">
+                                <input class="form-control" required type="text" name="website" value="{{$user->company->website ?? null}}" placeholder="{{__('dashboard/company/profile.website')}}">
                             </div>
                             <!-- Error -->
                             @if ($errors->has('website'))
@@ -180,54 +191,6 @@
 
             </div>
             <!-- /Company Info -->
-
-            <!-- Contact Info -->
-            <div class="tr-single-box">
-                <div class="tr-single-header">
-                    <h4><i class="ti-id-badge"></i> {{__('dashboard/company/profile.contactTile')}}</h4>
-                </div>
-                <div class="tr-single-body">
-
-                    <div class="row">
-
-                        <div class="col-lg-12 col-md-12 col-sm-12">
-                            <div class="form-group">
-                                <label>{{__('dashboard/company/profile.emailContact')}}</label>
-                                <input class="form-control" name="emailContact" required type="text" value="{{$user->company->commercialContact->email}}">
-                            </div>
-                            <!-- Error -->
-                            @if ($errors->has('emailContact'))
-                                <p class="color--error mb-2"><strong>{{$errors->first('emailContact')}}</strong></p>
-                            @endif
-                        </div>
-
-                        <div class="col-lg-6 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label>{{__('dashboard/company/profile.nameContact')}}</label>
-                                <input class="form-control" name="nameContact" required type="text" autocomplete="name" value="{{$user->company->commercialContact->name}}">
-                            </div>
-                            <!-- Error -->
-                            @if ($errors->has('nameContact'))
-                                <p class="color--error mb-2"><strong>{{$errors->first('nameContact')}}</strong></p>
-                            @endif
-                        </div>
-
-                        <div class="col-lg-6 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label>{{__('dashboard/company/profile.phoneContact')}}</label>
-                                <input class="form-control" name="phoneContact" required type="text" value="{{$user->company->commercialContact->telephone}}">
-                            </div>
-                            <!-- Error -->
-                            @if ($errors->has('phoneContact'))
-                                <p class="color--error mb-2"><strong>{{$errors->first('phoneContact')}}</strong></p>
-                            @endif
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-            <!-- /Contact Info -->
 
             <!-- Working Place Info -->
             <div class="tr-single-box">

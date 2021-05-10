@@ -89,14 +89,12 @@ class RegisterController extends Controller
                     Rule::in(['user', 'company']),
                 ],
                 'companyName' => ['required', 'string', 'max:255'],
-                'vatNumber' => ['required', 'numeric', 'digits:11'],
+                'vattinNumber' => ['required', 'numeric', 'digits:11'],
                 'companyForm' => ['required', 'string', 'max:255'],
                 'foundationYear' => ['required', 'numeric', 'min:0'],
                 'employeesNumber' => ['required', 'numeric', 'min:0'],
-                'website' => ['required', 'string', 'max:255'],
-                'contactEmail' => ['required', 'string', 'email', 'max:255'],
-                'contactName' => ['required', 'string', 'max:255'],
-                'contactPhone' => ['required', 'string', 'max:255'],
+                'website' => ['nullable', 'string', 'max:255'],
+                'contactPhone' => ['nullable','string', 'max:255'],
                 'address' => ['required', 'string', 'max:255'],
                 'city' => ['required', 'string', 'max:255'],
                 'country' => ['required', 'string', 'max:255'],
@@ -116,7 +114,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        //dd($data);
         $role = Role::where('name', '=', $data['user_type'])->firstOrFail();
 
         $user = User::create([
@@ -135,13 +132,7 @@ class RegisterController extends Controller
             $company->foundation_year = $data['foundationYear'];
             $company->company_form = $data['companyForm'];
             $company->vat_number = $data['vatNumber'];
-
-            $commercialContact = new CommercialContact();
-            $commercialContact->name = $data['contactEmail'];
-            $commercialContact->email = $data['contactName'];
-            $commercialContact->telephone = $data['contactPhone'];
-            $commercialContact->save();
-            $company->commercialContact()->associate($commercialContact);
+            $company->telephone = $data['contactPhone'];
 
             $user->company()->save($company);
 

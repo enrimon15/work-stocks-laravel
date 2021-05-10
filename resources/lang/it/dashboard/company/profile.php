@@ -1,10 +1,11 @@
 <?php
 
 return [
-    'profileTitle' => 'Informazioni Accesso',
-    'emailProfile' => 'Email Di Accesso',
+    'profileTitle' => 'Contatto',
+    'emailProfile' => 'Email',
     'name' => 'Nome',
     'surname' => 'Cognome',
+    'phoneContact' => 'Telefono',
     'companyTitle' => 'Informazioni Azienda',
     'companyName' => 'Nome Azienda',
     'vatNumber' => 'Partita Iva',
@@ -16,10 +17,6 @@ return [
     'avatar' => 'Logo Azienda',
     'website' => 'Sito Web',
     'slogan' => 'Slogan',
-    'contactTile' => 'Contatto Commerciale',
-    'emailContact' => 'Email Contatto',
-    'nameContact' => 'Nome Contatto',
-    'phoneContact' => 'Telefono Contatto',
     'workingPlaceTitle' => 'Sede Principale',
     'address' => 'Indirizzo',
     'city' => 'Città',
