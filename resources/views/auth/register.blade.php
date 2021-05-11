@@ -139,12 +139,12 @@
                                         <div class="form-group col-lg-6 col-md-6 col-sm-12">
                                             <label>{{__('loginAndRegister.vatNumber')}}</label>
                                             <div class="input-with-gray">
-                                                <input type="number" class="form-control companyfield" placeholder="{{__('loginAndRegister.vatNumber')}}" name="vattinNumber" value="{{ old('vattinNumber') }}" required>
+                                                <input type="number" class="form-control companyfield" placeholder="{{__('loginAndRegister.vatNumber')}}" name="vatNumber" value="{{ old('vatNumber') }}" required>
                                                 <i class="ti-receipt"></i>
                                             </div>
                                             <!-- Error -->
-                                            @if ($errors->has('vattinNumber'))
-                                                <p class="color--error mb-2"><strong>{{ $errors->first('vattinNumber') }}</strong></p>
+                                            @if ($errors->has('vatNumber'))
+                                                <p class="color--error mb-2"><strong>{{ $errors->first('vatNumber') }}</strong></p>
                                             @endif
                                         </div>
 

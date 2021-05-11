@@ -25,5 +25,7 @@ return [
     'legal' => 'Legal',
     'commercial' => 'Commercial',
     'operative' => 'Operative',
-    'buttonSave' => 'Save'
+    'buttonSave' => 'Save',
+
+    'success' => 'Company details successfully updated',
 ];

@@ -14,7 +14,7 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('updateProfileExecute') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('updateProfileCompanyExecute') }}" enctype="multipart/form-data">
         @csrf
         <!-- User Info -->
             <div class="tr-single-box">
@@ -28,11 +28,11 @@
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <div class="form-group">
                                 <label>{{__('dashboard/company/profile.emailProfile')}}</label>
-                                <input class="form-control" name="emailAccess" required type="text" value="{{$user->email}}">
+                                <input class="form-control" name="email" required type="email" value="{{$user->email}}">
                             </div>
                             <!-- Error -->
-                            @if ($errors->has('emailAccess'))
-                                <p class="color--error mb-2"><strong>{{$errors->first('emailAccess')}}</strong></p>
+                            @if ($errors->has('email'))
+                                <p class="color--error mb-2"><strong>{{$errors->first('email')}}</strong></p>
                             @endif
                         </div>
 
@@ -61,7 +61,7 @@
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <div class="form-group">
                                 <label>{{__('dashboard/company/profile.phoneContact')}}</label>
-                                <input class="form-control" name="phoneContact" required type="text" value="{{$user->telephone ?? null}}" placeholder="{{__('dashboard/company/profile.phoneContact')}}">
+                                <input class="form-control" name="phoneContact" type="text" value="{{$user->company->telephone ?? null}}" placeholder="{{__('dashboard/company/profile.phoneContact')}}">
                             </div>
                             <!-- Error -->
                             @if ($errors->has('phoneContact'))
@@ -145,7 +145,7 @@
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <div class="form-group">
                                 <label>{{__('dashboard/company/profile.website')}}</label>
-                                <input class="form-control" required type="text" name="website" value="{{$user->company->website ?? null}}" placeholder="{{__('dashboard/company/profile.website')}}">
+                                <input class="form-control" type="text" name="website" value="{{$user->company->website ?? null}}" placeholder="{{__('dashboard/company/profile.website')}}">
                             </div>
                             <!-- Error -->
                             @if ($errors->has('website'))
@@ -244,8 +244,8 @@
                                 </select>
                             </div>
                             <!-- Error -->
-                            @if ($errors->has('sex'))
-                                <p class="color--error mb-2"><strong>{{$errors->first('sex')}}</strong></p>
+                            @if ($errors->has('typeWorkingPlace'))
+                                <p class="color--error mb-2"><strong>{{$errors->first('typeWorkingPlace')}}</strong></p>
                             @endif
                         </div>
 

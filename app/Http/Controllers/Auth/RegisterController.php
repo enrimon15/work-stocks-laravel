@@ -89,7 +89,7 @@ class RegisterController extends Controller
                     Rule::in(['user', 'company']),
                 ],
                 'companyName' => ['required', 'string', 'max:255'],
-                'vattinNumber' => ['required', 'numeric', 'digits:11'],
+                'vatNumber' => ['required', 'numeric', 'digits:11'],
                 'companyForm' => ['required', 'string', 'max:255'],
                 'foundationYear' => ['required', 'numeric', 'min:0'],
                 'employeesNumber' => ['required', 'numeric', 'min:0'],

@@ -1,4 +1,4 @@
-@extends('subscriber.dashboard.candidate-dashboard')
+@extends(Auth::user()->hasRole('user') ? 'subscriber.dashboard.candidate-dashboard' : 'company.dashboard.company-dashboard')
 
 @section('content-dashboard')
 
