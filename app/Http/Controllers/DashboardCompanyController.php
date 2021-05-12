@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PlacesOfWork;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
@@ -77,5 +78,58 @@ class DashboardCompanyController extends Controller
     public function workingPlaces() {
         $user = Auth::user();
         return view('company.dashboard.working-places')->with('workingPlaces', $user->company->workingPlaces);
+    }
+
+    public function editWorkingPlaces($id) {
+        $user = Auth::user();
+        $workingPlace = PlacesOfWork::find($id);
+        if ($workingPlace->company->user == $user) {
+            return view('company.dashboard.edit-working-place')->with('workingPlace', $workingPlace);
+        }
+    }
+
+    public function deleteWorkingPlaces($id) {
+        $user = Auth::user();
+        $workingPlace = PlacesOfWork::find($id);
+        if ($workingPlace->company->user == $user) {
+            $workingPlace->delete();
+            return back()->with('success', __('dashboard/company/workingPlaces.successDelete'));
+        }
+    }
+
+    public function executeWorkingPlaces(Request $data) {
+        $user = Auth::user(); // current user
+
+        $data->validate([
+            'city' => ['required', 'string', 'max:255'],
+            'country' => ['required','string', 'max:255'],
+            'address'=> ['required','string', 'max:255'],
+            'type'=> ['required','string', 'max:255', Rule::in(['legal', 'commercial','operative'])],
+            'primary'=> ['nullable','string', 'max:255']
+        ]);
+
+        $company = $user->company;
+        $main = $company->mainPlaceOfWork();
+        if ($data->input('primary') == 'on' && $main != null) {
+            $main->primary = false;
+            $main->save();
+        }
+
+        $workingPlace = $data->input('id') != null ? $company->workingPlaces->firstWhere('id', $data->input('id')) : new PlacesOfWork();
+        $workingPlace->city = $data->input('city');
+        $workingPlace->country = $data->input('country');
+        $workingPlace->address = $data->input('address');
+        $workingPlace->type = $data->input('type');
+        $workingPlace->primary = ($data->input('primary') == 'on') ? true : false;
+        $workingPlace->company()->associate($company);
+
+        $workingPlace->save();
+
+        if ($data->input('id') == null) return redirect()->route('workingPlacesCompany')->with('success', __('dashboard/company/workingPlaces.successAdd'));
+        else return redirect()->route('workingPlacesCompany')->with('success', __('dashboard/company/workingPlaces.successUpdate'));
+    }
+
+    public function postNewJob() {
+        return view('company.dashboard.post-new-job');
     }
 }
