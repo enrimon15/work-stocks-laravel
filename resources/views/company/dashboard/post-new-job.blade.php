@@ -14,12 +14,12 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('updateProfileCompanyExecute') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('postNewJobCompanyExecute') }}" enctype="multipart/form-data">
         @csrf
         <!-- User Info -->
             <div class="tr-single-box">
                 <div class="tr-single-header">
-                    <h4><i class="ti-id-badge"></i> {{__('dashboard/company/profile.profileTitle')}}</h4>
+                    <h4><i class="ti-id-badge"></i> {{__('dashboard/company/newJob.title')}}</h4>
                 </div>
                 <div class="tr-single-body">
 
@@ -27,11 +27,11 @@
 
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <div class="form-group">
-                                <label>Sede Di Lavoro</label>
+                                <label>{{__('dashboard/company/newJob.workingPlace')}}</label>
                                 <select required class="form-control" name="workingPlace" id="working-place">
-                                    <option value="legal">Test1</option>
-                                    <option value="commercial">Test2</option>
-                                    <option value="operative">Test3</option>
+                                    @foreach($workingPlaces as $workingPlace)
+                                        <option value="{{$workingPlace->id}}">{{$workingPlace->city . ", " . $workingPlace->address . " (" . $workingPlace->country . ")"}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <!-- Error -->
@@ -42,8 +42,8 @@
 
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <div class="form-group">
-                                <label>Titolo</label>
-                                <input class="form-control" name="title" required type="text" placeholder="Titolo">
+                                <label>{{__('dashboard/company/newJob.jobTitle')}}</label>
+                                <input class="form-control" name="title" required type="text" placeholder="{{__('dashboard/company/newJob.jobTitle')}}">
                             </div>
                             <!-- Error -->
                             @if ($errors->has('title'))
@@ -53,7 +53,7 @@
 
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <div class="form-group">
-                                <label>Descrizione</label>
+                                <label>{{__('dashboard/company/newJob.description')}}</label>
                                 <textarea id="summernote" name="description"></textarea>
                             </div>
                             <!-- Error -->
@@ -64,7 +64,7 @@
 
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <div class="form-group">
-                                <label>Data Di Scadenza</label>
+                                <label>{{__('dashboard/company/newJob.dueDate')}}</label>
                                 <input class="form-control" name="dueDate" required type="date">
                             </div>
                             <!-- Error -->
@@ -75,11 +75,12 @@
 
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <div class="form-group">
-                                <label>Tipologia Contratto</label>
+                                <label>{{__('dashboard/company/newJob.contractType')}}</label>
                                 <select required class="form-control" name="offerType" id="offer-type">
-                                    <option value="legal">Test1</option>
-                                    <option value="commercial">Test2</option>
-                                    <option value="operative">Test3</option>
+                                    <option value="full_time">{{__('dashboard/company/newJob.fulltime')}}</option>
+                                    <option value="part_time">{{__('dashboard/company/newJob.parttime')}}</option>
+                                    <option value="construction_base">{{__('dashboard/company/newJob.base')}}</option>
+                                    <option value="internship">{{__('dashboard/company/newJob.internship')}}</option>
                                 </select>
                             </div>
                             <!-- Error -->
@@ -90,8 +91,8 @@
 
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
-                                <label>Esperienza Minina</label>
-                                <input class="form-control" name="experience" required type="number" min="0" placeholder="Esperienza minima (Anni)">
+                                <label>{{__('dashboard/company/newJob.experience')}}</label>
+                                <input class="form-control" name="experience" required type="number" min="0" placeholder="{{__('dashboard/company/newJob.experiencePh')}}">
                             </div>
                             <!-- Error -->
                             @if ($errors->has('experience'))
@@ -101,11 +102,11 @@
 
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
-                                <label>Genere</label>
+                                <label>{{__('dashboard/company/newJob.gender')}}</label>
                                 <select required class="form-control" name="gender" id="gender">
-                                    <option value="legal">Indifferente</option>
-                                    <option value="commercial">M</option>
-                                    <option value="operative">F</option>
+                                    <option value="not_specified">{{__('dashboard/company/newJob.notSpecified')}}</option>
+                                    <option value="male">M</option>
+                                    <option value="female">F</option>
                                 </select>
                             </div>
                             <!-- Error -->
@@ -116,8 +117,8 @@
 
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
-                                <label>Salario Minimo</label>
-                                <input class="form-control" name="minSalary" type="number" min="0" placeholder="Salario Minimo (k)">
+                                <label>{{__('dashboard/company/newJob.minSalary')}}</label>
+                                <input class="form-control" name="minSalary" type="number" min="0" placeholder="{{__('dashboard/company/newJob.minSalary') . " (K)"}}">
                             </div>
                             <!-- Error -->
                             @if ($errors->has('minSalary'))
@@ -127,8 +128,8 @@
 
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
-                                <label>Salario Massimo</label>
-                                <input class="form-control" name="maxSalary" type="number" min="0" placeholder="Salario Massimo (k)">
+                                <label>{{__('dashboard/company/newJob.maxSalary')}}</label>
+                                <input class="form-control" name="maxSalary" type="number" min="0" placeholder="{{__('dashboard/company/newJob.maxSalary') . " (K)"}}">
                             </div>
                             <!-- Error -->
                             @if ($errors->has('maxSalary'))
@@ -141,7 +142,7 @@
 
             </div>
 
-            <button type="submit" class="btn btn-info btn-md full-width">{{__('dashboard/company/profile.buttonSave')}}<i class="ml-2 ti-arrow-right"></i></button>
+            <button type="submit" class="btn btn-info btn-md full-width">{{__('dashboard/company/newJob.buttonSave')}}<i class="ml-2 ti-arrow-right"></i></button>
         </form>
 
     </div>

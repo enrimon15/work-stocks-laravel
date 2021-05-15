@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\JobOffer;
 use App\Models\PlacesOfWork;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -130,6 +131,46 @@ class DashboardCompanyController extends Controller
     }
 
     public function postNewJob() {
-        return view('company.dashboard.post-new-job');
+        $user = Auth::user(); // current user
+        $workingPlaces = $user->company->workingPlaces;
+        return view('company.dashboard.post-new-job')->with('workingPlaces', $workingPlaces);
+    }
+
+    public function postNewJobExecute(Request $data) {
+        $user = Auth::user(); // current user
+
+        $data->validate([
+            'workingPlace' => ['required','numeric', 'exists:places_of_work,id'], // Rule:exists -->'exists:places_of_work,id'
+            'title' => ['required','string', 'max:255'],
+            'description'=> ['required','string', 'max:255'],
+            'dueDate'=> ['required', 'date', 'after:yesterday'],
+            'offerType'=> ['required','string', 'max:255', Rule::in(['full_time', 'part_time','construction_base', 'internship'])],
+            'experience' => ['required','numeric', 'min:0'],
+            'gender' => ['required','string', 'max:255', Rule::in(['female', 'male','not_specified'])],
+            'minSalary' => ['required','numeric', 'min:0'],
+            'maxSalary' => ['required','numeric', 'min:0']
+            // skills
+        ]);
+
+        $newJob = new JobOffer();
+        $newJob->title = $data->input('title');
+        $newJob->description = $data->input('description');
+        $newJob->due_date = $data->input('dueDate');
+        $newJob->offers_type = $data->input('offerType');
+        $newJob->sex = $data->input('gender');
+        $newJob->experience = $data->input('experience');
+        $newJob->min_salary = $data->input('minSalary');
+        $newJob->max_salary = $data->input('maxSalary');
+
+        // skills
+
+        $workingPlace = PlacesOfWork::find($data->input('workingPlace'));
+        $newJob->workingPlace()->associate($workingPlace);
+
+        $newJob->save();
+    }
+
+    public function manageJobs() {
+        return view('company.dashboard.manage-job-offer');
     }
 }

@@ -34,7 +34,7 @@
 								<a class="nav-link {{Route::currentRouteName() == 'postNewJobCompany' ? 'active' : ''}}" href="{{route('postNewJobCompany')}}"><i class="ti-plus"></i>{{__('dashboard/company/menu.newJob')}}</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link {{Route::currentRouteName() == 'manageJobCompany' ? 'active' : ''}}" href="{{route('manageJobCompany')}}"><i class="lni-briefcase"></i>{{__('dashboard/company/menu.createdJobs')}}</a>
+								<a class="nav-link {{Route::currentRouteName() == 'manageJobsCompany' ? 'active' : ''}}" href="{{route('manageJobsCompany')}}"><i class="lni-briefcase"></i>{{__('dashboard/company/menu.createdJobs')}}</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" href="{{route('profile', ['id' => Auth::user()->id])}}"><i class="lni-user"></i>{{__('dashboard/company/menu.showProfile')}}</a>

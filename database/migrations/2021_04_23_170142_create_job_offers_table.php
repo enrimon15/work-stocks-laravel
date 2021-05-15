@@ -23,7 +23,7 @@ class CreateJobOffersTable extends Migration
             $table->text('description');
             $table->integer('experience');
             $table->dateTime('due_date');
-            $table->enum('offers_type',['full_time','part_time','costruction_base','internship']);
+            $table->enum('offers_type',['full_time','part_time','construction_base','internship']);
             $table->enum('sex', ['male','female','not_specified']);
             $table->integer('min_salary')->nullable();
             $table->integer('max_salary')->nullable();
