@@ -18,6 +18,8 @@ return [
     'fulltime' => 'Full-Time',
     'parttime' => 'Part-Time',
     'base' => 'Construction base',
+    'skills' => 'Skills',
+    'skillsPh' => 'Choose the skills',
 
     'success' => 'Job Offer successfully created',
 ];

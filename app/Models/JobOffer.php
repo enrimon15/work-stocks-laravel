@@ -87,6 +87,6 @@ class JobOffer extends Model
     }
 
     public function workingPlace() {
-        return $this->belongsTo( PlacesOfWork::class);
+        return $this->belongsTo( PlacesOfWork::class, 'places_of_work_id');
     }
 }

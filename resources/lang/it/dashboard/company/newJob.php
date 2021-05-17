@@ -18,6 +18,8 @@ return [
     'fulltime' => 'Full-Time',
     'parttime' => 'Part-Time',
     'base' => 'Apprendistato',
+    'skills' => 'Competenze',
+    'skillsPh' => 'Scegli le competenze',
 
-    'success' => 'Offerta di lavoro inserita correttamente',
+    'success' => 'Offerta di lavoro creata correttamente',
 ];

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\JobOffer;
 use App\Models\PlacesOfWork;
+use Conner\Tagging\Model\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
@@ -131,16 +132,29 @@ class DashboardCompanyController extends Controller
     }
 
     public function postNewJob() {
+        //dd(JobOffer::find(3)->tagNames());
+
         $user = Auth::user(); // current user
         $workingPlaces = $user->company->workingPlaces;
         return view('company.dashboard.post-new-job')->with('workingPlaces', $workingPlaces);
     }
 
-    public function postNewJobExecute(Request $data) {
+    public function editJob($id) {
         $user = Auth::user(); // current user
 
+        $jobOffer = JobOffer::find($id);
+        $workingPlaces = $user->company->workingPlaces;
+        return view('company.dashboard.post-new-job')
+            ->with('workingPlaces', $workingPlaces)
+            ->with('jobOffer', $jobOffer);
+    }
+
+    public function postNewJobExecute(Request $data, $operationType) {
+        $user = Auth::user(); // current user
+        $company = $user->company;
+
         $data->validate([
-            'workingPlace' => ['required','numeric', 'exists:places_of_work,id'], // Rule:exists -->'exists:places_of_work,id'
+            'workingPlace' => ['required','numeric', 'exists:places_of_works,id'], // Rule:exists -->'exists:places_of_work,id'
             'title' => ['required','string', 'max:255'],
             'description'=> ['required','string', 'max:255'],
             'dueDate'=> ['required', 'date', 'after:yesterday'],
@@ -148,11 +162,12 @@ class DashboardCompanyController extends Controller
             'experience' => ['required','numeric', 'min:0'],
             'gender' => ['required','string', 'max:255', Rule::in(['female', 'male','not_specified'])],
             'minSalary' => ['required','numeric', 'min:0'],
-            'maxSalary' => ['required','numeric', 'min:0']
-            // skills
+            'maxSalary' => ['required','numeric', 'min:0'],
+            'skills' => ['required', 'array', 'min:1'],
+            'skills.*' => ['required', 'string', 'distinct']
         ]);
 
-        $newJob = new JobOffer();
+        $newJob = $operationType == 'create' ? new JobOffer() : JobOffer::find($data->input('id'));
         $newJob->title = $data->input('title');
         $newJob->description = $data->input('description');
         $newJob->due_date = $data->input('dueDate');
@@ -162,12 +177,22 @@ class DashboardCompanyController extends Controller
         $newJob->min_salary = $data->input('minSalary');
         $newJob->max_salary = $data->input('maxSalary');
 
-        // skills
+        $newJob->company()->associate($company);
 
         $workingPlace = PlacesOfWork::find($data->input('workingPlace'));
         $newJob->workingPlace()->associate($workingPlace);
 
         $newJob->save();
+
+        // skills
+        $newJob->retag($data->input('skills'));
+
+        /*$tags = $newJob->tags->;
+        foreach ($tags as $tag) {
+            $tag->setGroup('skill');
+        }*/
+
+        return back()->with('success', __('dashboard/company/newJob.success'));
     }
 
     public function manageJobs() {

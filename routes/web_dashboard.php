@@ -48,7 +48,8 @@ Route::prefix('/company')->middleware('roleIn:company')->group(function () {
         Route::get('/delete-working-places/{id}', [DashboardCompanyController::class, 'deleteWorkingPlaces'])->name('deleteWorkingPlacesCompany');
 
         Route::get('/new-job', [DashboardCompanyController::class, 'postNewJob'])->name('postNewJobCompany');
-        Route::post('/new-job', [DashboardCompanyController::class, 'postNewJobExecute'])->name('postNewJobCompanyExecute');
+        Route::post('/new-job/{operationType}', [DashboardCompanyController::class, 'postNewJobExecute'])->name('postNewJobCompanyExecute');
+        Route::get('/edit-job/{id}', [DashboardCompanyController::class, 'editJob'])->name('editJobCompany');
 
         Route::get('/manage-jobs', [DashboardCompanyController::class, 'manageJobs'])->name('manageJobsCompany');
     });
