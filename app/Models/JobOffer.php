@@ -68,14 +68,13 @@ class JobOffer extends Model
         'experience',
         'due_date',
         'offers_type',
-        'offers_type',
         'sex',
         'min_salary',
         'max_salary'
     ];
 
     public function company() {
-        return $this->belongsTo(Company::class,'companies_id');
+        return $this->belongsTo(Company::class);
     }
 
     public function placesOfWork() {
@@ -87,6 +86,6 @@ class JobOffer extends Model
     }
 
     public function workingPlace() {
-        return $this->belongsTo( PlacesOfWork::class, 'places_of_work_id');
+        return $this->belongsTo( PlacesOfWork::class, 'place_of_work_id');
     }
 }

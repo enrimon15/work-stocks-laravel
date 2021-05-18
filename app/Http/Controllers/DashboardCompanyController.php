@@ -192,10 +192,13 @@ class DashboardCompanyController extends Controller
             $tag->setGroup('skill');
         }*/
 
-        return back()->with('success', __('dashboard/company/newJob.success'));
+        $success = $operationType == 'create' ? __('dashboard/company/newJob.success') : __('dashboard/company/newJob.successUpdate');
+        return back()->with('success', $success);
     }
 
     public function manageJobs() {
-        return view('company.dashboard.manage-job-offer');
+        $user = Auth::user();
+        $jobOffers = $user->company->jobOffers()->orderBy('due_date', 'desc')->get();
+        return view('company.dashboard.manage-job-offer')->with('jobs', $jobOffers);
     }
 }

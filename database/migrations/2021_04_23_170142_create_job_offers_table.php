@@ -15,14 +15,14 @@ class CreateJobOffersTable extends Migration
     {
         Schema::create('job_offers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('companies_id');
-            $table->unsignedBigInteger('places_of_work_id');
-            $table->foreign('companies_id')->references('id')->on('companies')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('places_of_work_id')->references('id')->on('places_of_works')->onDelete('cascade');
+            $table->unsignedBigInteger('company_id');
+            $table->unsignedBigInteger('place_of_work_id');
+            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('place_of_work_id')->references('id')->on('places_of_works')->onDelete('cascade');
             $table->string('title');
             $table->text('description');
             $table->integer('experience');
-            $table->dateTime('due_date');
+            $table->date('due_date');
             $table->enum('offers_type',['full_time','part_time','construction_base','internship']);
             $table->enum('sex', ['male','female','not_specified']);
             $table->integer('min_salary')->nullable();

@@ -2,6 +2,8 @@
 
 return [
     'title' => 'Add New Job Offer',
+    'titleUpdate' => 'Update Job Offer',
+    'refCreate' => 'Add new job offer',
     'workingPlace' => 'Working Place',
     'jobTitle' => 'Title',
     'description' => 'Description',
@@ -14,12 +16,14 @@ return [
     'minSalary' => 'Minimum Salary',
     'maxSalary' => 'Maximum Salary',
     'buttonSave' => 'Save',
+    'buttonUpdate' => 'Update',
     'internship' => 'Internship',
-    'fulltime' => 'Full-Time',
-    'parttime' => 'Part-Time',
-    'base' => 'Construction base',
+    'full_time' => 'Full-Time',
+    'part_time' => 'Part-Time',
+    'construction_base' => 'Construction base',
     'skills' => 'Skills',
     'skillsPh' => 'Choose the skills',
 
     'success' => 'Job Offer successfully created',
+    'successUpdate' => 'Job Offer successfully updated'
 ];

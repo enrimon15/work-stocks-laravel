@@ -14,12 +14,19 @@
             </div>
         @endif
 
+        @if(isset($jobOffer))
+        <div class="p-3">
+            <a href="{{route('postNewJobCompany')}}" class="full-width btn btn-info btn-md"><i class="ti-arrow-left"></i> {{__('dashboard/company/newJob.refCreate')}}</a>
+        </div>
+        @endif
+
+
         <form method="POST" action="{{ isset($jobOffer) ? route('postNewJobCompanyExecute', ['operationType' => 'edit']) : route('postNewJobCompanyExecute', ['operationType' => 'create']) }}" enctype="multipart/form-data">
         @csrf
         <!-- User Info -->
             <div class="tr-single-box">
                 <div class="tr-single-header">
-                    <h4><i class="ti-plus"></i> {{__('dashboard/company/newJob.title')}}</h4>
+                    <h4><i class="ti-plus"></i> {{ isset($jobOffer) ? __('dashboard/company/newJob.titleUpdate') : __('dashboard/company/newJob.title')}}</h4>
                 </div>
                 <div class="tr-single-body">
 
@@ -34,7 +41,7 @@
                                 <label>{{__('dashboard/company/newJob.workingPlace')}}</label>
                                 <select required class="form-control" name="workingPlace" id="working-place">
                                     @foreach($workingPlaces as $workingPlace)
-                                        <option {{ (isset($jobOffer) && $workingPlace == $jobOffer->$workingPlace) ? 'selected' : ''}} value="{{$workingPlace->id}}">{{$workingPlace->city . ", " . $workingPlace->address . " (" . $workingPlace->country . ")"}}</option>
+                                        <option {{ (isset($jobOffer) && $workingPlace->id == $jobOffer->workingPlace->id) ? 'selected' : ''}} value="{{$workingPlace->id}}">{{$workingPlace->city . ", " . $workingPlace->address . " (" . $workingPlace->country . ")"}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -81,10 +88,10 @@
                             <div class="form-group">
                                 <label>{{__('dashboard/company/newJob.contractType')}}</label>
                                 <select required class="form-control" name="offerType" id="offer-type">
-                                    <option {{ (isset($jobOffer) && $jobOffer->$offers_type == 'full_time') ? 'selected' : ''}} value="full_time">{{__('dashboard/company/newJob.fulltime')}}</option>
-                                    <option {{ (isset($jobOffer) && $jobOffer->$offers_type == 'part_time') ? 'selected' : ''}} value="part_time">{{__('dashboard/company/newJob.parttime')}}</option>
-                                    <option {{ (isset($jobOffer) && $jobOffer->$offers_type == 'construction_base') ? 'selected' : ''}} value="construction_base">{{__('dashboard/company/newJob.base')}}</option>
-                                    <option {{ (isset($jobOffer) && $jobOffer->$offers_type == 'internship') ? 'selected' : ''}} value="internship">{{__('dashboard/company/newJob.internship')}}</option>
+                                    <option {{ (isset($jobOffer) && $jobOffer->offers_type == 'full_time') ? 'selected' : ''}} value="full_time">{{__('dashboard/company/newJob.full_time')}}</option>
+                                    <option {{ (isset($jobOffer) && $jobOffer->offers_type == 'part_time') ? 'selected' : ''}} value="part_time">{{__('dashboard/company/newJob.part_time')}}</option>
+                                    <option {{ (isset($jobOffer) && $jobOffer->offers_type == 'construction_base') ? 'selected' : ''}} value="construction_base">{{__('dashboard/company/newJob.construction_base')}}</option>
+                                    <option {{ (isset($jobOffer) && $jobOffer->offers_type == 'internship') ? 'selected' : ''}} value="internship">{{__('dashboard/company/newJob.internship')}}</option>
                                 </select>
                             </div>
                             <!-- Error -->
@@ -108,9 +115,9 @@
                             <div class="form-group">
                                 <label>{{__('dashboard/company/newJob.gender')}}</label>
                                 <select required class="form-control" name="gender" id="gender">
-                                    <option {{ (isset($jobOffer) && $jobOffer->$sex == 'not_specified') ? 'selected' : ''}} value="not_specified">{{__('dashboard/company/newJob.notSpecified')}}</option>
-                                    <option {{ (isset($jobOffer) && $jobOffer->$sex == 'male') ? 'selected' : ''}} value="male">M</option>
-                                    <option {{ (isset($jobOffer) && $jobOffer->$sex == 'female') ? 'selected' : ''}} value="female">F</option>
+                                    <option {{ (isset($jobOffer) && $jobOffer->sex == 'not_specified') ? 'selected' : ''}} value="not_specified">{{__('dashboard/company/newJob.notSpecified')}}</option>
+                                    <option {{ (isset($jobOffer) && $jobOffer->sex == 'male') ? 'selected' : ''}} value="male">M</option>
+                                    <option {{ (isset($jobOffer) && $jobOffer->sex == 'female') ? 'selected' : ''}} value="female">F</option>
                                 </select>
                             </div>
                             <!-- Error -->
@@ -163,7 +170,7 @@
 
             </div>
 
-            <button type="submit" class="btn btn-info btn-md full-width">{{__('dashboard/company/newJob.buttonSave')}}<i class="ml-2 ti-arrow-right"></i></button>
+            <button type="submit" class="btn btn-info btn-md full-width">{{ isset($jobOffer) ? __('dashboard/company/newJob.buttonUpdate') : __('dashboard/company/newJob.buttonSave')}}<i class="ml-2 ti-arrow-right"></i></button>
         </form>
 
     </div>

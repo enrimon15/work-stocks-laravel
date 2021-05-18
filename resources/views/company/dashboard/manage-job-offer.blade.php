@@ -17,6 +17,22 @@
         }
     </style>
 
+    <!-- Modal Delete Job -->
+    <div class="modal fade" id="delete-job-modal" tabindex="-1" role="dialog" aria-labelledby="delete-job-modal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{__('dashboard/company/manage-jobs.modalTitle')}}</h5>
+                </div>
+                <div class="modal-body">{{__('dashboard/company/manage-jobs.modalBody')}}</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">{{__('dashboard/company/manage-jobs.cancel')}}</button>
+                    <a id="buttonDelete" href="#" class="btn btn-danger color--white" style="border-color: transparent!important;">{{__('dashboard/company/manage-jobs.delete')}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Manage Job Offer -->
     <div class="tab-pane active container" id="postNewJob">
 
@@ -36,81 +52,52 @@
 
                 <div class="container">
 
-                    <div class="p-1">
-                        <div class="manage-list">
+                    @forelse($jobs as $job)
+                        <div class="p-1">
+                            <div class="manage-list">
 
-                            <div class="mg-list-wrap">
-                                <div class="mg-list-caption">
-                                    <h4 class="mg-title title"> <a href="#" style="cursor: pointer">Java Developer</a> <span class="j-part-time p-2 ml-2" style="font-size: small; font-weight: normal">Part Time</span></h4>
-                                    <span class="mg-subtitle" style="color: #00a94f">IBM</span>
-                                    <div class="mt-1">Pescara, Italia</div>
-                                    <span><em>20/04/2021</em></span>
+                                <div class="mg-list-wrap">
+                                    <div class="mg-list-caption">
+                                        <h4 class="mg-title title">
+                                            <a href="#" style="cursor: pointer">{{$job->title}}</a>
+                                            <span class="j-part-time p-2 ml-2" style="font-size: small; font-weight: normal">{{__('dashboard/company/newJob.' . $job->offers_type)}}</span>
+                                        </h4>
+
+                                        <span class="mg-subtitle" style="color: #00a94f">{{$job->company->name}}</span>
+                                        <div class="mt-1">{{$job->workingPlace->city . ', ' . $job->workingPlace->country}}</div>
+                                        @if($job->due_date >= date('Y-m-d'))
+                                            <span><em>{{date('d-m-Y', strtotime($job->created_at))}}</em></span>
+                                        @else
+                                            <span><em>{{date('d-m-Y', strtotime($job->created_at))}}</em> </span>
+                                            <div><span class="color--error">{{__('dashboard/company/manage-jobs.expired')}} <i class="ti-na ml-2"></i></span></div>
+                                        @endif
+
+                                    </div>
                                 </div>
+
+                                <div class="mg-action {{$job->due_date < date('Y-m-d') ? 'd-none' : ''}}">
+                                    <div class="btn-group">
+                                        <a href="{{route('editJobCompany', ['id' => $job->id])}}" class="mg-edit"><i class="ti-pencil"></i></a>
+                                    </div>
+                                    <div class="btn-group ml-2">
+                                        <a onclick="deleteJobShow({{$job}})" data-toggle="modal" data-target="#delete-job-modal" href="#" class="mg-delete"><i class="ti-trash"></i></a>
+                                    </div>
+                                </div>
+
                             </div>
-
-                            <div class="mg-action">
-                                <div class="btn-group">
-                                    <a href="#" class="mg-edit"><i class="ti-pencil"></i></a>
-                                </div>
-                                <div class="btn-group ml-2">
-                                    <a href="#" class="mg-delete"><i class="ti-trash"></i></a>
-                                </div>
-                            </div>
-
                         </div>
-                    </div>
-
-                    <div class="p-1">
-                        <div class="manage-list">
-
-                            <div class="mg-list-wrap">
-                                <div class="mg-list-caption">
-                                    <h4 class="mg-title title"> <a href="#" style="cursor: pointer">Java Developer</a> <span class="j-part-time p-2 ml-2" style="font-size: small; font-weight: normal">Part Time</span></h4>
-                                    <span class="mg-subtitle" style="color: #00a94f">IBM</span>
-                                    <div class="mt-1">Pescara, Italia</div>
-                                    <span><em>20/04/2021</em></span>
-                                </div>
-                            </div>
-
-                            <div class="mg-action">
-                                <div class="btn-group">
-                                    <a href="#" class="mg-edit"><i class="ti-pencil"></i></a>
-                                </div>
-                                <div class="btn-group ml-2">
-                                    <a href="#" class="mg-delete"><i class="ti-trash"></i></a>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="p-1">
-                        <div class="manage-list">
-
-                            <div class="mg-list-wrap">
-                                <div class="mg-list-caption">
-                                    <h4 class="mg-title title"> <a href="#" style="cursor: pointer">Java Developer</a> <span class="j-part-time p-2 ml-2" style="font-size: small; font-weight: normal">Part Time</span></h4>
-                                    <span class="mg-subtitle" style="color: #00a94f">IBM</span>
-                                    <div class="mt-1">Pescara, Italia</div>
-                                    <span><em>20/04/2021</em></span>
-                                </div>
-                            </div>
-
-                            <div class="mg-action">
-                                <div class="btn-group">
-                                    <a href="#" class="mg-edit"><i class="ti-pencil"></i></a>
-                                </div>
-                                <div class="btn-group ml-2">
-                                    <a href="#" class="mg-delete"><i class="ti-trash"></i></a>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
+                    @empty
+                        <p>{{__('dashboard/company/manage-jobs.noContent')}}</p>
+                    @endforelse
 
                 </div>
 
             </div>
+
+<script>
+    function deleteJobShow(job) {
+        document.getElementById("buttonDelete").href = "/delete/" + job.id;
+    }
+</script>
 
 @endsection
