@@ -43,6 +43,13 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+        @elseif(isset($success))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{$success}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
         @endif
 
             <div class="tr-single-box ">
@@ -96,7 +103,9 @@
 
 <script>
     function deleteJobShow(job) {
-        document.getElementById("buttonDelete").href = "/delete/" + job.id;
+        let url = '{{route('deleteJob', ['id' => ':id'])}}';
+        url = url.replace(':id', job.id);
+        document.getElementById("buttonDelete").href = url;
     }
 </script>
 

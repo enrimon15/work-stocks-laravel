@@ -10,5 +10,5 @@ return [
     'delete' => 'Delete',
 
 
-    'success' => 'Offerta di lavoro inserita correttamente',
+    'successDelete' => 'Job offer successfully deleted',
 ];

@@ -191,14 +191,29 @@ class DashboardCompanyController extends Controller
         foreach ($tags as $tag) {
             $tag->setGroup('skill');
         }*/
+        $jobOffers = $user->company->jobOffers()->orderBy('due_date', 'desc')->get();
 
         $success = $operationType == 'create' ? __('dashboard/company/newJob.success') : __('dashboard/company/newJob.successUpdate');
-        return back()->with('success', $success);
+        return redirect()->route('manageJobsCompany')
+            ->with('success', $success)
+            ->with('jobs', $jobOffers);
     }
 
     public function manageJobs() {
         $user = Auth::user();
         $jobOffers = $user->company->jobOffers()->orderBy('due_date', 'desc')->get();
         return view('company.dashboard.manage-job-offer')->with('jobs', $jobOffers);
+    }
+
+
+    public function deleteJob($id) {
+        $user = Auth::user();
+        $job = JobOffer::find($id);
+
+        if ($user->company->jobOffers->contains($job)) {
+            $job->delete();
+        }
+
+        return back()->with('success', __('dashboard/company/manage-jobs.successDelete'));
     }
 }

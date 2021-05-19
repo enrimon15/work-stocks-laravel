@@ -29,6 +29,22 @@
         }
     </style>
 
+    <!-- Modal Delete Working Place -->
+    <div class="modal fade" id="delete-workingplace-modal" tabindex="-1" role="dialog" aria-labelledby="delete-workingplace-modal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{__('dashboard/company/workingPlaces.modalTitle')}}</h5>
+                </div>
+                <div class="modal-body">{{__('dashboard/company/workingPlaces.modalBody')}}</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">{{__('dashboard/company/manage-jobs.cancel')}}</button>
+                    <a id="buttonDelete" href="#" class="btn btn-danger color--white" style="border-color: transparent!important;">{{__('dashboard/company/manage-jobs.delete')}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Working Places -->
     <div class="tab-pane active container" id="workingPlaces">
 
@@ -80,7 +96,9 @@
                             <td>
                                 <div class="dash-action">
                                     <a href="{{route('editWorkingPlacesCompany', ['id' => $workingPlace->id])}}" class="dg-edit" data-toggle="tooltip" data-placement="top" title="{{__('dashboard/user/onlineCV.modify')}}"><i class="ti-pencil"></i></a>
-                                    <a href="{{route('deleteWorkingPlacesCompany', ['id' => $workingPlace->id])}}" class="dg-delete" data-toggle="tooltip" data-placement="top" title="{{__('dashboard/user/onlineCV.delete')}}"><i class="ti-trash"></i></a>
+                                    <span data-toggle="tooltip" data-placement="top" title="{{__('dashboard/user/onlineCV.delete')}}">
+                                        <a onclick="deleteWorkingPlaceShow({{$workingPlace}})" href="#" data-toggle="modal" data-target="#delete-workingplace-modal" class="dg-delete"><i class="ti-trash"></i></a>
+                                    </span>
                                 </div>
                             </td>
                         </tr>
@@ -217,6 +235,14 @@
             });
             ////////////////
         });
+    </script>
+
+    <script>
+        function deleteWorkingPlaceShow(workingPlace) {
+            let url = '{{route('deleteWorkingPlacesCompany', ['id' => ':id'])}}';
+            url = url.replace(':id', workingPlace.id);
+            document.getElementById("buttonDelete").href = url;
+        }
     </script>
 
 @endsection

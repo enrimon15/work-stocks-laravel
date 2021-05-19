@@ -14,12 +14,6 @@
             </div>
         @endif
 
-        @if(isset($jobOffer))
-        <div class="p-3">
-            <a href="{{route('postNewJobCompany')}}" class="full-width btn btn-info btn-md"><i class="ti-arrow-left"></i> {{__('dashboard/company/newJob.refCreate')}}</a>
-        </div>
-        @endif
-
 
         <form method="POST" action="{{ isset($jobOffer) ? route('postNewJobCompanyExecute', ['operationType' => 'edit']) : route('postNewJobCompanyExecute', ['operationType' => 'create']) }}" enctype="multipart/form-data">
         @csrf

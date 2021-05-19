@@ -21,5 +21,8 @@ return [
     'error' => 'Operazione non riuscita, controlla che tutti i campi siano corretti!',
 
     "previous" => "Precedente",
-    "next" => "Successiva"
+    "next" => "Successiva",
+
+    "modalBody" => "Sei sicuro di voler eliminare la sede di lavoro?",
+    "modalTitle" => "Attenzione"
 ];

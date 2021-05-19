@@ -21,5 +21,8 @@ return [
     'error' => 'Operation failed, check that all fields are correct!',
 
     "previous" => "Previous",
-    "next" => "Next"
+    "next" => "Next",
+
+    "modalBody" => "Do you want to delete the working place?",
+    "modalTitle" => "Warning"
 ];
