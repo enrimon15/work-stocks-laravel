@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\ApplicationSendEmailJob;
 use App\Mail\ApplicationMailCompany;
 use App\Mail\ApplicationMailForSubscriber;
 use App\Models\Application;
@@ -81,7 +82,7 @@ class SubscriberController extends Controller
                     return $this->abort('Subscriber o offerta non trovata',500);
                 }
 
-                if($jobOffer->due_date < Carbon::now()) {
+                if($jobOffer->due_date < Carbon::today()) {
                     return $this->abort('Offerta scaduta',405);
                 }
 
@@ -98,13 +99,13 @@ class SubscriberController extends Controller
                         'name' => $subscriber->name,
                         'surname' => $subscriber->surname,
                         'jobOfferName' => $jobOffer->title,
-                        'companyName' => $jobOffer->company->name
+                        'companyName' => $jobOffer->company->name,
+                        'subscriberEmail' => $subscriber->email,
+                        'companyEmail' => $jobOffer->company->user->email
                     ];
 
-                    //METTERE ASYNC MAIL SEND
-                    Mail::to($subscriber->email)->send(new ApplicationMailForSubscriber($details));
-                    Mail::to($jobOffer->company->user->email)->send(new ApplicationMailCompany($details));
-
+                    //JOB
+                    ApplicationSendEmailJob::dispatch($details);
                     return response(json_encode(['body'=>'OK']), 200);
                 }
 
@@ -119,6 +120,6 @@ class SubscriberController extends Controller
     }
 
     private function abort($description, $errorCode) {
-        return Response::json(['body'=>$description],$errorCode);
+        return response($description,$errorCode);
     }
 }
