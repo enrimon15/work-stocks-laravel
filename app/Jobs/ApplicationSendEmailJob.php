@@ -35,6 +35,7 @@ class ApplicationSendEmailJob implements ShouldQueue
      */
     public function handle()
     {
+        echo("SEND EMAIL");
         Mail::to($this->details['subscriberEmail'])->send(new ApplicationMailForSubscriber($this->details));
         Mail::to($this->details['companyEmail'])->send(new ApplicationMailCompany($this->details));
     }

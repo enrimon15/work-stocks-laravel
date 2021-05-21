@@ -7,6 +7,7 @@
  * Eseguire php artisan db:seed --class=MenuItemSeeder
  * Eseguire php artisan voyager:install
  * Eseguire php artisan voyager:admin admin@admin.it
+ * Eseguire php artisan queue:work --queue=high,default per avviare il work che invia le email in maniera asincrona
 
 
 Comandi utili:
