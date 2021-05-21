@@ -6,7 +6,7 @@
 <body>
 
 <h1>
-    @lang('mail/application/mailContent.mailBodySubscriber',['subscriberName'=>$details['name'],'subscriberSurname'=>$details['surname'], 'jobOfferName'=>$details['jobOfferName'],'companyName'=> $details['companyName']])
+    @lang('mail/application/mailContent.mailBodyCompany',['subscriberName'=>$details['name'],'subscriberSurname'=>$details['surname'], 'jobOfferName'=>$details['jobOfferName'],'companyName'=> $details['companyName']])
 </h1>
 
 </body>

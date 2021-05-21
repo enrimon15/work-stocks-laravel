@@ -5,11 +5,13 @@ function sendApplication(url) {
         dataType: 'json',
         success: function (result) {
             $('#apply').modal("hide");
-            alert(result.body);
+            $('#confirmApplication').removeClass('d-none').addClass('alert-succes');
+            document.getElementById('confirmApplicationSpan').innerText=result.body;
         },
         error: function (result) {
             $('#apply').modal("hide");
-            alert(result.body);
+            $('#confirmApplication').removeClass('d-none').addClass('alert-danger');
+            document.getElementById('confirmApplicationSpan').innerText=result.body;
         }
     });
 }

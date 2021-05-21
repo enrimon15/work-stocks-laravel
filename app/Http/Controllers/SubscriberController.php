@@ -100,10 +100,12 @@ class SubscriberController extends Controller
                         'jobOfferName' => $jobOffer->title,
                         'companyName' => $jobOffer->company->name
                     ];
-                    Mail::to($subscriber->email)->send(new ApplicationMailForSubscriber($details));
-                    Mail::to($jobOffer->company->email)->send(new ApplicationMailCompany($details));
 
-                    return response('', 200);
+                    //METTERE ASYNC MAIL SEND
+                    Mail::to($subscriber->email)->send(new ApplicationMailForSubscriber($details));
+                    Mail::to($jobOffer->company->user->email)->send(new ApplicationMailCompany($details));
+
+                    return response(json_encode(['body'=>'OK']), 200);
                 }
 
                 return $this->abort('Already Applied',500);
