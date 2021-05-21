@@ -15,6 +15,19 @@
             background: #00a94f;
             color: white!important;
         }
+
+        .mg-candidate {
+            background: #d2e8ff;
+            padding: 6px 16px;
+            border-radius: 2px;
+            transition: all 0.4s;
+            color: dodgerblue;
+        }
+
+        .mg-candidate:hover {
+            background: dodgerblue;
+            color: white!important;
+        }
     </style>
 
     <!-- Modal Delete Job -->
@@ -66,7 +79,7 @@
                                 <div class="mg-list-wrap">
                                     <div class="mg-list-caption">
                                         <h4 class="mg-title title">
-                                            <a href="#" style="cursor: pointer">{{$job->title}}</a>
+                                            <a href="{{route('jobs/getById', ['id' => $job->id])}}" style="cursor: pointer">{{$job->title}}</a>
                                             <span class="j-part-time p-2 ml-2" style="font-size: small; font-weight: normal">{{__('dashboard/company/newJob.' . $job->offers_type)}}</span>
                                         </h4>
 
@@ -82,13 +95,18 @@
                                     </div>
                                 </div>
 
-                                <div class="mg-action {{$job->due_date < date('Y-m-d') ? 'd-none' : ''}}">
-                                    <div class="btn-group">
-                                        <a href="{{route('editJobCompany', ['id' => $job->id])}}" class="mg-edit"><i class="ti-pencil"></i></a>
+                                <div class="mg-action">
+                                    <div class="btn-group" data-toggle="tooltip" data-placement="top" title="Visualizza Candidati">
+                                        <a href="{{route('editJobCompany', ['id' => $job->id])}}" class="mg-candidate"><i class="ti-user"></i></a>
                                     </div>
-                                    <div class="btn-group ml-2">
-                                        <a onclick="deleteJobShow({{$job}})" data-toggle="modal" data-target="#delete-job-modal" href="#" class="mg-delete"><i class="ti-trash"></i></a>
-                                    </div>
+                                    <span class="{{$job->due_date < date('Y-m-d') ? 'd-none' : ''}}">
+                                        <div class="btn-group ml-2" data-toggle="tooltip" data-placement="top" title="Modifica Offerta">
+                                            <a href="{{route('editJobCompany', ['id' => $job->id])}}" class="mg-edit"><i class="ti-pencil"></i></a>
+                                        </div>
+                                        <div class="btn-group" data-toggle="tooltip" data-placement="top" title="Elimina Offerta">
+                                            <a onclick="deleteJobShow({{$job}})" data-toggle="modal" data-target="#delete-job-modal" href="#" class="mg-delete"><i class="ti-trash"></i></a>
+                                        </div>
+                                    </span>
                                 </div>
 
                             </div>
@@ -107,6 +125,15 @@
         url = url.replace(':id', job.id);
         document.getElementById("buttonDelete").href = url;
     }
+</script>
+
+<script>
+    window.addEventListener('load', function () {
+        // tooltip
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        });
+    });
 </script>
 
 @endsection

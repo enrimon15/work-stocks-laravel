@@ -23,7 +23,7 @@
                     <div class="tr-list-info">
                         <h4 class="mb-1">{{$job->title}}</h4>
                         <h6 class="font-14"><a href="company-detail.html" class="text-warning">{{$job->company->name}}</a></h6>
-                        <p class="mb-1"><i class="ti-location-pin mr-2"></i>{{$job->placesOfWork->address.', '.$job->placesOfWork->city.', '.$job->placesOfWork->country}}</p>
+                        <p class="mb-1"><i class="ti-location-pin mr-2"></i>{{$job->workingPlace->address.', '.$job->workingPlace->city.', '.$job->workingPlace->country}}</p>
                     </div>
                 </div>
                 <div class="listing-detail_right">
@@ -194,12 +194,12 @@
 
                             <li>
                                 <div class="icon-box-icon-block">
-                                    <a href="tel:{{$job->company->commercialContact->telephone}}">
+                                    <a href="tel:{{$job->company->telephone}}">
                                         <div class="icon-box-round">
                                             <i class="lni-phone-handset"></i>
                                         </div>
                                         <div class="icon-box-text">
-                                            {{$job->company->commercialContact->telephone}}
+                                            {{$job->company->telephone}}
                                         </div>
                                     </a>
                                 </div>
@@ -207,12 +207,12 @@
 
                             <li>
                                 <div class="icon-box-icon-block">
-                                    <a href="mailto:{{$job->company->commercialContact->email}}">
+                                    <a href="mailto:{{$job->company->user->email}}">
                                         <div class="icon-box-round">
                                             <i class="lni-envelope"></i>
                                         </div>
                                         <div class="icon-box-text">
-                                            {{$job->company->commercialContact->email}}
+                                            {{$job->company->user->email}}
                                         </div>
                                     </a>
                                 </div>
