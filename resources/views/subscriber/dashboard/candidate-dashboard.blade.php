@@ -22,7 +22,7 @@
 					<!-- Nav tabs -->
 					<ul class="nav dashboard-verticle-nav"> <!--nav-pills-->
 						<li class="nav-item">
-							<a class="nav-link {{Route::currentRouteName() == 'dashboard' ? 'active' : ''}}" href="{{route('dashboard')}}"><i class="ti-user"></i>{{__('dashboard/user/menu.profile')}}</a>
+							<a class="nav-link {{Route::currentRouteName() == 'dashboardUser' ? 'active' : ''}}" href="{{route('dashboardUser')}}"><i class="ti-user"></i>{{__('dashboard/user/menu.profile')}}</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link {{Route::currentRouteName() == 'changePassword' ? 'active' : ''}}" href="{{route('changePassword')}}"><i class="lni-lock"></i>{{__('dashboard/user/menu.changePass')}}</a>

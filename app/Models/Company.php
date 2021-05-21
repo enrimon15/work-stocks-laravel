@@ -64,15 +64,12 @@ class Company extends Model
         'employees_number',
         'slogan',
         'website',
-        'foundation_year'
+        'foundation_year',
+        'telephone'
     ];
 
     public function jobOffers() {
         return $this->hasMany(JobOffer::class);
-    }
-
-    public function commercialContact() {
-        return $this->belongsTo(CommercialContact::class);
     }
 
     public function mainPlaceOfWork() {

@@ -67,8 +67,10 @@ use TCG\Voyager\Models\Menu;
                             <ul class="nav-dropdown nav-submenu" style="right: auto; display: none;">
                                 @if(Auth::user()->isAdmin())
                                     <li><a href="{{route('voyager.dashboard')}}">{{__('nav.dashboard')}}</a></li>
-                                @else
-                                    <li><a href="{{route('dashboard')}}">{{__('nav.profile')}}</a></li>
+                                @elseif(Auth::user()->hasRole('company'))
+                                    <li><a href="{{route('dashboardCompany')}}">{{__('nav.profile')}}</a></li>
+                                @elseif(Auth::user()->hasRole('user'))
+                                    <li><a href="{{route('dashboardUser')}}">{{__('nav.profile')}}</a></li>
                                 @endif
                                 <li>
                                     <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

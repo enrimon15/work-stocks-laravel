@@ -12,7 +12,7 @@
 <!-- ============================================================== -->
 
 <!-- ======================= Start Banner ===================== -->
-<section class="page-title-banner" style="background-image:url(https://via.placeholder.com/1920x800);">
+<section class="page-title-banner" style="background-image:url({{asset('img/joboffer-details-banner.jpeg')}});">
     <div class="container">
         <div class="row m-0 align-items-end detail-swap">
             <div class="tr-list-wrap">
@@ -23,7 +23,7 @@
                     <div class="tr-list-info">
                         <h4 class="mb-1">{{$job->title}}</h4>
                         <h6 class="font-14"><a href="company-detail.html" class="text-warning">{{$job->company->name}}</a></h6>
-                        <p class="mb-1"><i class="ti-location-pin mr-2"></i>{{$job->placesOfWork->address.', '.$job->placesOfWork->city.', '.$job->placesOfWork->country}}</p>
+                        <p class="mb-1"><i class="ti-location-pin mr-2"></i>{{$job->workingPlace->address.', '.$job->workingPlace->city.', '.$job->workingPlace->country}}</p>
                     </div>
                 </div>
                 <div class="listing-detail_right">
@@ -69,6 +69,17 @@
         <div class="row">
 
             <div class="col-lg-8 col-md-12 col-sm-12">
+
+                <!-- Default Style -->
+                <div class="single-job-head head-light" style="border: 1px solid #00a94f!important;">
+                    <div class="single-job-info pl-0">
+                        <ul class="tags-jobs row">
+                            <li class="col mx-auto text-left"><i class="ti-file float-none"></i> <strong>Applications:</strong> 14</li>
+                            <li class="col mx-auto text-center"><i class="ti-calendar float-none"></i> <strong>Post Date:</strong> {{date('d-m-Y', strtotime($job->created_at))}}</li>
+                            <li class="col mx-auto text-right"><i class="ti-alarm-clock float-none"></i> <strong>Due Date:</strong> {{date('d-m-Y', strtotime($job->due_date))}}</li>
+                        </ul>
+                    </div>
+                </div>
 
                 <!-- Job Overview -->
                 <div class="tr-single-box">
@@ -135,7 +146,7 @@
                                     </div>
                                     <div class="icon-box-text">
                                         <strong class="d-block">{{__('jobs/jobs.offeredSalary')}}</strong>
-                                        $80k - $270k
+                                        {{$job->min_salary . 'k - ' . $job->max_salary . 'k'}}
                                     </div>
                                 </div>
                             </li>
@@ -147,7 +158,7 @@
                                     </div>
                                     <div class="icon-box-text">
                                         <strong class="d-block">{{__('jobs/jobs.gender')}}</strong>
-                                        Male
+                                        {{$job->sex}}
                                     </div>
                                 </div>
                             </li>
@@ -172,7 +183,7 @@
                                     </div>
                                     <div class="icon-box-text">
                                         <strong class="d-block">{{__('jobs/jobs.experience')}}</strong>
-                                        5 Years
+                                        {{$job->experience . ' anni'}}
                                     </div>
                                 </div>
                             </li>
@@ -180,11 +191,11 @@
                             <li>
                                 <div class="icon-box-icon-block">
                                     <div class="icon-box-round">
-                                        <i class="lni-graduation"></i>
+                                        <i class="lni lni-briefcase"></i>
                                     </div>
                                     <div class="icon-box-text">
-                                        <strong class="d-block">{{__('jobs/jobs.qualification')}}</strong>
-                                        Master Degree
+                                        <strong class="d-block">Tipologia Contratto</strong>
+                                        {{$job->offers_type}}
                                     </div>
                                 </div>
                             </li>
@@ -219,12 +230,12 @@
 
                             <li>
                                 <div class="icon-box-icon-block">
-                                    <a href="tel:{{$job->company->commercialContact->telephone}}">
+                                    <a href="tel:{{$job->company->telephone}}">
                                         <div class="icon-box-round">
                                             <i class="lni-phone-handset"></i>
                                         </div>
                                         <div class="icon-box-text">
-                                            {{$job->company->commercialContact->telephone}}
+                                            {{$job->company->telephone}}
                                         </div>
                                     </a>
                                 </div>
@@ -232,12 +243,12 @@
 
                             <li>
                                 <div class="icon-box-icon-block">
-                                    <a href="mailto:{{$job->company->commercialContact->email}}">
+                                    <a href="mailto:{{$job->company->user->email}}">
                                         <div class="icon-box-round">
                                             <i class="lni-envelope"></i>
                                         </div>
                                         <div class="icon-box-text">
-                                            {{$job->company->commercialContact->email}}
+                                            {{$job->company->user->email}}
                                         </div>
                                     </a>
                                 </div>
@@ -262,7 +273,7 @@
                 </div>
 
                 <!-- Share this -->
-                <div class="tr-single-box">
+                <!-- <div class="tr-single-box">
                     <div class="tr-single-header">
                         <h4><i class="ti-share"></i>{{__('jobs/jobs.shareThisJob')}}</h4>
                     </div>
@@ -350,7 +361,7 @@
                         </ul>
                     </div>
 
-                </div>
+                </div> -->
 
             </div>
             <!-- /col-md-4 -->

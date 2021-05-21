@@ -451,7 +451,7 @@
                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                     <div class="form-group">
                                         <label>{{__('dashboard/user/onlineCV.skillLevel')}}</label>
-                                        <select class="form-control" name="skillLevel" required>
+                                        <select class="form-control" name="skillLevel" required id="level-skill-select">
                                             <option value="beginner">{{__('dashboard/user/onlineCV.beginner')}}</option>
                                             <option value="intermediate">{{__('dashboard/user/onlineCV.intermediate')}}</option>
                                             <option value="advanced">{{__('dashboard/user/onlineCV.advanced')}}</option>
@@ -490,7 +490,7 @@
                             @endif
                             <div class="form-group mr-2">
                                 <a href="{{route('downloadCv')}}">
-                                    <button {{Auth::user()->profile != null && Auth::user()->profile->cv_path == null ? 'disabled' : null}} type="button" class="btn btn-primary p-15" data-toggle="tooltip" data-placement="top" title="{{__('dashboard/user/onlineCV.downloadCv')}}"><i class="ti-download"></i></button>
+                                    <button {{Auth::user()->profile == null || Auth::user()->profile->cv_path == null ? 'disabled' : null}} type="button" class="btn btn-primary p-15" data-toggle="tooltip" data-placement="top" title="{{__('dashboard/user/onlineCV.downloadCv')}}"><i class="ti-download"></i></button>
                                 </a>
                             </div>
                         </div>
@@ -562,5 +562,13 @@
         document.getElementById("modal-experience").innerHTML = experience.description;
     }
 </script>
+
+        <script>
+            $(document).ready(function() {
+                $('#level-skill-select').select2({
+                    minimumResultsForSearch: -1
+                });
+            });
+        </script>
 
 @endsection

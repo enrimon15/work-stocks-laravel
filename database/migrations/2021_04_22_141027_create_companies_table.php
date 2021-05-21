@@ -15,8 +15,6 @@ class CreateCompaniesTable extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('commercial_contact_id');
-            $table->foreign('commercial_contact_id')->references('id')->on('commercial_contacts')->onDelete('cascade');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('vat_number')->unique();
@@ -25,8 +23,9 @@ class CreateCompaniesTable extends Migration
             $table->text('overview')->nullable();
             $table->integer('employees_number');
             $table->year('foundation_year');
-            $table->string('website');
+            $table->string('website')->nullable();
             $table->string('slogan')->nullable();
+            $table->string('telephone')->nullable();
             $table->timestamps();
         });
     }

@@ -108,7 +108,7 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label>{{__('dashboard/user/profile.gender')}}</label>
-                                <select class="form-control" name="sex">
+                                <select class="form-control" name="sex" id="sex-select">
                                     @if($user->profile()->exists() && !empty($user->profile->sex))
                                         <option disabled>{{__('dashboard/user/profile.choose')}}</option>
                                         <option {{$user->profile->sex == 'M' ? 'selected' : null}} value="M">M</option>
@@ -206,5 +206,13 @@
         </form>
 
     </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#sex-select').select2({
+                minimumResultsForSearch: -1
+            });
+        });
+    </script>
 
 @endsection

@@ -22,19 +22,19 @@
 						<!-- Nav tabs -->
 						<ul class="nav dashboard-verticle-nav"> <!--nav-pills-->
 							<li class="nav-item">
-								<a class="nav-link {{Route::currentRouteName() == 'dashboard' ? 'active' : ''}}" href="{{route('dashboard')}}"><i class="ti-home"></i>{{__('dashboard/company/menu.profile')}}</a>
+								<a class="nav-link {{Route::currentRouteName() == 'dashboardCompany' ? 'active' : ''}}" href="{{route('dashboardCompany')}}"><i class="ti-home"></i>{{__('dashboard/company/menu.profile')}}</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link {{(Route::currentRouteName() == 'onlineCV' || Route::currentRouteName() == 'onlineCvEdit') ? 'active' : ''}}" href="{{route('onlineCV')}}"><i class="ti-pin"></i>{{__('dashboard/company/menu.workingPlaces')}}</a>
+								<a class="nav-link {{Route::currentRouteName() == 'workingPlacesCompany' ? 'active' : ''}}" href="{{route('workingPlacesCompany')}}"><i class="ti-pin"></i>{{__('dashboard/company/menu.workingPlaces')}}</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link {{Route::currentRouteName() == 'changePassword' ? 'active' : ''}}" href="{{route('changePassword')}}"><i class="lni-lock"></i>{{__('dashboard/company/menu.changePass')}}</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link {{Route::currentRouteName() == 'favorite' ? 'active' : ''}}" href="{{route('favorite')}}"><i class="ti-plus"></i>{{__('dashboard/company/menu.newJob')}}</a>
+								<a class="nav-link {{Route::currentRouteName() == 'postNewJobCompany' ? 'active' : ''}}" href="{{route('postNewJobCompany')}}"><i class="ti-plus"></i>{{__('dashboard/company/menu.newJob')}}</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link {{Route::currentRouteName() == 'appliedJobs' ? 'active' : ''}}" href="{{route('appliedJobs')}}"><i class="lni-briefcase"></i>{{__('dashboard/company/menu.createdJobs')}}</a>
+								<a class="nav-link {{Route::currentRouteName() == 'manageJobsCompany' ? 'active' : ''}}" href="{{route('manageJobsCompany')}}"><i class="lni-briefcase"></i>{{__('dashboard/company/menu.createdJobs')}}</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" href="{{route('profile', ['id' => Auth::user()->id])}}"><i class="lni-user"></i>{{__('dashboard/company/menu.showProfile')}}</a>

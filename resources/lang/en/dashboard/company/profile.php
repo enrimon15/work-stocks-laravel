@@ -1,10 +1,11 @@
 <?php
 
 return [
-    'profileTitle' => 'Access Info',
-    'emailProfile' => 'Access Email',
+    'profileTitle' => 'Contact Info',
+    'emailProfile' => 'Email',
     'name' => 'Name',
     'surname' => 'Surname',
+    'phoneContact' => 'Phone',
     'companyTitle' => 'Company Info',
     'companyName' => 'Company Name',
     'vatNumber' => 'Vat Number',
@@ -16,10 +17,6 @@ return [
     'avatar' => 'Company Logo',
     'website' => 'Website',
     'slogan' => 'Slogan',
-    'contactTile' => 'Commercial Contact',
-    'emailContact' => 'Contact Email',
-    'nameContact' => 'Contact Name',
-    'phoneContact' => 'Contact Phone',
     'workingPlaceTitle' => 'Main Working Place',
     'address' => 'Address',
     'city' => 'City',
@@ -28,5 +25,7 @@ return [
     'legal' => 'Legal',
     'commercial' => 'Commercial',
     'operative' => 'Operative',
-    'buttonSave' => 'Save'
+    'buttonSave' => 'Save',
+
+    'success' => 'Company details successfully updated',
 ];

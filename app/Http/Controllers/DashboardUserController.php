@@ -8,13 +8,11 @@ use App\Models\Skill;
 use App\Models\UserProfile;
 use App\Models\WorkingExperience;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
-class DashboardController extends Controller
+class DashboardUserController extends Controller
 {
     public function __construct()
     {
@@ -23,12 +21,7 @@ class DashboardController extends Controller
 
     public function index() {
         $user = Auth::user();
-
-        if ($user->hasRole('company')) {
-            return view('company.dashboard.profile')->with('user', $user);
-        } else if ($user->hasRole('user')) {
-            return view('subscriber.dashboard.profile')->with('user', $user);
-        }
+        return view('subscriber.dashboard.profile')->with('user', $user);
     }
 
     public function updateProfile(Request $data) {
@@ -83,38 +76,6 @@ class DashboardController extends Controller
         $profile->save();
 
         return back()->with('success', __('dashboard/user/profile.success'));
-    }
-
-    public function showChangePassword() {
-        return view('subscriber.dashboard.change-password');
-    }
-
-    public function changePassword(Request $data) {
-        $error = null;
-
-        $data->validate([
-            'new_password'=> ['required', 'string', 'min:8'],
-            'confirm_password'=> ['required', 'string', 'min:8']
-        ]);
-
-        $user = Auth::user(); // current user
-        if (!Hash::check($data->input('old_password'), $user->password)) {
-            $error = ['old_pass' => __('dashboard/user/changePassword.errorCurrentPassword')];
-        }
-        if ($data->input('confirm_password') != $data->input('new_password')) {
-            $error = ['confirm_password' => __('dashboard/user/changePassword.errorConfirmPassword')];
-        }
-
-        if ($error != null) {
-            return Redirect::back()
-                ->withErrors($error)
-                ->withInput();
-        }
-
-        $user->password = Hash::make($data->input('new_password'));
-        $user->save();
-
-        return Redirect::back()->with('success', __('dashboard/user/changePassword.success'));
     }
 
     public function showFavorite() {
