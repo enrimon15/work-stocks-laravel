@@ -14,5 +14,8 @@ return [
     'companyAddress' => 'Company Address',
     'shareThisJob' => 'Share this Job',
     'addBookMark' => 'Bookmark this Job',
-    'applyThisJob' => 'Apply this Job'
+    'applyThisJob' => 'Apply this Job',
+    'applyMessage' => 'Are you sure that you want to send your application for the offer <b>:offersName</b> published by the company <b>:company</b>?',
+    'cancelButton' => 'Erase',
+    'confirmButton' => 'Send Application'
 ];

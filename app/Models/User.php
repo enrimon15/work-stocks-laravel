@@ -54,6 +54,8 @@ use TCG\Voyager\Models\Role;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @mixin \Eloquent
  * @property-read \App\Models\Company|null $company
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Application[] $applications
+ * @property-read int|null $applications_count
  */
 class User extends \TCG\Voyager\Models\User
 {
@@ -133,5 +135,9 @@ class User extends \TCG\Voyager\Models\User
 
     public function company() {
         return $this->hasOne( Company::class);
+    }
+
+    public function applications() {
+        return $this->belongsToMany(JobOffer::class,'applications','id_subscriber','id_job_offer')->withTimestamps();
     }
 }

@@ -56,6 +56,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \Illuminate\Database\Eloquent\Collection|Tagged[] $skillTags
  * @property-read int|null $skill_tags_count
  * @property-read \App\Models\PlacesOfWork $workingPlace
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $applicants
+ * @property-read int|null $applicants_count
  */
 class JobOffer extends Model
 {
@@ -88,5 +90,9 @@ class JobOffer extends Model
 
     public function workingPlace() {
         return $this->belongsTo( PlacesOfWork::class);
+    }
+
+    public function applicants() {
+        return $this->belongsToMany(User::class,'applications','id_job_offer','id_subscriber')->withTimestamps();
     }
 }

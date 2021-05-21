@@ -36,6 +36,7 @@
                 </li>
             </ul>
         </div>
+
         <a class="btn btn-black bn-det" href="{{route('jobs/getById', ['id'=>$job->id])}}">{{__('jobs/jobs.apply')}}
             <i class="ti-arrow-right ml-1"></i></a>
     </div>

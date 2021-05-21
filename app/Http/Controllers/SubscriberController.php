@@ -2,23 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ApplicationMailCompany;
+use App\Mail\ApplicationMailForSubscriber;
+use App\Models\Application;
 use App\Models\Filters\FilterJobOfferExperienceYears;
 use App\Models\Filters\FilterJobOfferLocation;
 use App\Models\Filters\FilterJobOfferSalary;
 use App\Models\Filters\FilterJobOfferSkills;
+use App\Models\JobOffer;
 use App\Models\User;
 use Carbon\Carbon;
 use Conner\Tagging\Model\Tag;
 use Conner\Tagging\Model\TagGroup;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Response;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class SubscriberController extends Controller
 {
-    public function subscribersCatalog(Request $request) {
+    public function subscribersCatalog(Request $request)
+    {
         $subscribers = QueryBuilder::for(User::class)
-            ->where('role_id', '=',3)
+            ->where('role_id', '=', 3)
             /*->allowedFilters(['title',
                 'experience',
                 'company.name',
@@ -30,7 +39,7 @@ class SubscriberController extends Controller
 
         if ($request->ajax()) {
             return view('subscribers.subscribers-search-data')
-                ->with('subscribers',$subscribers)
+                ->with('subscribers', $subscribers)
                 ->render();
         } else {
 
@@ -50,5 +59,64 @@ class SubscriberController extends Controller
         }
 
 
+    }
+
+    public function apply(Request $request, $idJobOffer)
+    {
+//        if (!$request->ajax()) {
+//            return redirect()->route('subscribers/getAll');
+//        } else {
+            try {
+
+                $idSubscriber = Auth::id();
+
+                if($idSubscriber == null) {
+                    return $this->abort("Redirect",308);
+                }
+
+                $subscriber = User::findOrFail($idSubscriber);
+                $jobOffer = JobOffer::findOrFail($idJobOffer);
+
+                if($subscriber === null || $jobOffer === null) {
+                    return $this->abort('Subscriber o offerta non trovata',500);
+                }
+
+                if($jobOffer->due_date < Carbon::now()) {
+                    return $this->abort('Offerta scaduta',405);
+                }
+
+                $application = Application::where('id_subscriber', '=', $subscriber->id)
+                    ->where('id_job_offer', '=', $jobOffer->id)
+                    ->first();
+
+
+                if ($application === null) {
+                    $subscriber->applications()->attach($jobOffer->id);
+
+
+                    $details = [
+                        'name' => $subscriber->name,
+                        'surname' => $subscriber->surname,
+                        'jobOfferName' => $jobOffer->title,
+                        'companyName' => $jobOffer->company->name
+                    ];
+                    Mail::to($subscriber->email)->send(new ApplicationMailForSubscriber($details));
+                    Mail::to($jobOffer->company->email)->send(new ApplicationMailCompany($details));
+
+                    return response('', 200);
+                }
+
+                return $this->abort('Already Applied',500);
+
+
+            } catch (ModelNotFoundException $e) {
+                return redirect()->route('subscribers/getAll');
+            }
+
+       // }
+    }
+
+    private function abort($description, $errorCode) {
+        return Response::json(['body'=>$description],$errorCode);
     }
 }

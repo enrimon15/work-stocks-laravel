@@ -14,5 +14,8 @@ return [
     'companyAddress' => 'Contatti',
     'shareThisJob' => 'Condividi quest\'offerta',
     'addBookMark' => 'Aggiungi ai preferiti',
-    'applyThisJob' => 'Candidati'
+    'applyThisJob' => 'Candidati',
+    'applyMessage' => 'Sei sicuro di voler confermare la tua candidatura per l\'offerta <b>:offersName</b> pubblicata dall\'azienda <b>:company</b>?',
+    'cancelButton' => 'Annulla',
+    'confirmButton' => 'Invia Candidatura'
 ];

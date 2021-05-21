@@ -30,6 +30,31 @@
                     <div class="listing-detail-item">
                         <a href="javascript:void(0)" data-toggle="modal" data-target="#apply" class="btn btn-list full-width mb-2 text-warning"><i class="ti-email mr-2"></i>{{__('jobs/jobs.applyThisJob')}}</a><br>
                         <!--<a href="#" class="btn btn-list full-width color--linkedin"><i class="ti-linkedin mr-2"></i> Apply With linkedin</a>-->
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="apply" tabindex="-1" role="dialog" aria-labelledby="apply" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">{{__('jobs/jobs.applyThisJob')}}</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        @lang('jobs/jobs.applyMessage',['company'=>$job->company->name,'offersName'=>$job->title])
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang('jobs/jobs.cancelButton')</button>
+                                        @if(Auth::id())
+                                        <button type="button" id="confirmationButton" class="btn btn-primary" onclick="sendApplication('{{route('subscribers/apply',['idJobOffer'=>$job->id])}}')">@lang('jobs/jobs.confirmButton')</button>
+                                        @else
+
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -336,3 +361,7 @@
 
 
 @endsection
+
+@push('scripts')
+    <script src="{{asset('js/custom/jobs/JobApplication.js')}}"></script>
+@endpush
