@@ -53,6 +53,7 @@ Route::prefix('/company')->middleware('roleIn:company')->group(function () {
 
         Route::get('/manage-jobs', [DashboardCompanyController::class, 'manageJobs'])->name('manageJobsCompany');
         Route::get('/delete-job/{id}', [DashboardCompanyController::class, 'deleteJob'])->name('deleteJob');
+        Route::get('/job-candidates/{jobId}', [DashboardCompanyController::class, 'showCandidate'])->name('manageJobsCompanyCandidate');
     });
 
 });

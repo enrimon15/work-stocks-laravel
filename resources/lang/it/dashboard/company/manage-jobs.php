@@ -9,6 +9,10 @@ return [
     'cancel' => 'Annulla',
     'delete' => 'Elimina',
 
+    'tooltipCandidates' => 'Visualizza Candidati',
+    'tooltipEdit' => 'Modifica Offerta',
+    'tooltipDelete' => 'Elimina Offerta',
+
 
     'successDelete' => 'Offerta di lavoro eliminata correttamente',
 ];

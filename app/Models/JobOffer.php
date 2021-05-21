@@ -92,6 +92,6 @@ class JobOffer extends Model
     }
 
     public function applicants() {
-        return $this->belongsToMany(User::class,'applications','id_job_offer','id_subscriber')->withTimestamps();
+        return $this->belongsToMany(User::class,'applications','id_job_offer','id_subscriber')->withTimestamps()->withPivot('id_subscriber');
     }
 }

@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\JobOffer;
 use App\Models\PlacesOfWork;
+use App\Models\User;
 use Conner\Tagging\Model\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -156,7 +158,7 @@ class DashboardCompanyController extends Controller
         $data->validate([
             'workingPlace' => ['required','numeric', 'exists:places_of_works,id'], // Rule:exists -->'exists:places_of_work,id'
             'title' => ['required','string', 'max:255'],
-            'description'=> ['required','string', 'max:255'],
+            'description'=> ['required','string'],
             'dueDate'=> ['required', 'date', 'after:yesterday'],
             'offerType'=> ['required','string', 'max:255', Rule::in(['full_time', 'part_time','construction_base', 'internship'])],
             'experience' => ['required','numeric', 'min:0'],
@@ -201,7 +203,7 @@ class DashboardCompanyController extends Controller
 
     public function manageJobs() {
         $user = Auth::user();
-        $jobOffers = $user->company->jobOffers()->orderBy('due_date', 'desc')->get();
+        $jobOffers = $user->company->jobOffers()->orderBy('due_date', 'desc')->paginate(10);
         return view('company.dashboard.manage-job-offer')->with('jobs', $jobOffers);
     }
 
@@ -215,5 +217,17 @@ class DashboardCompanyController extends Controller
         }
 
         return back()->with('success', __('dashboard/company/manage-jobs.successDelete'));
+    }
+
+    public function showCandidate($jobId) {
+        $user = Auth::user();
+        $candidates=DB::table('users')
+            ->join('applications','users.id','=','applications.id_subscriber')
+            ->where('applications.id_job_offer','=',$jobId)
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
+        //$candidates = User::where('id', '=', $jobId)->orderBy('created_at', 'desc')->paginate(10);
+        return view('company.dashboard.job-candidates')->with('candidates', $candidates);
     }
 }

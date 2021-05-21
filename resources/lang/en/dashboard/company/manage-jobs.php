@@ -9,6 +9,9 @@ return [
     'cancel' => 'Cancel',
     'delete' => 'Delete',
 
+    'tooltipCandidates' => 'Show Candidates',
+    'tooltipEdit' => 'Edit Job Offer',
+    'tooltipDelete' => 'Delete Job Offer',
 
     'successDelete' => 'Job offer successfully deleted',
 ];

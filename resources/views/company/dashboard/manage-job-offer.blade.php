@@ -96,14 +96,14 @@
                                 </div>
 
                                 <div class="mg-action">
-                                    <div class="btn-group" data-toggle="tooltip" data-placement="top" title="Visualizza Candidati">
-                                        <a href="{{route('editJobCompany', ['id' => $job->id])}}" class="mg-candidate"><i class="ti-user"></i></a>
+                                    <div class="btn-group" data-toggle="tooltip" data-placement="top" title="{{__('dashboard/company/manage-jobs.tooltipCandidates')}}">
+                                        <a href="{{route('manageJobsCompanyCandidate', ['jobId' => $job->id])}}" class="mg-candidate"><i class="ti-user"></i></a>
                                     </div>
                                     <span class="{{$job->due_date < date('Y-m-d') ? 'd-none' : ''}}">
-                                        <div class="btn-group ml-2" data-toggle="tooltip" data-placement="top" title="Modifica Offerta">
+                                        <div class="btn-group ml-2" data-toggle="tooltip" data-placement="top" title="{{__('dashboard/company/manage-jobs.tooltipEdit')}}">
                                             <a href="{{route('editJobCompany', ['id' => $job->id])}}" class="mg-edit"><i class="ti-pencil"></i></a>
                                         </div>
-                                        <div class="btn-group" data-toggle="tooltip" data-placement="top" title="Elimina Offerta">
+                                        <div class="btn-group" data-toggle="tooltip" data-placement="top" title="{{__('dashboard/company/manage-jobs.tooltipDelete')}}">
                                             <a onclick="deleteJobShow({{$job}})" data-toggle="modal" data-target="#delete-job-modal" href="#" class="mg-delete"><i class="ti-trash"></i></a>
                                         </div>
                                     </span>
@@ -114,10 +114,11 @@
                     @empty
                         <p>{{__('dashboard/company/manage-jobs.noContent')}}</p>
                     @endforelse
-
                 </div>
 
             </div>
+            {!! $jobs->links('vendor/pagination/bootstrap-4')!!}
+
 
 <script>
     function deleteJobShow(job) {

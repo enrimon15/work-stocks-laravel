@@ -138,6 +138,6 @@ class User extends \TCG\Voyager\Models\User
     }
 
     public function applications() {
-        return $this->belongsToMany(JobOffer::class,'applications','id_subscriber','id_job_offer')->withTimestamps();
+        return $this->belongsToMany(JobOffer::class,'applications','id_subscriber','id_job_offer')->withTimestamps()->withPivot('id_job_offer');
     }
 }

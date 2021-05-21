@@ -35,7 +35,7 @@ class JobController extends Controller
                             AllowedFilter::custom('experience',new FilterJobOfferExperienceYears),
                             AllowedFilter::custom('salary', new FilterJobOfferSalary),
                             AllowedFilter::custom('skill',new FilterJobOfferSkills)])
-            ->paginate(1);
+            ->paginate(10);
 
         if ($request->ajax()) {
             return view('jobs.job-search-data')
