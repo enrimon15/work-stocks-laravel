@@ -80,7 +80,7 @@
                 <div class="single-job-head head-light" style="border: 1px solid #00a94f!important;">
                     <div class="single-job-info pl-0">
                         <ul class="tags-jobs row">
-                            <li class="col mx-auto text-left"><i class="ti-file float-none"></i> <strong>Applications:</strong> 14</li>
+                            <li class="col mx-auto text-left"><i class="ti-file float-none"></i> <strong>Applications:</strong> {{count($job->applicants)}}</li>
                             <li class="col mx-auto text-center"><i class="ti-calendar float-none"></i> <strong>Post Date:</strong> {{date('d-m-Y', strtotime($job->created_at))}}</li>
                             <li class="col mx-auto text-right"><i class="ti-alarm-clock float-none"></i> <strong>Due Date:</strong> {{date('d-m-Y', strtotime($job->due_date))}}</li>
                         </ul>

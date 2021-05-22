@@ -79,4 +79,10 @@ return [
 
     'successCv' => 'CV aggiornato con successo',
     'downloadCv' => 'Scarica CV',
+
+    'modalTitle' => 'Attenzione',
+    'modalBodyQualification' => 'Sei sicuro di voler eliminare la qualifica?',
+    'modalBodySkill' => 'Sei sicuro di voler eliminare la competenza?',
+    'modalBodyExperience' => 'Sei sicuro di voler eliminare l\'esperienza?',
+    'modalBodyCertificate' => 'Sei sicuro di voler eliminare la certificazione?',
 ];

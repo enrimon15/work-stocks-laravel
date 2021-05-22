@@ -166,7 +166,7 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label class="social-nfo">{{__('dashboard/user/profile.country')}}</label>
-                                <input class="form-control" type="text" name="{{__('dashboard/user/profile.phCountry')}}" placeholder="Nazione" value="{{$user->profile->country ?? null}}">
+                                <input class="form-control" type="text" name="country" placeholder="{{__('dashboard/user/profile.phCountry')}}" value="{{$user->profile->country ?? null}}">
                             </div>
                             <!-- Error -->
                             @if ($errors->has('country'))
@@ -177,7 +177,7 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label class="social-nfo">{{__('dashboard/user/profile.city')}}</label>
-                                <input class="form-control" type="text" name="city" placeholder="{{__('dashboard/user/profile.phCity')}}" value="{{$user->profile->min_salary ?? null}}">
+                                <input class="form-control" type="text" name="city" placeholder="{{__('dashboard/user/profile.phCity')}}" value="{{$user->profile->city ?? null}}">
                             </div>
                             <!-- Error -->
                             @if ($errors->has('city'))

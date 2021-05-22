@@ -221,13 +221,16 @@ class DashboardCompanyController extends Controller
 
     public function showCandidate($jobId) {
         $user = Auth::user();
+
         $candidates=DB::table('users')
             ->join('applications','users.id','=','applications.id_subscriber')
+            ->join('user_profiles','users.id','=','user_profiles.user_id')
             ->where('applications.id_job_offer','=',$jobId)
-            ->orderBy('created_at', 'desc')
+            ->orderBy('applications.created_at', 'desc')
             ->paginate(10);
 
-        //$candidates = User::where('id', '=', $jobId)->orderBy('created_at', 'desc')->paginate(10);
-        return view('company.dashboard.job-candidates')->with('candidates', $candidates);
+        return view('company.dashboard.job-candidates')
+            ->with('candidates', $candidates)
+            ->with('jobName', JobOffer::find($jobId)->title);
     }
 }

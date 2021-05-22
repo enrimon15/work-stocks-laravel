@@ -14,4 +14,7 @@ return [
     'tooltipDelete' => 'Delete Job Offer',
 
     'successDelete' => 'Job offer successfully deleted',
+
+    'titleCandidates' => 'Candidates list to the job offer: ',
+    'noContentCandidates' => 'There are no candidates to the job offer: ',
 ];

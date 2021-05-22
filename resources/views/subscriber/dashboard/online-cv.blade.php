@@ -78,7 +78,9 @@
                         <td>
                             <div class="dash-action">
                                 <a href="{{route('onlineCvEdit', ['operationType' => 'qualification','id' => $qualification->id])}}" class="dg-edit" data-toggle="tooltip" data-placement="top" title="{{__('dashboard/user/onlineCV.modify')}}"><i class="ti-pencil"></i></a>
-                                <a href="{{route('onlineCvDelete', ['id' => $qualification->id, 'operationType' => 'qualification'])}}" class="dg-delete" data-toggle="tooltip" data-placement="top" title="{{__('dashboard/user/onlineCV.delete')}}"><i class="ti-trash"></i></a>
+                                <span data-toggle="tooltip" data-placement="top" title="{{__('dashboard/user/onlineCV.delete')}}">
+                                    <a href="#" class="dg-delete" onclick="deleteModalShow({{$qualification}}, 'qualification')" data-toggle="modal" data-target="#delete-qualification-modal"><i class="ti-trash"></i></a>
+                                </span>
                             </div>
                         </td>
                     </tr>
@@ -157,6 +159,22 @@
     </div>
     <!-- /Education Info -->
 
+    <!-- Modal Delete Qualification -->
+    <div class="modal fade" id="delete-qualification-modal" tabindex="-1" role="dialog" aria-labelledby="delete-qualification-modal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{__('dashboard/user/onlineCV.modalTitle')}}</h5>
+                </div>
+                <div class="modal-body">{{__('dashboard/user/onlineCV.modalBodyQualification')}}</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">{{__('dashboard/company/manage-jobs.cancel')}}</button>
+                    <a id="buttonDeleteQualification" href="#" class="btn btn-danger color--white" style="border-color: transparent!important;">{{__('dashboard/company/manage-jobs.delete')}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Modal Qualification Description -->
     <div class="modal fade" id="qualification-description-modal" tabindex="-1" role="dialog" aria-labelledby="qualification-description-modal" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -210,7 +228,9 @@
                         <td>
                             <div class="dash-action">
                                 <a href="{{route('onlineCvEdit', ['operationType' => 'experience','id' => $experience->id])}}" class="dg-edit" data-toggle="tooltip" data-placement="top" title="{{__('dashboard/user/onlineCV.modify')}}"><i class="ti-pencil"></i></a>
-                                <a href="{{route('onlineCvDelete', ['id' => $experience->id, 'operationType' => 'experience'])}}" class="dg-delete" data-toggle="tooltip" data-placement="top" title="{{__('dashboard/user/onlineCV.delete')}}"><i class="ti-trash"></i></a>
+                                <span data-toggle="tooltip" data-placement="top" title="{{__('dashboard/user/onlineCV.delete')}}">
+                                    <a href="#" onclick="deleteModalShow({{$experience}}, 'experience')" data-toggle="modal" data-target="#delete-experience-modal" class="dg-delete"><i class="ti-trash"></i></a>
+                                </span>
                             </div>
                         </td>
                     </tr>
@@ -280,6 +300,22 @@
     </div>
     <!-- /Experience Info -->
 
+        <!-- Modal Delete Experience -->
+        <div class="modal fade" id="delete-experience-modal" tabindex="-1" role="dialog" aria-labelledby="delete-experience-modal" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{__('dashboard/user/onlineCV.modalTitle')}}</h5>
+                    </div>
+                    <div class="modal-body">{{__('dashboard/user/onlineCV.modalBodyExperience')}}</div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">{{__('dashboard/company/manage-jobs.cancel')}}</button>
+                        <a id="buttonDeleteExperience" href="#" class="btn btn-danger color--white" style="border-color: transparent!important;">{{__('dashboard/company/manage-jobs.delete')}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Modal Qualification Description -->
         <div class="modal fade" id="experience-description-modal" tabindex="-1" role="dialog" aria-labelledby="xperience-description-modal" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -325,7 +361,9 @@
                         <td>
                             <div class="dash-action">
                                 <a href="{{route('onlineCvEdit', ['operationType' => 'certificate','id' => $certificate->id])}}" class="dg-edit" data-toggle="tooltip" data-placement="top" title="{{__('dashboard/user/onlineCV.modify')}}"><i class="ti-pencil"></i></a>
-                                <a href="{{route('onlineCvDelete', ['id' => $certificate->id, 'operationType' => 'certificate'])}}" class="dg-delete" data-toggle="tooltip" data-placement="top" title="{{__('dashboard/user/onlineCV.delete')}}"><i class="ti-trash"></i></a>
+                                <span data-toggle="tooltip" data-placement="top" title="{{__('dashboard/user/onlineCV.delete')}}">
+                                    <a href="#" onclick="deleteModalShow({{$certificate}}, 'certificate')" data-toggle="modal" data-target="#delete-certificate-modal" class="dg-delete"><i class="ti-trash"></i></a>
+                                </span>
                             </div>
                         </td>
                     </tr>
@@ -402,6 +440,22 @@
     </div>
     <!-- /Certificates Info -->
 
+    <!-- Modal Delete Certificate -->
+    <div class="modal fade" id="delete-certificate-modal" tabindex="-1" role="dialog" aria-labelledby="delete-certificate-modal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{__('dashboard/user/onlineCV.modalTitle')}}</h5>
+                </div>
+                <div class="modal-body">{{__('dashboard/user/onlineCV.modalBodyCertificate')}}</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">{{__('dashboard/company/manage-jobs.cancel')}}</button>
+                    <a id="buttonDeleteCertificate" href="#" class="btn btn-danger color--white" style="border-color: transparent!important;">{{__('dashboard/company/manage-jobs.delete')}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Add Skills -->
     <div class="tr-single-box">
         <div class="tr-single-header">
@@ -425,7 +479,9 @@
                             <td>
                                 <div class="dash-action">
                                     <a href="{{route('onlineCvEdit', ['operationType' => 'skill','id' => $skill->id])}}" class="dg-edit" data-toggle="tooltip" data-placement="top" title="{{__('dashboard/user/onlineCV.modify')}}"><i class="ti-pencil"></i></a>
-                                    <a href="{{route('onlineCvDelete', ['id' => $skill->id, 'operationType' => 'skill'])}}" class="dg-delete" data-toggle="tooltip" data-placement="top" title="{{__('dashboard/user/onlineCV.delete')}}"><i class="ti-trash"></i></a>
+                                    <span data-toggle="tooltip" data-placement="top" title="{{__('dashboard/user/onlineCV.delete')}}">
+                                        <a href="#" onclick="deleteModalShow({{$skill}}, 'skill')" data-toggle="modal" data-target="#delete-skill-modal" class="dg-delete"><i class="ti-trash"></i></a>
+                                    </span>
                                 </div>
                             </td>
                         </tr>
@@ -472,7 +528,7 @@
     </div>
     <!-- /Skills Info -->
 
-    <!-- Add Skills -->
+    <!-- Add CV file -->
     <div class="tr-single-box">
         <div class="tr-single-header">
             <h4><i class="ti-file"></i> {{__('dashboard/user/onlineCV.cvTitle')}}</h4>
@@ -512,7 +568,23 @@
             </form>
         </div>
 
-</div>
+    </div>
+
+        <!-- Modal Delete Qualification -->
+        <div class="modal fade" id="delete-skill-modal" tabindex="-1" role="dialog" aria-labelledby="delete-skill-modal" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{__('dashboard/user/onlineCV.modalTitle')}}</h5>
+                    </div>
+                    <div class="modal-body">{{__('dashboard/user/onlineCV.modalBodySkill')}}</div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">{{__('dashboard/company/manage-jobs.cancel')}}</button>
+                        <a id="buttonDeleteSkill" href="#" class="btn btn-danger color--white" style="border-color: transparent!important;">{{__('dashboard/company/manage-jobs.delete')}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 <script src="{{asset('js/dashboard.js')}}"></script>
 <script src="{{asset('js/dashboard-in-progress.js')}}"></script>
@@ -563,12 +635,40 @@
     }
 </script>
 
-        <script>
-            $(document).ready(function() {
-                $('#level-skill-select').select2({
-                    minimumResultsForSearch: -1
-                });
-            });
-        </script>
+<script>
+    $(document).ready(function() {
+        $('#level-skill-select').select2({
+            minimumResultsForSearch: -1
+        });
+    });
+</script>
+
+<script>
+    function deleteModalShow(obj, opType) {
+        console.log("obj: ", obj);
+        console.log("obj: ", obj['id']);
+        let url = '{{route('onlineCvDelete', ['id' => ':id', 'operationType' => ':opType'])}}';
+        url = url.replace(':id', obj.id);
+        url = url.replace(':opType', opType);
+
+        switch(opType) {
+            case 'qualification':
+                document.getElementById("buttonDeleteQualification").href = url;
+                break;
+            case 'experience':
+                document.getElementById("buttonDeleteExperience").href = url;
+                break;
+            case 'certificate':
+                document.getElementById("buttonDeleteCertificate").href = url;
+                break;
+            case 'skill':
+                document.getElementById("buttonDeleteSkill").href = url;
+                break;
+            default:
+        }
+
+
+    }
+</script>    
 
 @endsection

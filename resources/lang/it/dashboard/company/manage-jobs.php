@@ -15,4 +15,8 @@ return [
 
 
     'successDelete' => 'Offerta di lavoro eliminata correttamente',
+
+
+    'titleCandidates' => 'Lista di candidati per l\'offerta di lavoro: ',
+    'noContentCandidates' => 'Non sono presenti candidati per l\'offerta di lavoro: ',
 ];

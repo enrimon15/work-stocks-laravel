@@ -79,4 +79,10 @@ return [
 
     'successCv' => 'CV updated successfully',
     'downloadCv' => 'Download CV',
+
+    'modalTitle' => 'Warning',
+    'modalBodyQualification' => 'Do you want to delete the qualification?',
+    'modalBodySkill' => 'Do you want to delete the skill?',
+    'modalBodyExperience' => 'Do you want to delete the experience?',
+    'modalBodyCertificate' => 'Do you want to delete the certificate?',
 ];

@@ -65,12 +65,12 @@
 
                     </div>
 
-                    <div class="d-block d-none d-sm-block d-md-none mb-3">
+                    <!-- <div class="d-block d-none d-sm-block d-md-none mb-3">
                         <a href="javascript:void(0)" onclick="openNav()" class="btn btn-info full-width btn-md"><i
                                 class="ti-filter mrg-r-5"></i>Filter Search</a>
-                    </div>
+                    </div> -->
 
-                    <div class="sidebar-container d-sm-none d-md-block d-none">
+                    <div class="sidebar-container d-sm-block d-md-block">
 
                     @if(!empty($tags))
                         <!-- Experince -->
@@ -278,6 +278,8 @@
 
             </div>
 
+
+
         </div>
     </section>
     <div class="clearfix"></div>
@@ -289,6 +291,18 @@
 
     <script>
         window.skillsFilterTranslation = '{{__('jobs/filters.skillsTitle')}}';
+    </script>
+
+    <script>
+        $(window).on('scroll',function() {
+            var scroll = $(window).scrollTop();
+
+            if (scroll >= 450) {
+                $(".advance-search").addClass("advn-fixed");
+            } else {
+                $(".advance-search").removeClass("advn-fixed");
+            }
+        });
     </script>
 @endpush
 

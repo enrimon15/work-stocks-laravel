@@ -58,6 +58,8 @@ class DashboardUserController extends Controller
 
         $user->save();
 
+
+
         $profile = new UserProfile();
         if ($user->profile()->exists()) {
             $profile = $user->profile;
@@ -73,7 +75,10 @@ class DashboardUserController extends Controller
         $profile->country = $data->input('country');
         $profile->city = $data->input('city');
         $profile->website = $data->input('website');
+
         $profile->save();
+
+
 
         return back()->with('success', __('dashboard/user/profile.success'));
     }
