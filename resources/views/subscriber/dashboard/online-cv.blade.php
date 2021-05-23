@@ -541,7 +541,7 @@
 
                     <div class="col-lg-12 col-md-12 col-sm-12">
                         <div class="row float-right">
-                            @if(Auth::user()->profile != null && uth::user()->profile->cv_path != null)
+                            @if(Auth::user()->profile != null && Auth::user()->profile->cv_path != null )
                                 <p class="mr-3">{{'CV' . '-' . Auth::user()->name . '-' . Auth::user()->surname . '.pdf'}}</p>
                             @endif
                             <div class="form-group mr-2">

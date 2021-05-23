@@ -22,7 +22,7 @@
                     </div>
                     <div class="tr-list-info">
                         <h4 class="mb-1">{{$job->title}}</h4>
-                        <h6 class="font-14"><a href="company-detail.html" class="text-warning">{{$job->company->name}}</a></h6>
+                        <h6 class="font-14"><a href="{{route('profile', ['type' => 'company', 'id' => $job->company->id])}}" class="text-warning">{{$job->company->name}}</a></h6>
                         <p class="mb-1"><i class="ti-location-pin mr-2"></i>{{$job->workingPlace->address.', '.$job->workingPlace->city.', '.$job->workingPlace->country}}</p>
                     </div>
                 </div>
@@ -66,6 +66,16 @@
 <!-- ============== Job Detail ====================== -->
 <section class="tr-single-detail gray-bg">
     <div class="container">
+
+        @if(Session::get('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{Session::get('success')}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
+
         <div class="alert alert-dismissible fade show d-none" id="confirmApplication" role="alert">
             <span id="confirmApplicationSpan"></span>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -80,9 +90,9 @@
                 <div class="single-job-head head-light" style="border: 1px solid #00a94f!important;">
                     <div class="single-job-info pl-0">
                         <ul class="tags-jobs row">
-                            <li class="col mx-auto text-left"><i class="ti-file float-none"></i> <strong>Applications:</strong> {{count($job->applicants)}}</li>
-                            <li class="col mx-auto text-center"><i class="ti-calendar float-none"></i> <strong>Post Date:</strong> {{date('d-m-Y', strtotime($job->created_at))}}</li>
-                            <li class="col mx-auto text-right"><i class="ti-alarm-clock float-none"></i> <strong>Due Date:</strong> {{date('d-m-Y', strtotime($job->due_date))}}</li>
+                            <li class="col mx-auto text-left"><i class="ti-file float-none"></i> <strong>{{__('jobs/jobs.applications')}}</strong> {{count($job->applicants)}}</li>
+                            <li class="col mx-auto text-center"><i class="ti-calendar float-none"></i> <strong>{{__('jobs/jobs.postDate')}}</strong> {{date('d-m-Y', strtotime($job->created_at))}}</li>
+                            <li class="col mx-auto text-right"><i class="ti-alarm-clock float-none"></i> <strong>{{__('jobs/jobs.dueDate')}}</strong> {{date('d-m-Y', strtotime($job->due_date))}}</li>
                         </ul>
                     </div>
                 </div>
@@ -134,7 +144,7 @@
             <div class="col-lg-4 col-md-12 col-sm-12">
 
                 <div class="offer-btn-wrap mb-4">
-                    <a href="#" class="btn btn-info btn-md full-width"><i class="mr-2 ti-bookmark"></i>{{__('jobs/jobs.addBookMark')}}</a>
+                    <a href="{{route('favoriteExecute', ['idJobOffer' => $job->id])}}" class="btn btn-info btn-md full-width"><i class="mr-2 ti-bookmark"></i>{{__('jobs/jobs.addBookMark')}}</a>
                 </div>
 
                 <!-- Job Overview -->
@@ -164,7 +174,7 @@
                                     </div>
                                     <div class="icon-box-text">
                                         <strong class="d-block">{{__('jobs/jobs.gender')}}</strong>
-                                        {{$job->sex}}
+                                        {{__('jobs/jobs.' . $job->sex)}}
                                     </div>
                                 </div>
                             </li>
@@ -189,7 +199,7 @@
                                     </div>
                                     <div class="icon-box-text">
                                         <strong class="d-block">{{__('jobs/jobs.experience')}}</strong>
-                                        {{$job->experience . ' anni'}}
+                                        {{$job->experience . ' ' . __('jobs/jobs.year')}}
                                     </div>
                                 </div>
                             </li>
@@ -200,8 +210,8 @@
                                         <i class="lni lni-briefcase"></i>
                                     </div>
                                     <div class="icon-box-text">
-                                        <strong class="d-block">Tipologia Contratto</strong>
-                                        {{$job->offers_type}}
+                                        <strong class="d-block">{{__('jobs/jobs.offerType')}}</strong>
+                                        {{__('jobs/jobs.' . $job->offers_type)}}
                                     </div>
                                 </div>
                             </li>

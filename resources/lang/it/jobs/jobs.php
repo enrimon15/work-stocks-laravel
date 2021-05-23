@@ -17,5 +17,18 @@ return [
     'applyThisJob' => 'Candidati',
     'applyMessage' => 'Sei sicuro di voler confermare la tua candidatura per l\'offerta <b>:offersName</b> pubblicata dall\'azienda <b>:company</b>?',
     'cancelButton' => 'Annulla',
-    'confirmButton' => 'Invia Candidatura'
+    'confirmButton' => 'Invia Candidatura',
+
+    'applications' => 'Candidature:',
+    'dueDate' => 'Scadenza:',
+    'postDate' => 'Creazione:',
+    'male' => 'M',
+    'female' => 'F',
+    'not_specified' => 'Non specificato',
+    'construction_base' => 'Apprendistato',
+    'internship' => 'Tirocinio',
+    'full_time' => 'Full-Time',
+    'part_time' => 'Part-Time',
+    'offerType' => 'Tipologia Contratto',
+    'year' => 'anni'
 ];

@@ -21,16 +21,19 @@ Route::prefix('/user')->middleware('roleIn:user')->group(function () {
 
         Route::get('/favorite', [DashboardUserController::class, 'showFavorite'])->name('favorite');
 
-        Route::get('/applied-jobs', [DashboardUserController::class, 'showAppliedJobs'])->name('appliedJobs');
+        Route::prefix('/applied-jobs')->group(function () {
+            Route::get('/', [DashboardUserController::class, 'showAppliedJobs'])->name('appliedJobs');
+            Route::get('/delete/{id}', [DashboardUserController::class, 'deleteAppliedJobs'])->name('deleteAppliedJob');
+        });
 
         Route::get('/job-alert', [DashboardUserController::class, 'showJobAlert'])->name('jobAlert');
 
         Route::prefix('/online-cv')->group(function () {
             Route::get('/', [DashboardUserController::class, 'showOnlineCV'])->name('onlineCV');
-            Route::post('/online-cv/{operationType}', [DashboardUserController::class, 'populateOnlineCV'])->name('onlineCvExecute');
-            Route::get('/online-cv/delete/{id}/{operationType}', [DashboardUserController::class, 'deleteRecordCv'])->name('onlineCvDelete');
-            Route::get('/online-cv/edit/{operationType}/{id}', [DashboardUserController::class, 'editCV'])->name('onlineCvEdit');
-            Route::get('/online-cv/download-cv', [DashboardUserController::class, 'downloadCv'])->name('downloadCv');
+            Route::post('/{operationType}', [DashboardUserController::class, 'populateOnlineCV'])->name('onlineCvExecute');
+            Route::get('/delete/{id}/{operationType}', [DashboardUserController::class, 'deleteRecordCv'])->name('onlineCvDelete');
+            Route::get('/edit/{operationType}/{id}', [DashboardUserController::class, 'editCV'])->name('onlineCvEdit');
+            Route::get('/download-cv', [DashboardUserController::class, 'downloadCv'])->name('downloadCv');
         });
     });
 

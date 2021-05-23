@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Application;
 use App\Models\Certificate;
+use App\Models\JobOffer;
 use App\Models\Qualification;
 use App\Models\Skill;
 use App\Models\UserProfile;
 use App\Models\WorkingExperience;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
@@ -88,7 +91,32 @@ class DashboardUserController extends Controller
     }
 
     public function showAppliedJobs() {
-        return view('subscriber.dashboard.applied-jobs');
+        $user = Auth::user();
+
+        $appliedJobs=DB::table('job_offers')
+            ->select('job_offers.*', 'applications.created_at', 'companies.name as company_name', 'places_of_works.country as country', 'places_of_works.city as city')
+            ->join('applications','job_offers.id','=','applications.id_job_offer')
+            ->join('companies','companies.id','=','job_offers.company_id')
+            ->join('places_of_works','places_of_works.id','=','job_offers.place_of_work_id')
+            ->where('applications.id_subscriber','=',$user->id)
+            ->orderBy('applications.created_at', 'desc')
+            ->paginate(10);
+
+        return view('subscriber.dashboard.applied-jobs')->with('appliedJobs', $appliedJobs);
+    }
+
+    public function deleteAppliedJobs($id) {
+        $user = Auth::user();
+        $job = JobOffer::find($id);
+
+        if ($user->applications->contains($job)) {
+            DB::table('applications')
+                ->where('id_subscriber', '=', $user->id)
+                ->where('id_job_offer', '=', $job->id)
+                ->delete();
+        }
+
+        return back()->with('success', __('dashboard/user/appliedJobs.successDelete'));
     }
 
     public function showJobAlert() {

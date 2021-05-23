@@ -7,12 +7,11 @@ use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
-    public function index($id)
+    public function index($type, $id)
     {
-        $user = Auth::user();
-        if ($user->hasRole('user')) {
+        if ($type == 'user') {
             return view('subscriber.subscriber-details');
-        } else if ($user->hasRole('company')) {
+        } else if ( $type ==  'company') {
             return view('company.company-details');
         }
     }

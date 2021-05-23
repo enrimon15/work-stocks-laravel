@@ -119,6 +119,10 @@ class SubscriberController extends Controller
        // }
     }
 
+    public function favoriteExecute($idJobOffer) {
+        return null;
+    }
+
     private function abort($description, $errorCode) {
         return response($description,$errorCode);
     }

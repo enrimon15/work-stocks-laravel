@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'skillsTitle' => 'Abilità',
+    'skillsTitle' => 'Competenze',
     'experienceTitle' => 'Esperienza Richiesta',
     'jobTypeTitle' => 'Tipo di Contratto',
     'jobLevelTitle' => 'Ruolo',
