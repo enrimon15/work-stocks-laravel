@@ -30,5 +30,10 @@ return [
     'full_time' => 'Full-Time',
     'part_time' => 'Part-Time',
     'offerType' => 'Offer Type',
-    'year' => 'year'
+    'year' => 'year',
+
+    'alreadyFavorite' => 'Remove to your favorites',
+    'alreadyApplied' => 'Application done',
+
+    'successFavorite' => 'The job offer has been successfully added to your favorites'
 ];

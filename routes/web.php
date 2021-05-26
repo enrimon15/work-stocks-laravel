@@ -26,10 +26,3 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/home', function () {
     return redirect('/');
 })->name('home');
-
-
-
-
-//rotte di prova per la class active sui <li> del menu
-Route::get('/offerte/pippo', [HomeController::class, 'index']);
-Route::get('/candidati', [HomeController::class, 'index']);

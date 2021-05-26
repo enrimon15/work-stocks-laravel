@@ -8,7 +8,7 @@ return [
     'expectedSalleryTitle' => 'Retribuzione',
     'year'=> 'Anno',
     'years' => 'Anni',
-    'full_time' => 'Tempo Pieno',
+    'full_time' => 'Full Time',
     'part_time' => 'Part Time',
     'costruction_base' => 'Apprendistato',
     'internship' => 'Tirocinio',

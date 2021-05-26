@@ -87,7 +87,32 @@ class DashboardUserController extends Controller
     }
 
     public function showFavorite() {
-        return view('subscriber.dashboard.favorite');
+        $user = Auth::user();
+
+        $favoriteJobs=DB::table('job_offers')
+            ->select('job_offers.*', 'favorite_jobs.created_at', 'companies.name as company_name', 'places_of_works.country as country', 'places_of_works.city as city')
+            ->join('favorite_jobs','job_offers.id','=','favorite_jobs.job_offer_id')
+            ->join('companies','companies.id','=','job_offers.company_id')
+            ->join('places_of_works','places_of_works.id','=','job_offers.place_of_work_id')
+            ->where('favorite_jobs.user_id','=',$user->id)
+            ->orderBy('favorite_jobs.created_at', 'desc')
+            ->paginate(10);
+
+            return view('subscriber.dashboard.favorite')->with('jobs', $favoriteJobs);
+    }
+
+    public function deleteFavorite($id) {
+        $user = Auth::user();
+        $job = JobOffer::find($id);
+
+        if ($user->applications->contains($job)) {
+            DB::table('favorite_jobs')
+                ->where('user_id', '=', $user->id)
+                ->where('job_offer_id', '=', $job->id)
+                ->delete();
+        }
+
+        return back()->with('success', __('dashboard/user/favorite.successDelete'));
     }
 
     public function showAppliedJobs() {

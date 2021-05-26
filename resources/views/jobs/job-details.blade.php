@@ -28,7 +28,11 @@
                 </div>
                 <div class="listing-detail_right">
                     <div class="listing-detail-item">
-                        <a href="javascript:void(0)" data-toggle="modal" data-target="#apply" class="btn btn-list full-width mb-2 text-warning"><i class="ti-email mr-2"></i>{{__('jobs/jobs.applyThisJob')}}</a><br>
+                        @if($job->applicants->contains(Auth::user()))
+                            <a style="cursor: not-allowed" href="#" class="btn btn-list full-width mb-2 text-warning"><i class="ti-email mr-2"></i>{{__('jobs/jobs.alreadyApplied')}}</a><br>
+                        @else
+                            <a href="javascript:void(0)" data-toggle="modal" data-target="#apply" class="btn btn-list full-width mb-2 text-warning"><i class="ti-email mr-2"></i>{{__('jobs/jobs.applyThisJob')}}</a><br>
+                        @endif
                         <!--<a href="#" class="btn btn-list full-width color--linkedin"><i class="ti-linkedin mr-2"></i> Apply With linkedin</a>-->
 
                         <!-- Modal -->
@@ -136,15 +140,20 @@
                     </div>
                 </div>-->
 
+                @if(!$job->applicants->contains(Auth::user()))
                 <a href="javascript:void(0)" data-toggle="modal" data-target="#apply" class="btn btn-info full-width mb-2">{{__('jobs/jobs.applyThisJob')}}</a>
-
+                @endif
             </div>
 
             <!-- Sidebar Start -->
             <div class="col-lg-4 col-md-12 col-sm-12">
 
                 <div class="offer-btn-wrap mb-4">
-                    <a href="{{route('favoriteExecute', ['idJobOffer' => $job->id])}}" class="btn btn-info btn-md full-width"><i class="mr-2 ti-bookmark"></i>{{__('jobs/jobs.addBookMark')}}</a>
+                    @if($job->favoriteUsers->contains(Auth::user()))
+                        <a href="{{route('deleteFavorite', ['id' => $job->id])}}" class="btn btn-info btn-md full-width"><i class="mr-2 ti-trash"></i>{{__('jobs/jobs.alreadyFavorite')}}</a>
+                    @else
+                        <a href="{{route('favoriteExecute', ['idJobOffer' => $job->id])}}" class="btn btn-info btn-md full-width"><i class="mr-2 ti-bookmark"></i>{{__('jobs/jobs.addBookMark')}}</a>
+                    @endif
                 </div>
 
                 <!-- Job Overview -->

@@ -6,6 +6,7 @@ use App\Jobs\ApplicationSendEmailJob;
 use App\Mail\ApplicationMailCompany;
 use App\Mail\ApplicationMailForSubscriber;
 use App\Models\Application;
+use App\Models\FavoriteJob;
 use App\Models\Filters\FilterJobOfferExperienceYears;
 use App\Models\Filters\FilterJobOfferLocation;
 use App\Models\Filters\FilterJobOfferSalary;
@@ -120,7 +121,35 @@ class SubscriberController extends Controller
     }
 
     public function favoriteExecute($idJobOffer) {
-        return null;
+        try {
+            $user = Auth::user();
+
+            if($user == null) {
+                return $this->abort("Redirect",308);
+            }
+
+            $jobOffer = JobOffer::findOrFail($idJobOffer);
+
+            if($jobOffer->due_date < Carbon::today()) {
+                return $this->abort('Offerta scaduta',405);
+            }
+
+            $favorite = FavoriteJob::where('user_id', '=', $user->id)
+                ->where('job_offer_id', '=', $jobOffer->id)
+                ->first();
+
+
+            if ($favorite === null) {
+                $user->favoriteJobs()->attach($jobOffer->id);
+                return back()->with('success', __('jobs/jobs.successFavorite'));
+            }
+
+            return $this->abort('Already put in favorites',500);
+
+
+        } catch (ModelNotFoundException $e) {
+            return redirect()->route('subscribers/getAll');
+        }
     }
 
     private function abort($description, $errorCode) {

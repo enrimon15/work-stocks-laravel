@@ -30,5 +30,10 @@ return [
     'full_time' => 'Full-Time',
     'part_time' => 'Part-Time',
     'offerType' => 'Tipologia Contratto',
-    'year' => 'anni'
+    'year' => 'anni',
+
+    'alreadyFavorite' => 'Rimuovi dai preferiti',
+    'alreadyApplied' => 'Candidatura effettuata',
+
+    'successFavorite' => 'L\'offerta di lavoro è stata correttamente inserita nei preferiti'
 ];

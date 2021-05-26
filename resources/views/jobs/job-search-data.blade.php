@@ -13,7 +13,7 @@
             <ul class="vc-info-list">
                 <li class="list-inline-item">
                     <h5>{{__('jobs/filters.expectedSalleryTitle')}}</h5> <i
-                        class="ti-credit-card"></i>{{$job->min_salary.'€ - '.$job->max_salary.'€'}}
+                        class="ti-credit-card"></i>{{$job->min_salary.'k€ - '.$job->max_salary.'k€'}}
                 </li>
                 <li class="list-inline-item"><h5>{{__('jobs/filters.skillsTitle')}}</h5>
                     <div class="skills">

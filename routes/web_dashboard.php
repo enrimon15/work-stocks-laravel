@@ -19,7 +19,10 @@ Route::prefix('/user')->middleware('roleIn:user')->group(function () {
 
         Route::post('/update-profile', [DashboardUserController::class, 'updateProfile'])->name('updateProfileExecute');
 
-        Route::get('/favorite', [DashboardUserController::class, 'showFavorite'])->name('favorite');
+        Route::prefix('/favorite')->group(function () {
+            Route::get('/', [DashboardUserController::class, 'showFavorite'])->name('favorite');
+            Route::get('/delete/{id}', [DashboardUserController::class, 'deleteFavorite'])->name('deleteFavorite');
+        });
 
         Route::prefix('/applied-jobs')->group(function () {
             Route::get('/', [DashboardUserController::class, 'showAppliedJobs'])->name('appliedJobs');
