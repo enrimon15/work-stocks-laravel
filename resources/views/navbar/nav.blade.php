@@ -27,6 +27,33 @@ use TCG\Voyager\Models\Menu;
                         <!-- Menu recuperato da voyager e poi renderizzato tramite menu.blade.php -->
                         <?=Menu::display('guest', '/navbar/menu')?>
                     @endif
+                    <li>
+                        @if(Lang::locale() == 'it')
+                            <a href="#">
+                                <img src="{{asset('img/flag-it.png')}}" style="height: 22px"/><span class="submenu-indicator"></span>
+                            </a>
+                            <ul class="nav-dropdown nav-submenu" style="right: auto; display: none;">
+                                <li>
+                                    <a href="{{Request::url() . '?language=en'}}">
+                                        <img src="{{asset('img/flag-uk.png')}}" class="mr-2" style="height: 22px">
+                                        &nbsp;Inglese
+                                    </a>
+                                </li>
+                            </ul>
+                        @elseif(Lang::locale() == 'en')
+                            <a href="#">
+                                <img src="{{asset('img/flag-uk.png')}}" style="height: 22px"><span class="submenu-indicator"></span>
+                            </a>
+                            <ul class="nav-dropdown nav-submenu" style="right: auto; display: none;">
+                                <li>
+                                    <a href="{{Request::url() . '?language=it'}}">
+                                        <img src="{{asset('img/flag-it.png')}}" class="mr-2" style="height: 22px"/>
+                                        &nbsp;Italian
+                                    </a>
+                                </li>
+                            </ul>
+                        @endif
+                    </li>
                     <!--<li><a href="#">Pages<span class="submenu-indicator"></span></a>
                         <ul class="nav-dropdown nav-submenu" style="right: auto; display: none;">
                             <li><a href="blog.html">Blogs Page</a></li>
@@ -87,8 +114,14 @@ use TCG\Voyager\Models\Menu;
 
                     <li class="add-listing theme-bg display-desk">
                         <a href="#">
-                            <i class="ti-plus"></i> {{__('nav.newOffer')}}
+                             <i class="ti-plus"></i> {{__('nav.newOffer')}}
                         </a>
+                        <!--<a href="#">
+                            <img src="{{asset('img/flag-it.png')}}" style="height: 28px">
+                        </a>
+                        <a href="#">
+                            <img src="{{asset('img/flag-uk.png')}}" style="height: 18px">
+                        </a>-->
                     </li>
                 </ul>
             </div>
