@@ -46,7 +46,7 @@ class MenuItemSeeder extends Seeder
         $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu->id,
             'title' => __("offers"),
-            'url' => 'jobs',
+            'url' => '/jobs',
             'route' => null,
         ]);
         if (!$menuItem->exists) {
@@ -62,7 +62,7 @@ class MenuItemSeeder extends Seeder
         $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu->id,
             'title' => __("subscribers"),
-            'url' => 'subscribers',
+            'url' => '/subscribers',
             'route' => null,
         ]);
         if (!$menuItem->exists) {
@@ -78,7 +78,7 @@ class MenuItemSeeder extends Seeder
         $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu->id,
             'title' => __("companies"),
-            'url' => 'aziende',
+            'url' => '/aziende',
             'route' => null,
         ]);
         if (!$menuItem->exists) {
@@ -94,7 +94,7 @@ class MenuItemSeeder extends Seeder
         $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu->id,
             'title' => __("blog"),
-            'url' => 'blog',
+            'url' => '/blog',
             'route' => null,
         ]);
         if (!$menuItem->exists) {
@@ -132,7 +132,7 @@ class MenuItemSeeder extends Seeder
         $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu->id,
             'title' => __("offers"),
-            'url' => 'jobs',
+            'url' => '/jobs',
             'route' => null,
         ]);
         if (!$menuItem->exists) {
@@ -148,7 +148,7 @@ class MenuItemSeeder extends Seeder
         $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu->id,
             'title' => __("companies"),
-            'url' => 'aziende',
+            'url' => '/aziende',
             'route' => null,
         ]);
         if (!$menuItem->exists) {
@@ -187,7 +187,7 @@ class MenuItemSeeder extends Seeder
         $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu->id,
             'title' => __("offers"),
-            'url' => 'jobs',
+            'url' => '/jobs',
             'route' => null,
         ]);
         if (!$menuItem->exists) {
@@ -203,7 +203,7 @@ class MenuItemSeeder extends Seeder
         $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu->id,
             'title' => __("subscribers"),
-            'url' => 'subscribers',
+            'url' => '/subscribers',
             'route' => null,
         ]);
         if (!$menuItem->exists) {
