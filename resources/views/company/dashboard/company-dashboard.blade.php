@@ -37,7 +37,7 @@
 								<a class="nav-link {{(Route::currentRouteName() == 'manageJobsCompany' || Route::currentRouteName() == 'manageJobsCompanyCandidate') ? 'active' : ''}}" href="{{route('manageJobsCompany')}}"><i class="lni-briefcase"></i>{{__('dashboard/company/menu.createdJobs')}}</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="{{route('profile', ['type' => 'company','id' => Auth::user()->id])}}"><i class="lni-user"></i>{{__('dashboard/company/menu.showProfile')}}</a>
+								<a class="nav-link" href="{{route('profile', ['type' => 'company','id' => Auth::user()->company->id])}}"><i class="lni-user"></i>{{__('dashboard/company/menu.showProfile')}}</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

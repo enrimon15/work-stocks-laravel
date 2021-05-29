@@ -35,7 +35,8 @@
                         <div class="form-group">
                             <i class="ti-briefcase"></i>
                             <input id="topFilterCompanyName" type="text" class="form-control b-r keyPress"
-                                   placeholder="{{__('jobs/filters.companyName')}}">
+                                   placeholder="{{__('jobs/filters.companyName')}}"
+                            >
                         </div>
                     </div>
 
@@ -303,6 +304,15 @@
                 $(".advance-search").removeClass("advn-fixed");
             }
         });
+    </script>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const myParam = urlParams.get('filter[company.name]');
+
+        if (myParam != null) {
+            document.getElementById('topFilterCompanyName').value = myParam;
+        }
     </script>
 @endpush
 
