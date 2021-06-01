@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\News;
 use App\Models\NewsComment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class NewsController extends Controller
 {
@@ -55,12 +56,12 @@ class NewsController extends Controller
     }
 
     //ricerca per titolo
-    public function search(Request $request){
-        $request->validate([
-            'search' => ['required', 'string'],
-        ]);
+    public function search($query){
+        $news = null;
+        if ($query != null) {
+            $news = News::where('title', 'LIKE', '%'.$query.'%')->orderBy('created_at', 'desc')->paginate(9);
+        }
 
-        $news = News::where('title', 'LIKE', '%'.$request->input('search').'%')->paginate(9);
-        return view('blog.blog')->with('news', $news);
+        return view('blog.blog')->with('news', $news)->with('query', $query);
     }
 }
