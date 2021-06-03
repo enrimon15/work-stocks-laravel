@@ -12,7 +12,7 @@
 				<div class="container">
 					<div class="col-lg-12 col-md-12">
 						<div class="pt-caption text-center">
-							<h1>Our Latest Blog</h1>
+							<h1>{{__('blog.title')}}</h1>
 						</div>
 					</div>
 				</div>
@@ -27,9 +27,9 @@
 					<div class="row mb-4">
 						<div class="col mx-auto p-t-10 mb-3">
 							<div class="input-group small">
-								<input id="searchInput" type="text" class="form-control b-r" placeholder="Search…" style="background-color: #f4f8fa" value="{{$query ?? null}}">
+								<input id="searchInput" type="text" class="form-control b-r" placeholder="{{__('blog.search')}}" style="background-color: #f4f8fa" value="{{$query ?? null}}">
 								<span class="input-group-btn">
-									<button type="button" onclick="search()" class="btn btn-primary">Go</button>
+									<button type="button" onclick="search()" class="btn btn-primary">{{__('blog.go')}}</button>
 								</span>
 							</div>
 						</div>
@@ -41,7 +41,7 @@
 							<div class="col-lg-4 col-md-4">
 								<div class="blog-grid-wrap mb-4">
 									<div class="blog-grid-thumb" style="height: 235px">
-										<a href="blog-details.blade.php"><img src="{{asset('storage/'.$singleNews->image_path)}}" class="img-responsive" style="height: 100%; width: auto!important" alt="" /></a>
+										<a href="#"><img src="{{asset('storage/'.$singleNews->image_path)}}" class="img-responsive" style="height: 100%; width: auto!important" alt="" /></a>
 										<h6 class="post-cat">{{$singleNews->created_at->format('d/m')}}</h6>
 									</div>
 									<div class="blog-grid-content" style="height: 170px">
@@ -61,7 +61,7 @@
 								</div>
 							</div>
 						@empty
-							<p>Non sono presenti notizie</p>
+							<p>{{__('blog.noNews')}}</p>
 						@endforelse
 					
 					</div>

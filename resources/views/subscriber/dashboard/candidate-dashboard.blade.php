@@ -40,7 +40,7 @@
 							<a class="nav-link {{Route::currentRouteName() == 'jobAlert' ? 'active' : ''}}" href="{{route('jobAlert')}}"><i class="lni-alarm"></i>{{__('dashboard/user/menu.jobAlert')}}</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="{{route('profile', ['type' => 'company', 'id' => Auth::user()->id])}}"><i class="lni-user"></i>{{__('dashboard/user/menu.showProfile')}}</a>
+							<a class="nav-link" href="{{route('profile', ['type' => 'user', 'id' => Auth::user()->id])}}"><i class="lni-user"></i>{{__('dashboard/user/menu.showProfile')}}</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
