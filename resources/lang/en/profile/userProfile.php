@@ -16,5 +16,10 @@ return [
     'address' => 'Subscriber Address',
     'gender' => 'Gender',
     'salary' => 'Minimum Salary',
-    'cv' => 'Download CV'
+    'cv' => 'Download CV',
+    'mail' => 'Write a message...',
+    'mailSuccess' => 'Mail successfully sent',
+    'contact' => 'Contact request from: ',
+    'site' => 'Go to website',
+    'thanks' => 'Thanks,'
 ];

@@ -16,5 +16,10 @@ return [
     'address' => 'Indirizzo Utente',
     'gender' => 'Genere',
     'salary' => 'Salario Minimo',
-    'cv' => 'Scarica CV'
+    'cv' => 'Scarica CV',
+    'mail' => 'Scrivi un messaggio...',
+    'mailSuccess' => 'Mail inviata con successo',
+    'contact' => 'Richiesta di contatto da: ',
+    'site' => 'Visita il sito',
+    'thanks' => 'Grazie,'
 ];

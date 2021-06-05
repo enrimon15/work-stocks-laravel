@@ -34,7 +34,7 @@
 				</div>
 				<div class="listing-detail_right">
 					<div class="listing-detail-item">
-						<a href="#" class="btn btn-list full-width color--linkedin"><i class="ti-email mr-2"></i> {{__('profile/companyProfile.message')}}</a>
+						<a href="#" data-toggle="modal" data-target="#mail" class="btn btn-list full-width color--linkedin"><i class="ti-email mr-2"></i> {{__('profile/companyProfile.message')}}</a>
 					</div>
 				</div>
 			</div>
@@ -46,6 +46,16 @@
 <!-- ============== Job Detail ====================== -->
 <section class="tr-single-detail gray-bg">
 	<div class="container">
+
+		@if(Session::get('success'))
+			<div class="alert alert-success alert-dismissible fade show" role="alert">
+				{{Session::get('success')}}
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+		@endif
+		
 		<div class="row">
 
 			<div class="col-md-8 col-sm-12">
@@ -131,10 +141,6 @@
 
 			<!-- Sidebar Start -->
 			<div class="col-md-4 col-sm-12">
-
-				<div class="offer-btn-wrap mb-4">
-					<a href="#" class="btn btn-info btn-md full-width"><i class="mr-2 ti-bell"></i>{{__('profile/companyProfile.jobAlert')}}</a>
-				</div>
 
 				<!-- Company Overview -->
 				<div class="tr-single-box">
@@ -288,6 +294,40 @@
 	</div>
 </section>
 <!-- ============== Job Detail ====================== -->
+
+	<!-- Modal -->
+	<div class="modal fade" id="mail" tabindex="-1" role="dialog" aria-labelledby="mail" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">{{__('profile/userProfile.message')}}</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form method="POST" action="{{ route('sendMail', ['idRecipient' => $company->user->id]) }}">
+						@csrf
+						<div class="row">
+							<div class="form-group col-md-12 col-sm-12">
+								<input class="form-control" name="idUser" type="hidden" value="{{Auth::user()->id}}">
+								<textarea name="message" class="form-control" placeholder="{{__('profile/userProfile.mail')}}"></textarea>
+							</div>
+
+							<div class="col-md-12 col-sm-12">
+								@guest
+									<button disabled class="btn btn-primary" type="button">{{__('blog.submit')}}</button>
+								@else
+									<button class="btn btn-primary" type="submit">{{__('blog.submit')}}</button>
+								@endguest
+							</div>
+						</div>
+					</form>
+				</div>
+
+			</div>
+		</div>
+	</div>
 
 
 		<!-- <script src="assets/js/counterup.min.js"></script>

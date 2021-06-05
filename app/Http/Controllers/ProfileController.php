@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactUser;
 use App\Models\Company;
 use App\Models\JobOffer;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
@@ -34,6 +36,21 @@ class ProfileController extends Controller
             // error
         }
         return Storage::disk('public')->download($user->profile->cv_path);
+    }
+
+    public function sendMail(Request $request, $idRecipient) {
+        $data = $request->validate([
+            'message'=> ['required', 'string'],
+            'idUser' => ['required', 'numeric']
+        ]);
+
+        $data['user'] = User::findOrFail($data['idUser']);
+
+        $userTo = User::findOrFail($idRecipient);
+
+        Mail::to($userTo->email)->send(new ContactUser($data));
+
+        return back()->with('success', __('profile/userProfile.mailSuccess'));
     }
 
 }
