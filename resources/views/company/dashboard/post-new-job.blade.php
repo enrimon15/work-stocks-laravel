@@ -35,7 +35,9 @@
                                 <label>{{__('dashboard/company/newJob.workingPlace')}}</label>
                                 <select required class="form-control" name="workingPlace" id="working-place">
                                     @foreach($workingPlaces as $workingPlace)
-                                        <option {{ (isset($jobOffer) && $workingPlace->id == $jobOffer->workingPlace->id) ? 'selected' : ''}} value="{{$workingPlace->id}}">{{$workingPlace->city . ", " . $workingPlace->address . " (" . $workingPlace->country . ")"}}</option>
+                                        <option {{ (isset($jobOffer) && $workingPlace->id == $jobOffer->workingPlace->id) ? 'selected' : ''}}
+                                                {{ (old('workingPlace') != null && $workingPlace->id == old('workingPlace')) ? 'selected' : ''}}
+                                                value="{{$workingPlace->id}}">{{$workingPlace->city . ", " . $workingPlace->address . " (" . $workingPlace->country . ")"}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -48,7 +50,7 @@
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <div class="form-group">
                                 <label>{{__('dashboard/company/newJob.jobTitle')}}</label>
-                                <input class="form-control" name="title" required type="text" placeholder="{{__('dashboard/company/newJob.jobTitle')}}" value="{{$jobOffer->title ?? null}}">
+                                <input class="form-control" name="title" required type="text" placeholder="{{__('dashboard/company/newJob.jobTitle')}}" value="{{$jobOffer->title ?? old('title')}}">
                             </div>
                             <!-- Error -->
                             @if ($errors->has('title'))
@@ -59,7 +61,7 @@
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <div class="form-group">
                                 <label>{{__('dashboard/company/newJob.description')}}</label>
-                                <textarea id="summernote" name="description">{{$jobOffer->description ?? null}}</textarea>
+                                <textarea required id="summernote" name="description">{{$jobOffer->description ?? old('description')}}</textarea>
                             </div>
                             <!-- Error -->
                             @if ($errors->has('description'))
@@ -70,7 +72,7 @@
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <div class="form-group">
                                 <label>{{__('dashboard/company/newJob.dueDate')}}</label>
-                                <input class="form-control" name="dueDate" required type="date" value="{{$jobOffer->due_date ?? null}}">
+                                <input class="form-control" name="dueDate" required type="date" value="{{$jobOffer->due_date ?? old('dueDate')}}">
                             </div>
                             <!-- Error -->
                             @if ($errors->has('dueDate'))
@@ -82,10 +84,10 @@
                             <div class="form-group">
                                 <label>{{__('dashboard/company/newJob.contractType')}}</label>
                                 <select required class="form-control" name="offerType" id="offer-type">
-                                    <option {{ (isset($jobOffer) && $jobOffer->offers_type == 'full_time') ? 'selected' : ''}} value="full_time">{{__('dashboard/company/newJob.full_time')}}</option>
-                                    <option {{ (isset($jobOffer) && $jobOffer->offers_type == 'part_time') ? 'selected' : ''}} value="part_time">{{__('dashboard/company/newJob.part_time')}}</option>
-                                    <option {{ (isset($jobOffer) && $jobOffer->offers_type == 'construction_base') ? 'selected' : ''}} value="construction_base">{{__('dashboard/company/newJob.construction_base')}}</option>
-                                    <option {{ (isset($jobOffer) && $jobOffer->offers_type == 'internship') ? 'selected' : ''}} value="internship">{{__('dashboard/company/newJob.internship')}}</option>
+                                    <option {{ (isset($jobOffer) && $jobOffer->offers_type == 'full_time') ? 'selected' : ''}} {{ (old('offerType') != null && 'full_time' == old('offerType')) ? 'selected' : ''}}  value="full_time">{{__('dashboard/company/newJob.full_time')}}</option>
+                                    <option {{ (isset($jobOffer) && $jobOffer->offers_type == 'part_time') ? 'selected' : ''}} {{ (old('offerType') != null && 'part_time' == old('offerType')) ? 'selected' : ''}} value="part_time">{{__('dashboard/company/newJob.part_time')}}</option>
+                                    <option {{ (isset($jobOffer) && $jobOffer->offers_type == 'construction_base') ? 'selected' : ''}} {{ (old('offerType') != null && 'construction_base' == old('offerType')) ? 'selected' : ''}} value="construction_base">{{__('dashboard/company/newJob.construction_base')}}</option>
+                                    <option {{ (isset($jobOffer) && $jobOffer->offers_type == 'internship') ? 'selected' : ''}} {{ (old('offerType') != null && 'internship' == old('offerType')) ? 'selected' : ''}} value="internship">{{__('dashboard/company/newJob.internship')}}</option>
                                 </select>
                             </div>
                             <!-- Error -->
@@ -97,7 +99,7 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label>{{__('dashboard/company/newJob.experience')}}</label>
-                                <input class="form-control" name="experience" required type="number" min="0" placeholder="{{__('dashboard/company/newJob.experiencePh')}}" value="{{$jobOffer->experience ?? null}}">
+                                <input class="form-control" name="experience" required type="number" min="0" placeholder="{{__('dashboard/company/newJob.experiencePh')}}" value="{{$jobOffer->experience ?? old('experience')}}">
                             </div>
                             <!-- Error -->
                             @if ($errors->has('experience'))
@@ -123,7 +125,7 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label>{{__('dashboard/company/newJob.minSalary')}}</label>
-                                <input class="form-control" name="minSalary" type="number" min="0" placeholder="{{__('dashboard/company/newJob.minSalary') . " (K)"}}" value="{{$jobOffer->min_salary ?? null}}">
+                                <input required class="form-control" name="minSalary" type="number" min="0" placeholder="{{__('dashboard/company/newJob.minSalary') . " (K)"}}" value="{{$jobOffer->min_salary ?? null}}">
                             </div>
                             <!-- Error -->
                             @if ($errors->has('minSalary'))
@@ -134,7 +136,7 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label>{{__('dashboard/company/newJob.maxSalary')}}</label>
-                                <input class="form-control" name="maxSalary" type="number" min="0" placeholder="{{__('dashboard/company/newJob.maxSalary') . " (K)"}}" value="{{$jobOffer->max_salary ?? null}}">
+                                <input required class="form-control" name="maxSalary" type="number" min="0" placeholder="{{__('dashboard/company/newJob.maxSalary') . " (K)"}}" value="{{$jobOffer->max_salary ?? null}}">
                             </div>
                             <!-- Error -->
                             @if ($errors->has('maxSalary'))
