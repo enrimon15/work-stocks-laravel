@@ -6,7 +6,7 @@
         {{__('profile/userProfile.site')}}
     @endcomponent
 
-    {{__('profile/userProfile.thanks')}}<br>
+    {{__('profile/userProfile.thanks')}}
     WorkStocks STAFF
 @endcomponent
 

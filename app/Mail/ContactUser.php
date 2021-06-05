@@ -30,6 +30,7 @@ class ContactUser extends Mailable
      */
     public function build()
     {
-        return $this->markdown('mail.mail-contact-user')->with('data', $this->data);
+        return $this->subject(__('mail/application/mailContent.mailSubjectContact'))
+                ->markdown('mail.mail-contact-user')->with('data', $this->data);
     }
 }

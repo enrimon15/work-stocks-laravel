@@ -31,7 +31,7 @@ class ApplicationMailForSubscriber extends Mailable
     public function build()
     {
         return $this->subject(__('mail/application/mailContent.mailSubjectSubscriber'))
-            ->view('mail.mail-application-toSubscriber')
+            ->markdown('mail.mail-application-toSubscriber')
             ->with('details',$this->details);
     }
 }

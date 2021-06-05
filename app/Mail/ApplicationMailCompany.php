@@ -30,7 +30,7 @@ class ApplicationMailCompany extends Mailable
     public function build()
     {
         return $this->subject(__('mail/application/mailContent.mailSubjectCompany'))
-            ->view('mail.mail-application-toCompany')
+            ->markdown('mail.mail-application-toCompany')
             ->with('details',$this->details);
     }
 }
