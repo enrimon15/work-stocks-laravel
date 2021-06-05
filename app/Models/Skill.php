@@ -41,4 +41,38 @@ class Skill extends Model
     public function user() {
         return $this->belongsTo( User::class);
     }
+
+    public function getSkillLevel() {
+        switch ($this->assestment) {
+            case 'beginner':
+                return 33;
+                break;
+            case 'intermediate':
+                return 66;
+                break;
+            case 'advanced':
+                return 100;
+                break;
+            default:
+                return 0;
+                break;
+        }
+    }
+
+    public function getSkillColor() {
+        switch ($this->assestment) {
+            case 'beginner':
+                return 'danger';
+                break;
+            case 'intermediate':
+                return 'warning';
+                break;
+            case 'advanced':
+                return 'success';
+                break;
+            default:
+                return null;
+                break;
+        }
+    }
 }

@@ -3,24 +3,23 @@
 @section('content')
 
 <!-- ======================= Start Banner ===================== -->
-<section class="page-title-banner" style="background-image:url(https://via.placeholder.com/1280x820);">
+<section class="page-title-banner" style="background-image:url({{asset('img/banner-subscriber.jpeg')}});">
 	<div class="container">
 		<div class="row m-0 align-items-end detail-swap">
 			<div class="tr-list-wrap">
 				<div class="tr-list-detail">
 					<div class="tr-list-thumb">
-						<img src="https://via.placeholder.com/400x400" class="img-responsive" alt="" />
+						<img src="{{asset('storage/' . $user->avatar)}}" class="img-responsive" alt="" />
 					</div>
 					<div class="tr-list-info">
-						<h4 class="mb-1">Shaurya Preet</h4>
-						<p class="mb-1 text-warning">UI/UX & Product Designer</p>
-						<p class="mb-1"><i class="ti-location-pin mr-2"></i>Blick Market, USA</p>
+						<h4 class="mb-1">{{$user->name . ' ' . $user->surname}}</h4>
+						<p class="mb-1 text-warning">{{$user->profile->job_title ?? null}}</p>
+						<p class="mb-1"><i class="ti-location-pin mr-2"></i>{{isset($user->profile->city) ? $user->profile->city . ', ' : null}} {{$user->profile->country ?? null}}</p>
 					</div>
 				</div>
 				<div class="listing-detail_right">
 					<div class="listing-detail-item">
-						<a href="#" class="btn btn-list full-width mb-2 text-warning"><i class="ti-check mr-2"></i> Shortlist Now</a><br>
-						<a href="#" class="btn btn-list full-width color--linkedin"><i class="ti-email mr-2"></i> Send A Message</a>
+						<a href="#" class="btn btn-list full-width color--linkedin"><i class="ti-email mr-2"></i> {{__('profile/userProfile.message')}}</a>
 					</div>
 				</div>
 			</div>
@@ -39,57 +38,32 @@
 				<!-- Candidate Overview -->
 				<div class="tr-single-box">
 					<div class="tr-single-header">
-						<h4><i class="ti-info"></i>Candidate Overview</h4>
+						<h4><i class="ti-info"></i>{{__('profile/userProfile.overview')}}</h4>
 					</div>
 					<div class="tr-single-body">
-						<p>We are seeking an experienced Wordpress developer with minimum 2+ years of experiencea WordPress Developer responsible for both back-end and front-end development, including creating WordPress themes and plugins. This position requires a combination of programming skills (namely PHP, HTML5, CSS3, and JavaScript) and aesthetics (understanding element arrangements on the screen, the color and font choices, and so on). The candidate should have a strong understanding of industry trends and content management systems.</p>
-						<p> Experience with the responsive and adaptive design is strongly preferred. Also, an understanding of the entire web development process, including design, development, and deployment is preferred.</p>
+						{!! $user->profile->overview ?? __('profile/userProfile.noDesc') !!}
 					</div>
 				</div>
 
 				<!-- Extra Skill& Knowledge -->
 				<div class="tr-single-box">
 					<div class="tr-single-header">
-						<h4><i class="ti-book"></i>Extra Skill & Knowledge</h4>
+						<h4><i class="ti-book"></i>{{__('profile/userProfile.skill')}}</h4>
 					</div>
 					<div class="tr-single-body">
-						<ul class="jb-detail-list mb-3">
-							<li>Hand On experience with Wordpress</li>
-							<li>Good understanding of front-end technologies, including HTML5, CSS3, JavaScript, jQuery</li>
-							<li>Experience building user interfaces for websites and/or web applications</li>
-							<li>Comfortable working with debugging tools like Firebug, Chrome inspector, etc.</li>
-						</ul>
-
 						<!-- Skills -->
 						<div class="row">
 
-							<div class="col-lg-6 col-md-6 col-sm-12">
-								<label>Website Design</label>
-								<div class="progress">
-									<div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 98%" aria-valuenow="98" aria-valuemin="0" aria-valuemax="100"></div>
+							@forelse($user->skills as $skill)
+								<div class="col-lg-6 col-md-6 col-sm-12">
+									<label>{{$skill->name}}</label>
+									<div class="progress">
+										<div class="progress-bar progress-bar-striped bg-{{$skill->getSkillColor()}}" role="progressbar" style="width: {{$skill->getSkillLevel()}}%" aria-valuenow="{{$skill->getSkillLevel()}}" aria-valuemin="0" aria-valuemax="100"></div>
+									</div>
 								</div>
-							</div>
-
-							<div class="col-lg-6 col-md-6 col-sm-12">
-								<label>UI/UX Designer</label>
-								<div class="progress">
-									<div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-								</div>
-							</div>
-
-							<div class="col-lg-6 col-md-6 col-sm-12">
-								<label>Wordpress Development</label>
-								<div class="progress">
-									<div class="progress-bar progress-bar-striped bg-purple" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-								</div>
-							</div>
-
-							<div class="col-lg-6 col-md-6 col-sm-12">
-								<label>iPhone Developer</label>
-								<div class="progress">
-									<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 67%" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100"></div>
-								</div>
-							</div>
+							@empty
+								<p class="ml-4">{{__('profile/userProfile.noSkill')}}</p>
+							@endforelse
 
 						</div>
 
@@ -100,30 +74,33 @@
 				<!-- Education & Qualification -->
 				<div class="tr-single-box">
 					<div class="tr-single-header">
-						<h4><i class="ti-cup"></i>Education & Qualification</h4>
+						<h4><i class="ti-cup"></i>{{__('profile/userProfile.education')}}</h4>
 					</div>
 					<div class="tr-single-body">
-						<ul class="qa-skill-list">
+						<ul class="qa-skill-list" style="{{count($user->qualifications) <= 0 ? 'border-left: none!important' : ''}}">
 
-							<!-- Single List -->
-							<li>
-								<div class="qa-skill-box">
-									<h4 class="qa-skill-title">Bachelor Degree<span class="qa-time">2010 - 2013</span></h4>
-									<div class="qa-content">
-										<p>Experience with the responsive and adaptive design is strongly preferred. Also, an understanding of the entire web development process, including design, development, and deployment is preferred.</p>
-									</div>
-								</div>
-							</li>
+							@forelse($user->qualifications as $qualification)
+								<!-- Single List -->
+								<li>
+									<div class="qa-skill-box">
+										<h4 class="qa-skill-title">{{$qualification->name}}<span class="qa-time">{{date('d-m-y', strtotime($qualification->start_date)) . ' - '}}{{isset($qualification->end_date) ? date('d-m-y', strtotime($qualification->end_date)) : 'in corso'}}</span></h4>
+										<h5 class="qa-subtitle">{{$qualification->institute}}</h5>
+										@if(isset($qualification->description))
+											<div class="qa-content">
+												<p>{{$qualification->description}}</p>
+											</div>
+										@endif
 
-							<!-- Single List -->
-							<li>
-								<div class="qa-skill-box">
-									<h4 class="qa-skill-title">Master Degree<span class="qa-time">2013 - 2016</span></h4>
-									<div class="qa-content">
-										<p>Experience with the responsive and adaptive design is strongly preferred. Also, an understanding of the entire web development process, including design, development, and deployment is preferred.</p>
+										@if(isset($qualification->valuation))
+											<div class="qa-content">
+												<p>{{'Valuation: ' . $qualification->valuation}}</p>
+											</div>
+										@endif
 									</div>
-								</div>
-							</li>
+								</li>
+							@empty
+								<p>{{__('profile/userProfile.noEducation')}}</p>
+							@endforelse
 
 						</ul>
 					</div>
@@ -132,32 +109,54 @@
 				<!-- Experience -->
 				<div class="tr-single-box">
 					<div class="tr-single-header">
-						<h4><i class="lni-certificate"></i>Award & Experience</h4>
+						<h4><i class="lni lni-briefcase"></i>{{__('profile/userProfile.experience')}}</h4>
 					</div>
 					<div class="tr-single-body">
-						<ul class="qa-skill-list">
+						<ul class="qa-skill-list" style="{{count($user->workingExperiences) <= 0 ? 'border-left: none!important' : ''}}">
 
+						@forelse($user->workingExperiences as $experience)
 							<!-- Single List -->
 							<li>
 								<div class="qa-skill-box">
-									<h4 class="qa-skill-title">Web Designer<span class="qa-time">2017 - 2018</span></h4>
-									<h5 class="qa-subtitle">Booble Infotech</h5>
-									<div class="qa-content">
-										<p>Experience with the responsive and adaptive design is strongly preferred. Also, an understanding of the entire web development process, including design, development, and deployment is preferred.</p>
-									</div>
+									<h4 class="qa-skill-title">{{$experience->job_position}}<span class="qa-time">{{date('d-m-y', strtotime($experience->start_date)) . ' - '}}{{isset($experience->end_date) ? date('d-m-y', strtotime($experience->end_date)) : 'in corso'}}</span></h4>
+									<h5 class="qa-subtitle">{{$qualification->company}}</h5>
+									@if(isset($experience->description))
+										<div class="qa-content">
+											<p>{{$experience->description}}</p>
+										</div>
+									@endif
 								</div>
 							</li>
+						@empty
+							<p>{{__('profile/userProfile.noExperience')}}</p>
+						@endforelse
 
+						</ul>
+					</div>
+				</div>
+
+				<!-- Certificate -->
+				<div class="tr-single-box">
+					<div class="tr-single-header">
+						<h4><i class="lni-certificate"></i>{{__('profile/userProfile.certificate')}}</h4>
+					</div>
+					<div class="tr-single-body">
+						<ul class="qa-skill-list" style="{{count($user->certificates) <= 0 ? 'border-left: none!important' : ''}}">
+
+						@forelse($user->certificates as $certificate)
 							<!-- Single List -->
-							<li>
-								<div class="qa-skill-box">
-									<h4 class="qa-skill-title">Product Designer<span class="qa-time">2018 - 2020</span></h4>
-									<h5 class="qa-subtitle">Silicon Software</h5>
-									<div class="qa-content">
-										<p>Experience with the responsive and adaptive design is strongly preferred. Also, an understanding of the entire web development process, including design, development, and deployment is preferred.</p>
+								<li>
+									<div class="qa-skill-box">
+										<h4 class="qa-skill-title">{{$certificate->name}}<span class="qa-time">{{date('d-m-y', strtotime($certificate->date))}}{{isset($certificate->end_date) ? ' - ' . date('d-m-y', strtotime($certificate->end_date)) : null}}</span></h4>
+										<h5 class="qa-subtitle"><a href="{{$certificate->link ?? '#'}}">{{$certificate->credential}}</a></h5>
+										<div class="qa-content">
+											<p>{{$certificate->society}}</p>
+										</div>
 									</div>
-								</div>
-							</li>
+								</li>
+							@empty
+								<p>{{__('profile/userProfile.message')}}</p>
+							@endforelse
 
 						</ul>
 					</div>
@@ -170,76 +169,50 @@
 			<div class="col-md-4 col-sm-12">
 
 				<div class="offer-btn-wrap mb-4">
-					<a href="#" class="btn btn-info btn-md full-width"><i class="mr-2 ti-bookmark"></i>Dowanload Resume</a>
+					@if($user->profile == null || Auth::user()->profile->cv_path == null)
+						<a href="#" style="cursor: not-allowed" class="btn btn-info btn-md full-width"><i class="mr-2 ti-download"></i>{{__('profile/userProfile.cv')}}</a>
+					@elseif($user->profile != null && Auth::user()->profile->cv_path != null)
+						<a href="{{ route('profileCV', ['idUser' => $user->id]) }}" class="btn btn-info btn-md full-width"><i class="mr-2 ti-download"></i>{{__('profile/userProfile.cv')}}</a>
+					@endif
 				</div>
 
 				<!-- Candidate Detail -->
 				<div class="tr-single-box">
 					<div class="tr-single-header">
-						<h4><i class="ti-direction"></i> Candidate Detail</h4>
+						<h4><i class="ti-direction"></i> {{__('profile/userProfile.detail')}}</h4>
 					</div>
+
 
 					<div class="tr-single-body">
 						<ul class="extra-service">
+
+							@if(isset($user->profile->min_salary))
 							<li>
 								<div class="icon-box-icon-block">
 									<div class="icon-box-round">
 										<i class="ti-money"></i>
 									</div>
 									<div class="icon-box-text">
-										<strong class="d-block">Expected Sallery</strong>
-										$80k - $270k
+										<strong class="d-block">{{__('profile/userProfile.salary')}}</strong>
+										{{$user->profile->min_salary . 'K'}}
 									</div>
 								</div>
 							</li>
+							@endif
 
-							<li>
-								<div class="icon-box-icon-block">
-									<div class="icon-box-round">
-										<i class="ti-time"></i>
-									</div>
-									<div class="icon-box-text">
-										<strong class="d-block">Hourly Rate</strong>
-										$30 - $50
-									</div>
-								</div>
-							</li>
-
+							@if(isset($user->profile->sex))
 							<li>
 								<div class="icon-box-icon-block">
 									<div class="icon-box-round">
 										<i class="lni-users"></i>
 									</div>
 									<div class="icon-box-text">
-										<strong class="d-block">Gender</strong>
-										Male
+										<strong class="d-block">{{__('profile/userProfile.gender')}}</strong>
+										{{$user->profile->sex}}
 									</div>
 								</div>
 							</li>
-
-							<li>
-								<div class="icon-box-icon-block">
-									<div class="icon-box-round">
-										<i class="lni-certificate"></i>
-									</div>
-									<div class="icon-box-text">
-										<strong class="d-block">Experience</strong>
-										5 Years
-									</div>
-								</div>
-							</li>
-
-							<li>
-								<div class="icon-box-icon-block">
-									<div class="icon-box-round">
-										<i class="lni-graduation"></i>
-									</div>
-									<div class="icon-box-text">
-										<strong class="d-block">Qualification</strong>
-										Master Degree
-									</div>
-								</div>
-							</li>
+							@endif
 
 						</ul>
 					</div>
@@ -249,153 +222,69 @@
 				<!-- Candidate Address -->
 				<div class="tr-single-box">
 					<div class="tr-single-header">
-						<h4><i class="ti-direction"></i> Candidate Address</h4>
+						<h4><i class="ti-direction"></i> {{__('profile/userProfile.address')}}</h4>
 					</div>
 
 					<div class="tr-single-body">
 						<ul class="extra-service">
+							@if(isset($user->profile->country) || isset($user->profile->city))
 							<li>
 								<div class="icon-box-icon-block">
-									<a href="#">
+									<a href="https://www.google.com/maps/search/?api=1&query={{ str_replace(' ','%20',$user->profile->city).'%20'.
+                                                                                                str_replace(' ','%20',$user->profile->country)}}">
 										<div class="icon-box-round">
 											<i class="lni-map-marker"></i>
 										</div>
 										<div class="icon-box-text">
-											524 New Ave, CA 548, USA
+											{{isset($user->profile->city) ? $user->profile->city . ', ' : null}} {{$user->profile->country ?? null}}
 										</div>
 									</a>
 								</div>
 							</li>
+							@endif
 
+							@if(isset($user->profile->telephone))
 							<li>
 								<div class="icon-box-icon-block">
-									<a href="#">
+									<a href="tel:{{$user->profile->telephone}}">
 										<div class="icon-box-round">
 											<i class="lni-phone-handset"></i>
 										</div>
 										<div class="icon-box-text">
-											+1 415-989-1002
+											{{$user->profile->telephone}}
 										</div>
 									</a>
 								</div>
 							</li>
+							@endif
 
 							<li>
 								<div class="icon-box-icon-block">
-									<a href="#">
+									<a href="mailto:{{$user->email}}">
 										<div class="icon-box-round">
 											<i class="lni-envelope"></i>
 										</div>
 										<div class="icon-box-text">
-											helpsupport.com@finding.com
+											{{$user->email}}
 										</div>
 									</a>
 								</div>
 							</li>
 
+							@if(isset($user->profile->website))
 							<li>
 								<div class="icon-box-icon-block">
-									<a href="#">
+									<a href="{{'//'.$user->profile->website}}">
 										<div class="icon-box-round">
 											<i class="lni-world"></i>
 										</div>
 										<div class="icon-box-text">
-											www.myfinding.com
+											{{$user->profile->website}}
 										</div>
 									</a>
 								</div>
 							</li>
-
-						</ul>
-					</div>
-
-				</div>
-
-				<!-- Social Links -->
-				<div class="tr-single-box">
-					<div class="tr-single-header">
-						<h4><i class="ti-share"></i> Social Profiles</h4>
-					</div>
-
-					<div class="tr-single-body">
-						<ul class="extra-service half">
-							<li>
-								<div class="icon-box-icon-block">
-									<a href="#">
-										<div class="icon-box-round">
-											<i class="lni-facebook"></i>
-										</div>
-										<div class="icon-box-text">
-											Facebook
-										</div>
-									</a>
-								</div>
-							</li>
-
-							<li>
-								<div class="icon-box-icon-block">
-									<a href="#">
-										<div class="icon-box-round">
-											<i class="lni-google-plus"></i>
-										</div>
-										<div class="icon-box-text">
-											Google plus
-										</div>
-									</a>
-								</div>
-							</li>
-
-							<li>
-								<div class="icon-box-icon-block">
-									<a href="#">
-										<div class="icon-box-round">
-											<i class="lni-twitter"></i>
-										</div>
-										<div class="icon-box-text">
-											Twitter
-										</div>
-									</a>
-								</div>
-							</li>
-
-							<li>
-								<div class="icon-box-icon-block">
-									<a href="#">
-										<div class="icon-box-round">
-											<i class="lni-linkedin"></i>
-										</div>
-										<div class="icon-box-text">
-											LinkedIn
-										</div>
-									</a>
-								</div>
-							</li>
-
-							<li>
-								<div class="icon-box-icon-block">
-									<a href="#">
-										<div class="icon-box-round">
-											<i class="lni-instagram"></i>
-										</div>
-										<div class="icon-box-text">
-											Instagram
-										</div>
-									</a>
-								</div>
-							</li>
-
-							<li>
-								<div class="icon-box-icon-block">
-									<a href="#">
-										<div class="icon-box-round">
-											<i class="fa fa-pinterest"></i>
-										</div>
-										<div class="icon-box-text">
-											Pinterest
-										</div>
-									</a>
-								</div>
-							</li>
+							@endif
 
 						</ul>
 					</div>

@@ -118,11 +118,11 @@ class User extends \TCG\Voyager\Models\User
     }
 
     public function qualifications() {
-        return $this->hasMany( Qualification::class);
+        return $this->hasMany( Qualification::class)->orderBy('start_date', 'desc');
     }
 
     public function certificates() {
-        return $this->hasMany( Certificate::class);
+        return $this->hasMany( Certificate::class)->orderBy('date', 'desc');
     }
 
     public function skills() {
@@ -130,7 +130,7 @@ class User extends \TCG\Voyager\Models\User
     }
 
     public function workingExperiences() {
-        return $this->hasMany( WorkingExperience::class);
+        return $this->hasMany( WorkingExperience::class)->orderBy('start_date', 'desc');
     }
 
     public function company() {
