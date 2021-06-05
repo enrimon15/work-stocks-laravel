@@ -189,10 +189,9 @@ class DashboardCompanyController extends Controller
         // skills
         $newJob->retag($data->input('skills'));
 
-        /*$tags = $newJob->tags->;
-        foreach ($tags as $tag) {
+        foreach($newJob->tags as $tag) {
             $tag->setGroup('skill');
-        }*/
+        }
         $jobOffers = $user->company->jobOffers()->orderBy('due_date', 'desc')->get();
 
         $success = $operationType == 'create' ? __('dashboard/company/newJob.success') : __('dashboard/company/newJob.successUpdate');

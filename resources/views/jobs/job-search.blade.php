@@ -145,31 +145,31 @@
                             <div class="form-group">
                                 <h5 class="mb-2">{{__('jobs/filters.jobTypeTitle')}}</h5>
                                 <div class="side-imbo">
-                                    <ul class="no-ul-list">
+                                    <ul class="no-ul-list" id="checkBoxFilterOfferType">
                                         <li>
-                                            <input id="checkbox-j1" class="checkbox-custom" name="checkbox-j1"
-                                                   type="checkbox">
+                                            <input id="checkbox-j1" class="checkbox-custom" name="group3[]"
+                                                   type="checkbox" value="full_time">
                                             <label for="checkbox-j1"
                                                    class="checkbox-custom-label">{{__('jobs/filters.full_time')}}</label>
                                         </li>
 
                                         <li>
-                                            <input id="checkbox-j2" class="checkbox-custom" name="checkbox-j2"
-                                                   type="checkbox">
+                                            <input id="checkbox-j2" class="checkbox-custom" name="group3[]"
+                                                   type="checkbox" value="part_time">
                                             <label for="checkbox-j2"
                                                    class="checkbox-custom-label">{{__('jobs/filters.part_time')}}</label>
                                         </li>
 
                                         <li>
-                                            <input id="checkbox-j3" class="checkbox-custom" name="checkbox-j3"
-                                                   type="checkbox">
+                                            <input id="checkbox-j3" class="checkbox-custom" name="group3[]"
+                                                   type="checkbox" value="construction_base">
                                             <label for="checkbox-j3"
-                                                   class="checkbox-custom-label">{{__('jobs/filters.costruction_base')}}</label>
+                                                   class="checkbox-custom-label">{{__('jobs/filters.construction_base')}}</label>
                                         </li>
 
                                         <li>
-                                            <input id="checkbox-j4" class="checkbox-custom" name="checkbox-j4"
-                                                   type="checkbox">
+                                            <input id="checkbox-j4" class="checkbox-custom" name="group3[]"
+                                                   type="checkbox" value="internship">
                                             <label for="checkbox-j4"
                                                    class="checkbox-custom-label">{{__('jobs/filters.internship')}}</label>
                                         </li>
@@ -177,35 +177,6 @@
                                 </div>
                             </div>
                         </div>
-
-                    <!-- Job Type
-                            <div class="sidebar-widget">
-                                <div class="form-group">
-                                    <h5 class="mb-2">{{__('jobs/filters.jobLevelTitle')}}</h5>
-                                    <div class="side-imbo">
-                                        <ul class="no-ul-list">
-                                            <li>
-                                                <input id="checkbox-jf1" class="checkbox-custom" name="checkbox-jf1"
-                                                       type="checkbox">
-                                                <label for="checkbox-jf1" class="checkbox-custom-label">Manager</label>
-                                            </li>
-
-                                            <li>
-                                                <input id="checkbox-jf2" class="checkbox-custom" name="checkbox-jf2"
-                                                       type="checkbox">
-                                                <label for="checkbox-jf2" class="checkbox-custom-label">Junior</label>
-                                            </li>
-
-                                            <li>
-                                                <input id="checkbox-jf3" class="checkbox-custom" name="checkbox-jf3"
-                                                       type="checkbox">
-                                                <label for="checkbox-jf3" class="checkbox-custom-label">Senior</label>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            -->
                         <!-- Compensation -->
                         <div class="sidebar-widget">
                             <div class="form-group">
@@ -215,35 +186,31 @@
                                         <li>
                                             <input id="checkbox-c0" class="checkbox-custom" name="group2[]"
                                                    type="checkbox" value="0">
-                                            <label for="checkbox-c0" class="checkbox-custom-label">0€ -
-                                                500</label>
+                                            <label for="checkbox-c0" class="checkbox-custom-label">@lang('jobs/filters.filterSalaryUpTo', ['numero'=> '5K', 'valuta'=> '€'])</label>
                                         </li>
 
                                         <li>
                                             <input id="checkbox-c1" class="checkbox-custom" name="group2[]"
                                                    type="checkbox" value="1">
-                                            <label for="checkbox-c1" class="checkbox-custom-label">500€ -
-                                                1000€</label>
+                                            <label for="checkbox-c1" class="checkbox-custom-label">@lang('jobs/filters.filterSalaryBetween', ['numeroMin'=>'5K','numeroMax'=> '10K', 'valuta'=> '€'])</label>
                                         </li>
 
                                         <li>
                                             <input id="checkbox-c2" class="checkbox-custom" name="group2[]"
                                                    type="checkbox" value="2">
-                                            <label for="checkbox-c2" class="checkbox-custom-label">1000€ -
-                                                2000€</label>
+                                            <label for="checkbox-c2" class="checkbox-custom-label">@lang('jobs/filters.filterSalaryBetween', ['numeroMin'=>'10K','numeroMax'=> '20K', 'valuta'=> '€'])</label>
                                         </li>
 
                                         <li>
                                             <input id="checkbox-c3" class="checkbox-custom" name="group2[]"
                                                    type="checkbox" value="3">
-                                            <label for="checkbox-c3" class="checkbox-custom-label">2000€ -
-                                                5000€</label>
+                                            <label for="checkbox-c3" class="checkbox-custom-label">@lang('jobs/filters.filterSalaryBetween', ['numeroMin'=>'20K','numeroMax'=> '50K', 'valuta'=> '€'])</label>
                                         </li>
 
                                         <li>
                                             <input id="checkbox-c4" class="checkbox-custom" name="group2[]"
                                                    type="checkbox" value="4">
-                                            <label for="checkbox-c4" class="checkbox-custom-label">5000€ +</label>
+                                            <label for="checkbox-c4" class="checkbox-custom-label">@lang('jobs/filters.filterSalaryFrom', ['numero'=> '50K', 'valuta'=> '€'])</label>
                                         </li>
                                     </ul>
                                 </div>
