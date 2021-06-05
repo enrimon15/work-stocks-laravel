@@ -16,9 +16,9 @@ class CreateJobOffersTable extends Migration
         Schema::create('job_offers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('company_id');
-            $table->unsignedBigInteger('place_of_work_id');
+            $table->unsignedBigInteger('places_of_work_id');
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('place_of_work_id')->references('id')->on('places_of_works')->onDelete('cascade');
+            $table->foreign('places_of_work_id')->references('id')->on('places_of_works')->onDelete('cascade');
             $table->string('title');
             $table->text('description');
             $table->integer('experience');

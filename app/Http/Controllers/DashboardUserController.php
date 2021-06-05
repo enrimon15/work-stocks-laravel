@@ -93,7 +93,7 @@ class DashboardUserController extends Controller
             ->select('job_offers.*', 'favorite_jobs.created_at', 'companies.name as company_name', 'places_of_works.country as country', 'places_of_works.city as city')
             ->join('favorite_jobs','job_offers.id','=','favorite_jobs.job_offer_id')
             ->join('companies','companies.id','=','job_offers.company_id')
-            ->join('places_of_works','places_of_works.id','=','job_offers.place_of_work_id')
+            ->join('places_of_works','places_of_works.id','=','job_offers.places_of_work_id')
             ->where('favorite_jobs.user_id','=',$user->id)
             ->orderBy('favorite_jobs.created_at', 'desc')
             ->paginate(10);
@@ -122,7 +122,7 @@ class DashboardUserController extends Controller
             ->select('job_offers.*', 'applications.created_at', 'companies.name as company_name', 'places_of_works.country as country', 'places_of_works.city as city')
             ->join('applications','job_offers.id','=','applications.id_job_offer')
             ->join('companies','companies.id','=','job_offers.company_id')
-            ->join('places_of_works','places_of_works.id','=','job_offers.place_of_work_id')
+            ->join('places_of_works','places_of_works.id','=','job_offers.places_of_work_id')
             ->where('applications.id_subscriber','=',$user->id)
             ->orderBy('applications.created_at', 'desc')
             ->paginate(10);

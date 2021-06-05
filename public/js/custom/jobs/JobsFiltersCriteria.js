@@ -44,7 +44,16 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
 
+        $('#checkBoxFilterOfferType').find('input[type=checkbox]').each(function () {
+            console.log("trovati i checkbox");
+            if ($(this).prop('checked')) {
+                queryParameters += ("filter[offers_type]=" + $(this).val()+"&");
+                console.log("query:" + queryParameters);
+            }
+        });
+        checkBoxFilterOfferType
 
+        console.log("PARAMETRI QUERY: ",queryParameters);
         return queryParameters;
     }
 
@@ -54,6 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         $('#topFilterLocation').val("");
 
+        $('#topFilterCompanyName').val("");
 
 
         $('#checkBoxFilterExperience').find('input[type=checkbox]').each(function () {
@@ -76,6 +86,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 $(this).prop('checked', false);
             }
         });
+
+        $('#checkBoxFilterOfferType').find('input[type=checkbox]').each(function () {
+            console.log("trovati i checkbox");
+            if ($(this).prop('checked')) {
+                $(this).prop('checked', false);
+            }
+        });
+
 
         filtersByAjaxCall();
     }

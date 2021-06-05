@@ -32,6 +32,7 @@ class JobController extends Controller
             ->allowedFilters(['title',
                             'experience',
                             'company.name',
+                            'offers_type',
                             AllowedFilter::custom('location',new FilterJobOfferLocation),
                             AllowedFilter::custom('experience',new FilterJobOfferExperienceYears),
                             AllowedFilter::custom('salary', new FilterJobOfferSalary),
