@@ -7,7 +7,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">{{__('dashboard/user/appliedJobs-jobs.modalTitle')}}</h5>
+                <h5 class="modal-title">{{__('dashboard/user/appliedJobs.modalTitle')}}</h5>
             </div>
             <div class="modal-body">{{__('dashboard/user/appliedJobs.modalBody')}}</div>
             <div class="modal-footer">
