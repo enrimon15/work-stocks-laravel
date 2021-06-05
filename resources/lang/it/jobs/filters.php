@@ -10,7 +10,7 @@ return [
     'years' => 'Anni',
     'full_time' => 'Full Time',
     'part_time' => 'Part Time',
-    'costruction_base' => 'Apprendistato',
+    'construction_base' => 'Apprendistato',
     'internship' => 'Tirocinio',
     'findJobs' => 'Cerca Lavori',
     'jobTitleOrKeywords' => 'Titolo Offerta o parole chiave',

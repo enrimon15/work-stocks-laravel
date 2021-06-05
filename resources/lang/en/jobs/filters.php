@@ -10,7 +10,7 @@ return [
     'years' => 'Years',
     'full_time' => 'Full time',
     'part_time' => 'Part Time',
-    'costruction_base' => 'Construction Base',
+    'construction_base' => 'Construction Base',
     'internship' => 'Internship',
     'findJobs' => 'Find Jobs',
     'jobTitleOrKeywords' => 'Job Title or Keywords',

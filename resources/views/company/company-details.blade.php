@@ -55,7 +55,7 @@
 				</button>
 			</div>
 		@endif
-		
+
 		<div class="row">
 
 			<div class="col-md-8 col-sm-12">
@@ -306,7 +306,7 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form method="POST" action="{{ route('sendMail', ['idRecipient' => $company->user->id]) }}">
+					<form id="form-contact" method="POST" action="{{ route('sendMail', ['idRecipient' => $company->user->id]) }}">
 						@csrf
 						<div class="row">
 							<div class="form-group col-md-12 col-sm-12">
@@ -318,7 +318,7 @@
 								@guest
 									<button disabled class="btn btn-primary" type="button">{{__('blog.submit')}}</button>
 								@else
-									<button class="btn btn-primary" type="submit">{{__('blog.submit')}}</button>
+									<button onclick="handleMail()" id="spinner" class="btn btn-primary" type="submit">{{__('blog.submit')}}</button>
 								@endguest
 							</div>
 						</div>
@@ -328,6 +328,27 @@
 			</div>
 		</div>
 	</div>
+
+	<script>
+		function htmlToElement(html) {
+			var template = document.createElement('template');
+			html = html.trim(); // Never return a text node of whitespace as the result
+			template.innerHTML = html;
+			return template.content.firstChild;
+		}
+
+		function handleMail() {
+			$button = document.getElementById('spinner');
+
+			var td = htmlToElement('<td>foo</td>'),
+					div = htmlToElement('<div><span>nested</span> <span>stuff</span></div>');
+
+			const spinner = htmlToElement('<div class="spinner-border text-success" role="status"><span class="sr-only">Loading...</span></div>');
+			$button.replaceWith(spinner);
+
+			document.getElementById('form-contact').submit()
+		}
+	</script>
 
 
 		<!-- <script src="assets/js/counterup.min.js"></script>
