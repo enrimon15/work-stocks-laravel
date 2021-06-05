@@ -19,4 +19,7 @@ return [
     'noExperience' => 'No Experience',
     'orMore' => 'or more',
     'companyName' => 'Company Name',
+    'filterSalaryUpTo' => 'Up to :numero :valuta',
+    'filterSalaryFrom' => 'From :numero :valuta up',
+    'filterSalaryBetween' => 'Between :numeroMin :valuta and :numeroMax :valuta',
 ];
