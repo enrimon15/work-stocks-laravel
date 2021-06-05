@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\ApplicationSendEmailJob;
 use App\Models\Application;
 use App\Models\Certificate;
 use App\Models\JobOffer;
@@ -140,6 +141,18 @@ class DashboardUserController extends Controller
                 ->where('id_job_offer', '=', $job->id)
                 ->delete();
         }
+
+        //JOB ASYNC
+        $details = [
+            'name' => $user->name,
+            'surname' => $user->surname,
+            'jobOfferName' => $job->title,
+            'companyName' => $job->company->name,
+            'subscriberEmail' => $user->email,
+            'companyEmail' => $job->company->user->email,
+            'emailType' => 'deleteApplication'
+        ];
+        ApplicationSendEmailJob::dispatch($details);
 
         return back()->with('success', __('dashboard/user/appliedJobs.successDelete'));
     }

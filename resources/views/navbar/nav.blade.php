@@ -6,7 +6,7 @@ use TCG\Voyager\Models\Menu;
     <div class="container-fluid">
         <nav id="navigation" class="navigation navigation-landscape">
             <div class="nav-header">
-                <a class="nav-brand" href="#">
+                <a class="nav-brand" href="{{route('home')}}">
                     <img src="{{asset('img/logo.png')}}" class="logo" alt="" />
                 </a>
                 <div class="nav-toggle"></div>
@@ -73,7 +73,7 @@ use TCG\Voyager\Models\Menu;
                 <ul class="nav-menu nav-menu-social align-to-right">
 
                     <li class="add-listing theme-bg mb-3 display-mob">
-                        <a href="#">
+                        <a href="{{route('postNewJobCompany')}}">
                             <i class="ti-plus"></i> {{__('nav.newOffer')}}
                         </a>
                     </li>
@@ -113,7 +113,7 @@ use TCG\Voyager\Models\Menu;
                     @endguest
 
                     <li class="add-listing theme-bg display-desk">
-                        <a href="#">
+                        <a href="{{route('postNewJobCompany')}}">
                              <i class="ti-plus"></i> {{__('nav.newOffer')}}
                         </a>
                         <!--<a href="#">

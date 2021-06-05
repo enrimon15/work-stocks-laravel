@@ -102,7 +102,8 @@ class SubscriberController extends Controller
                         'jobOfferName' => $jobOffer->title,
                         'companyName' => $jobOffer->company->name,
                         'subscriberEmail' => $subscriber->email,
-                        'companyEmail' => $jobOffer->company->user->email
+                        'companyEmail' => $jobOffer->company->user->email,
+                        'emailType' => 'sendApplication'
                     ];
 
                     //JOB

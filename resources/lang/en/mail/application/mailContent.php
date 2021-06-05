@@ -9,5 +9,9 @@ return [
     'mailBodyCompany' => 'Dear Company :companyName,
     we correctly stored an application from :subscriberName :subscriberSurname for your job offer titled :jobOfferName',
 
-    'mailSubjectContact' => 'Request contact'
+    'mailSubjectContact' => 'Request contact',
+
+    'mailSubjectDeleteApplication' => 'Delete Application',
+    'mailBodyDeleteApplication' => 'Dear Company :companyName,
+    the Subscriber :subscriberName :subscriberSurname (:subscriberEmail) has deleted the application for your job offer titled :jobOfferName',
 ];

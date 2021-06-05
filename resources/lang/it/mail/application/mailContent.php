@@ -9,5 +9,9 @@ return [
     'mailBodyCompany' => 'Gentile azienda :companyName,
     abbiamo registrato una candidatura da :subscriberName :subscriberSurname per la tua offerta di lavoro dal titolo :jobOfferName',
 
-    'mailSubjectContact' => 'Richiesta di contatto'
+    'mailSubjectContact' => 'Richiesta di contatto',
+
+    'mailSubjectDeleteApplication' => 'Eliminazione Candidatura',
+    'mailBodyDeleteApplication' => 'Gentile azienda :companyName,
+    l\'utente :subscriberName :subscriberSurname (:subscriberEmail) ha ritirato la candidatura per la tua offerta di lavoro dal titolo :jobOfferName',
 ];

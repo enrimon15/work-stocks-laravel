@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Mail\ApplicationMailCompany;
 use App\Mail\ApplicationMailForSubscriber;
+use App\Mail\DeleteApplication;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -36,7 +37,14 @@ class ApplicationSendEmailJob implements ShouldQueue
     public function handle()
     {
         echo("SEND EMAIL");
-        Mail::to($this->details['subscriberEmail'])->send(new ApplicationMailForSubscriber($this->details));
-        Mail::to($this->details['companyEmail'])->send(new ApplicationMailCompany($this->details));
+
+        if ($this->details['emailType'] == 'deleteApplication') {
+            Mail::to($this->details['companyName'])->send(new DeleteApplication($this->details));
+        } else if ($this->details['emailType'] == 'sendApplication') {
+            Mail::to($this->details['subscriberEmail'])->send(new ApplicationMailForSubscriber($this->details));
+            Mail::to($this->details['companyEmail'])->send(new ApplicationMailCompany($this->details));
+        } else {
+            $this->fail();
+        }
     }
 }
