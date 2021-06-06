@@ -21,5 +21,8 @@ return [
     'mailSuccess' => 'Mail inviata con successo',
     'contact' => 'Richiesta di contatto da: ',
     'site' => 'Visita il sito',
-    'thanks' => 'Grazie,'
+    'thanks' => 'Grazie,',
+    'society' => 'Rilasciato da:',
+    'credential' => 'Credenziale:',
+    'noExp' => '(nessuna scadenza)',
 ];

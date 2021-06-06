@@ -156,10 +156,10 @@
 							<!-- Single List -->
 								<li>
 									<div class="qa-skill-box">
-										<h4 class="qa-skill-title">{{$certificate->name}}<span class="qa-time">{{date('d-m-y', strtotime($certificate->date))}}{{isset($certificate->end_date) ? ' - ' . date('d-m-y', strtotime($certificate->end_date)) : null}}</span></h4>
-										<h5 class="qa-subtitle"><a href="{{$certificate->link ?? '#'}}">{{$certificate->credential}}</a></h5>
+										<h4 class="qa-skill-title">{{$certificate->name}}<span class="qa-time">{{date('d-m-y', strtotime($certificate->date))}}{{isset($certificate->end_date) ? ' - ' . date('d-m-y', strtotime($certificate->end_date)) : ' - ' . __('profile/userProfile.noExp')}}</span></h4>
+										<h5 class="qa-subtitle">{{__('profile/userProfile.society')}} {{$certificate->society}}</h5>
 										<div class="qa-content">
-											<p>{{$certificate->society}}</p>
+											<p>{{__('profile/userProfile.credential')}} <a href="{{$certificate->link ?? '#'}}">{{$certificate->credential}}</a></p>
 										</div>
 									</div>
 								</li>
@@ -343,17 +343,14 @@
 
 <script>
 	function htmlToElement(html) {
-		var template = document.createElement('template');
+		let template = document.createElement('template');
 		html = html.trim(); // Never return a text node of whitespace as the result
 		template.innerHTML = html;
 		return template.content.firstChild;
 	}
 
 	function handleMail() {
-		$button = document.getElementById('spinner');
-
-		var td = htmlToElement('<td>foo</td>'),
-				div = htmlToElement('<div><span>nested</span> <span>stuff</span></div>');
+		const $button = document.getElementById('spinner');
 
 		const spinner = htmlToElement('<div class="spinner-border text-success" role="status"><span class="sr-only">Loading...</span></div>');
 		$button.replaceWith(spinner);

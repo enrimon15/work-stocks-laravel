@@ -21,5 +21,8 @@ return [
     'mailSuccess' => 'Mail successfully sent',
     'contact' => 'Contact request from: ',
     'site' => 'Go to website',
-    'thanks' => 'Thanks,'
+    'thanks' => 'Thanks,',
+    'society' => 'Released by:',
+    'credential' => 'Credential:',
+    'noExp' => '(no expiration)',
 ];
