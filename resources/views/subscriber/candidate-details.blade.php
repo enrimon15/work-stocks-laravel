@@ -102,7 +102,7 @@
 
 										@if(isset($qualification->valuation))
 											<div class="qa-content">
-												<p>{{'Valuation: ' . $qualification->valuation}}</p>
+												<p>{{__('profile/userProfile.valuation') . $qualification->valuation}}</p>
 											</div>
 										@endif
 									</div>

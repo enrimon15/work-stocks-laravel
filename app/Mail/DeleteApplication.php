@@ -20,7 +20,6 @@ class DeleteApplication extends Mailable
      */
     public function __construct($details)
     {
-        echo($details);
         $this->details = $details;
     }
 

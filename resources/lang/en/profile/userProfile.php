@@ -25,4 +25,5 @@ return [
     'society' => 'Released by:',
     'credential' => 'Credential:',
     'noExp' => '(no expiration)',
+    'valuation' => 'Valuation: '
 ];

@@ -157,7 +157,7 @@ class MenuItemSeeder extends Seeder
                 'icon_class' => 'voyager-boat',
                 'color' => null,
                 'parent_id' => null,
-                'order' => 4,
+                'order' => 3,
             ])->save();
         }
 
@@ -173,7 +173,7 @@ class MenuItemSeeder extends Seeder
                 'icon_class' => 'voyager-boat',
                 'color' => null,
                 'parent_id' => null,
-                'order' => 5,
+                'order' => 4,
             ])->save();
         }
 

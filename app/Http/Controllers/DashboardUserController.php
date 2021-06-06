@@ -152,6 +152,7 @@ class DashboardUserController extends Controller
             'companyEmail' => $job->company->user->email,
             'emailType' => 'deleteApplication'
         ];
+
         ApplicationSendEmailJob::dispatch($details);
 
         return back()->with('success', __('dashboard/user/appliedJobs.successDelete'));
