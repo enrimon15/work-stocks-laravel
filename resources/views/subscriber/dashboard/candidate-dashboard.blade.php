@@ -36,9 +36,9 @@
 						<li class="nav-item">
 							<a class="nav-link {{Route::currentRouteName() == 'appliedJobs' ? 'active' : ''}}" href="{{route('appliedJobs')}}"><i class="lni-briefcase"></i>{{__('dashboard/user/menu.appliedJobs')}}</a>
 						</li>
-						<li class="nav-item">
+						<!-- <li class="nav-item">
 							<a class="nav-link {{Route::currentRouteName() == 'jobAlert' ? 'active' : ''}}" href="{{route('jobAlert')}}"><i class="lni-alarm"></i>{{__('dashboard/user/menu.jobAlert')}}</a>
-						</li>
+						</li> -->
 						<li class="nav-item">
 							<a class="nav-link" href="{{route('profile', ['type' => 'user', 'id' => Auth::user()->id])}}"><i class="lni-user"></i>{{__('dashboard/user/menu.showProfile')}}</a>
 						</li>

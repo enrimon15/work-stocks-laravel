@@ -29,7 +29,7 @@ Route::prefix('/user')->middleware('roleIn:user')->group(function () {
             Route::get('/delete/{id}', [DashboardUserController::class, 'deleteAppliedJobs'])->name('deleteAppliedJob');
         });
 
-        Route::get('/job-alert', [DashboardUserController::class, 'showJobAlert'])->name('jobAlert');
+        //Route::get('/job-alert', [DashboardUserController::class, 'showJobAlert'])->name('jobAlert');
 
         Route::prefix('/online-cv')->group(function () {
             Route::get('/', [DashboardUserController::class, 'showOnlineCV'])->name('onlineCV');

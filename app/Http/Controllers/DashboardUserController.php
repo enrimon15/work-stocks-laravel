@@ -157,9 +157,9 @@ class DashboardUserController extends Controller
         return back()->with('success', __('dashboard/user/appliedJobs.successDelete'));
     }
 
-    public function showJobAlert() {
+    /*public function showJobAlert() {
         return view('subscriber.dashboard.job-alert');
-    }
+    }*/
 
     public function showOnlineCV() {
         $user = Auth::user();
