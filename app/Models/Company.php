@@ -51,6 +51,8 @@ use function Illuminate\Support\Facades\Date;
  * @property-read int|null $working_places_count
  * @method static \Illuminate\Database\Eloquent\Builder|Company whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Company whereVatNumber($value)
+ * @property string|null $telephone
+ * @method static \Illuminate\Database\Eloquent\Builder|Company whereTelephone($value)
  */
 class Company extends Model
 {

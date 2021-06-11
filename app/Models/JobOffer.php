@@ -58,6 +58,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\Models\PlacesOfWork $workingPlace
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $applicants
  * @property-read int|null $applicants_count
+ * @property int $company_id
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $favoriteUsers
+ * @property-read int|null $favorite_users_count
+ * @method static \Illuminate\Database\Eloquent\Builder|JobOffer whereCompanyId($value)
  */
 class JobOffer extends Model
 {

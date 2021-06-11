@@ -35,5 +35,6 @@ return [
     'alreadyFavorite' => 'Rimuovi dai preferiti',
     'alreadyApplied' => 'Candidatura effettuata',
 
-    'successFavorite' => 'L\'offerta di lavoro è stata correttamente inserita nei preferiti'
+    'successFavorite' => 'L\'offerta di lavoro è stata correttamente inserita nei preferiti',
+    'successSentApplication' => 'La tua candidatura per questa offerta di lavoro è stata acquisita correttamente'
 ];

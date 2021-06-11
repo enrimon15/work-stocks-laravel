@@ -56,6 +56,8 @@ use TCG\Voyager\Models\Role;
  * @property-read \App\Models\Company|null $company
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Application[] $applications
  * @property-read int|null $applications_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\JobOffer[] $favoriteJobs
+ * @property-read int|null $favorite_jobs_count
  */
 class User extends \TCG\Voyager\Models\User
 {

@@ -11,7 +11,12 @@ use App\Models\Filters\FilterJobOfferExperienceYears;
 use App\Models\Filters\FilterJobOfferLocation;
 use App\Models\Filters\FilterJobOfferSalary;
 use App\Models\Filters\FilterJobOfferSkills;
+use App\Models\Filters\FilterSubscriberLocation;
+use App\Models\Filters\FilterSubscriberNameSurname;
+use App\Models\Filters\FilterSubscriberSalary;
+use App\Models\Filters\FilterSubscriberSkills;
 use App\Models\JobOffer;
+use App\Models\Login;
 use App\Models\User;
 use Carbon\Carbon;
 use Conner\Tagging\Model\Tag;
@@ -21,6 +26,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -30,33 +36,24 @@ class SubscriberController extends Controller
     {
         $subscribers = QueryBuilder::for(User::class)
             ->where('role_id', '=', 3)
-            /*->allowedFilters(['title',
+            ->allowedFilters(['profile.job_title',/*
                 'experience',
-                'company.name',
-                AllowedFilter::custom('location',new FilterJobOfferLocation),
-                AllowedFilter::custom('experience',new FilterJobOfferExperienceYears),
-                AllowedFilter::custom('salary', new FilterJobOfferSalary),
-                AllowedFilter::custom('skill',new FilterJobOfferSkills)])*/
+                'company.name',*/
+                AllowedFilter::custom('name_surname', new FilterSubscriberNameSurname()),
+                AllowedFilter::custom('location',new FilterSubscriberLocation()),
+                AllowedFilter::custom('salary',new FilterSubscriberSalary()),
+                AllowedFilter::custom('skill',new FilterSubscriberSkills())])
             ->paginate(10);
 
+
+
         if ($request->ajax()) {
-            return view('subscribers.subscribers-search-data')
+            return view('subscriber.subscribers-search-data')
                 ->with('subscribers', $subscribers)
                 ->render();
         } else {
 
-            $tagGroup = TagGroup::where('slug', '=', 'skill')->first();
-
-            $tags = null;
-            if ($tagGroup) {
-                $tags = Tag::where('tag_group_id', '=', $tagGroup->getAttribute('id'))
-                    ->orderBy('count', 'desc')
-                    ->limit(5)
-                    ->get();
-            }
-
             return view('subscriber.subscribers-search')
-                ->with('tags', $tags)
                 ->with('subscribers', $subscribers);
         }
 
@@ -65,26 +62,26 @@ class SubscriberController extends Controller
 
     public function apply(Request $request, $idJobOffer)
     {
-//        if (!$request->ajax()) {
-//            return redirect()->route('subscribers/getAll');
-//        } else {
+        if (!$request->ajax()) {
+            return redirect()->route('subscribers/getAll');
+        } else {
             try {
 
                 $idSubscriber = Auth::id();
 
-                if($idSubscriber == null) {
-                    return $this->abort("Redirect",308);
+                if ($idSubscriber == null) {
+                    return $this->abort("Redirect", 308);
                 }
 
                 $subscriber = User::findOrFail($idSubscriber);
                 $jobOffer = JobOffer::findOrFail($idJobOffer);
 
-                if($subscriber === null || $jobOffer === null) {
-                    return $this->abort('Subscriber o offerta non trovata',500);
+                if ($subscriber === null || $jobOffer === null) {
+                    return $this->abort('Subscriber o offerta non trovata', 500);
                 }
 
-                if($jobOffer->due_date < Carbon::today()) {
-                    return $this->abort('Offerta scaduta',405);
+                if ($jobOffer->due_date < Carbon::today()) {
+                    return $this->abort('Offerta scaduta', 405);
                 }
 
                 $application = Application::where('id_subscriber', '=', $subscriber->id)
@@ -108,17 +105,17 @@ class SubscriberController extends Controller
 
                     //JOB
                     ApplicationSendEmailJob::dispatch($details);
-                    return response(json_encode(['body'=>'OK']), 200);
+                    return response(json_encode(['body' => __('jobs/jobs.successSentApplication')]), 200);
                 }
 
-                return $this->abort('Already Applied',500);
+                return $this->abort('Already Applied', 500);
 
 
             } catch (ModelNotFoundException $e) {
                 return redirect()->route('subscribers/getAll');
             }
 
-       // }
+        }
     }
 
     public function favoriteExecute($idJobOffer) {
@@ -153,7 +150,76 @@ class SubscriberController extends Controller
         }
     }
 
+    public function getById($id) {
+
+        try {
+            $user = User::findOrFail($id);
+        } catch(ModelNotFoundException $e) {
+            return redirect()->route('subscribers/getAll');
+        }
+
+        if($user == null || $user->role_id != 3) {
+            return redirect()->route('subscribers/getAll');
+        }
+
+        return view('subscriber.subscriber-detail')->with('subscriber', $user);
+    }
+
+    public function downloadCV($id) {
+        try {
+            $user = User::findOrFail($id);
+        } catch(ModelNotFoundException $e) {
+            return null;
+        }
+
+        if($user->profile != null && $user->profile->cv_path != null) {
+            return Storage::disk('public')->download($user->profile->cv_path);
+        }
+
+        return null;
+    }
+
     private function abort($description, $errorCode) {
         return response($description,$errorCode);
+    }
+
+    public static function getLastLoginInDays($user)
+    {
+        $now = Carbon::now();
+        $lastLogin = null;
+
+        $days = null;
+
+        try {
+            $lastLogin= Login::where('user_id', '=', $user->id)
+                ->orderBy('created_at', 'desc')
+                ->firstOrFail();
+
+            $last = Carbon::parse($lastLogin->created_at);
+
+            $days = $now->diffInDays($last);
+        } catch(ModelNotFoundException $e){
+            $days = __('subcribers/subscribersList.noLastLogin');
+            return $days;
+        }
+
+        if($days > 0) {
+            $days = trans_choice('subcribers/subscribersList.daysLastLogin',$days,['giorni'=> $days]);
+        } else {
+            $days = __('subcribers/subscribersList.todayLastLogin');
+        }
+        return $days;
+    }
+
+    public static function progressPercentage($startDate, $endDate) {
+        $beginDate = Carbon::parse($startDate);
+        $dueDate = Carbon::parse($endDate);
+        $today = Carbon::now();
+
+        $totalDays = $dueDate->diffInDays($beginDate);
+        $atTodayDays = $today->diffInDays($beginDate);
+
+        return (100 * $atTodayDays)/$totalDays;
+
     }
 }

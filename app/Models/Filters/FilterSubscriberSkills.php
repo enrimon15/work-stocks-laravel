@@ -1,0 +1,20 @@
+<?php
+
+
+namespace App\Models\Filters;
+
+
+use App\Models\JobOffer;
+use Illuminate\Database\Eloquent\Builder;
+use Spatie\QueryBuilder\Filters\Filter;
+
+class FilterSubscriberSkills implements Filter
+{
+
+    public function __invoke(Builder $query, $value, string $property)
+    {
+        $query->whereHas('skills',function(Builder $query) use($value) {
+            $query->where('name', 'like','%'.$value.'%');
+        });
+    }
+}

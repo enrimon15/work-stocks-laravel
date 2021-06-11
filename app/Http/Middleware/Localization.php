@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use Carbon\Carbon;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -28,8 +29,10 @@ class Localization
         if ($inputLang != '' && in_array($inputLang, $languagesAllowed)) {
             App::setLocale($inputLang);
             Session::put('language', $inputLang);
+            Carbon::setLocale($inputLang);
         } else if (Session::has('language')) {
             App::setLocale(Session::get('language'));
+            Carbon::setLocale(Session::get('language'));
         }
 
         return $next($request);

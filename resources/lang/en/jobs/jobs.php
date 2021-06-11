@@ -35,5 +35,6 @@ return [
     'alreadyFavorite' => 'Remove to your favorites',
     'alreadyApplied' => 'Application done',
 
-    'successFavorite' => 'The job offer has been successfully added to your favorites'
+    'successFavorite' => 'The job offer has been successfully added to your favorites',
+    'successSentApplication' => 'Your application for this Job Offer was sent correctly'
 ];

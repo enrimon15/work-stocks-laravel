@@ -178,9 +178,9 @@
 			<div class="col-md-4 col-sm-12">
 
 				<div class="offer-btn-wrap mb-4">
-					@if($user->profile == null || Auth::user()->profile->cv_path == null)
+					@if($user->profile == null || $user->profile->cv_path == null)
 						<a href="#" style="cursor: not-allowed" class="btn btn-info btn-md full-width"><i class="mr-2 ti-download"></i>{{__('profile/userProfile.cv')}}</a>
-					@elseif($user->profile != null && Auth::user()->profile->cv_path != null)
+					@elseif($user->profile != null && $user->profile->cv_path != null)
 						<a href="{{ route('profileCV', ['idUser' => $user->id]) }}" class="btn btn-info btn-md full-width"><i class="mr-2 ti-download"></i>{{__('profile/userProfile.cv')}}</a>
 					@endif
 				</div>
