@@ -61,7 +61,9 @@
 								</div>
 							</div>
 						@empty
-							<p>{{__('blog.noNews')}}</p>
+							<div class="container">
+								<p>{{__('blog.noNews')}}</p>
+							</div>
 						@endforelse
 					
 					</div>

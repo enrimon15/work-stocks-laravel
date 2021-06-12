@@ -5,58 +5,48 @@
 <div class="Loader"></div>
 
 <!-- ============================ Hero Banner  Start================================== -->
-<div class="hero-header jumbo-banner text-center" style="background: url(https://via.placeholder.com/1920x800);" data-overlay="6">
+<div class="hero-header jumbo-banner text-center" style="background: url({{asset($home->banner_img_path)}});" data-overlay="6">
 	<div class="container">
-		<h1>Find All Jobs in Canada</h1>
-		<p class="lead">Find Jobs, Employment & Best Career Opportunities</p>
-		<form class="search-big-form no-border search-shadow">
-			<div class="row m-0">
-				<div class="col-lg-4 col-md-4 col-sm-12 p-0">
-					<div class="form-group">
-						<i class="ti-search"></i>
-						<input type="text" class="form-control b-r" placeholder="Job Title or Keywords">
+		<h1>{{Lang::locale() == 'en' ? $home->banner_title_en : $home->banner_title_it}}</h1>
+		<p class="lead">{{Lang::locale() == 'en' ? $home->banner_subtitle_en : $home->banner_subtitle_it}}</p>
+		@if($home->show_search_bar == true)
+			<form class="search-big-form no-border search-shadow" method="POST" action="{{ route('newsComment') }}">
+				@csrf
+				<div class="row m-0">
+					<div class="col-lg-5 col-md-5 col-sm-12 p-0">
+						<div class="form-group">
+							<i class="ti-search"></i>
+							<input name="jobTitle" type="text" class="form-control b-r" placeholder="{{__('home.jobTitle')}}">
+						</div>
+					</div>
+
+					<div class="col-lg-5 col-md-5 col-sm-12 p-0">
+						<div class="form-group">
+							<i class="ti-location-pin"></i>
+							<input name="location" type="text" class="form-control b-r" placeholder="{{__('home.location')}}">
+						</div>
+					</div>
+
+					<div class="col-lg-2 col-md-2 col-sm-12 p-0">
+						<button type="button" class="btn btn-primary full-width">{{__('home.submit')}}</button>
 					</div>
 				</div>
-
-				<div class="col-lg-3 col-md-3 col-sm-12 p-0">
-					<div class="form-group">
-						<i class="ti-location-pin"></i>
-						<input type="text" class="form-control b-r" placeholder="Location">
-					</div>
-				</div>
-
-				<div class="col-lg-3 col-md-3 col-sm-12 p-0">
-					<div class="form-group">
-						<select id="category" class="js-states form-control">
-							<option value="">&nbsp;</option>
-							<option value="1">SEO & Web Design</option>
-							<option value="2">Wealth & Healthcare</option>
-							<option value="3">Account / Finance</option>
-							<option value="4">Education</option>
-							<option value="5">Banking Jobs</option>
-						</select>
-						<i class="ti-layers"></i>
-					</div>
-				</div>
-
-				<div class="col-lg-2 col-md-2 col-sm-12 p-0">
-					<button type="button" class="btn btn-primary full-width">Find Jobs</button>
-				</div>
-			</div>
-		</form>
+			</form>
+		@endif
 	</div>
 </div>
 <!-- ============================ Hero Banner End ================================== -->
 
-<!-- ============================ Latest job ================================== -->
+<!-- ============================ Popular Companies ================================== -->
+@if($home->homeComponents()->where('component_name', 'pupular_companies')->first()->active == true)
 <section>
 	<div class="container">
 
 		<div class="row">
 			<div class="col text-center">
 				<div class="sec-heading mx-auto">
-					<p>New & Trending Jobs</p>
-					<h2>Most Popular & Trending Jobs</h2>
+					<p>{{Lang::locale() == 'en' ? $home->homeComponents()->where('component_name', 'pupular_companies')->first()->component_title_en : $home->homeComponents()->where('component_name', 'pupular_companies')->first()->component_title_it}}</p>
+					<h2>{{Lang::locale() == 'en' ? $home->homeComponents()->where('component_name', 'pupular_companies')->first()->component_subtitle_en : $home->homeComponents()->where('component_name', 'pupular_companies')->first()->component_subtitle_it}}</h2>
 				</div>
 			</div>
 		</div>
@@ -64,156 +54,43 @@
 		<div class="row">
 			<div class="owl-carousel" id="job-slide">
 
+				@forelse($companies as $company)
 				<!-- Single Job -->
 				<div class="item">
 					<div class="job-grid style-1">
 						<div class="job-grid-wrap">
-							<span class="job-type j-part-time">Part Time</span>
 							<div class="job-grid-thumb">
-								<a href="job-detail.html"><img src="https://via.placeholder.com/90x90" class="img-fluid mx-auto" alt="" /></a>
+								<a style="cursor: default;" href="#"><img src="{{asset('storage/' . $company->avatar)}}" class="img-fluid mx-auto" alt="" /></a>
 							</div>
-							<h4 class="job-title"><a href="job-detail.html">Product Manager</a></h4>
+							<h4 class="job-title"><a href="{{route('profile', ['type' => 'company', 'id' => $company->id])}}">{{$company->name}}</a></h4>
 							<hr>
 							<div class="job-grid-detail">
-								<h4 class="jbc-name"><a href="employer-detail.html">Alliziance Tech</a></h4>
-								<p><i class="ti-location-pin"></i>325, New Market, New York </p>
+								<h4 class="jbc-name">{{$company->slogan}}</h4>
+								<p><i class="ti-location-pin"></i>{{\App\Models\Company::find($company->id)->mainPlaceOfWork()->city . ', ' . \App\Models\Company::find($company->id)->mainPlaceOfWork()->country}} </p>
 							</div>
-							<div class="job-grid-footer">
-								<h4 class="job-price">$7,247</h4>
-								<a href="job-detail.html" class="btn btn-outline-info btn-rounded">Apply</a>
+							<div class="job-grid-footer" style="justify-content: center;">
+								<a href="{{route('profile', ['type' => 'company', 'id' => $company->id])}}" class="btn btn-outline-info btn-rounded">{{__('home.visitCompany')}}</a>
 							</div>
 
 						</div>
 					</div>
 				</div>
-
-				<!-- Single Job -->
-				<div class="item">
-					<div class="job-grid style-1">
-						<div class="job-grid-wrap">
-							<div class="featured-job"><i class="ti-star filled"></i></div>
-							<span class="job-type j-full-time">Full Time</span>
-							<div class="job-grid-thumb">
-								<a href="job-detail.html"><img src="https://via.placeholder.com/90x90" class="img-fluid mx-auto" alt="" /></a>
-							</div>
-							<h4 class="job-title"><a href="job-detail.html">Project & Team Head</a></h4>
-							<hr>
-							<div class="job-grid-detail">
-								<h4 class="jbc-name"><a href="employer-detail.html">Asana Inc.</a></h4>
-								<p><i class="ti-location-pin"></i>356, Blick Shop, London </p>
-							</div>
-							<div class="job-grid-footer">
-								<h4 class="job-price">$3,254</h4>
-								<a href="job-detail.html" class="btn btn-outline-info btn-rounded">Apply</a>
-							</div>
-
-						</div>
+				@empty
+					<div class="container">
+						<p>{{__('home.noPopularCompanies')}}</p>
 					</div>
-				</div>
-
-				<!-- Single Job -->
-				<div class="item">
-					<div class="job-grid style-1">
-						<div class="job-grid-wrap">
-							<span class="job-type j-full-time">Full Time</span>
-							<div class="job-grid-thumb">
-								<a href="job-detail.html"><img src="https://via.placeholder.com/90x90" class="img-fluid mx-auto" alt="" /></a>
-							</div>
-							<h4 class="job-title"><a href="job-detail.html">Web Designer</a></h4>
-							<hr>
-							<div class="job-grid-detail">
-								<h4 class="jbc-name"><a href="employer-detail.html">Drive Tech</a></h4>
-								<p><i class="ti-location-pin"></i>New Market, United State </p>
-							</div>
-							<div class="job-grid-footer">
-								<h4 class="job-price">$5,747</h4>
-								<a href="job-detail.html" class="btn btn-outline-info btn-rounded">Apply</a>
-							</div>
-
-						</div>
-					</div>
-				</div>
-
-				<!-- Single Job -->
-				<div class="item">
-					<div class="job-grid style-1">
-						<div class="job-grid-wrap">
-							<div class="featured-job"><i class="ti-star filled"></i></div>
-							<span class="job-type j-freelance-time">Freelance</span>
-							<div class="job-grid-thumb">
-								<a href="job-detail.html"><img src="https://via.placeholder.com/90x90" class="img-fluid mx-auto" alt="" /></a>
-							</div>
-							<h4 class="job-title"><a href="job-detail.html">Sales Analytics</a></h4>
-							<hr>
-							<div class="job-grid-detail">
-								<h4 class="jbc-name"><a href="employer-detail.html">Photos Info.</a></h4>
-								<p><i class="ti-location-pin"></i>325, New Market, New York </p>
-							</div>
-							<div class="job-grid-footer">
-								<h4 class="job-price">$6,357</h4>
-								<a href="job-detail.html" class="btn btn-outline-info btn-rounded">Apply</a>
-							</div>
-
-						</div>
-					</div>
-				</div>
-
-				<!-- Single Job -->
-				<div class="item">
-					<div class="job-grid style-1">
-						<div class="job-grid-wrap">
-							<span class="job-type j-part-time">Part Time</span>
-							<div class="job-grid-thumb">
-								<a href="job-detail.html"><img src="https://via.placeholder.com/90x90" class="img-fluid mx-auto" alt="" /></a>
-							</div>
-							<h4 class="job-title"><a href="job-detail.html">Product Manager</a></h4>
-							<hr>
-							<div class="job-grid-detail">
-								<h4 class="jbc-name"><a href="employer-detail.html">Google Info.</a></h4>
-								<p><i class="ti-location-pin"></i>325, Rack Newer, England </p>
-							</div>
-							<div class="job-grid-footer">
-								<h4 class="job-price">$10,047</h4>
-								<a href="job-detail.html" class="btn btn-outline-info btn-rounded">Apply</a>
-							</div>
-
-						</div>
-					</div>
-				</div>
-
-				<!-- Single Job -->
-				<div class="item">
-					<div class="job-grid style-1">
-						<div class="job-grid-wrap">
-							<div class="featured-job"><i class="ti-star filled"></i></div>
-							<span class="job-type j-temporary-time">Temporary</span>
-							<div class="job-grid-thumb">
-								<a href="job-detail.html"><img src="https://via.placeholder.com/90x90" class="img-fluid mx-auto" alt="" /></a>
-							</div>
-							<h4 class="job-title"><a href="job-detail.html">Team Director</a></h4>
-							<hr>
-							<div class="job-grid-detail">
-								<h4 class="jbc-name"><a href="employer-detail.html">PayPal Info.</a></h4>
-								<p><i class="ti-location-pin"></i>254, New Buklack, London </p>
-							</div>
-							<div class="job-grid-footer">
-								<h4 class="job-price">$8,247</h4>
-								<a href="job-detail.html" class="btn btn-outline-info btn-rounded">Apply</a>
-							</div>
-
-						</div>
-					</div>
-				</div>
+				@endforelse
 
 			</div>
 		</div>
 
 	</div>
 </section>
-<!-- ============================ Latest Job End ================================== -->
+@endif
+<!-- ============================ Popular Companies End ================================== -->
 
 <!-- ============================ Category Start ================================== -->
-<section class="gray">
+<!-- <section class="gray">
 	<div class="container">
 
 		<div class="row">
@@ -298,47 +175,50 @@
 
 	</div>
 </section>
-<div class="clearfix"></div>
+<div class="clearfix"></div> -->
 <!-- ============================ Category End ================================== -->
 
 <!-- ============================ Counter Facts  Start================================== -->
-<section class="image-bg text-center" style="background:#00a94f url(assets/img/bg2.png);" data-overlay="0">
+@if($home->homeComponents()->where('component_name', 'statistics_banner')->first()->active == true)
+<section class="image-bg text-center" style="background:#00a94f" data-overlay="0">
 	<div class="container">
 		<div class="row">
 
 			<div class="col-lg-3 col-md-3 col-sm-6 b-r">
 				<div class="count-facts">
-					<h4>2120</h4>
-					<span>Jobs Posted</span>
+					<h4>{{$stats['jobs']}}</h4>
+					<span>{{__('home.jobs')}}</span>
 				</div>
 			</div>
 
 			<div class="col-lg-3 col-md-3 col-sm-6 b-r">
 				<div class="count-facts">
-					<h4>3117</h4>
-					<span>Jobs Filled</span>
+					<h4>{{$stats['applications']}}</h4>
+					<span>{{__('home.applications')}}</span>
 				</div>
 			</div>
 
 			<div class="col-lg-3 col-md-3 col-sm-6 b-r">
 				<div class="count-facts">
-					<h4>872</h4>
-					<span>Companies</span>
+					<h4>{{$stats['companies']}}</h4>
+					<span>{{__('home.companies')}}</span>
 				</div>
 			</div>
 
 			<div class="col-lg-3 col-md-3 col-sm-6">
 				<div class="count-facts">
-					<h4>3740</h4>
-					<span>Freelancer</span>
+					<h4>{{$stats['users']}}</h4>
+					<span>{{__('home.users')}}</span>
 				</div>
 			</div>
 
 		</div>
 	</div>
 </section>
+@endif
 <!-- ============================ Counter Facts End ================================== -->
 
+@if($home->homeComponents()->where('component_name', 'popular_jobs')->first()->active == true)
 <!-- ============================ Popular Jobs Start ================================== -->
 <section>
 	<div class="container">
@@ -346,8 +226,8 @@
 		<div class="row">
 			<div class="col text-center">
 				<div class="sec-heading mx-auto">
-					<p>Browse Popular jobs</p>
-					<h2>Top Trending Jobs</h2>
+					<p>{{Lang::locale() == 'en' ? $home->homeComponents()->where('component_name', 'popular_jobs')->first()->component_title_en : $home->homeComponents()->where('component_name', 'popular_jobs')->first()->component_title_it}}</p>
+					<h2>{{Lang::locale() == 'en' ? $home->homeComponents()->where('component_name', 'popular_jobs')->first()->component_subtitle_en : $home->homeComponents()->where('component_name', 'popular_jobs')->first()->component_subtitle_it}}</h2>
 				</div>
 			</div>
 		</div>
@@ -355,105 +235,45 @@
 		<div class="row">
 			<div class="col-md-12">
 
+				@forelse($jobs as $job)
 				<!-- Single Large Job List -->
-				<div class="job-new-list">
+				<div class="job-new-list" style="cursor: default">
 					<div class="vc-thumb">
-						<img class="img-fluid rounded-circle" src="https://via.placeholder.com/90x90" alt="c2.jpg">
+						<img class="img-fluid rounded-circle" src="{{asset('storage/'. \App\Models\JobOffer::find($job->id)->company->user->avatar)}}" alt="c2.jpg">
 					</div>
 					<div class="vc-content">
-						<h5 class="title"><a href="job-detail.html">Web Developer</a><span class="j-full-time">Full Time</span></h5>
-						<p>Google Inc</p>
+						<h5 class="title"><a href="{!! route('jobs/getById',['id'=>$job->id]) !!}">{{$job->title}}</a><span class="j-full-time">{{__('jobs/filters.'.$job->offers_type)}}</span></h5>
+						<p>{{\App\Models\JobOffer::find($job->id)->company->name}}</p>
 						<ul class="vc-info-list">
-							<li class="list-inline-item"><h5>Sallery</h5> <i class="ti-credit-card"></i>$3.5k-$5k P.A</li>
-							<li class="list-inline-item"><h5>Skills</h5>
+							<li class="list-inline-item"><h5>{{__('home.salary')}}</h5> <i class="ti-credit-card"></i>{{$job->min_salary . 'k' . '-' . $job->max_salary . 'k'}}</li>
+							@if(!empty(\App\Models\JobOffer::find($job->id)->tagNames()))
+							<li class="list-inline-item"><h5>{{__('home.skills')}}</h5>
 								<div class="skills">
-									<span>Css3</span><span>photoshop</span><span>java</span><span>+3 more</span>
+										@foreach(\App\Models\JobOffer::find($job->id)->tagNames() as $tag)
+											@if($loop->iteration > 3)
+												<span>+ {{' '.
+                                                                            (count($job->tagNames())-3)
+                                                                            .' '.
+                                                                            trans_choice('jobs/jobs.others',(count($job->tagNames())-3))
+                                                                            }}
+                                                                    </span>
+												@break
+											@endif
+											<span>{{$tag}}</span>
+										@endforeach
+									<!-- <span>Css3</span><span>photoshop</span><span>java</span><span>+3 more</span> -->
 								</div>
 							</li>
+							@endif
 						</ul>
 					</div>
-					<a class="btn btn-primary bn-det" href="job-detail.html">Apply Now<i class="ti-arrow-right ml-1"></i></a>
+					<a class="btn btn-primary bn-det" href="{{route('jobs/getById', ['id'=>$job->id])}}">{{__('home.apply')}}<i class="ti-arrow-right ml-1"></i></a>
 				</div>
-
-				<!-- Single Large Job List -->
-				<div class="job-new-list">
-					<div class="vc-thumb">
-						<img class="img-fluid rounded-circle" src="https://via.placeholder.com/90x90" alt="c2.jpg">
+				@empty
+					<div class="container">
+						<p>{{__('home.noJobs')}}</p>
 					</div>
-					<div class="vc-content">
-						<h5 class="title"><a href="job-detail.html">App Developer</a><span class="j-part-time">Part Time</span></h5>
-						<p>Apple Soft.</p>
-						<ul class="vc-info-list">
-							<li class="list-inline-item"><h5>Sallery</h5> <i class="ti-credit-card"></i>$4.5k-$5k P.A</li>
-							<li class="list-inline-item"><h5>Skills</h5>
-								<div class="skills">
-									<span>Html</span><span>Css3</span><span>java</span><span>+3 more</span>
-								</div>
-							</li>
-						</ul>
-					</div>
-					<a class="btn btn-primary bn-det" href="job-detail.html">Apply Now<i class="ti-arrow-right ml-1"></i></a>
-				</div>
-
-				<!-- Single Large Job List -->
-				<div class="job-new-list">
-					<div class="vc-thumb">
-						<img class="img-fluid rounded-circle" src="https://via.placeholder.com/90x90" alt="c2.jpg">
-					</div>
-					<div class="vc-content">
-						<h5 class="title"><a href="job-detail.html">Product Manager</a><span class="j-part-time">Part Time</span></h5>
-						<p>Google Inc</p>
-						<ul class="vc-info-list">
-							<li class="list-inline-item"><h5>Sallery</h5> <i class="ti-credit-card"></i>$4.5k-$6k P.A</li>
-							<li class="list-inline-item"><h5>Skills</h5>
-								<div class="skills">
-									<span>Html5</span><span>photoshop</span><span>java</span><span>+1 more</span>
-								</div>
-							</li>
-						</ul>
-					</div>
-					<a class="btn btn-primary bn-det" href="job-detail.html">Apply Now<i class="ti-arrow-right ml-1"></i></a>
-				</div>
-
-				<!-- Single Large Job List -->
-				<div class="job-new-list">
-					<div class="vc-thumb">
-						<img class="img-fluid rounded-circle" src="https://via.placeholder.com/90x90" alt="c2.jpg">
-					</div>
-					<div class="vc-content">
-						<h5 class="title"><a href="job-detail.html">Expert Bidder</a><span class="j-full-time">Full Time</span></h5>
-						<p>Shiverianer Inc</p>
-						<ul class="vc-info-list">
-							<li class="list-inline-item"><h5>Sallery</h5> <i class="ti-credit-card"></i>$3.5k-$5k P.A</li>
-							<li class="list-inline-item"><h5>Skills</h5>
-								<div class="skills">
-									<span>Html</span><span>Css3</span><span>java</span><span>+3 more</span>
-								</div>
-							</li>
-						</ul>
-					</div>
-					<a class="btn btn-primary bn-det" href="job-detail.html">Apply Now<i class="ti-arrow-right ml-1"></i></a>
-				</div>
-
-				<!-- Single Large Job List -->
-				<div class="job-new-list">
-					<div class="vc-thumb">
-						<img class="img-fluid rounded-circle" src="https://via.placeholder.com/90x90" alt="c2.jpg">
-					</div>
-					<div class="vc-content">
-						<h5 class="title"><a href="job-detail.html">Iphone Developer</a><span class="j-part-time">Part Time</span></h5>
-						<p>Megrolia Soft</p>
-						<ul class="vc-info-list">
-							<li class="list-inline-item"><h5>Sallery</h5> <i class="ti-credit-card"></i>$7.5k-$15k P.A</li>
-							<li class="list-inline-item"><h5>Skills</h5>
-								<div class="skills">
-									<span>Html</span><span>Css3</span><span>java</span><span>+3 more</span>
-								</div>
-							</li>
-						</ul>
-					</div>
-					<a class="btn btn-primary bn-det" href="job-detail.html">Apply Now<i class="ti-arrow-right ml-1"></i></a>
-				</div>
+				@endforelse
 
 			</div>
 		</div>
@@ -461,115 +281,58 @@
 	</div>
 </section>
 <div class="clearfix"></div>
+@endif
 <!-- ============================ Popular Jobs End ================================== -->
 
 <!-- ============================ Blog Start ================================== -->
+@if($home->homeComponents()->where('component_name', 'latest_news')->first()->active == true)
 <section>
 	<div class="container">
 
 		<div class="row">
 			<div class="col text-center">
 				<div class="sec-heading mx-auto">
-					<p>Our Top News</p>
-					<h2>See Latest Updates</h2>
+					<p>{{Lang::locale() == 'en' ? $home->homeComponents()->where('component_name', 'latest_news')->first()->component_title_en : $home->homeComponents()->where('component_name', 'latest_news')->first()->component_title_it}}</p>
+					<h2>{{Lang::locale() == 'en' ? $home->homeComponents()->where('component_name', 'latest_news')->first()->component_subtitle_en : $home->homeComponents()->where('component_name', 'latest_news')->first()->component_subtitle_it}}</h2>
 				</div>
 			</div>
 		</div>
 
 		<div class="row">
-			<div class="col-lg-4 col-md-4">
-				<div class="blog-grid-wrap mb-4">
-					<div class="blog-grid-thumb">
-						<a href="blog-detail.html"><img src="https://via.placeholder.com/1280x820" class="img-responsive" alt=""></a>
-						<div class="bg-cat-info">
-							<div class="post-m-info">
-								<h5 class="pm-date">12</h5>
-								<h5 class="pm-month">Dec</h5>
+			@forelse($news as $singleNews)
+				<div class="col-lg-4 col-md-4">
+					<div class="blog-grid-wrap mb-4">
+						<div class="blog-grid-thumb" style="height: 235px">
+							<a href="#"><img src="{{asset('storage/'.$singleNews->image_path)}}" class="img-responsive" style="height: 100%; width: auto!important" alt="" /></a>
+							<h6 class="post-cat">{{$singleNews->created_at->format('d/m')}}</h6>
+						</div>
+						<div class="blog-grid-content" style="height: 170px">
+							<h4 class="cnt-gb-title"><a href="{{ route('newsById', ['id' => $singleNews->id]) }}">{{$singleNews->title}}</a></h4>
+							<p>{{  \Illuminate\Support\Str::limit(strip_tags($singleNews->body), 100,'...')  }}</p>
+						</div>
+						<div class="blog-grid-meta">
+							<div class="gb-info-author">
 							</div>
-						</div>
-						<h6 class="post-cat">Travel &amp; Tour</h6>
-					</div>
-					<div class="blog-grid-content">
-						<h4 class="cnt-gb-title"><a href="blog-detail.html">Why most People used bootstrap framework?</a></h4>
-						<p>In varius varius justo, eget ultrices mauris rhoncus non. Morbi tristique, mauris eu bibendum, velit diam.</p>
-					</div>
-					<div class="blog-grid-meta">
-						<div class="gb-info-author">
-							<p><strong>By </strong>Javid Akhtar</p>
-						</div>
-						<div class="gb-info-cmt">
-							<ul>
-								<li><a href="#">110<i class="fa fa-comment text-info"></i></a></li>
-								<li><a href="#">50<i class="fa fa-heart text-info"></i></a></li>
-							</ul>
+							<div class="gb-info-cmt">
+								<ul>
+									<li><a style="cursor: default" href="#">{{count($singleNews->comments)}}<i class="fa fa-comment text-info"></i></a></li>
+									<li><a style="cursor: default" href="#">{{count($singleNews->likes)}}<i class="fa fa-heart text-info"></i></a></li>
+								</ul>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			@empty
+				<div class="container">
+					<p>{{__('home.noNews')}}</p>
+				</div>
+			@endforelse
 
-			<div class="col-lg-4 col-md-4">
-				<div class="blog-grid-wrap mb-4">
-					<div class="blog-grid-thumb">
-						<a href="blog-detail.html"><img src="https://via.placeholder.com/1280x820" class="img-responsive" alt=""></a>
-						<div class="bg-cat-info">
-							<div class="post-m-info">
-								<h5 class="pm-date">10</h5>
-								<h5 class="pm-month">Jan</h5>
-							</div>
-						</div>
-						<h6 class="post-cat">Technology &amp; Fashion</h6>
-					</div>
-					<div class="blog-grid-content">
-						<h4 class="cnt-gb-title"><a href="blog-detail.html">drizvato Launch New &amp; powerful template</a></h4>
-						<p>In varius varius justo, eget ultrices mauris rhoncus non. Morbi tristique, mauris eu bibendum, velit diam.</p>
-					</div>
-					<div class="blog-grid-meta">
-						<div class="gb-info-author">
-							<p><strong>By </strong>Javid Akhtar</p>
-						</div>
-						<div class="gb-info-cmt">
-							<ul>
-								<li><a href="#">20<i class="fa fa-comment text-info"></i></a></li>
-								<li><a href="#">40<i class="fa fa-heart text-info"></i></a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-lg-4 col-md-4">
-				<div class="blog-grid-wrap mb-4">
-					<div class="blog-grid-thumb">
-						<a href="blog-detail.html"><img src="https://via.placeholder.com/1280x820" class="img-responsive" alt=""></a>
-						<div class="bg-cat-info">
-							<div class="post-m-info">
-								<h5 class="pm-date">10</h5>
-								<h5 class="pm-month">Feb</h5>
-							</div>
-						</div>
-						<h6 class="post-cat">Business</h6>
-					</div>
-					<div class="blog-grid-content">
-						<h4 class="cnt-gb-title"><a href="blog-detail.html">Which Features is best in drizvato Theme?</a></h4>
-						<p>In varius varius justo, eget ultrices mauris rhoncus non. Morbi tristique, mauris eu bibendum, velit diam.</p>
-					</div>
-					<div class="blog-grid-meta">
-						<div class="gb-info-author">
-							<p><strong>By </strong>Javid Akhtar</p>
-						</div>
-						<div class="gb-info-cmt">
-							<ul>
-								<li><a href="#">250<i class="fa fa-comment text-info"></i></a></li>
-								<li><a href="#">40<i class="fa fa-heart text-info"></i></a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
 		</div>
 
 	</div>
 </section>
+@endif
 <!-- ============================ Blog End ================================== -->
 @endsection
 
