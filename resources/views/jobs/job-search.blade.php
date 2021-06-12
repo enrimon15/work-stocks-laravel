@@ -274,12 +274,69 @@
     </script>
 
     <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const myParam = urlParams.get('filter[company.name]');
+        let getParameterByName = function() {
+            let queries = location.search.substring(1).split('&'),
+                processed = {};
+            for (let query of queries) {
+                let [name, value] = query.split('=');
+                processed[decodeURIComponent(name)] = value? decodeURIComponent(value) : '';
+            }
 
-        if (myParam != null) {
-            document.getElementById('topFilterCompanyName').value = myParam;
+            return function(name) {
+                if (typeof processed[name] !== 'undefined')
+                    return processed[name];
+                else
+                    return null;
+            };
+        }();
+
+        const companyName = getParameterByName('filter[company.name]');
+        const title = getParameterByName('filter[title]');
+        const locations = getParameterByName('filter[location]');
+
+        console.log(companyName, title, locations);
+
+        if (companyName != null) {
+            document.getElementById('topFilterCompanyName').value = companyName;
+        }
+
+        if (title != null) {
+            document.getElementById('topFilterJobTitle').value = title;
+        }
+
+        if (locations != null) {
+            document.getElementById('topFilterLocation').value = locations;
         }
     </script>
+
+    <!--<script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const companyName = urlParams.get('filter[company.name]');
+
+        if (companyName != null) {
+            document.getElementById('topFilterCompanyName').value = companyName;
+        }
+    </script>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const title = urlParams.get('filter[title]');
+
+        if (title != null) {
+            document.getElementById('topFilterJobTitle').value = title;
+        }
+    </script>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const locations = urlParams.get('filter[location]');
+
+        if (locations != null) {
+            document.getElementById('topFilterLocation').value = locations;
+        }
+    </script> -->
+
+
+
 @endpush
 

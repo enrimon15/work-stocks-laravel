@@ -10,25 +10,25 @@
 		<h1>{{Lang::locale() == 'en' ? $home->banner_title_en : $home->banner_title_it}}</h1>
 		<p class="lead">{{Lang::locale() == 'en' ? $home->banner_subtitle_en : $home->banner_subtitle_it}}</p>
 		@if($home->show_search_bar == true)
-			<form class="search-big-form no-border search-shadow" method="POST" action="{{ route('newsComment') }}">
+			<form class="search-big-form no-border search-shadow" method="POST" action="{{ route('searchHome') }}">
 				@csrf
 				<div class="row m-0">
 					<div class="col-lg-5 col-md-5 col-sm-12 p-0">
 						<div class="form-group">
 							<i class="ti-search"></i>
-							<input name="jobTitle" type="text" class="form-control b-r" placeholder="{{__('home.jobTitle')}}">
+							<input id="title" name="title" type="text" class="form-control b-r" placeholder="{{__('home.jobTitle')}}">
 						</div>
 					</div>
 
 					<div class="col-lg-5 col-md-5 col-sm-12 p-0">
 						<div class="form-group">
 							<i class="ti-location-pin"></i>
-							<input name="location" type="text" class="form-control b-r" placeholder="{{__('home.location')}}">
+							<input id="location" name="location" type="text" class="form-control b-r" placeholder="{{__('home.location')}}">
 						</div>
 					</div>
 
 					<div class="col-lg-2 col-md-2 col-sm-12 p-0">
-						<button type="button" class="btn btn-primary full-width">{{__('home.submit')}}</button>
+						<button id="submitButt" type="submit" class="btn btn-primary full-width">{{__('home.submit')}}</button>
 					</div>
 				</div>
 			</form>

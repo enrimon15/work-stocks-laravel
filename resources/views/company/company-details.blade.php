@@ -66,7 +66,7 @@
 						<h4><i class="ti-info"></i>{{__('profile/companyProfile.overview')}}</h4>
 					</div>
 					<div class="tr-single-body">
-						{{ $company->overview ?? __('profile/companyProfile.noDesc') }}
+						{!! $company->overview ?? __('profile/companyProfile.noDesc') !!}
 					</div>
 				</div>
 
@@ -310,7 +310,7 @@
 						@csrf
 						<div class="row">
 							<div class="form-group col-md-12 col-sm-12">
-								<input class="form-control" name="idUser" type="hidden" value="{{Auth::user()->id}}">
+								<input class="form-control" name="idUser" type="hidden" value="{{Auth::user()->id ?? null}}">
 								<textarea name="message" class="form-control" placeholder="{{__('profile/userProfile.mail')}}"></textarea>
 							</div>
 

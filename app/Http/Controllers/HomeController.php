@@ -10,6 +10,7 @@ use App\Models\News;
 use App\Models\User;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -88,5 +89,17 @@ class HomeController extends Controller
     private function getLatestNews() {
         $latest = News::orderBy('created_at', 'desc')->limit(3)->get();
         return $latest;
+    }
+
+    public function searchOffers(Request $request) {
+        $data = $request->validate([
+            'title'=> ['nullable', 'string'],
+            'location' => ['nullable', 'string']
+        ]);
+        $url = '/jobs?';
+        if ($data['title'] != null) $url = $url . 'filter[title]=' . $data['title'] . '&';
+        if ($data['location'] != null) $url = $url . 'filter[location]=' . $data['location'];
+
+        return redirect($url);
     }
 }

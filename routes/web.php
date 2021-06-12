@@ -26,3 +26,5 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/home', function () {
     return redirect('/');
 })->name('home');
+
+Route::post('/searchJobsHome', [HomeController::class, 'searchOffers'])->name('searchHome');
