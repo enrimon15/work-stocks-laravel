@@ -45,7 +45,7 @@
                                 <a href="#" style="cursor: auto"><img src="{{asset('storage/' . $candidate->avatar)}}" class="img-responsive img-circle" alt="" /></a>
                             </div>
                             <div class="cll-caption">
-                                <h4><a href="{{route('profile', ['type' => 'company', 'id' => $candidate->id])}}">{{$candidate->name . ' ' . $candidate->surname}}</a><span><i class="ti-briefcase"></i>{{$candidate->job_title ?? null}}</span></h4>
+                                <h4><a href="{{route('profile', ['type' => 'user', 'id' => $candidate->id])}}">{{$candidate->name . ' ' . $candidate->surname}}</a><span><i class="ti-briefcase"></i>{{$candidate->job_title ?? null}}</span></h4>
                                 <ul>
                                     <li><i class="ti-location-pin text-danger"></i>{{isset($candidate->city) ? $candidate->city : null}}  {{isset($candidate->country) ? ', ' . $candidate->country : null}}</li>
                                 </ul>
