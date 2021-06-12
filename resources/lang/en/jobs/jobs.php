@@ -36,5 +36,7 @@ return [
     'alreadyApplied' => 'Application done',
 
     'successFavorite' => 'The job offer has been successfully added to your favorites',
-    'successSentApplication' => 'Your application for this Job Offer was sent correctly'
+    'successSentApplication' => 'Your application for this Job Offer was sent correctly',
+
+    'applyGuest' => 'To apply this job offer you need to login'
 ];

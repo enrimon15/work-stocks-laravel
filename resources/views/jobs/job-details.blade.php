@@ -30,7 +30,7 @@
                     <div class="listing-detail-item">
                         @if($job->applicants->contains(Auth::user()))
                             <a style="cursor: not-allowed" href="#" class="btn btn-list full-width mb-2 text-warning"><i class="ti-email mr-2"></i>{{__('jobs/jobs.alreadyApplied')}}</a><br>
-                        @else
+                        @elseif(!$job->applicants->contains(Auth::user()) && (Auth::user() != null && Auth::user()->hasRole('user')))
                             <a href="javascript:void(0)" data-toggle="modal" data-target="#apply" class="btn btn-list full-width mb-2 text-warning"><i class="ti-email mr-2"></i>{{__('jobs/jobs.applyThisJob')}}</a><br>
                         @endif
                         <!--<a href="#" class="btn btn-list full-width color--linkedin"><i class="ti-linkedin mr-2"></i> Apply With linkedin</a>-->
@@ -46,7 +46,11 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        @lang('jobs/jobs.applyMessage',['company'=>$job->company->name,'offersName'=>$job->title])
+                                        @guest
+                                            {{__('jobs/jobs.applyGuest')}}
+                                        @else
+                                            @lang('jobs/jobs.applyMessage',['company'=>$job->company->name,'offersName'=>$job->title])
+                                        @endguest
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang('jobs/jobs.cancelButton')</button>
@@ -141,7 +145,7 @@
                     </div>
                 </div>-->
 
-                @if(!$job->applicants->contains(Auth::user()))
+                @if(!$job->applicants->contains(Auth::user()) && (Auth::user() != null && Auth::user()->hasRole('user')))
                 <a href="javascript:void(0)" data-toggle="modal" data-target="#apply" class="btn btn-info full-width mb-2">{{__('jobs/jobs.applyThisJob')}}</a>
                 @endif
             </div>

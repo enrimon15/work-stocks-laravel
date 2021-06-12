@@ -36,5 +36,7 @@ return [
     'alreadyApplied' => 'Candidatura effettuata',
 
     'successFavorite' => 'L\'offerta di lavoro è stata correttamente inserita nei preferiti',
-    'successSentApplication' => 'La tua candidatura per questa offerta di lavoro è stata acquisita correttamente'
+    'successSentApplication' => 'La tua candidatura per questa offerta di lavoro è stata acquisita correttamente',
+
+    'applyGuest' => 'Per candidarti a questa offerta devi accedere alla piattaforma'
 ];
