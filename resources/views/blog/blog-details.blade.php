@@ -115,11 +115,11 @@
 										</div>
 										
 										<div class="col-md-12 col-sm-12">
-											@guest
-												<button disabled class="btn btn-primary" type="button">{{__('blog.submit')}}</button>
-											@else
+											@if(Auth::user() && Auth::user()->hasRole('user'))
 												<button class="btn btn-primary" type="submit">{{__('blog.submit')}}</button>
-											@endguest
+											@else
+												<button disabled class="btn btn-primary" type="button">{{__('blog.submit')}}</button>
+											@endif
 										</div>
 									</div>
 								</form>
@@ -132,16 +132,15 @@
 							<div class="sidebar">
 
 								<div class="offer-btn-wrap mb-4">
-									@guest
-										<a href="#" class="btn btn-info btn-md full-width" style="cursor: not-allowed"><i class="mr-2 lni lni-heart"></i>{{__('blog.like')}}</a>
-									@else
+									@if(Auth::user() && Auth::user()->hasRole('user'))
 										@if($news->likes->contains(Auth::user()))
 											<a id="like" href="#" onclick="sendLike('{{route('newsLike',['id'=> $news->id, 'opType' => 'remove'])}}')" class="btn btn-info btn-md full-width"><i id="heart" class="mr-2 lni lni-heart-filled"></i>{{__('blog.like')}}</a>
 										@else
 											<a id="like" href="#" onclick="sendLike('{{route('newsLike',['id'=> $news->id, 'opType' => 'add'])}}')" class="btn btn-info btn-md full-width"><i id="heart" class="mr-2 lni lni-heart"></i>{{__('blog.like')}}</a>
 										@endif
-									@endguest
-
+									@else
+										<a href="#" class="btn btn-info btn-md full-width" style="cursor: not-allowed"><i class="mr-2 lni lni-heart"></i>{{__('blog.like')}}</a>
+									@endif
 								</div>
 								
 								<div class="side-widget">

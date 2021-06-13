@@ -28,7 +28,7 @@ class MenuItemSeeder extends Seeder
 
         $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu->id,
-            'title' => __("home"),
+            'title' => "home",
             'url' => '/',
             'route' => null,
         ]);
@@ -45,7 +45,7 @@ class MenuItemSeeder extends Seeder
 
         $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu->id,
-            'title' => __("offers"),
+            'title' => "offers",
             'url' => '/jobs',
             'route' => null,
         ]);
@@ -61,7 +61,7 @@ class MenuItemSeeder extends Seeder
 
         $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu->id,
-            'title' => __("subscribers"),
+            'title' => "subscribers",
             'url' => '/subscribers',
             'route' => null,
         ]);
@@ -77,7 +77,7 @@ class MenuItemSeeder extends Seeder
 
         $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu->id,
-            'title' => __("companies"),
+            'title' => "companies",
             'url' => '/aziende',
             'route' => null,
         ]);
@@ -93,7 +93,7 @@ class MenuItemSeeder extends Seeder
 
         $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu->id,
-            'title' => __("blog"),
+            'title' => "blog",
             'url' => '/blog',
             'route' => null,
         ]);
@@ -114,7 +114,7 @@ class MenuItemSeeder extends Seeder
 
         $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu->id,
-            'title' => __("home"),
+            'title' => "home",
             'url' => '/',
             'route' => null,
         ]);
@@ -131,7 +131,7 @@ class MenuItemSeeder extends Seeder
 
         $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu->id,
-            'title' => __("offers"),
+            'title' => "offers",
             'url' => '/jobs',
             'route' => null,
         ]);
@@ -147,7 +147,7 @@ class MenuItemSeeder extends Seeder
 
         $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu->id,
-            'title' => __("companies"),
+            'title' => "companies",
             'url' => '/aziende',
             'route' => null,
         ]);
@@ -163,7 +163,7 @@ class MenuItemSeeder extends Seeder
 
         $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu->id,
-            'title' => __("blog"),
+            'title' => "blog",
             'url' => '/blog',
             'route' => null,
         ]);
@@ -185,7 +185,7 @@ class MenuItemSeeder extends Seeder
 
         $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu->id,
-            'title' => __("home"),
+            'title' => "home",
             'url' => '/',
             'route' => null,
         ]);
@@ -202,7 +202,7 @@ class MenuItemSeeder extends Seeder
 
         $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu->id,
-            'title' => __("offers"),
+            'title' => "offers",
             'url' => '/jobs',
             'route' => null,
         ]);
@@ -218,7 +218,7 @@ class MenuItemSeeder extends Seeder
 
         $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu->id,
-            'title' => __("subscribers"),
+            'title' => "subscribers",
             'url' => '/subscribers',
             'route' => null,
         ]);
@@ -229,6 +229,22 @@ class MenuItemSeeder extends Seeder
                 'color' => null,
                 'parent_id' => null,
                 'order' => 3,
+            ])->save();
+        }
+
+        $menuItem = MenuItem::firstOrNew([
+            'menu_id' => $menu->id,
+            'title' => "blog",
+            'url' => '/blog',
+            'route' => null,
+        ]);
+        if (!$menuItem->exists) {
+            $menuItem->fill([
+                'target' => '_self',
+                'icon_class' => 'voyager-boat',
+                'color' => null,
+                'parent_id' => null,
+                'order' => 4,
             ])->save();
         }
 
