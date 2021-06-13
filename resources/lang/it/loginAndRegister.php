@@ -41,4 +41,11 @@ return [
     'legal' => 'Legale',
     'commercial' => 'Commerciale',
     'operative' => 'Operativa',
+
+    'placeholderEmail' => 'Inserisci Email',
+    'resetSubmit' => 'Manda il Reset Link',
+    'reset' => 'Reset Password',
+    'placeholderPwConfirm' => 'Inserisci Password di Conferma',
+    'placeholderPw' => 'Inserisci Password',
+    'resetSubmitSend' => 'Reset'
 ];

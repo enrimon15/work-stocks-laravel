@@ -42,4 +42,11 @@ return [
     'commercial' => 'Commercial',
     'operative' => 'Operative',
 
+    'placeholderEmail' => 'Add Email',
+    'resetSubmit' => 'Send Password Reset Link',
+    'reset' => 'Reset Password',
+    'placeholderPwConfirm' => 'Add Confirm Password',
+    'placeholderPw' => 'Add Password',
+    'resetSubmitSend' => 'Reset'
+
 ];
