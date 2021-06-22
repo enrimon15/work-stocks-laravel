@@ -23,6 +23,8 @@ Route::group(['prefix' => 'admin'], function () {
 
 Route::get('/', [HomeController::class, 'index']);
 
+Route::get('/error', [HomeController::class, 'error']);
+
 Route::get('/home', function () {
     return redirect('/');
 })->name('home');

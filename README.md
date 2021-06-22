@@ -25,3 +25,6 @@ Tutti gli altri comandi sui gruppi sono disponibili sul repo github indicato sop
 Documentazione delle librerie introdotte:
 
 * Tags: https://github.com/rtconner/laravel-tagging
+
+Aggiungere nel file .env la seguente proprietà:
+isProduction=true

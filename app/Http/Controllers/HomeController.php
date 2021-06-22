@@ -102,4 +102,8 @@ class HomeController extends Controller
 
         return redirect($url);
     }
+
+    public function error() {
+        return view('error/error');
+    }
 }

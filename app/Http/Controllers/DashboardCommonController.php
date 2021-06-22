@@ -10,9 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class DashboardCommonController extends Controller
 {
 
-    public function index() {
-
-    }
+    public function index() {}
 
     public function showChangePassword() {
         return view('dashboard-common.change-password');
