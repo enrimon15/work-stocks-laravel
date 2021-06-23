@@ -27,37 +27,42 @@ class JobController extends Controller
 
     public function jobCatalog(Request $request)
     {
-        $jobs = QueryBuilder::for(JobOffer::class)
-            ->where('due_date', '>=', Carbon::today())
-            ->allowedFilters(['title',
-                            'experience',
-                            'company.name',
-                            'offers_type',
-                            AllowedFilter::custom('location',new FilterJobOfferLocation),
-                            AllowedFilter::custom('experience',new FilterJobOfferExperienceYears),
-                            AllowedFilter::custom('salary', new FilterJobOfferSalary),
-                            AllowedFilter::custom('skill',new FilterJobOfferSkills)])
-            ->paginate(10);
+        try {
+            $jobs = QueryBuilder::for(JobOffer::class)
+                ->where('due_date', '>=', Carbon::today())
+                ->allowedFilters(['title',
+                    'experience',
+                    'company.name',
+                    'offers_type',
+                    AllowedFilter::custom('location', new FilterJobOfferLocation),
+                    AllowedFilter::custom('experience', new FilterJobOfferExperienceYears),
+                    AllowedFilter::custom('salary', new FilterJobOfferSalary),
+                    AllowedFilter::custom('skill', new FilterJobOfferSkills)])
+                ->paginate(10);
 
-        if ($request->ajax()) {
-            return view('jobs.job-search-data')
-                ->with('jobs',$jobs)
-                ->render();
-        } else {
+            if ($request->ajax()) {
+                return view('jobs.job-search-data')
+                    ->with('jobs', $jobs)
+                    ->render();
+            } else {
 
-            $tagGroup = TagGroup::where('slug', '=', 'skill')->first();
+                $tagGroup = TagGroup::where('slug', '=', 'skill')->first();
 
-            $tags = null;
-            if ($tagGroup) {
-                $tags = Tag::where('tag_group_id', '=', $tagGroup->getAttribute('id'))
-                    ->orderBy('count', 'desc')
-                    ->limit(5)
-                    ->get();
+                $tags = null;
+                if ($tagGroup) {
+                    $tags = Tag::where('tag_group_id', '=', $tagGroup->getAttribute('id'))
+                        ->orderBy('count', 'desc')
+                        ->limit(5)
+                        ->get();
+                }
+
+                return view('jobs/job-search')
+                    ->with('tags', $tags)
+                    ->with('jobs', $jobs/*JobOffer::paginate(10)*/);
             }
-
-            return view('jobs/job-search')
-                ->with('tags', $tags)
-                ->with('jobs', $jobs/*JobOffer::paginate(10)*/);
+        } catch(\Exception $ex) {
+            echo($ex);
+            abort(500, 'generic error');
         }
     }
 
@@ -68,10 +73,9 @@ class JobController extends Controller
             $job = JobOffer::findOrFail($id);
             return view('jobs.job-details')
                 ->with('job', $job);
-        } catch (ModelNotFoundException $ex) {
-            return redirect()->route('jobs/getAll');
+        } catch(\Exception $ex) {
+            echo($ex);
+            abort(500, 'generic error');
         }
-
-
     }
 }

@@ -15,42 +15,57 @@ use Illuminate\Support\Facades\Storage;
 class ProfileController extends Controller
 {
     public function index($type, $id) {
-        if ($type == 'user') {
-            $user = User::findOrFail($id);
-            return view('subscriber.candidate-details')->with('user', $user);
-        } else if ( $type ==  'company') {
-            $company = Company::findOrFail($id);
-            $latestJobOffers = JobOffer::where('company_id', '=', $id)
-                ->where('due_date', '>=', Carbon::today())
-                ->orderBy('created_at', 'desc')->limit(4);
+        try {
+            if ($type == 'user') {
+                $user = User::findOrFail($id);
+                return view('subscriber.candidate-details')->with('user', $user);
+            } else if ($type == 'company') {
+                $company = Company::findOrFail($id);
+                $latestJobOffers = JobOffer::where('company_id', '=', $id)
+                    ->where('due_date', '>=', Carbon::today())
+                    ->orderBy('created_at', 'desc')->limit(4);
 
-            return view('company.company-details')->with('company', $company)->with('latestJobs', $latestJobOffers->get());
+                return view('company.company-details')->with('company', $company)->with('latestJobs', $latestJobOffers->get());
+            }
+
+            abort(404, 'not found');
+        } catch(\Exception $ex) {
+            echo($ex);
+            abort(500, 'generic error');
         }
-
-        return null;
     }
 
     public function downloadCv($idUser) {
-        $user = User::findOrFail($idUser);
-        if (!$user->hasRole('user')) {
-            // error
+        try {
+            $user = User::findOrFail($idUser);
+            if (!$user->hasRole('user')) {
+                abort(401, 'unauthorized');
+            }
+            return Storage::disk('public')->download($user->profile->cv_path);
+        } catch(\Exception $ex) {
+            echo($ex);
+            abort(500, 'generic error');
         }
-        return Storage::disk('public')->download($user->profile->cv_path);
     }
 
     public function sendMail(Request $request, $idRecipient) {
-        $data = $request->validate([
-            'message'=> ['required', 'string'],
-            'idUser' => ['required', 'numeric']
-        ]);
+        try {
+            $data = $request->validate([
+                'message' => ['required', 'string'],
+                'idUser' => ['required', 'numeric']
+            ]);
 
-        $data['user'] = User::findOrFail($data['idUser']);
+            $data['user'] = User::findOrFail($data['idUser']);
 
-        $userTo = User::findOrFail($idRecipient);
+            $userTo = User::findOrFail($idRecipient);
 
-        Mail::to($userTo->email)->send(new ContactUser($data));
+            Mail::to($userTo->email)->send(new ContactUser($data));
 
-        return back()->with('success', __('profile/userProfile.mailSuccess'));
+            return back()->with('success', __('profile/userProfile.mailSuccess'));
+        } catch(\Exception $ex) {
+            echo($ex);
+            abort(500, 'generic error');
+        }
     }
 
 }

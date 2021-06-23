@@ -34,39 +34,38 @@ class SubscriberController extends Controller
 {
     public function subscribersCatalog(Request $request)
     {
-        $subscribers = QueryBuilder::for(User::class)
-            ->where('role_id', '=', 3)
-            ->allowedFilters(['profile.job_title',/*
+        try {
+            $subscribers = QueryBuilder::for(User::class)
+                ->where('role_id', '=', 3)
+                ->allowedFilters(['profile.job_title',/*
                 'experience',
                 'company.name',*/
-                AllowedFilter::custom('name_surname', new FilterSubscriberNameSurname()),
-                AllowedFilter::custom('location',new FilterSubscriberLocation()),
-                AllowedFilter::custom('salary',new FilterSubscriberSalary()),
-                AllowedFilter::custom('skill',new FilterSubscriberSkills())])
-            ->paginate(10);
+                    AllowedFilter::custom('name_surname', new FilterSubscriberNameSurname()),
+                    AllowedFilter::custom('location',new FilterSubscriberLocation()),
+                    AllowedFilter::custom('salary',new FilterSubscriberSalary()),
+                    AllowedFilter::custom('skill',new FilterSubscriberSkills())])
+                ->paginate(10);
 
-
-
-        if ($request->ajax()) {
-            return view('subscriber.subscribers-search-data')
-                ->with('subscribers', $subscribers)
-                ->render();
-        } else {
-
-            return view('subscriber.subscribers-search')
-                ->with('subscribers', $subscribers);
+            if ($request->ajax()) {
+                return view('subscriber.subscribers-search-data')
+                    ->with('subscribers', $subscribers)
+                    ->render();
+            } else {
+                return view('subscriber.subscribers-search')
+                    ->with('subscribers', $subscribers);
+            }
+        } catch (\Exception $ex) {
+            echo($ex);
+            abort(500, 'generic error');
         }
-
-
     }
 
     public function apply(Request $request, $idJobOffer)
     {
-        if (!$request->ajax()) {
-            return redirect()->route('subscribers/getAll');
-        } else {
-            try {
-
+        try {
+            if (!$request->ajax()) {
+                return redirect()->route('subscribers/getAll');
+            } else {
                 $idSubscriber = Auth::id();
 
                 if ($idSubscriber == null) {
@@ -109,12 +108,10 @@ class SubscriberController extends Controller
                 }
 
                 return $this->abort('Already Applied', 500);
-
-
-            } catch (ModelNotFoundException $e) {
-                return redirect()->route('subscribers/getAll');
             }
-
+        } catch (\Exception $ex) {
+            echo($ex);
+            abort(500, 'generic error');
         }
     }
 
@@ -145,42 +142,44 @@ class SubscriberController extends Controller
             return $this->abort('Already put in favorites',500);
 
 
-        } catch (ModelNotFoundException $e) {
-            return redirect()->route('subscribers/getAll');
+        } catch (\Exception $ex) {
+            echo($ex);
+            abort(500, 'generic error');
         }
     }
 
     public function getById($id) {
-
         try {
             $user = User::findOrFail($id);
-        } catch(ModelNotFoundException $e) {
-            return redirect()->route('subscribers/getAll');
-        }
 
-        if($user == null || $user->role_id != 3) {
-            return redirect()->route('subscribers/getAll');
-        }
+            if ($user == null || $user->role_id != 3) {
+                return redirect()->route('subscribers/getAll');
+            }
 
-        return view('subscriber.subscriber-detail')->with('subscriber', $user);
+            return view('subscriber.subscriber-detail')->with('subscriber', $user);
+        } catch (\Exception $ex) {
+            echo($ex);
+            abort(500, 'generic error');
+        }
     }
 
     public function downloadCV($id) {
         try {
             $user = User::findOrFail($id);
-        } catch(ModelNotFoundException $e) {
-            return null;
-        }
 
-        if($user->profile != null && $user->profile->cv_path != null) {
-            return Storage::disk('public')->download($user->profile->cv_path);
+            if ($user->profile != null && $user->profile->cv_path != null) {
+                return Storage::disk('public')->download($user->profile->cv_path);
+            } else {
+                abort(404, 'not found');
+            }
+        } catch (\Exception $ex) {
+            echo($ex);
+            abort(500, 'generic error');
         }
-
-        return null;
     }
 
     private function abort($description, $errorCode) {
-        return response($description,$errorCode);
+        abort($errorCode, $description);
     }
 
     public static function getLastLoginInDays($user)
@@ -212,14 +211,18 @@ class SubscriberController extends Controller
     }
 
     public static function progressPercentage($startDate, $endDate) {
-        $beginDate = Carbon::parse($startDate);
-        $dueDate = Carbon::parse($endDate);
-        $today = Carbon::now();
+        try {
+            $beginDate = Carbon::parse($startDate);
+            $dueDate = Carbon::parse($endDate);
+            $today = Carbon::now();
 
-        $totalDays = $dueDate->diffInDays($beginDate);
-        $atTodayDays = $today->diffInDays($beginDate);
+            $totalDays = $dueDate->diffInDays($beginDate);
+            $atTodayDays = $today->diffInDays($beginDate);
 
-        return (100 * $atTodayDays)/$totalDays;
-
+            return (100 * $atTodayDays)/$totalDays;
+        } catch(\Exception $ex) {
+            echo($ex);
+            abort(500, 'generic error');
+        }
     }
 }
