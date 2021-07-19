@@ -247,7 +247,7 @@
 						<ul class="vc-info-list">
 							<li class="list-inline-item"><h5>{{__('home.salary')}}</h5> <i class="ti-credit-card"></i>{{$job->min_salary . 'k' . '-' . $job->max_salary . 'k'}}</li>
 							@if(!empty(\App\Models\JobOffer::find($job->id)->tagNames()))
-							<li class="list-inline-item"><h5>{{__('home.skills')}}</h5>
+							<li class="list-inline-item"><h5>{{__('home.skill')}}</h5>
 								<div class="skills">
 										@foreach(\App\Models\JobOffer::find($job->id)->tagNames() as $tag)
 											@if($loop->iteration > 3)

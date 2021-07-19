@@ -30,6 +30,10 @@ class ApplicationMailForSubscriber extends Mailable
      */
     public function build()
     {
+        foreach ($this->details as &$value) {
+            echo($value . '\n');
+        }
+
         return $this->subject(__('mail/application/mailContent.mailSubjectSubscriber'))
             ->markdown('mail.mail-application-toSubscriber')
             ->with('details',$this->details);

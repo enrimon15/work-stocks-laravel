@@ -37,13 +37,19 @@ class ApplicationSendEmailJob implements ShouldQueue
     public function handle()
     {
         echo("SEND EMAIL");
+        foreach ($this->details as &$value) {
+            echo($value . '\n');
+        }
+
 
         if ($this->details['emailType'] == 'deleteApplication') {
             Mail::to($this->details['companyEmail'])->send(new DeleteApplication($this->details));
         } else if ($this->details['emailType'] == 'sendApplication') {
+            echo('entrato');
             Mail::to($this->details['subscriberEmail'])->send(new ApplicationMailForSubscriber($this->details));
             Mail::to($this->details['companyEmail'])->send(new ApplicationMailCompany($this->details));
-        } else {
+       } else {
+            echo('fail');
             $this->fail();
         }
     }

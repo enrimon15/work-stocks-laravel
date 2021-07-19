@@ -14,7 +14,11 @@
 					<div class="tr-list-info">
 						<h4 class="mb-1">{{$user->name . ' ' . $user->surname}}</h4>
 						<p class="mb-1 text-warning">{{$user->profile->job_title ?? null}}</p>
-						<p class="mb-1"><i class="ti-location-pin mr-2"></i>{{isset($user->profile->city) ? $user->profile->city . ', ' : null}} {{$user->profile->country ?? null}}</p>
+						<p class="mb-1">
+							@if(isset($user->profile->city) || isset($user->profile->country))
+								<i class="ti-location-pin mr-2"></i>
+							@endif
+							{{isset($user->profile->city) ? $user->profile->city . ', ' : null}} {{$user->profile->country ?? null}}</p>
 					</div>
 				</div>
 				<div class="listing-detail_right">
@@ -322,7 +326,7 @@
 					@csrf
 					<div class="row">
 						<div class="form-group col-md-12 col-sm-12">
-							<input class="form-control" name="idUser" type="hidden" value="{{Auth::user()->id}}">
+							<input class="form-control" name="idUser" type="hidden" value="{{Auth::user()->id ?? null}}">
 							<textarea name="message" class="form-control" placeholder="{{__('profile/userProfile.mail')}}"></textarea>
 						</div>
 

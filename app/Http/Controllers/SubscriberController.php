@@ -36,7 +36,8 @@ class SubscriberController extends Controller
     {
         try {
             $subscribers = QueryBuilder::for(User::class)
-                ->where('role_id', '=', 3)
+                ->join('user_roles', 'user_roles.user_id', '=', 'users.id')
+                ->where('user_roles.role_id', '=', 3)
                 ->allowedFilters(['profile.job_title',/*
                 'experience',
                 'company.name',*/

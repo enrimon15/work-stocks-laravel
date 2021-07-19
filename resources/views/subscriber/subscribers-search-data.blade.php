@@ -14,7 +14,11 @@
             </h4>
             @if($subscriber->profile)
             <ul>
-                <li><i class="ti-location-pin text-danger"></i>{{$subscriber->profile->country.' '.$subscriber->profile->city}}</li>
+                <li>
+                    @if(isset($subscriber->profile->country) || isset($subscriber->profile->city))
+                        <i class="ti-location-pin text-danger"></i>
+                    @endif
+                    {{$subscriber->profile->country.' '.$subscriber->profile->city}}</li>
                 <li><i class="ti-time text-success"></i>
                     {{\App\Http\Controllers\SubscriberController::getLastLoginInDays($subscriber)}}
                 </li>
