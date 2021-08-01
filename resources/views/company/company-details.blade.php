@@ -78,9 +78,7 @@
 					<div class="tr-single-body">
 						<ul class="jb-detail-list">
 							@foreach($company->workingPlaces as $workingPlace)
-								@if($workingPlace->primary)
 								<li>{{$workingPlace->address . ', ' . $workingPlace->city . ' (' . $workingPlace->country . ') - '}} <strong>{{__('profile/companyProfile.' . $workingPlace->type)}}</strong></li>
-								@endif
 							@endforeach
 						</ul>
 					</div>
