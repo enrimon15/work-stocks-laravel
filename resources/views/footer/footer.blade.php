@@ -6,27 +6,27 @@
 
                 <div class="col-lg-3 col-md-3">
                     <div class="footer-widget">
-                        <img src="{{asset('img/logo-light.png')}}" class="img-footer" alt="" />
+                        <img src="{{asset('storage/' . $footer->logo)}}" class="img-footer" alt="" />
                         <div class="footer-add">
-                            <p>Collins Street West, Victoria,</br> Australia (AU4578).</p>
-                            <p><strong>Email:</strong></br><a href="#">hello@workstock.com</a></p>
-                            <p><strong>Call:</strong></br>91 855 742 62548</p>
+                            <p>{{$footer->address}}</p>
+                            <p><strong>{{__('footer.email')}}:</strong></br><a href="#">{{$footer->email}}</a></p>
+                            <p><strong>{{__('footer.phone')}}:</strong></br>{{$footer->phone}}</p>
                         </div>
 
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-2">
-                    <div class="footer-widget">
-                        <h4 class="widget-title">Navigations</h4>
-                        <ul class="footer-menu">
-                            <li><a href="#">New Home Design</a></li>
-                            <li><a href="#">Browse Candidates</a></li>
-                            <li><a href="#">Browse Employers</a></li>
-                            <li><a href="#">Advance Search</a></li>
-                            <li><a href="#">Job With Map</a></li>
-                        </ul>
+                @foreach($footer->footerMenus()->where('active', true)->limit(3)->get() as $footerMenu)
+                    <div class="col-lg-2 col-md-2">
+                        <div class="footer-widget">
+                            <h4 class="widget-title">{{Lang::locale() == 'en' ? $footerMenu->title_en : $footerMenu->title_it}}</h4>
+                            <ul class="footer-menu">
+                                @foreach($footerMenu->footerMenuItems()->get() as $item)
+                                    <li><a href="{{route('footer', ['idPage' => $item->id])}}">{{Lang::locale() == 'en' ?  $item->title_en : $item->title_it}}</a></li>
+                                @endforeach
+                            </ul>
+                        </div>
                     </div>
-                </div>
+                @endforeach
 
                 <div class="col-lg-2 col-md-2">
                     <div class="footer-widget">

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FooterController;
 use App\Http\Controllers\JobController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -30,3 +31,5 @@ Route::get('/home', function () {
 })->name('home');
 
 Route::post('/searchJobsHome', [HomeController::class, 'searchOffers'])->name('searchHome');
+
+Route::get('/footer/{idPage}', [FooterController::class, 'index'])->name('footer');

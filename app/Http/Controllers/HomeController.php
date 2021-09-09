@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Application;
 use App\Models\Company;
+use App\Models\Footer;
 use App\Models\Home;
 use App\Models\JobOffer;
 use App\Models\News;
@@ -11,6 +12,8 @@ use App\Models\User;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
+
 
 class HomeController extends Controller
 {
@@ -32,6 +35,9 @@ class HomeController extends Controller
     public function index() {
         try {
             $home = Home::where('active', true)->first();
+
+            $footer = Footer::first();
+            View::share('footer', $footer);
 
             return view('home-web')
                 ->with('home', $home)
