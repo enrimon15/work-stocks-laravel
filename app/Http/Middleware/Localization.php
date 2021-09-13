@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Footer;
 use Carbon\Carbon;
 use Closure;
 use Illuminate\Http\Request;
@@ -34,6 +35,9 @@ class Localization
             App::setLocale(Session::get('language'));
             Carbon::setLocale(Session::get('language'));
         }
+
+        // footer
+        \Cache::rememberForever('footer', function () {return Footer::first();});
 
         return $next($request);
     }
