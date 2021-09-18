@@ -168,7 +168,7 @@
 									</div>
 								</li>
 							@empty
-								<p>{{__('profile/userProfile.message')}}</p>
+								<p>{{__('profile/userProfile.noCertificate')}}</p>
 							@endforelse
 
 						</ul>

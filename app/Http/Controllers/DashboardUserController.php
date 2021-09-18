@@ -120,7 +120,7 @@ class DashboardUserController extends Controller
             $user = Auth::user();
             $job = JobOffer::find($id);
 
-            if ($user->applications->contains($job)) {
+            if ($user->favoriteJobs->contains($job)) {
                 DB::table('favorite_jobs')
                     ->where('user_id', '=', $user->id)
                     ->where('job_offer_id', '=', $job->id)
