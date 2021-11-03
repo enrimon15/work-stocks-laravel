@@ -16,24 +16,24 @@
             <form class="search-big-form no-border p-0">
                 <div class="row m-0">
                     <div class="col-lg-3 col-md-3 col-sm-12 p-0">
-                        <div class="form-group">
-                            <i class="ti-search"></i>
+                        <div style="z-index: 0" class="form-group">
+                            <i style="z-index: -1" class="ti-search"></i>
                             <input id="topFilterJobTitle" type="text" class="form-control b-r keyPress"
                                    placeholder="{{__('jobs/filters.jobTitleOrKeywords')}}">
                         </div>
                     </div>
 
                     <div class="col-lg-3 col-md-3 col-sm-12 p-0">
-                        <div class="form-group">
-                            <i class="ti-location-pin"></i>
+                        <div style="z-index: 0" class="form-group">
+                            <i style="z-index: -1" class="ti-location-pin"></i>
                             <input id="topFilterLocation" type="text" class="form-control b-r keyPress"
                                    placeholder="{{__('jobs/filters.location')}}">
                         </div>
                     </div>
 
                     <div class="col-lg-3 col-md-3 col-sm-12 p-0">
-                        <div class="form-group">
-                            <i class="ti-briefcase"></i>
+                        <div style="z-index: 0" class="form-group">
+                            <i style="z-index: -1"class="ti-briefcase"></i>
                             <input id="topFilterCompanyName" type="text" class="form-control b-r keyPress"
                                    placeholder="{{__('jobs/filters.companyName')}}"
                             >

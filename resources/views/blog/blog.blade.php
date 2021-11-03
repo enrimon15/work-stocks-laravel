@@ -76,7 +76,12 @@
 	<script>
 		function search() {
 			$input = document.getElementById('searchInput').value;
-			window.location.href = '/blog/search/' + $input;
+			if ($input == null || $input == undefined || $input.trim() == '') {
+				window.location.href = '/blog';
+			} else {
+				window.location.href = '/blog/search/' + $input;
+			}
+
 		}
 	</script>
 

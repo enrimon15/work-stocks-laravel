@@ -65,7 +65,7 @@
 							<h4 class="job-title"><a href="{{route('profile', ['type' => 'company', 'id' => $company->id])}}">{{$company->name}}</a></h4>
 							<hr>
 							<div class="job-grid-detail">
-								<h4 class="jbc-name">{{$company->slogan}}</h4>
+								<h4 class="jbc-name">{{\Illuminate\Support\Str::limit($company->slogan, 33, $end = '...')}}</h4>
 								<p><i class="ti-location-pin"></i>{{\App\Models\Company::find($company->id)->mainPlaceOfWork()->city . ', ' . \App\Models\Company::find($company->id)->mainPlaceOfWork()->country}} </p>
 							</div>
 							<div class="job-grid-footer" style="justify-content: center;">

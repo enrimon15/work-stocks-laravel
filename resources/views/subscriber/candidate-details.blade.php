@@ -132,7 +132,7 @@
 							<li>
 								<div class="qa-skill-box">
 									<h4 class="qa-skill-title">{{$experience->job_position}}<span class="qa-time">{{date('d-m-y', strtotime($experience->start_date)) . ' - '}}{{isset($experience->end_date) ? date('d-m-y', strtotime($experience->end_date)) : 'in corso'}}</span></h4>
-									<h5 class="qa-subtitle">{{$qualification->company}}</h5>
+									<h5 class="qa-subtitle">{{$experience->company}}</h5>
 									@if(isset($experience->description))
 										<div class="qa-content">
 											<p>{{$experience->description}}</p>

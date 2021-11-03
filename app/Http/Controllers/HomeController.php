@@ -36,9 +36,6 @@ class HomeController extends Controller
         try {
             $home = Home::where('active', true)->first();
 
-            $footer = Footer::first();
-            View::share('footer', $footer);
-
             return view('home-web')
                 ->with('home', $home)
                 ->with('news', $this->getLatestNews())

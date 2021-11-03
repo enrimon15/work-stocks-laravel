@@ -112,7 +112,7 @@
 												<div class="job-grid-thumb">
 													<a style="cursor: auto" href="#"><img src="{{asset('storage/'. $company->user->avatar)}}" class="img-fluid mx-auto" alt="" /></a>
 												</div>
-												<h4 class="job-title"><a href="{{route('jobs/getById', ['id' => $job->id])}}">{{$job->title}}</a></h4>
+												<h4 class="job-title"><a href="{{route('jobs/getById', ['id' => $job->id])}}">{{\Illuminate\Support\Str::limit($job->title, 24, $end = '...')}}</a></h4>
 												<hr>
 												<div class="job-grid-detail">
 													<h4 class="jbc-name"><a style="cursor: auto" href="#">{{$company->name}}</a></h4>

@@ -7,6 +7,7 @@ use App\Models\NewsComment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class NewsController extends Controller
 {
@@ -112,6 +113,8 @@ class NewsController extends Controller
             $news = null;
             if ($query != null) {
                 $news = News::where('title', 'LIKE', '%' . $query . '%')->orderBy('created_at', 'desc')->paginate(9);
+            } else {
+                $news = News::orderBy('created_at', 'desc')->paginate(9);
             }
 
             return view('blog.blog')->with('news', $news)->with('query', $query);

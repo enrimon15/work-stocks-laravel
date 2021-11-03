@@ -9,7 +9,7 @@
                         <img src="{{asset('storage/' . cache('footer')->logo)}}" class="img-footer" alt="" />
                         <div class="footer-add">
                             <p>{{cache('footer')->address}}</p>
-                            <p><strong>{{__('footer.email')}}:</strong></br><a href="#">{{cache('footer')->email}}</a></p>
+                            <p><strong>{{__('footer.email')}}:</strong></br><a href="mailto:{{cache('footer')->email}}">{{cache('footer')->email}}</a></p>
                             <p><strong>{{__('footer.phone')}}:</strong></br>{{cache('footer')->phone}}</p>
                         </div>
 
@@ -65,7 +65,7 @@
             <div class="row align-items-center">
 
                 <div class="col-lg-6 col-md-6">
-                    <p class="mb-0">© 2021 Work Stocks. Designd By Enrico Monte & Marco Ovidi</p>
+                    <p class="mb-0">© 2021 Work Stocks. Designed By Enrico Monte & Marco Ovidi</p>
                 </div>
 
                 <!--<div class="col-lg-6 col-md-6 text-right">
