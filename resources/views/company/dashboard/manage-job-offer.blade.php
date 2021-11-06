@@ -79,7 +79,7 @@
                                 <div class="mg-list-wrap">
                                     <div class="mg-list-caption">
                                         <h4 class="mg-title title">
-                                            <a href="{{route('jobs/getById', ['id' => $job->id])}}" style="cursor: pointer">{{$job->title}}</a>
+                                            <a href="{{route('jobs/getById', ['id' => $job->id])}}" style="cursor: pointer">{{\Illuminate\Support\Str::limit($job->title, 41, $end = '..')}}</a>
                                             <span class="j-part-time p-2 ml-2" style="font-size: small; font-weight: normal">{{__('dashboard/company/newJob.' . $job->offers_type)}}</span>
                                         </h4>
 

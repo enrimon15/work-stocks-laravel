@@ -37,7 +37,8 @@ class Localization
         }
 
         // footer
-        \Cache::rememberForever('footer', function () {return Footer::first();});
+        //\Cache::forget('footer');
+        \Cache::remember('footer', 20, function () {return Footer::first();});
 
         return $next($request);
     }

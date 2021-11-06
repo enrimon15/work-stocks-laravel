@@ -6,7 +6,7 @@
                  src="{{asset('storage/'.$job->company->user->avatar)}}">
         </div>
         <div class="vc-content">
-            <h5 class="title"><a href="{!! route('jobs/getById',['id'=>$job->id]) !!}">{{$job->title}}</a><span
+            <h5 class="title"><a href="{!! route('jobs/getById',['id'=>$job->id]) !!}">{{\Illuminate\Support\Str::limit($job->title, 41, $end = '..')}}</a><span
                     class="j-full-time">{{__('jobs/filters.'.$job->offers_type)}}</span></h5>
             <p>{{$job->company->name}}</p>
 

@@ -116,7 +116,7 @@
 												<hr>
 												<div class="job-grid-detail">
 													<h4 class="jbc-name"><a style="cursor: auto" href="#">{{$company->name}}</a></h4>
-													<p><i class="ti-location-pin"></i>{{$job->workingPlace->address . ', ' . $job->workingPlace->city . ' (' . $job->workingPlace->country . ')'}} </p>
+													<p><i class="ti-location-pin"></i>{{$job->workingPlace->address . ', ' . \Illuminate\Support\Str::limit($job->workingPlace->city, 8, $end = '')  . ' (' . $job->workingPlace->country . ')'}} </p>
 												</div>
 												<div class="job-grid-footer">
 													<h4 class="job-price">{{__('profile/companyProfile.upTo') . ' ' . $job->max_salary . 'k'}}</h4>

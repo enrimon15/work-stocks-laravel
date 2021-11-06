@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\DashboardCompanyController;
 use \App\Http\Controllers\CompaniesController;
 
-Route::get('/company',[CompaniesController::class,'companiesCatalog'])->name('companiesCatalog');
+Route::get('/companies',[CompaniesController::class,'companiesCatalog'])->name('companiesCatalog');
 
 Route::prefix('/company')->middleware('roleIn:company')->group(function () {
     Route::prefix('/dashboard')->group(function () {

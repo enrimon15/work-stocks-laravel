@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
         $(document).ready(function () {
 
             $.ajax({
-                url: "/company?" + analyzeFilters(),
+                url: "/companies?" + analyzeFilters(),
                 success: function (data) {
                     $('#table_data').html(data);
                     $('#totalResultsInfo').html(window.totalResults+" "+window.totalResultI18nString);
@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function fetch_data(page) {
         $.ajax({
-            url: "/company?page=" + page + "&" + analyzeFilters(),
+            url: "/companies?page=" + page + "&" + analyzeFilters(),
             success: function (data) {
                 $('#table_data').html(data);
             }

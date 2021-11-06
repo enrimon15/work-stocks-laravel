@@ -160,7 +160,7 @@
                         @if(Auth::user() && Auth::user()->hasRole('user'))
                             <a href="{{route('favoriteExecute', ['idJobOffer' => $job->id])}}" class="btn btn-info btn-md full-width"><i class="mr-2 ti-bookmark"></i>{{__('jobs/jobs.addBookMark')}}</a>
                         @else
-                            <a style="cursor: not-allowed" href="{{route('favoriteExecute', ['idJobOffer' => $job->id])}}" class="btn btn-info btn-md full-width"><i class="mr-2 ti-bookmark"></i>{{__('jobs/jobs.addBookMark')}}</a>
+                            <a style="cursor: not-allowed" href="#" class="btn btn-info btn-md full-width"><i class="mr-2 ti-bookmark"></i>{{__('jobs/jobs.addBookMark')}}</a>
                         @endif
 
                     @endif
