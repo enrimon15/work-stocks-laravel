@@ -5,7 +5,7 @@
 <div class="Loader"></div>
 
 <!-- ============================ Hero Banner  Start================================== -->
-<div class="hero-header jumbo-banner text-center" style="background: url({{asset($home->banner_img_path)}});" data-overlay="6">
+<div class="hero-header jumbo-banner text-center" style="background: url({{asset('storage/' . $home->banner_img_path)}});" data-overlay="6">
 	<div class="container">
 		<h1>{{Lang::locale() == 'en' ? $home->banner_title_en : $home->banner_title_it}}</h1>
 		<p class="lead">{{Lang::locale() == 'en' ? $home->banner_subtitle_en : $home->banner_subtitle_it}}</p>
