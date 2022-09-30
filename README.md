@@ -7,6 +7,10 @@
  * Eseguire php artisan voyager:install
  * Eseguire php artisan voyager:admin admin@admin.it
  * Eseguire php artisan serve
+
+ \
+<br/>
+
  
 ### Descrizione
 
@@ -20,8 +24,14 @@ Inoltre, Work Stocks integra anche un comodo blog comprendente le ultime notizie
 ### LOW-FI
 #### ![Skeleton](<https://github.com/enrimon15/work-stocks-laravel/blob/main/docs/Ricerca_Offerte-Candidati-Aziende.png>)
 
+ \
+<br/>
+
 ### HI-FI
 #### ![Demo_Image](<https://github.com/enrimon15/work-stocks-laravel/blob/main/docs/Lista_Offerte.png>)
+
+ \
+<br/>
 
 ### Content Model
 #### ![Diagram](<https://github.com/enrimon15/work-stocks-laravel/blob/main/docs/content_model.svg>)
